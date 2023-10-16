@@ -225,7 +225,7 @@ const Addservice = () => {
                         </div>
                     </section>
                 </main>{/* End #main */}
-                {/* ======= Footer ======= */}
+                {/* <=+=+=+=+=+=+=| Footer |=+=+=+=+=+=+=> */}
                 <footer id="footer" className="footer">
                     <div className="copyright">
                         © Copyright <strong><span>Sky Digital</span></strong>. All Rights Reserved
@@ -242,4 +242,4 @@ const Addservice = () => {
 }
 
 
-export default Addservice
+export default Addservice;
