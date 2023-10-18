@@ -65,7 +65,7 @@ function App() {
         <Route path="/admin_showservices" element={<Showservices/>} />
         {/* <Route path="/admin_servicesdetails/:id" element={isLoggedIn ? <Servicedetails onLogout={handleLogout} /> : <Navigate to="/admin"/>} /> */}
 
-        {/* <Route path="/admin_addprovider" element={isLoggedIn ? <Addprovider onLogout={handleLogout} /> : <Navigate to="/admin"/>} /> */}
+        <Route path="/admin_addprovider" element={<Addprovider/>} />
         {/* <Route path="/admin_showproviders" element={isLoggedIn ? <Showprovider onLogout={handleLogout} /> : <Navigate to="/admin"/>} /> */}
         {/* <Route path="/admin_providerdetails/:id" element={isLoggedIn ? <Providerdetails onLogout={handleLogout} /> : <Navigate to="/admin"/>} /> */}
 

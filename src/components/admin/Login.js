@@ -83,7 +83,7 @@ const Login = ({ onLogin }) => {
                             </div>
                         </div>
 
-                        <div className="bg-image col-lg-6 mb-5 mb-lg-0 d-none d-md-block">
+                        <div className="bg-image col-lg-6 mb-5 mb-lg-0 d-none d-lg-block">
                             <img src={require('../../img/login-img.jpg')} style={{ height: "800px" }} className="w-100 rounded-4 shadow-4"
                                 alt="" />
                         </div>

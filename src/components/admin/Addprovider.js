@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Header.js';
 import axios from 'axios';
 
@@ -16,11 +16,15 @@ const Addprovider = () => {
     const [bussinessemailid, setBussinessemailid] = useState('');
     const [bussinessdetails, setBussinessdetails] = useState('');
     const [bussinesswebsiteurl, setBussinesswebsiteurl] = useState('');
+    const [bussinessfacebookurl, setBussinessfacebookurl] = useState('');
+    const [bussinessinstagramurl, setBussinessinstagramurl] = useState('');
+    const [bussinessyoutubeurl, setBussinessyoutubeurl] = useState('');
     const [bussinessgstnumber, setBussinessgstnumber] = useState('');
     const [bussinesstype, setBussinesstype] = useState('');
+    const [bussinessformation, setBussinessformation] = useState('');
     const [bussinesstdsdetails, setBussinesstdsdetails] = useState('');
     const [bussinesspancardnumber, setBussinesspancardnumber] = useState('');
-    const [bussinesscategory, setBussinesscategory] = useState('');
+    // const [sbcatid, setSbcatid] = useState('');
     const [bussinessaddress, setBussinessaddress] = useState('');
     const [collaborationdetails, setCollaborationdetails] = useState('');
     // Sales Details
@@ -34,7 +38,7 @@ const Addprovider = () => {
     const [bankifsccode, setBankifsccode] = useState('');
     const [bankbranchname, setBankbranchname] = useState('');
     // Files
-    const [img, setImg] = useState({})
+    const [img, setImg] = useState([]);
 
     // Main object
 
@@ -49,10 +53,41 @@ const Addprovider = () => {
         setSeletedOption(true)
     };
     // ADD BUSINESS DIV END
+
+    // ADD BUSINESS DIV SHOW SELECT INPUT
+    const [associate, setAssociate] = useState(false);
+    const handleBussiness = (e) => {
+        e.preventDefault();
+        setAssociate(true)
+    };
+    // ADD BUSINESS DIV END
+   
+
     // SELECT OPTION FOR SHOW DIV DATA
-    const [associate, setAssociate] = useState('')
+    const [bcatid, setBcatid] = useState('')
+    const [sbcatid, setSbcatid] = useState('')
+    const [bsubcategorys,setBsubcategorys] = useState('')
+
     const handleSecondSelectChange = (e) => {
-        setAssociate(e.target.value);
+        
+        // console.log(bcatid,"dfsdfdsf");
+        if(bcatid){
+            axios.post(`${process.env.REACT_APP_URL}/admin/subcatdata`,{bcatid:bcatid} ).then(function (response) {
+                // hendle success
+            //    console.log(response.data);
+               const sub=response.data.bsubcategorys
+               setBsubcategorys(sub);
+               
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+        }
+        else{
+            console.log("category id not found");
+        }
+        
     };
     // SELECT OPTION END
     // ADD SELES PROSAN DIV SHOW
@@ -88,11 +123,15 @@ const Addprovider = () => {
         bussinessemailid,
         bussinessdetails,
         bussinesswebsiteurl,
+        bussinessfacebookurl,
+        bussinessinstagramurl,
+        bussinessyoutubeurl,
         bussinessgstnumber,
         bussinesstype,
+        bussinessformation,
         bussinesstdsdetails,
         bussinesspancardnumber,
-        bussinesscategory,
+        sbcatid,
         bussinessaddress,
         collaborationdetails,
         salespersonname,
@@ -104,11 +143,13 @@ const Addprovider = () => {
         bankifsccode,
         bankbranchname,
     }
-
+    
 
 
 
     const handleSubmit = (e) => {
+
+
         e.preventDefault()
         const provider = {
             providerdata: data
@@ -121,35 +162,39 @@ const Addprovider = () => {
         
         for (const file of img) {
             // console.log(file,":::dfsfs::::");
-            formData.append("providerimg", file);
+            formData.append("documents", file);
         }
 
 
-        formData.append("providername", data.providername);
-        formData.append("providernumber", data.providernumber);
-        formData.append("provideremailid", data.provideremailid);
-        formData.append("providerbod", data.providerbod);
-        formData.append("provideraddress", data.provideraddress);
-        formData.append("bussinessname", data.bussinessname);
-        formData.append("bussinessnumber", data.bussinessnumber);
-        formData.append("bussinessemailid", data.bussinessemailid);
-        formData.append("bussinessdetails", data.bussinessdetails);
-        formData.append("bussinessgstnumber", data.bussinessgstnumber);
-        formData.append("bussinesswebsiteurl", data.bussinesswebsiteurl);
-        formData.append("bussinesstype", data.bussinesstype);
-        formData.append("bussinesstdsdetails", data.bussinesstdsdetails);
-        formData.append("bussinesspancardnumber", data.bussinesspancardnumber);
-        formData.append("bussinesscategory", data.bussinesscategory);
-        formData.append("bussinessaddress", data.bussinessaddress);
-        formData.append("collaborationdetails", data.collaborationdetails);
-        formData.append("salespersonname", data.salespersonname);
-        formData.append("salespersonnumber", data.salespersonnumber);
-        formData.append("salespersonemailid", data.salespersonemailid);
-        formData.append("salespersonposition", data.salespersonposition);
-        formData.append("bankname", data.bankname);
-        formData.append("bankaccountnumber", data.bankaccountnumber);
-        formData.append("bankifsccode", data.bankifsccode);
-        formData.append("bankbranchname", data.bankbranchname);
+        formData.append("name", data.providername);//
+        formData.append("numbar", data.providernumber);
+        formData.append("email", data.provideremailid);//
+        formData.append("BOD", data.providerbod);//
+        formData.append("address", data.provideraddress);//
+        formData.append("Bname", data.bussinessname);//
+        formData.append("Bnumber", data.bussinessnumber);//
+        formData.append("Bemail", data.bussinessemailid);//
+        formData.append("Bdetails", data.bussinessdetails);//
+        formData.append("B_GSTnumbar", data.bussinessgstnumber);
+        formData.append("Bsocialmedia", data.bussinesswebsiteurl);//
+        formData.append("Bsocialmedia", data.bussinessfacebookurl);//
+        formData.append("Bsocialmedia", data.bussinessinstagramurl);//
+        formData.append("Bsocialmedia", data.bussinessyoutubeurl);//
+        formData.append("Btype", data.bussinesstype);
+        formData.append("Bformation", data.bussinessformation);
+        formData.append("Btdsdetails", data.bussinesstdsdetails);
+        formData.append("Bpancardnumbar", data.bussinesspancardnumber);
+        formData.append("bsubcategoryid", data.sbcatid);
+        formData.append("Baddress", data.bussinessaddress);
+        formData.append("collaborationDetails", data.collaborationdetails);
+        formData.append("salespersonName", data.salespersonname);
+        formData.append("salespersonNumber", data.salespersonnumber);
+        formData.append("salespersonEmail", data.salespersonemailid);
+        formData.append("salespersonPosition", data.salespersonposition);
+        formData.append("bankName", data.bankname);
+        formData.append("bankAccountnumber", data.bankaccountnumber);
+        formData.append("bankIFSCcode", data.bankifsccode);
+        formData.append("bankbranchName", data.bankbranchname);
 
         try {
             axios.post(`${process.env.REACT_APP_URL}/admin/addprovider`, formData, {
@@ -160,6 +205,7 @@ const Addprovider = () => {
             })
             .then((response) => {
                 console.log(response.data);
+                console.log(data,"dsd");
             })
             .catch((error) => {
                 console.error(error);
@@ -169,27 +215,31 @@ const Addprovider = () => {
         }
 
     }
-
-    
     // const handleFileChange = (event) => {
-    //     console.log('event', event)
-    //     const selectedFiles = event.target.files;
-    //     const myNewFile = new File([selectedFiles], 'new_name.png', {type: event.target.files[0].type});
-    //     setImg((prevFiles) => {
-            
-    //         console.log('check:::',[...prevFiles, ...Array.from(selectedFiles)]);
-    //         return [...prevFiles, ...Array.from(selectedFiles)]
-    //     });
-    // };
+    //     const selectedFiles = Array.from(event.target.files);
+    //     setFiles(selectedFiles);
 
+    // };
+    
     const handleFileChange = (event) => {
-        const file_obj = {
-            [event.target.name]: Array.from(event.target.files)[0]
-        };
-        console.log('event 1', file_obj);
-        setImg((prevFiles) => ({...prevFiles, ...file_obj}));
-        console.log('event 2', img);
+        console.log('event', event)
+        const selectedFiles = event.target.files;
+        const myNewFile = new File([selectedFiles], 'new_name.png', {type: event.target.files[0].type});
+        setImg((prevFiles) => {
+            
+            console.log('check:::',[...prevFiles, ...Array.from(selectedFiles)]);
+            return [...prevFiles, ...Array.from(selectedFiles)]
+        });
     };
+
+    // const handleFileChange = (event) => {
+    //     const file_obj = {
+    //         [event.target.name]: Array.from(event.target.files)[0]
+    //     };
+    //     console.log('event 1', file_obj);
+    //     setImg((prevFiles) => ({...prevFiles, ...file_obj}));
+    //     console.log('event 2', img);
+    // };
 
     // const handleFileChange = (event) => {
     //     const file_obj = {
@@ -200,6 +250,72 @@ const Addprovider = () => {
     // };
     
 
+
+    // Select Bussiness Category START
+    const [bcategory, setBcategory] = useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`).then(function (response) {
+            // handle success
+
+            // console.log(response.data, "ddd");
+            setBcategory(response.data.bcategory);
+            // console.log("Bussiness Category:::", bussinesscategory);
+
+
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
+    // Select Bussiness Category END
+
+
+
+    // Select Bussiness Types START
+    const [bussinessType, setBussinessType] = useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_btype`).then(function (response) {
+            // handle success
+
+            console.log(response.data, "ddd");
+            setBussinessType(response.data.bussinessType);
+            // console.log("Bussiness Category:::", bussinesscategory);
+
+
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
+
+    // Select Bussiness Types END
+
+
+    // Select Bussiness Formation START
+    const [bussinessFormation, setBussinessFormation] = useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_bformation`).then(function (response) {
+            // handle success
+
+            console.log(response.data, "ddd");
+            setBussinessFormation(response.data.bussinessFormation);
+            // console.log("Bussiness Category:::", bussinesscategory);
+
+
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
+
+    // Select Bussiness Types END
+
+    
+
+    
 
    
     return (
@@ -222,7 +338,7 @@ const Addprovider = () => {
                                 {/* <div className='card recent-sales overflow-auto'>
                                     <div className='card-body'> */}
 
-                                <form onSubmit={handleSubmit}>
+                                <form onSubmit={handleSubmit} encType='multipart/formData'>
                                     <div className='card recent-sales overflow-auto'>
                                         <div className='card-body'>
                                             <h5 className='card-title mb-5'>Add Provider <span>| Today</span></h5>
@@ -287,7 +403,7 @@ const Addprovider = () => {
                                                     </div>
                                                 </div>
                                                 <div className='row mb-5 text-end me-2'>
-                                                    <div>
+                                                    <div className='w-25'>
                                                         <button className='btn bg-danger text-white' onClick={handleAdd}>Select Business</button>
                                                     </div>
                                                 </div>
@@ -300,15 +416,91 @@ const Addprovider = () => {
                                                 <div className='card recent-sales overflow-auto'>
                                                     <div className='card-body'>
                                                         <div className='row mt-5 mb-5'>
-                                                            <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Category<span className='text-red'>*</span></label>
+                                                            <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Type <span className='text-red'>*</span></label>
                                                             <div className='col-sm-9 col-lg-10'>
-                                                                <select className="form-select" onChange={handleSecondSelectChange} value={associate} aria-label="Default select example">
-                                                                    <option >------ Select Option ------</option>
-                                                                    <option value="Property" >Property</option>
-                                                                    <option value="Design" >Design</option>
-                                                                    {/* {getSecondSelectOptions()} */}
+                                                                <select class="form-select" aria-label="Default select example" value={bussinesstype} onChange={(e) => setBussinesstype(e.target.value)}>
+                                                                    <option selected>---- Select Business Type ----</option>
+                                                                   
+                                                                {
+                                                                    bussinessType && bussinessType.map((item, i) => {
+                                                                        return (
+                                                                            <>
+
+                                                                                    <option value={item.btype}>{item.btype}</option>
+
+                                                                            </>
+                                                                        )
+                                                                    })
+                                                                }
                                                                 </select>
+                                                                
                                                             </div>
+                                                        </div>
+                                                        <div className='row mt-5 mb-5'>
+                                                            <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Formation <span className='text-red'>*</span></label>
+                                                            <div className='col-sm-9 col-lg-10'>
+                                                                <select class="form-select" aria-label="Default select example" value={bussinessformation} onChange={(e) => setBussinessformation(e.target.value)}>
+                                                                    <option selected>---- Select Business Formation ----</option>
+                                                                   
+                                                                {
+                                                                    bussinessFormation && bussinessFormation.map((item, i) => {
+                                                                        return (
+                                                                            <>
+
+                                                                                    <option value={item.bussinessformation}>{item.bussinessformation}</option>
+
+                                                                            </>
+                                                                        )
+                                                                    })
+                                                                }
+                                                                </select>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div className='row mt-5 mb-5'>
+                                                            <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Category <span className='text-red'>*</span></label>
+                                                            <div className='col-sm-9 col-lg-10'>
+                                                                <select class="form-select" aria-label="Default select example" value={bcatid} onChange={(e) => setBcatid(e.target.value)} onClick={handleSecondSelectChange}>
+                                                                    <option selected>---- Select Category ----</option>
+                                                                   
+                                                                {
+                                                                    bcategory && bcategory.map((item, i) => {
+                                                                        return (
+                                                                            <>
+
+                                                                                    <option value={item._id}>{item.bussinesscategory}</option>
+
+                                                                            </>
+                                                                        )
+                                                                    })
+                                                                }
+                                                                </select>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div className='row mt-5 mb-5'>
+                                                            <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Subcategory <span className='text-red'>*</span></label>
+                                                            <div className='col-sm-9 col-lg-10'>
+                                                            <select class="form-select" aria-label="Default select example" value={sbcatid} onChange={(e) => setSbcatid(e.target.value)}>
+                                                                    <option selected>---- Select Subcategory ----</option>
+                                                                   
+                                                                {
+                                                                    bsubcategorys && bsubcategorys.map((item, i) => {
+                                                                        return (
+                                                                            <>
+
+                                                                                    <option value={item._id}>{item.bussinesssubcategory}</option>
+
+                                                                            </>
+                                                                        )
+                                                                    })
+                                                                }
+                                                                </select>
+                                                                
+                                                            </div>
+                                                    <div className='mt-5 w-25'>
+                                                        <button className='btn bg-danger text-white' onClick={handleBussiness}>Add Business Details</button>
+                                                    </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -318,7 +510,7 @@ const Addprovider = () => {
                                     }
 
                                     {
-                                        associate === 'Property' ? (
+                                        associate ? (
                                             <>
                                                 <div className='card recent-sales overflow-auto'>
                                                     <div className='card-body'>
@@ -363,6 +555,33 @@ const Addprovider = () => {
                                                                 </div>
                                                             </div>
                                                             <div className='row mb-5'>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Facebook Url <span className='text-red'>*</span></label>
+                                                                <div className='col-sm-9 col-lg-10'>
+                                                                    <div className='me-3 form-floating'>
+                                                                        <input type='text' className='form-control' value={bussinessfacebookurl} onChange={(e) => setBussinessfacebookurl(e.target.value)} placeholder='Business Facebook Url' />
+                                                                        <label htmlFor="floatingTextarea">Business Facebook Url</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mb-5'>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Instagram Url <span className='text-red'>*</span></label>
+                                                                <div className='col-sm-9 col-lg-10'>
+                                                                    <div className='me-3 form-floating'>
+                                                                        <input type='text' className='form-control' value={bussinessinstagramurl} onChange={(e) => setBussinessinstagramurl(e.target.value)} placeholder='Business Instagram Url' />
+                                                                        <label htmlFor="floatingTextarea">Business Instagram Url</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mb-5'>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Youtube Url <span className='text-red'>*</span></label>
+                                                                <div className='col-sm-9 col-lg-10'>
+                                                                    <div className='me-3 form-floating'>
+                                                                        <input type='text' className='form-control' value={bussinessyoutubeurl} onChange={(e) => setBussinessyoutubeurl(e.target.value)} placeholder='Business Youtube Url' />
+                                                                        <label htmlFor="floatingTextarea">Business Youtube Url</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mb-5'>
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Details <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
@@ -372,7 +591,7 @@ const Addprovider = () => {
                                                                 </div>
                                                             </div>
                                                             <div className='row mb-5'>
-                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Brosar <span className='text-red'>*</span></label>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Brochure <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3'>
                                                                         <input type='file' name='bussiness-brosar' onChange={handleFileChange} multiple className='form-control' placeholder='Business Brosar' />
@@ -415,7 +634,7 @@ const Addprovider = () => {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div className='row mb-5'>
+                                                            {/* <div className='row mb-5'>
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Category <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
@@ -423,8 +642,8 @@ const Addprovider = () => {
                                                                         <label htmlFor="floatingTextarea">Business Category</label>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div className='row mb-5'>
+                                                            </div> */}
+                                                            {/* <div className='row mb-5'>
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Type <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
@@ -432,7 +651,7 @@ const Addprovider = () => {
                                                                         <label htmlFor="floatingTextarea">Business Type</label>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> */}
                                                             <div className='row mb-5'>
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Collaboration Details <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
@@ -445,7 +664,7 @@ const Addprovider = () => {
                                                                 </div>
                                                             </div>
                                                             <div className='row mb-5 text-end me-2'>
-                                                                <div>
+                                                                <div className='w-25'>
                                                                     <button className='btn bg-danger text-white' onClick={personAdd}>Add Sales Person</button>
                                                                 </div>
                                                             </div>
@@ -505,7 +724,7 @@ const Addprovider = () => {
                                                                 </div>
                                                             </div>
                                                             <div className='row mb-5 text-end me-2'>
-                                                                <div>
+                                                                <div className='w-25'>
                                                                     <button className='btn bg-danger text-white' onClick={bankAdd}>Add Bank Details</button>
                                                                 </div>
                                                             </div>
@@ -553,7 +772,7 @@ const Addprovider = () => {
                                                                 </div>
                                                             </div>
                                                             <div className='row mb-5'>
-                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Bank Branch Name<span className='text-red'>*</span></label>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Bank Branch Name <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
                                                                         <input type='text' className='form-control' value={bankbranchname} onChange={(e) => setBankbranchname(e.target.value)} placeholder='Bank Branch Name' />
@@ -562,7 +781,7 @@ const Addprovider = () => {
                                                                 </div>
                                                             </div>
                                                             <div className='row mb-5 text-end me-2'>
-                                                                <div>
+                                                                <div className='w-25'>
                                                                     <button className='btn bg-danger text-white' onClick={documentAdd}>Add Document</button>
                                                                 </div>
                                                             </div>
@@ -624,7 +843,7 @@ const Addprovider = () => {
                                                             </div>
 
                                                             <div className='row mb-5 text-end me-2'>
-                                                                <div>
+                                                                <div className='w-25'>
                                                                     <button className='btn bg-success text-white' >Submit Data</button>
                                                                 </div>
                                                             </div>
