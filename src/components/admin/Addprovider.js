@@ -38,7 +38,7 @@ const Addprovider = () => {
     const [bankifsccode, setBankifsccode] = useState('');
     const [bankbranchname, setBankbranchname] = useState('');
     // Files
-    const [img, setImg] = useState([]);
+    //const [img, setImg] = useState([]);
 
     // Main object
 
@@ -112,6 +112,62 @@ const Addprovider = () => {
     }
     // ADD IMAGE DOCUMENT DIV END
 
+
+
+    // image and document parh all start
+    const [pfiles, setPfiles] = useState([]);
+
+    const handleProfile = (event) => {
+        const selectedFiles = Array.from(event.target.files);
+        setPfiles(selectedFiles);
+
+    };
+    
+    const [adharfiles, setAdharfiles] = useState([]);
+
+    const handleAdhar = (event) => {
+        const selectedFiles = Array.from(event.target.files);
+        setAdharfiles(selectedFiles);
+
+    };
+    const [pancardfiles, setPancardfiles] = useState([]);
+
+    const handlePancard = (event) => {
+        const selectedFiles = Array.from(event.target.files);
+        setPancardfiles(selectedFiles);
+
+    };
+    const [gstfiles, setGstfiles] = useState([]);
+
+    const handleGst = (event) => {
+        const selectedFiles = Array.from(event.target.files);
+        setGstfiles(selectedFiles);
+
+    };
+    const [tdsfiles, setTdsfiles] = useState([]);
+
+    const handleTds = (event) => {
+        const selectedFiles = Array.from(event.target.files);
+        setTdsfiles(selectedFiles);
+
+    };
+    const [agreementfiles, setAgreementfiles] = useState([]);
+
+    const handleAgreement = (event) => {
+        const selectedFiles = Array.from(event.target.files);
+        setAgreementfiles(selectedFiles);
+
+    };
+    const [bfiles, setBfiles] = useState([]);
+
+    const handlebrochure = (event) => {
+        const selectedFiles = Array.from(event.target.files);
+        setBfiles(selectedFiles);
+
+    };
+
+    // image and document parh all End
+
     const data = {
         providername,
         providernumber,
@@ -142,6 +198,14 @@ const Addprovider = () => {
         bankaccountnumber,
         bankifsccode,
         bankbranchname,
+        // Image data
+        pfiles,
+        bfiles,
+        adharfiles,
+        pancardfiles,
+        gstfiles,
+        tdsfiles,
+        agreementfiles
     }
     
 
@@ -154,32 +218,57 @@ const Addprovider = () => {
         const provider = {
             providerdata: data
         }
-        if (img.length === 0) {
-            console.log("Please select at least one file");
-            return;
-        }
+       
         const formData = new FormData();
         
-        for (const file of img) {
+        // for (const file of img) {
+        //     console.log(file,":::dfsfs::::");
+        //     formData.append("documents", file);
+        // }
+        for (const file of pfiles) {
             // console.log(file,":::dfsfs::::");
-            formData.append("documents", file);
+            formData.append("profile", file);
+        }
+        for (const file of bfiles) {
+            // console.log(file,":::dfsfs::::");
+            formData.append("b_brochure", file);
+        }
+        for (const file of adharfiles) {
+            // console.log(file,":::dfsfs::::");
+            formData.append("adharcard", file);
+        }
+        for (const file of pancardfiles) {
+            // console.log(file,":::dfsfs::::");
+            formData.append("pancard", file);
+        }
+        for (const file of gstfiles) {
+            // console.log(file,":::dfsfs::::");
+            formData.append("gstfile", file);
+        }
+        for (const file of tdsfiles) {
+            // console.log(file,":::dfsfs::::");
+            formData.append("tdsfile", file);
+        }
+        for (const file of agreementfiles) {
+            // console.log(file,":::dfsfs::::");
+            formData.append("agreementfile", file);
         }
 
 
-        formData.append("name", data.providername);//
-        formData.append("numbar", data.providernumber);
-        formData.append("email", data.provideremailid);//
-        formData.append("BOD", data.providerbod);//
-        formData.append("address", data.provideraddress);//
-        formData.append("Bname", data.bussinessname);//
-        formData.append("Bnumber", data.bussinessnumber);//
-        formData.append("Bemail", data.bussinessemailid);//
-        formData.append("Bdetails", data.bussinessdetails);//
+        formData.append("name", data.providername);
+        formData.append("number", data.providernumber);
+        formData.append("email", data.provideremailid);
+        formData.append("BOD", data.providerbod);
+        formData.append("address", data.provideraddress);
+        formData.append("Bname", data.bussinessname);
+        formData.append("Bnumber", data.bussinessnumber);
+        formData.append("Bemail", data.bussinessemailid);
+        formData.append("Bdetails", data.bussinessdetails);
         formData.append("B_GSTnumbar", data.bussinessgstnumber);
-        formData.append("Bsocialmedia", data.bussinesswebsiteurl);//
-        formData.append("Bsocialmedia", data.bussinessfacebookurl);//
-        formData.append("Bsocialmedia", data.bussinessinstagramurl);//
-        formData.append("Bsocialmedia", data.bussinessyoutubeurl);//
+        formData.append("Bsocialmedia", data.bussinesswebsiteurl);
+        formData.append("Bsocialmedia", data.bussinessfacebookurl);
+        formData.append("Bsocialmedia", data.bussinessinstagramurl);
+        formData.append("Bsocialmedia", data.bussinessyoutubeurl);
         formData.append("Btype", data.bussinesstype);
         formData.append("Bformation", data.bussinessformation);
         formData.append("Btdsdetails", data.bussinesstdsdetails);
@@ -195,13 +284,18 @@ const Addprovider = () => {
         formData.append("bankAccountnumber", data.bankaccountnumber);
         formData.append("bankIFSCcode", data.bankifsccode);
         formData.append("bankbranchName", data.bankbranchname);
+        formData.append("bankbranchName", data.adharfiles);
+        formData.append("bankbranchName", data.pancardfiles);
+        formData.append("bankbranchName", data.gstfiles);
+        formData.append("bankbranchName", data.tdsfiles);
+        formData.append("bankbranchName", data.agreementfiles);
 
         try {
             axios.post(`${process.env.REACT_APP_URL}/admin/addprovider`, formData, {
-                headers: {
-                    'token': token,
-                    'Content-Type': 'multipart/form-data', // Set the content type for file uploads
-                }
+                // headers: {
+                //     'token': token,
+                //     'Content-Type': 'multipart/form-data', // Set the content type for file uploads
+                // }
             })
             .then((response) => {
                 console.log(response.data);
@@ -215,23 +309,21 @@ const Addprovider = () => {
         }
 
     }
-    // const handleFileChange = (event) => {
-    //     const selectedFiles = Array.from(event.target.files);
-    //     setFiles(selectedFiles);
-
-    // };
     
-    const handleFileChange = (event) => {
-        console.log('event', event)
-        const selectedFiles = event.target.files;
-        const myNewFile = new File([selectedFiles], 'new_name.png', {type: event.target.files[0].type});
-        setImg((prevFiles) => {
+    
+    // const handleFileChange = (event) => {
+    //     console.log('event', event)
+    //     const selectedFiles = event.target.files;
+    //     const myNewFile = new File([selectedFiles], 'new_name.png', {type: event.target.files[0].type});
+    //     setImg((prevFiles) => {
             
-            console.log('check:::',[...prevFiles, ...Array.from(selectedFiles)]);
-            return [...prevFiles, ...Array.from(selectedFiles)]
-        });
-    };
+    //         console.log('check:::',[...prevFiles, ...Array.from(selectedFiles)]);
+    //         return [...prevFiles, ...Array.from(selectedFiles)]
+    //     });
+    // };
 
+
+   
     // const handleFileChange = (event) => {
     //     const file_obj = {
     //         [event.target.name]: Array.from(event.target.files)[0]
@@ -278,7 +370,7 @@ const Addprovider = () => {
         axios.get(`${process.env.REACT_APP_URL}/admin/show_btype`).then(function (response) {
             // handle success
 
-            console.log(response.data, "ddd");
+            // console.log(response.data, "ddd");
             setBussinessType(response.data.bussinessType);
             // console.log("Bussiness Category:::", bussinesscategory);
 
@@ -299,7 +391,7 @@ const Addprovider = () => {
         axios.get(`${process.env.REACT_APP_URL}/admin/show_bformation`).then(function (response) {
             // handle success
 
-            console.log(response.data, "ddd");
+            // console.log(response.data, "ddd");
             setBussinessFormation(response.data.bussinessFormation);
             // console.log("Bussiness Category:::", bussinesscategory);
 
@@ -352,8 +444,8 @@ const Addprovider = () => {
                                                         <div className='me-3'>
                                                             <input type='file' 
                                                             name="provide-profile"
-                                                            onChange={handleFileChange}
-                                                                multiple className='form-control' placeholder='Provider Name' />
+                                                            onChange={handleProfile}
+                                                                className='form-control' placeholder='Provider Name' />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -594,7 +686,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Brochure <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3'>
-                                                                        <input type='file' name='bussiness-brosar' onChange={handleFileChange} multiple className='form-control' placeholder='Business Brosar' />
+                                                                        <input type='file' name='bussiness-brosar' onChange={handlebrochure} multiple className='form-control' placeholder='Business Brosar' />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -805,7 +897,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Aadharcard Image JPEG <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3'>
-                                                                        <input type='file' name='adharcard-image' onChange={handleFileChange} className='form-control' placeholder='Aadharcard Image JPEG' />
+                                                                        <input type='file' name='adharcard-image' onChange={handleAdhar} className='form-control' placeholder='Aadharcard Image JPEG' />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -813,7 +905,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Pancard Image JPEG <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 '>
-                                                                        <input type='file' name='pancard-image' onChange={handleFileChange} className='form-control' placeholder='Pancard Image JPEG' />
+                                                                        <input type='file' name='pancard-image' onChange={handlePancard} className='form-control' placeholder='Pancard Image JPEG' />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -821,7 +913,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>GST File JPEG <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 '>
-                                                                        <input type='file' name='gst-file' onChange={handleFileChange} className='form-control' placeholder='GST File JPEG' />
+                                                                        <input type='file' name='gst-file' onChange={handleGst} className='form-control' placeholder='GST File JPEG' />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -829,7 +921,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>TDS File JPEG<span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3'>
-                                                                        <input type='file' name='tds-file' onChange={handleFileChange} className='form-control' placeholder='TDS File JPEG' />
+                                                                        <input type='file' name='tds-file' onChange={handleTds} className='form-control' placeholder='TDS File JPEG' />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -837,7 +929,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Agreement File JPEG<span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3'>
-                                                                        <input type='file' name='agreement-file' onChange={handleFileChange} className='form-control' placeholder='Agreement File JPEG' />
+                                                                        <input type='file' name='agreement-file' onChange={handleAgreement} className='form-control' placeholder='Agreement File JPEG' />
                                                                     </div>
                                                                 </div>
                                                             </div>

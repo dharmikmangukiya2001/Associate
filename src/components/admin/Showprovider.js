@@ -7,22 +7,40 @@ import { logDOM } from "@testing-library/react";
 
 const Showprovider = () => {
 
-    const [providerdata, setProvider] = useState([])
+    const [providers, setProviders] = useState([])
     const token = localStorage.getItem("token");
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/providerdata`, { headers: { token } }).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/showproviders`).then(function (response) {
             // handle success
             // console.log(response.data);
-            setProvider(response.data.providerdata);
+            setProviders(response.data.providers);
         })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             })
     }, [])
+    const XLSX = require('xlsx');
+    const exportToExcel = () => {
+        const headers = ['Provider Name', 'Provider Number', 'Business Name', 'Business Type', 'Provider Email'];
+        // Fetch data from the API and store it in the 'data' variable
+        const dataAsArray = providers.map((item) => [
+            item.name,
+            item.number,
+            item.Bname,
+            item.Btype,
+            item.email
+        ]);
 
+        const excelData = [headers, ...dataAsArray];
+        const ws = XLSX.utils.json_to_sheet(excelData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        XLSX.writeFile(wb, 'exported_data.xlsx');
+    }
 
     return (
         <>
@@ -48,26 +66,29 @@ const Showprovider = () => {
                                         <div className="card recent-sales overflow-auto">
                                             <div className="card-body">
                                                 <h5 className="card-title">Show All Providers</h5>
+
                                                 <table className="rwd-table">
+                                                    <button onClick={exportToExcel}>Export to Excel</button>
 
                                                     <tbody>
+
                                                         <tr>
                                                             <th>No.</th>
                                                             <th>Provider Name</th>
                                                             <th>Provider Number</th>
                                                             <th>Business Name</th>
                                                             {/* <th>Provider Number</th> */}
-                                                            <th>Category Name</th>
+                                                            <th>Bussiness Type</th>
                                                             {/* <th>Provider Email</th> */}
-                                                            <th>Business Details</th>
+                                                            <th>Provider Email</th>
                                                             <th>Show Details</th>
                                                         </tr>
                                                         {/* {
                                                             providerdata && providerdata.map((item, i) => {
                                                                 return ( */}
                                                         <>
-                                                            {providerdata &&
-                                                                providerdata.map((item, i) => (
+                                                            {providers &&
+                                                                providers.map((item, i) => (
                                                                     <tr key={i}>
                                                                         <td>
                                                                             <h5>
@@ -76,27 +97,27 @@ const Showprovider = () => {
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.providername}
+                                                                                {item.name}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.providernumber}
+                                                                                {item.number}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.bussinessname}
+                                                                                {item.Bname}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.bussinesscategory}
+                                                                                {item.Btype}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.bussinessdetails}
+                                                                                {item.email}
                                                                             </h6>
                                                                         </td>
                                                                         <td data-th="Net Amount">

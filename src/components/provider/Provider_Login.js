@@ -9,17 +9,17 @@ const Provider_Login = () => {
     const nevigate =useNavigate()
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
+        // e.preventDefault();
         const providerdetails = {
-            provideremailid : email,
-            providernumber : password
+            email : email,
+            number : password
         }
         // console.log("EMAIL:", email, "PASSWORD:", password);
         setEmail(email);
         setPassword(password);
 
-        axios.post(`${process.env.REACT_APP_URL}/provider/logindata`, providerdetails)
+        axios.post(`${process.env.REACT_APP_URL}/provider/login`, providerdetails)
         .then(function(response){
             // handle success
             const providertoken =response.data.token;
@@ -39,7 +39,7 @@ const Provider_Login = () => {
             <section className="pro-login">
                 <div className="form-box">
                     <div className="form-value">
-                        <form onSubmit={handleSubmit}>
+                        <form>
                             <h2 className="text-white">Provider Login</h2>
                             <div className="inputbox">
                                 <ion-icon name="mail-outline" />
@@ -54,7 +54,7 @@ const Provider_Login = () => {
                             <div className="forget">
                                 <label htmlFor><input type="checkbox" required/>Remember Me  <a href="#">Forget Password</a></label>
                             </div>
-                            <button className="btn border text-white mt-3">Log in</button>
+                            <button className="btn border text-white mt-3" onClick={handleSubmit}>Log in</button>
                             
                         </form>
                     </div>

@@ -66,14 +66,14 @@ function App() {
         {/* <Route path="/admin_servicesdetails/:id" element={isLoggedIn ? <Servicedetails onLogout={handleLogout} /> : <Navigate to="/admin"/>} /> */}
 
         <Route path="/admin_addprovider" element={<Addprovider/>} />
-        {/* <Route path="/admin_showproviders" element={isLoggedIn ? <Showprovider onLogout={handleLogout} /> : <Navigate to="/admin"/>} /> */}
-        {/* <Route path="/admin_providerdetails/:id" element={isLoggedIn ? <Providerdetails onLogout={handleLogout} /> : <Navigate to="/admin"/>} /> */}
+        <Route path="/admin_showproviders" element={<Showprovider/>} />
+        <Route path="/admin_providerdetails/:id" element={<Providerdetails/>} />
 
         {/* ADMIN SITE END */}
 
         {/* PROVIDER SITE START */}
-        {/* <Route path="/provider" element={<Provider_Login />} /> */}
-        {/* <Route path="/provider_dashboard" element={<Provider_Dashboard />} /> */}
+        <Route path="/provider" element={<Provider_Login />} />
+        <Route path="/provider_dashboard" element={<Provider_Dashboard />} />
         {/* PROVIDER SITE END */}
 
 
