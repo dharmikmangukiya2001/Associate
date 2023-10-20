@@ -27,20 +27,20 @@ function Providerdetails() {
 
     // delete provider
 
-    // const nevigate = useNavigate();
-    // const deleteService = (e) => {
-    //     e.preventDefault();
+    const nevigate = useNavigate();
+    const deleteService = (e) => {
+        e.preventDefault();
 
-    //     axios.get(`${process.env.REACT_APP_URL}/admin/deleteprovider/${providerid}`, { headers: { token } }).then(function (response) {
-    //         // handle success
-    //         console.log(response.data);
-    //         nevigate('/admin_showproviders')
-    //     })
-    //         .catch(function (error) {
-    //             // handle error
-    //             console.log(error);
-    //         })
-    // }
+        axios.delete(`${process.env.REACT_APP_URL}/admin/deleteprovider/${providerid}`).then(function (response) {
+            // handle success
+            console.log(response.data);
+            nevigate('/admin_showproviders')
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }
 
 
 
@@ -285,46 +285,11 @@ function Providerdetails() {
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                
                                                                 <div className="ms-3 d-flex col-12">
                                                                     <div className="col-4">
                                                                         <p className="fs-6">
                                                                             <strong>Bussiness Category &nbsp;&nbsp;: </strong>
-                                                                        </p>
-                                                                    </div>
-                                                                    <div className="col-8 pe-3">
-                                                                        <p>
-                                                                            <span className="fs-6">
-                                                                                {
-                                                                                    Object.entries(item).map(([key, value], index) => {
-                                                                                        if (key === 'bsubcategoryid') {
-                                                                                            return (
-                                                                                                <div key={index}>
-                                                                                                    {Object.entries(value).map(([subKey, subValue], subIndex) => (
-                                                                                                        <div key={subIndex}>
-                                                                                                            {subKey === 'bussinesssubcategory' ? (
-                                                                                                                <>{subValue}</>
-                                                                                                            ) : (
-                                                                                                                <>
-                                                                                                                    {/* {subKey}: {JSON.stringify(subValue)} */}
-                                                                                                                </>
-                                                                                                            )}
-                                                                                                        </div>
-                                                                                                    ))}
-                                                                                                </div>
-                                                                                            );
-                                                                                        }
-                                                                                        return null; // Handle other keys, if needed
-                                                                                    })
-                                                                                }
-
-                                                                            </span>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="ms-3 d-flex col-12">
-                                                                    <div className="col-4">
-                                                                        <p className="fs-6">
-                                                                            <strong>Bussiness Subcategory &nbsp;&nbsp;: </strong>
                                                                         </p>
                                                                     </div>
                                                                     <div className="col-8 pe-3">
@@ -359,6 +324,42 @@ function Providerdetails() {
                                                                                         return null; // Handle other keys, if needed
                                                                                     })
                                                                                 }
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="ms-3 d-flex col-12">
+                                                                    <div className="col-4">
+                                                                        <p className="fs-6">
+                                                                            <strong>Bussiness Subcategory &nbsp;&nbsp;: </strong>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div className="col-8 pe-3">
+                                                                        <p>
+                                                                            <span className="fs-6">
+                                                                                {
+                                                                                    Object.entries(item).map(([key, value], index) => {
+                                                                                        if (key === 'bsubcategoryid') {
+                                                                                            return (
+                                                                                                <div key={index}>
+                                                                                                    {Object.entries(value).map(([subKey, subValue], subIndex) => (
+                                                                                                        <div key={subIndex}>
+                                                                                                            {subKey === 'bussinesssubcategory' ? (
+                                                                                                                <>{subValue}</>
+                                                                                                            ) : (
+                                                                                                                <>
+                                                                                                                    {/* {subKey}: {JSON.stringify(subValue)} */}
+                                                                                                                </>
+                                                                                                            )}
+                                                                                                        </div>
+                                                                                                    ))}
+                                                                                                </div>
+                                                                                            );
+                                                                                        }
+                                                                                        return null; // Handle other keys, if needed
+                                                                                    })
+                                                                                }
+
                                                                             </span>
                                                                         </p>
                                                                     </div>
@@ -873,12 +874,179 @@ function Providerdetails() {
                                                                 </div>
                                                                 <div className="ms-3 d-flex col-12 mt-5 mb-2">
                                                                     <div className="pe-4 col-12 text-end">
-                                                                        {/* <Link><button onClick={deleteService} className="btn btn-danger px-5 me-2 mb-3">Delete</button></Link> */}
+                                                                        <Link><button onClick={deleteService} className="btn btn-danger px-5 me-2 mb-3">Delete</button></Link>
 
                                                                         {/* <Link><button id="updateButton" onClick={() => onAddUpdate()} className="btn btn-primary me-1 px-5 mb-3">Update</button></Link> */}
                                                                     </div>
 
                                                                 </div>
+                                                            </>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-4">
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="card recent-sales overflow-auto">
+                                            <div className="card-body">
+                                                <h5 className="card-title">Document</h5>
+                                                <div>
+                                                    <div className="col-12 border shadow-sm p-3 mb-5 bg-body rounded">
+                                                        <div className="ms-3 d-flex col-12 pb-5">
+                                                            <div className="col-4">
+
+                                                            </div>
+                                                            <div className="col-8">
+
+
+                                                                {/* {provider.img.map((image, index) => (
+                                                                    <img
+                                                                        key={index} // Make sure to provide a unique key for each image if within a loop.
+                                                                        className='rounded-circle border border-3 border-secondary'
+                                                                        src={`${process.env.REACT_APP_URL}/${image}`} // Assuming 'image' contains the path to the image.
+                                                                        height={100}
+                                                                        alt={`Image ${index}`}
+                                                                    />
+                                                                ))} */}
+                                                                {/* <img className='rounded-circle border border-3 border-secondary' src={`${process.env.REACT_APP_URL}/${provider.img}`} height={100} /> */}
+
+                                                            </div>
+                                                        </div>
+                                                        {providers.map((item, i) => (
+                                                            <>
+                                                                <div className="ms-3 d-flex col-12">
+                                                                    
+                                                                    <div className="col-8 pe-3">
+                                                                        <p>
+                                                                            <span className="fs-6">
+                                                                                {
+                                                                                    Object.entries(item).map(([key, value], index) => {
+                                                                                        return (
+                                                                                            <>{key == 'adharcard' ? (<>
+                                                                                                <img className="w-100" src={value}></img>
+                                                                                                Addharcard
+                                                                                            </>) : null}
+
+                                                                                            </>
+                                                                                        )
+                                                                                    })
+                                                                                }
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="ms-3 d-flex col-12">
+                                                                    
+                                                                    <div className="col-8 pe-3">
+                                                                        <p>
+                                                                            <span className="fs-6">
+                                                                                {
+                                                                                    Object.entries(item).map(([key, value], index) => {
+                                                                                        return (
+                                                                                            <>{key == 'pancard' ? (<>
+                                                                                                <img className="w-100" src={value}></img>
+                                                                                                Pancard
+                                                                                            </>) : null}
+
+                                                                                            </>
+                                                                                        )
+                                                                                    })
+                                                                                }
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="ms-3 d-flex col-12">
+                                                                    
+                                                                    <div className="col-8 pe-3">
+                                                                        <p>
+                                                                            <span className="fs-6">
+                                                                                {
+                                                                                    Object.entries(item).map(([key, value], index) => {
+                                                                                        return (
+                                                                                            <>{key == 'b_brochure' ? (<>
+                                                                                                <img className="w-100" src={value}></img>
+                                                                                                Bussiness Brochure
+                                                                                            </>) : null}
+
+                                                                                            </>
+                                                                                        )
+                                                                                    })
+                                                                                }
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="ms-3 d-flex col-12">
+                                                                    
+                                                                    <div className="col-8 pe-3">
+                                                                        <p>
+                                                                            <span className="fs-6">
+                                                                                {
+                                                                                    Object.entries(item).map(([key, value], index) => {
+                                                                                        return (
+                                                                                            <>{key == 'agreementfile' ? (<>
+                                                                                                <img className="w-100" src={value}></img>
+                                                                                                Agreement
+                                                                                            </>) : null}
+
+                                                                                            </>
+                                                                                        )
+                                                                                    })
+                                                                                }
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="ms-3 d-flex col-12">
+                                                                    
+                                                                    <div className="col-8 pe-3">
+                                                                        <p>
+                                                                            <span className="fs-6">
+                                                                                {
+                                                                                    Object.entries(item).map(([key, value], index) => {
+                                                                                        return (
+                                                                                            <>{key == 'gstfile' ? (<>
+                                                                                                <img className="w-100" src={value}></img>
+                                                                                                GSTIN File
+                                                                                            </>) : null}
+
+                                                                                            </>
+                                                                                        )
+                                                                                    })
+                                                                                }
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="ms-3 d-flex col-12">
+                                                                    
+                                                                    <div className="col-8 pe-3">
+                                                                        <p>
+                                                                            <span className="fs-6">
+                                                                                {
+                                                                                    Object.entries(item).map(([key, value], index) => {
+                                                                                        return (
+                                                                                            <>{key == 'tdsfile' ? (<>
+                                                                                                <img className="w-100" src={value}></img>
+                                                                                                TDS File
+                                                                                            </>) : null}
+
+                                                                                            </>
+                                                                                        )
+                                                                                    })
+                                                                                }
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                
                                                             </>
                                                         ))}
                                                     </div>
