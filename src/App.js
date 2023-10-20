@@ -14,6 +14,7 @@ import { Navigate } from 'react-router-dom';
 
 import Provider_Login from './components/provider/Provider_Login';
 import Provider_Dashboard from './components/provider/Provider_Dashboard';
+import AddService from './components/provider/AddServices';
 import { useEffect, useState } from 'react';
 
 import User from './components/user/User';
@@ -74,6 +75,7 @@ function App() {
         {/* PROVIDER SITE START */}
         <Route path="/provider" element={<Provider_Login />} />
         <Route path="/provider_dashboard" element={<Provider_Dashboard />} />
+        <Route path="/provider_addservice" element={<AddService/>} />
         {/* PROVIDER SITE END */}
 
 

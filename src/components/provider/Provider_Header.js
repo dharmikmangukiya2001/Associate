@@ -261,7 +261,7 @@ const Provider_Header = () => {
                         </a>
                         <ul id="forms-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
-                                <a href="forms-elements.html" class="a-none">
+                                <a href="/provider_addservice" class="a-none">
                                     <i className="bi bi-plus-square fs-5" /><span>Add Services</span>
                                 </a>
                             </li>

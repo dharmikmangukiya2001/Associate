@@ -221,76 +221,60 @@ const Addprovider = () => {
        
         const formData = new FormData();
         
-        // for (const file of img) {
-        //     console.log(file,":::dfsfs::::");
-        //     formData.append("documents", file);
-        // }
+        
         for (const file of pfiles) {
-            // console.log(file,":::dfsfs::::");
             formData.append("profile", file);
         }
         for (const file of bfiles) {
-            // console.log(file,":::dfsfs::::");
             formData.append("b_brochure", file);
         }
         for (const file of adharfiles) {
-            // console.log(file,":::dfsfs::::");
             formData.append("adharcard", file);
         }
         for (const file of pancardfiles) {
-            // console.log(file,":::dfsfs::::");
             formData.append("pancard", file);
         }
         for (const file of gstfiles) {
-            // console.log(file,":::dfsfs::::");
             formData.append("gstfile", file);
         }
         for (const file of tdsfiles) {
-            // console.log(file,":::dfsfs::::");
             formData.append("tdsfile", file);
         }
         for (const file of agreementfiles) {
-            // console.log(file,":::dfsfs::::");
             formData.append("agreementfile", file);
         }
 
-
-        formData.append("name", data.providername);//
-        formData.append("number", data.providernumber);//
-        formData.append("email", data.provideremailid);//
-        formData.append("BOD", data.providerbod);//
-        formData.append("address", data.provideraddress);//
-        formData.append("Btype", data.bussinesstype);//
-        formData.append("Bformation", data.bussinessformation);//
-        formData.append("bsubcategoryid", data.sbcatid);//
-        formData.append("Bname", data.bussinessname);//
-        formData.append("Bnumber", data.bussinessnumber);//
-        formData.append("Bemail", data.bussinessemailid);//
-        formData.append("Bsocialmedia", data.bussinesswebsiteurl);//
-        formData.append("Bsocialmedia", data.bussinessfacebookurl);//
-        formData.append("Bsocialmedia", data.bussinessinstagramurl);//
-        formData.append("Bsocialmedia", data.bussinessyoutubeurl);//
-        formData.append("Bdetails", data.bussinessdetails);//
-        formData.append("Baddress", data.bussinessaddress);//
-        formData.append("Btdsdetails", data.bussinesstdsdetails);//
-        formData.append("collaborationDetails", data.collaborationdetails);//
-        formData.append("salespersonName", data.salespersonname);//
-        formData.append("salespersonNumber", data.salespersonnumber);//
-        formData.append("salespersonEmail", data.salespersonemailid);//
-        formData.append("salespersonPosition", data.salespersonposition);//
-        formData.append("bankAccountnumber", data.bankaccountnumber);//
-        formData.append("bankIFSCcode", data.bankifsccode);//
-
+        formData.append("name", data.providername);
+        formData.append("number", data.providernumber);
+        formData.append("email", data.provideremailid);
+        formData.append("BOD", data.providerbod);
+        formData.append("address", data.provideraddress);
+        formData.append("Btype", data.bussinesstype);
+        formData.append("Bformation", data.bussinessformation);
+        formData.append("bsubcategoryid", data.sbcatid);
+        formData.append("Bname", data.bussinessname);
+        formData.append("Bnumber", data.bussinessnumber);
+        formData.append("Bemail", data.bussinessemailid);
+        formData.append("Bsocialmedia", data.bussinesswebsiteurl);
+        formData.append("Bsocialmedia", data.bussinessfacebookurl);
+        formData.append("Bsocialmedia", data.bussinessinstagramurl);
+        formData.append("Bsocialmedia", data.bussinessyoutubeurl);
+        formData.append("Bdetails", data.bussinessdetails);
+        formData.append("Baddress", data.bussinessaddress);
         formData.append("B_GSTnumber", data.bussinessgstnumber);
         formData.append("Bpancardnumber", data.bussinesspancardnumber);
-        
+        formData.append("Btdsdetails", data.bussinesstdsdetails);
+        formData.append("collaborationDetails", data.collaborationdetails);
+        formData.append("salespersonName", data.salespersonname);
+        formData.append("salespersonNumber", data.salespersonnumber);
+        formData.append("salespersonEmail", data.salespersonemailid);
+        formData.append("salespersonPosition", data.salespersonposition);
         formData.append("bankName", data.bankname);
+        formData.append("bankAccountnumber", data.bankaccountnumber);
+        formData.append("bankIFSCcode", data.bankifsccode);
         formData.append("bankBranchname", data.bankbranchname);
-        // formData.append("bankbranchName", data.adharfiles);
-        // formData.append("bankbranchName", data.pancardfiles);
-        // formData.append("bankbranchName", data.gstfiles);
-        // formData.append("bankbranchName", data.tdsfiles);
-        // formData.append("bankbranchName", data.agreementfiles);
+
+        
 
         try {
             axios.post(`${process.env.REACT_APP_URL}/admin/addprovider`, formData, {
@@ -301,7 +285,7 @@ const Addprovider = () => {
             })
             .then((response) => {
                 console.log(response.data);
-                console.log(data,"dsd");
+                // console.log(data,"dsd");
             })
             .catch((error) => {
                 console.error(error);
@@ -313,35 +297,7 @@ const Addprovider = () => {
     }
     
     
-    // const handleFileChange = (event) => {
-    //     console.log('event', event)
-    //     const selectedFiles = event.target.files;
-    //     const myNewFile = new File([selectedFiles], 'new_name.png', {type: event.target.files[0].type});
-    //     setImg((prevFiles) => {
-            
-    //         console.log('check:::',[...prevFiles, ...Array.from(selectedFiles)]);
-    //         return [...prevFiles, ...Array.from(selectedFiles)]
-    //     });
-    // };
-
-
    
-    // const handleFileChange = (event) => {
-    //     const file_obj = {
-    //         [event.target.name]: Array.from(event.target.files)[0]
-    //     };
-    //     console.log('event 1', file_obj);
-    //     setImg((prevFiles) => ({...prevFiles, ...file_obj}));
-    //     console.log('event 2', img);
-    // };
-
-    // const handleFileChange = (event) => {
-    //     const file_obj = {
-    //         [event.target.name]: event.target.files[0]
-    //     };
-    //     setImg([...img, file_obj]);
-    //     setImg([...img, event.target.files[0]]);
-    // };
     
 
 
@@ -387,6 +343,7 @@ const Addprovider = () => {
     // Select Bussiness Types END
 
 
+    
     // Select Bussiness Formation START
     const [bussinessFormation, setBussinessFormation] = useState([])
     useEffect(() => {

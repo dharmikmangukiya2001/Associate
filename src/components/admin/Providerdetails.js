@@ -63,7 +63,7 @@ function Providerdetails() {
                     </div>{/* End Page Title */}
                     <section className="section dashboard">
                         <div className="row">
-                            {/* Left side columns */}
+                            {/* Provider Data */}
                             <div className="col-lg-8">
                                 <div className="row">
                                     <div className="col-12">
@@ -890,6 +890,7 @@ function Providerdetails() {
                                     </div>
                                 </div>
                             </div>
+                            {/* Provider Document */}
                             <div className="col-lg-4">
                                 <div className="row">
                                     <div className="col-12">
