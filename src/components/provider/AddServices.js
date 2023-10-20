@@ -113,7 +113,7 @@ const AddService = () => {
                                                         <label className="col-sm-2 col-form-label fw-bold">Service Card Image</label>
                                                         <div className="col-sm-10">
                                                             <div className=" mb-4">
-                                                                <input type="file" className="form-control" id="floatingInput" value={serviceimage} onChange={(e) => setServiceImage(e.target.value)} placeholder="Services Card Image" />
+                                                                <input type="file" className="form-control" id="floatingInput" onChange={handleServiceImage} placeholder="Services Card Image" />
                                                                 {/* <label htmlFor="floatingInput">Services Card Image</label> */}
                                                             </div>
                                                         </div>
@@ -122,7 +122,7 @@ const AddService = () => {
                                                         <label className="col-sm-2 col-form-label fw-bold">Bussiness Profie Image</label>
                                                         <div className="col-sm-10">
                                                             <div className=" mb-4">
-                                                                <input type="file" className="form-control" id="floatingInput" value={bprofileimage} onChange={(e) => setBprofileImage(e.target.value)} placeholder="Services Card Image" />
+                                                                <input type="file" className="form-control" id="floatingInput" onChange={handleBProfileImage} placeholder="Services Card Image" />
                                                                 {/* <label htmlFor="floatingInput">Services Card Image</label> */}
                                                             </div>
                                                         </div>
