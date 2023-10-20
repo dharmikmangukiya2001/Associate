@@ -255,40 +255,42 @@ const Addprovider = () => {
         }
 
 
-        formData.append("name", data.providername);
-        formData.append("number", data.providernumber);
-        formData.append("email", data.provideremailid);
-        formData.append("BOD", data.providerbod);
-        formData.append("address", data.provideraddress);
-        formData.append("Bname", data.bussinessname);
-        formData.append("Bnumber", data.bussinessnumber);
-        formData.append("Bemail", data.bussinessemailid);
-        formData.append("Bdetails", data.bussinessdetails);
-        formData.append("B_GSTnumbar", data.bussinessgstnumber);
-        formData.append("Bsocialmedia", data.bussinesswebsiteurl);
-        formData.append("Bsocialmedia", data.bussinessfacebookurl);
-        formData.append("Bsocialmedia", data.bussinessinstagramurl);
-        formData.append("Bsocialmedia", data.bussinessyoutubeurl);
-        formData.append("Btype", data.bussinesstype);
-        formData.append("Bformation", data.bussinessformation);
-        formData.append("Btdsdetails", data.bussinesstdsdetails);
-        formData.append("Bpancardnumbar", data.bussinesspancardnumber);
-        formData.append("bsubcategoryid", data.sbcatid);
-        formData.append("Baddress", data.bussinessaddress);
-        formData.append("collaborationDetails", data.collaborationdetails);
-        formData.append("salespersonName", data.salespersonname);
-        formData.append("salespersonNumber", data.salespersonnumber);
-        formData.append("salespersonEmail", data.salespersonemailid);
-        formData.append("salespersonPosition", data.salespersonposition);
+        formData.append("name", data.providername);//
+        formData.append("number", data.providernumber);//
+        formData.append("email", data.provideremailid);//
+        formData.append("BOD", data.providerbod);//
+        formData.append("address", data.provideraddress);//
+        formData.append("Btype", data.bussinesstype);//
+        formData.append("Bformation", data.bussinessformation);//
+        formData.append("bsubcategoryid", data.sbcatid);//
+        formData.append("Bname", data.bussinessname);//
+        formData.append("Bnumber", data.bussinessnumber);//
+        formData.append("Bemail", data.bussinessemailid);//
+        formData.append("Bsocialmedia", data.bussinesswebsiteurl);//
+        formData.append("Bsocialmedia", data.bussinessfacebookurl);//
+        formData.append("Bsocialmedia", data.bussinessinstagramurl);//
+        formData.append("Bsocialmedia", data.bussinessyoutubeurl);//
+        formData.append("Bdetails", data.bussinessdetails);//
+        formData.append("Baddress", data.bussinessaddress);//
+        formData.append("Btdsdetails", data.bussinesstdsdetails);//
+        formData.append("collaborationDetails", data.collaborationdetails);//
+        formData.append("salespersonName", data.salespersonname);//
+        formData.append("salespersonNumber", data.salespersonnumber);//
+        formData.append("salespersonEmail", data.salespersonemailid);//
+        formData.append("salespersonPosition", data.salespersonposition);//
+        formData.append("bankAccountnumber", data.bankaccountnumber);//
+        formData.append("bankIFSCcode", data.bankifsccode);//
+
+        formData.append("B_GSTnumber", data.bussinessgstnumber);
+        formData.append("Bpancardnumber", data.bussinesspancardnumber);
+        
         formData.append("bankName", data.bankname);
-        formData.append("bankAccountnumber", data.bankaccountnumber);
-        formData.append("bankIFSCcode", data.bankifsccode);
-        formData.append("bankbranchName", data.bankbranchname);
-        formData.append("bankbranchName", data.adharfiles);
-        formData.append("bankbranchName", data.pancardfiles);
-        formData.append("bankbranchName", data.gstfiles);
-        formData.append("bankbranchName", data.tdsfiles);
-        formData.append("bankbranchName", data.agreementfiles);
+        formData.append("bankBranchname", data.bankbranchname);
+        // formData.append("bankbranchName", data.adharfiles);
+        // formData.append("bankbranchName", data.pancardfiles);
+        // formData.append("bankbranchName", data.gstfiles);
+        // formData.append("bankbranchName", data.tdsfiles);
+        // formData.append("bankbranchName", data.agreementfiles);
 
         try {
             axios.post(`${process.env.REACT_APP_URL}/admin/addprovider`, formData, {
