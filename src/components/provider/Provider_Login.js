@@ -22,9 +22,9 @@ const Provider_Login = () => {
         axios.post(`${process.env.REACT_APP_URL}/provider/login`, providerdetails)
         .then(function(response){
             // handle success
-            const providertoken =response.data.token;
+            const providertoken =response.data.providertoken;
             localStorage.setItem('providertoken', providertoken);
-            console.log(response.data,"Successfully logged in");
+            // console.log(response.data,"Successfully logged in");
             nevigate('/provider_dashboard')
 
         })

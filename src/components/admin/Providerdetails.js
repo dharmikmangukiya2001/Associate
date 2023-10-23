@@ -5,6 +5,7 @@ import axios from 'axios'
 
 function Providerdetails() {
     const [providers, setProviders] = useState([])
+    const [subcatdata, setSubcatdata] = useState([])
     const id = useParams()
     const providerid = id.id
     const token = localStorage.getItem("token");
@@ -13,6 +14,8 @@ function Providerdetails() {
             // handle success
             console.log(response.data);
             setProviders([response.data.providers]);
+            setSubcatdata(response.data.subcatData);
+
 
         })
             .catch(function (error) {
@@ -22,7 +25,7 @@ function Providerdetails() {
     }, [id]);
 
 
-
+    let hasDisplayedBussinessCategory = false;
 
 
     // delete provider
@@ -285,7 +288,7 @@ function Providerdetails() {
                                                                         </p>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div className="ms-3 d-flex col-12">
                                                                     <div className="col-4">
                                                                         <p className="fs-6">
@@ -295,34 +298,38 @@ function Providerdetails() {
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
+                                                                                
                                                                                 {
-                                                                                    Object.entries(item).map(([key, value], index) => {
-                                                                                        if (key === 'bsubcategoryid') {
-                                                                                            return (
-                                                                                                <div key={index}>
-                                                                                                    {Object.entries(value).map(([subKey, subValue], subIndex) => (
-                                                                                                        <div key={subIndex}>
-                                                                                                            {Object.entries(subValue).map(([catkey, catvalue], cat) => (
-                                                                                                                <div key={cat}>
-
-                                                                                                                    {catkey === 'bussinesscategory' ? (
-                                                                                                                        <>{catvalue}</>
-                                                                                                                    ) : (
-                                                                                                                        <>
-                                                                                                                            {/* {subKey}: {JSON.stringify(subValue)} */}
-                                                                                                                        </>
-                                                                                                                    )}
-
-
-                                                                                                                </div>
-                                                                                                            ))}
-                                                                                                        </div>
-                                                                                                    ))}
-                                                                                                </div>
-                                                                                            );
-                                                                                        }
-                                                                                        return null; // Handle other keys, if needed
-                                                                                    })
+                                                                                    subcatdata.map((item, i) => (
+                                                                                        <>
+                                                                                        
+                                                                                            {/* {item.bussinesssubcategory} */}
+                                                                                            {
+                                                                                                
+                                                                                                subcatdata.map((item, i) => (
+                                                                                                    <>
+                                                                                                        {Object.entries(item).map(([key, value], index) => {
+                                                                                                            if (key === 'bcategoryid') {
+                                                                                                                return (
+                                                                                                                    <div key={index}>
+                                                                                                                        {Object.entries(value).map(([subKey, subValue], subIndex) => {
+                                                                                                                            if (subKey === 'bussinesscategory' && !hasDisplayedBussinessCategory) {
+                                                                                                                                hasDisplayedBussinessCategory = true; // Set the flag to true
+                                                                                                                                return <>{subValue}</>;
+                                                                                                                            } else {
+                                                                                                                                return null; // Skip other entries
+                                                                                                                            }
+                                                                                                                        })}
+                                                                                                                    </div>
+                                                                                                                );
+                                                                                                            }
+                                                                                                            return null; // Handle other keys, if needed
+                                                                                                        })}
+                                                                                                    </>
+                                                                                                ))
+                                                                                            }
+                                                                                        </>
+                                                                                    ))
                                                                                 }
                                                                             </span>
                                                                         </p>
@@ -338,28 +345,17 @@ function Providerdetails() {
                                                                         <p>
                                                                             <span className="fs-6">
                                                                                 {
-                                                                                    Object.entries(item).map(([key, value], index) => {
-                                                                                        if (key === 'bsubcategoryid') {
-                                                                                            return (
-                                                                                                <div key={index}>
-                                                                                                    {Object.entries(value).map(([subKey, subValue], subIndex) => (
-                                                                                                        <div key={subIndex}>
-                                                                                                            {subKey === 'bussinesssubcategory' ? (
-                                                                                                                <>{subValue}</>
-                                                                                                            ) : (
-                                                                                                                <>
-                                                                                                                    {/* {subKey}: {JSON.stringify(subValue)} */}
-                                                                                                                </>
-                                                                                                            )}
-                                                                                                        </div>
-                                                                                                    ))}
-                                                                                                </div>
-                                                                                            );
-                                                                                        }
-                                                                                        return null; // Handle other keys, if needed
-                                                                                    })
-                                                                                }
+                                                                                    subcatdata.map((item, i) => (
+                                                                                        <>
+                                                                                           
+                                                                                                <div key={i}>{
+                                                                                                    item.bussinesssubcategory
 
+                                                                                                }</div>
+                                                                                          
+                                                                                        </>
+                                                                                    ))
+                                                                                }
                                                                             </span>
                                                                         </p>
                                                                     </div>
@@ -659,6 +655,30 @@ function Providerdetails() {
                                                                 <div className="ms-3 d-flex col-12">
                                                                     <div className="col-4">
                                                                         <p className="fs-6">
+                                                                            <strong>Product and Service &nbsp;&nbsp;: </strong>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div className="col-8 pe-3">
+                                                                        <p>
+                                                                            <span className="fs-6">
+                                                                                {
+                                                                                    Object.entries(item).map(([key, value], index) => {
+                                                                                        return (
+                                                                                            <>{key == 'product_service' ? (<>
+                                                                                                {value}
+                                                                                            </>) : null}
+
+                                                                                            </>
+                                                                                        )
+                                                                                    })
+                                                                                }
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="ms-3 d-flex col-12">
+                                                                    <div className="col-4">
+                                                                        <p className="fs-6">
                                                                             <strong>Collaboration Details &nbsp;&nbsp;: </strong>
                                                                         </p>
                                                                     </div>
@@ -922,7 +942,7 @@ function Providerdetails() {
                                                         {providers.map((item, i) => (
                                                             <>
                                                                 <div className="ms-3 d-flex col-12">
-                                                                    
+
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
@@ -943,7 +963,7 @@ function Providerdetails() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="ms-3 d-flex col-12">
-                                                                    
+
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
@@ -964,7 +984,7 @@ function Providerdetails() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="ms-3 d-flex col-12">
-                                                                    
+
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
@@ -972,7 +992,8 @@ function Providerdetails() {
                                                                                     Object.entries(item).map(([key, value], index) => {
                                                                                         return (
                                                                                             <>{key == 'b_brochure' ? (<>
-                                                                                                <img className="w-100" src={value}></img>
+                                                                                                <iframe frameborder="0" style={{ height: '185px', overflow: 'scroll', width: '100%' }} src={value} marginheight="1" marginwidth="1" name="cboxmain" id="cboxmain" seamless="seamless" allowtransparency="true"></iframe>
+                                                                                                {/* <img className="w-100" src={value}></img> */}
                                                                                                 Bussiness Brochure
                                                                                             </>) : null}
 
@@ -985,7 +1006,7 @@ function Providerdetails() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="ms-3 d-flex col-12">
-                                                                    
+
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
@@ -1006,7 +1027,7 @@ function Providerdetails() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="ms-3 d-flex col-12">
-                                                                    
+
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
@@ -1027,7 +1048,7 @@ function Providerdetails() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="ms-3 d-flex col-12">
-                                                                    
+
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
@@ -1047,7 +1068,7 @@ function Providerdetails() {
                                                                         </p>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                             </>
                                                         ))}
                                                     </div>

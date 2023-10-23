@@ -1,77 +1,82 @@
 import React, { useState } from "react";
 import Provider_Header from "./Provider_Header";
 import axios from "axios";
+// import { useNavigate } from 'react-router-dom'
+const providertoken = localStorage.getItem("providertoken");
+console.log(providertoken);
 
 const AddService = () => {
 
-    const[servicename ,setServiceName] =useState('')
-    const[servicedepreciation ,setServiceDepreciation] =useState('')
-    // service Image
-    const[serviceimage ,setServiceImage] =useState([])
-    const handleServiceImage = (event) => {
-        const selectedFiles = Array.from(event.target.files);
-        setServiceImage(selectedFiles);
-
-    };
-    // Bussiness Profile Image
-    const[bprofileimage ,setBprofileImage] =useState([])
-    const handleBProfileImage = (event) => {
-        const selectedFiles = Array.from(event.target.files);
-        setBprofileImage(selectedFiles);
-
-    };
+    const [service, setService] = useState('');
+    const [description, setDescription] = useState('');
+    const [files, setFiles] = useState('');
 
     const data = {
-        servicename,
-        servicedepreciation,
-        // image
-        serviceimage,
-        bprofileimage
+        service: service,
+        description: description
     }
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        const serviceData = {
-            servicedata:data
-        }
+        console.log("service:", service);
+        console.log("description:", description);
 
+
+        // if (files.length === 0) {
+        //     console.log("Please select at least one file");
+        //     return;
+        // }
 
         const formData = new FormData();
 
-        for (const file of serviceimage){
-            formData.append("",file);
-        }
-        for (const file of bprofileimage){
-            formData.append("",file);
+        // Append all selected files to the FormData object
+        for (const i of files) {
+
+            formData.append("serviceimg", i);
+            console.log(files, "files::");
         }
 
-        formData.append("",servicename);
-        formData.append("",servicedepreciation);
-
+        formData.append("service", data.service);
+        formData.append("description", data.description);
 
         try {
-
-            axios.post(`${process.env.REACT_APP_URL}/provider/addService`, formData,{
-                // headers: {
-                //     'token': token,
-                //     'Content-Type': 'multipart/form-data', // Set the content type for file uploads
-                // }
+            axios.post(`${process.env.REACT_APP_URL}/provider/addservice`, formData, {
+                headers: {
+                    'providertoken': providertoken,
+                    'Content-Type': 'multipart/form-data', // Set the content type for file uploads
+                }
             })
-            .then((response)=>{
-                console.log(response.data)
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-
-        } catch(error){
-            console.error(error);
+            .then(response => {
+            if (response) {
+                console.log("Successfully uploaded images");
+                // Handle the response data if needed
+                const data = response.data;
+                console.log(providertoken);
+                console.log('jasd', data);
+                // nevigate('/admin_showservices')
+            } else {
+                console.log("Error uploading images");
+            }})
+        } catch (error) {
+            console.error("An error occurred:", error);
         }
-    }
 
-    return(<>
-    <Provider_Header/>
-    <div>
+
+    }
+    const handleFileChange = (event) => {
+        console.log('event', event)
+        const selectedFiles = event.target.files;
+        //  const myNewFile = new File([selectedFiles], 'new_name.png', {type: event.target.files[0].type});
+        setFiles((prevFiles) => {
+
+            console.log('check:::', [...prevFiles, ...Array.from(selectedFiles)]);
+            return [...prevFiles, ...Array.from(selectedFiles)]
+        });
+
+    };
+    return (
+        <>
+            <Provider_Header />
+            <div>
                 <main id="main" className="main">
                     <div className="pagetitle">
                         <h1 className="text-start" >Add Services</h1>
@@ -90,46 +95,49 @@ const AddService = () => {
                                     <div className="col-12">
                                         <div className="card recent-sales overflow-auto">
                                             <div className="card-body">
-                                                <form >
-                                                    <div className="row my-2">
-                                                        <label className="col-sm-2 col-form-label fw-bold">Service Name</label>
+                                                <h5 className="card-title">Add Services <span>| Today</span></h5>
+                                                <form onSubmit={handleSubmit} encType="multipart/formData">
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-2 col-form-label fw-bold">Services Name</label>
                                                         <div className="col-sm-10">
-                                                            <div className="form-floating mb-4">
-                                                                <input type="text" className="form-control" id="floatingInput" value={servicename} onChange={(e) => setServiceName(e.target.value)} placeholder="Services Name" />
+                                                            <div className="form-floating mb-3">
+                                                                <input type="text" className="form-control" id="floatingInput" value={service} onChange={(e) => setService(e.target.value)} placeholder="Services Name" />
                                                                 <label htmlFor="floatingInput">Services Name</label>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="row my-2">
-                                                        <label className="col-sm-2 col-form-label fw-bold">Service Depreciation</label>
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-2 col-form-label fw-bold">Services Details</label>
                                                         <div className="col-sm-10">
-                                                            <div className="form-floating mb-4">
-                                                                <input type="text" className="form-control" id="floatingInput" value={servicedepreciation} onChange={(e) => setServiceDepreciation(e.target.value)} placeholder="Services Depreciation" />
-                                                                <label htmlFor="floatingInput">Services Depreciation</label>
+                                                            <div className="form-floating mb-3">
+                                                                <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea" value={description} onChange={(e) => setDescription(e.target.value)} style={{ height: 100 }} defaultValue={""} />
+                                                                <label htmlFor="floatingTextarea">Services Details</label>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="row my-2">
-                                                        <label className="col-sm-2 col-form-label fw-bold">Service Card Image</label>
-                                                        <div className="col-sm-10">
-                                                            <div className=" mb-4">
-                                                                <input type="file" className="form-control" id="floatingInput" onChange={handleServiceImage} placeholder="Services Card Image" />
-                                                                {/* <label htmlFor="floatingInput">Services Card Image</label> */}
+                                                    <div className='row mb-5'>
+                                                        <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Service Image JPG/JPEG<span className='text-red'>*</span></label>
+                                                        <div className='col-sm-9 col-lg-10'>
+                                                            <div className='me-3'>
+                                                                <input type='file' name='serviseimg' onChange={handleFileChange} className='form-control' placeholder='TDS File JPEG' />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="row my-2">
-                                                        <label className="col-sm-2 col-form-label fw-bold">Bussiness Profie Image</label>
-                                                        <div className="col-sm-10">
-                                                            <div className=" mb-4">
-                                                                <input type="file" className="form-control" id="floatingInput" onChange={handleBProfileImage} placeholder="Services Card Image" />
-                                                                {/* <label htmlFor="floatingInput">Services Card Image</label> */}
+                                                    <div className='row mb-5'>
+                                                        <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Profile Image JPG/JPEG<span className='text-red'>*</span></label>
+                                                        <div className='col-sm-9 col-lg-10'>
+                                                            <div className='me-3'>
+                                                                <input type='file' name='serviseimg' onChange={handleFileChange} className='form-control' placeholder='Agreement File JPEG' />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="row mb-0 justify-content-end">
+
+
+
+
+                                                    <div className="row mb-5 justify-content-end">
                                                         <div className="col-sm-2">
-                                                            <div className="input-group">
+                                                            <div className="input-group mb-3">
                                                                 <input type="submit" className="form-control bg-success text-white" />
                                                             </div>
                                                         </div>
@@ -138,14 +146,13 @@ const AddService = () => {
 
                                             </div>
                                         </div>
-                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
                 </main>{/* End #main */}
-                {/* <=+=+=+=+=+=+=| Footer |=+=+=+=+=+=+=> */}
+                {/* ======= Footer ======= */}
                 <footer id="footer" className="footer">
                     <div className="copyright">
                         © Copyright <strong><span>Sky Digital</span></strong>. All Rights Reserved
@@ -156,6 +163,6 @@ const AddService = () => {
                 </footer>{/* End Footer */}
                 <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short" /></a>
             </div>
-    </>)
+        </>)
 }
 export default AddService

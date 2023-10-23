@@ -65,10 +65,16 @@ const Showprovider = () => {
                                     <div className="col-12">
                                         <div className="card recent-sales overflow-auto">
                                             <div className="card-body">
-                                                <h5 className="card-title">Show All Providers</h5>
-
+                                                <div className="d-flex">
+                                                    <div className="col-10">
+                                                        <h5 className="card-title">Show All Providers</h5>
+                                                    </div>
+                                                    <div className="col-2">
+                                                        <button className="btn btn-success" onClick={exportToExcel}>Export to Excel</button>
+                                                    </div>
+                                                </div>
                                                 <table className="rwd-table">
-                                                    <button onClick={exportToExcel}>Export to Excel</button>
+
 
                                                     <tbody>
 

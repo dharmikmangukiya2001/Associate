@@ -5,7 +5,7 @@ import UserHeader from "./UserHeader";
 import Loader from "./Loader";
 
 
-const User = () => {
+const   User = () => {
 
 
  // loader

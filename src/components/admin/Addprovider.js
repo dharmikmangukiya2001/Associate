@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header.js';
 import axios from 'axios';
+import Multiselect from 'multiselect-react-dropdown';
 
 
 const Addprovider = () => {
@@ -23,6 +24,7 @@ const Addprovider = () => {
     const [bussinesstype, setBussinesstype] = useState('');
     const [bussinessformation, setBussinessformation] = useState('');
     const [bussinesstdsdetails, setBussinesstdsdetails] = useState('');
+    const [productandservice, setProductandservice] = useState('');
     const [bussinesspancardnumber, setBussinesspancardnumber] = useState('');
     // const [sbcatid, setSbcatid] = useState('');
     const [bussinessaddress, setBussinessaddress] = useState('');
@@ -61,33 +63,33 @@ const Addprovider = () => {
         setAssociate(true)
     };
     // ADD BUSINESS DIV END
-   
+
 
     // SELECT OPTION FOR SHOW DIV DATA
     const [bcatid, setBcatid] = useState('')
-    const [sbcatid, setSbcatid] = useState('')
-    const [bsubcategorys,setBsubcategorys] = useState('')
+    const [sbcatid, setSbcatid] = useState([])
+    const [bsubcategorys, setBsubcategorys] = useState('')
 
     const handleSecondSelectChange = (e) => {
-        
+
         // console.log(bcatid,"dfsdfdsf");
-        if(bcatid){
-            axios.post(`${process.env.REACT_APP_URL}/admin/subcatdata`,{bcatid:bcatid} ).then(function (response) {
+        if (bcatid) {
+            axios.post(`${process.env.REACT_APP_URL}/admin/subcatdata`, { bcatid: bcatid }).then(function (response) {
                 // hendle success
-            //    console.log(response.data);
-               const sub=response.data.bsubcategorys
-               setBsubcategorys(sub);
-               
+                //    console.log(response.data);
+                const sub = response.data.bsubcategorys
+                setBsubcategorys(sub);
+
             })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
         }
-        else{
+        else {
             console.log("category id not found");
         }
-        
+
     };
     // SELECT OPTION END
     // ADD SELES PROSAN DIV SHOW
@@ -122,7 +124,7 @@ const Addprovider = () => {
         setPfiles(selectedFiles);
 
     };
-    
+
     const [adharfiles, setAdharfiles] = useState([]);
 
     const handleAdhar = (event) => {
@@ -186,6 +188,7 @@ const Addprovider = () => {
         bussinesstype,
         bussinessformation,
         bussinesstdsdetails,
+        productandservice,
         bussinesspancardnumber,
         sbcatid,
         bussinessaddress,
@@ -207,7 +210,7 @@ const Addprovider = () => {
         tdsfiles,
         agreementfiles
     }
-    
+
 
 
 
@@ -218,10 +221,10 @@ const Addprovider = () => {
         const provider = {
             providerdata: data
         }
-       
+
         const formData = new FormData();
-        
-        
+
+
         for (const file of pfiles) {
             formData.append("profile", file);
         }
@@ -264,6 +267,7 @@ const Addprovider = () => {
         formData.append("B_GSTnumber", data.bussinessgstnumber);
         formData.append("Bpancardnumber", data.bussinesspancardnumber);
         formData.append("Btdsdetails", data.bussinesstdsdetails);
+        formData.append("product_service", data.productandservice);
         formData.append("collaborationDetails", data.collaborationdetails);
         formData.append("salespersonName", data.salespersonname);
         formData.append("salespersonNumber", data.salespersonnumber);
@@ -274,7 +278,7 @@ const Addprovider = () => {
         formData.append("bankIFSCcode", data.bankifsccode);
         formData.append("bankBranchname", data.bankbranchname);
 
-        
+
 
         try {
             axios.post(`${process.env.REACT_APP_URL}/admin/addprovider`, formData, {
@@ -283,22 +287,22 @@ const Addprovider = () => {
                 //     'Content-Type': 'multipart/form-data', // Set the content type for file uploads
                 // }
             })
-            .then((response) => {
-                console.log(response.data);
-                // console.log(data,"dsd");
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+                .then((response) => {
+                    console.log(response.data);
+                    // console.log(data,"dsd");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         } catch (error) {
             console.error(error);
         }
 
     }
-    
-    
-   
-    
+
+
+
+
 
 
     // Select Bussiness Category START
@@ -343,7 +347,7 @@ const Addprovider = () => {
     // Select Bussiness Types END
 
 
-    
+
     // Select Bussiness Formation START
     const [bussinessFormation, setBussinessFormation] = useState([])
     useEffect(() => {
@@ -364,14 +368,14 @@ const Addprovider = () => {
 
     // Select Bussiness Types END
 
-    
 
-    
 
-   
+
+
+
     return (
         <>
-        <Header/>
+            <Header />
             <div>
                 <main id="main" className='main'>
                     <div className='pagetitle'>
@@ -401,9 +405,9 @@ const Addprovider = () => {
                                                     <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Provider Profile Photos <span className='text-red'>*</span></label>
                                                     <div className='col-sm-9 col-lg-10'>
                                                         <div className='me-3'>
-                                                            <input type='file' 
-                                                            name="provide-profile"
-                                                            onChange={handleProfile}
+                                                            <input type='file'
+                                                                name="provide-profile"
+                                                                onChange={handleProfile}
                                                                 className='form-control' placeholder='Provider Name' />
                                                         </div>
                                                     </div>
@@ -471,20 +475,20 @@ const Addprovider = () => {
                                                             <div className='col-sm-9 col-lg-10'>
                                                                 <select class="form-select" aria-label="Default select example" value={bussinesstype} onChange={(e) => setBussinesstype(e.target.value)}>
                                                                     <option selected>---- Select Business Type ----</option>
-                                                                   
-                                                                {
-                                                                    bussinessType && bussinessType.map((item, i) => {
-                                                                        return (
-                                                                            <>
+
+                                                                    {
+                                                                        bussinessType && bussinessType.map((item, i) => {
+                                                                            return (
+                                                                                <>
 
                                                                                     <option value={item.btype}>{item.btype}</option>
 
-                                                                            </>
-                                                                        )
-                                                                    })
-                                                                }
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    }
                                                                 </select>
-                                                                
+
                                                             </div>
                                                         </div>
                                                         <div className='row mt-5 mb-5'>
@@ -492,20 +496,20 @@ const Addprovider = () => {
                                                             <div className='col-sm-9 col-lg-10'>
                                                                 <select class="form-select" aria-label="Default select example" value={bussinessformation} onChange={(e) => setBussinessformation(e.target.value)}>
                                                                     <option selected>---- Select Business Formation ----</option>
-                                                                   
-                                                                {
-                                                                    bussinessFormation && bussinessFormation.map((item, i) => {
-                                                                        return (
-                                                                            <>
+
+                                                                    {
+                                                                        bussinessFormation && bussinessFormation.map((item, i) => {
+                                                                            return (
+                                                                                <>
 
                                                                                     <option value={item.bussinessformation}>{item.bussinessformation}</option>
 
-                                                                            </>
-                                                                        )
-                                                                    })
-                                                                }
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    }
                                                                 </select>
-                                                                
+
                                                             </div>
                                                         </div>
                                                         <div className='row mt-5 mb-5'>
@@ -513,46 +517,43 @@ const Addprovider = () => {
                                                             <div className='col-sm-9 col-lg-10'>
                                                                 <select class="form-select" aria-label="Default select example" value={bcatid} onChange={(e) => setBcatid(e.target.value)} onClick={handleSecondSelectChange}>
                                                                     <option selected>---- Select Category ----</option>
-                                                                   
-                                                                {
-                                                                    bcategory && bcategory.map((item, i) => {
-                                                                        return (
-                                                                            <>
+
+                                                                    {
+                                                                        bcategory && bcategory.map((item, i) => {
+                                                                            return (
+                                                                                <>
 
                                                                                     <option value={item._id}>{item.bussinesscategory}</option>
 
-                                                                            </>
-                                                                        )
-                                                                    })
-                                                                }
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    }
                                                                 </select>
-                                                                
+
                                                             </div>
                                                         </div>
                                                         <div className='row mt-5 mb-5'>
                                                             <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Subcategory <span className='text-red'>*</span></label>
                                                             <div className='col-sm-9 col-lg-10'>
-                                                            <select class="form-select" aria-label="Default select example" value={sbcatid} onChange={(e) => setSbcatid(e.target.value)}>
+                                                                <select class="form-select" aria-label="Default select example" multiple value={sbcatid} onChange={(e) => setSbcatid(Array.from(e.target.selectedOptions, option => option.value))} >
                                                                     <option selected>---- Select Subcategory ----</option>
-                                                                   
-                                                                {
-                                                                    bsubcategorys && bsubcategorys.map((item, i) => {
-                                                                        return (
-                                                                            <>
 
-                                                                                    <option value={item._id}>{item.bussinesssubcategory}</option>
+                                                                    {bsubcategorys &&
+                                                                        bsubcategorys.map((item, i) => (
+                                                                            <option value={item._id} key={i}>
+                                                                                {item.bussinesssubcategory}
+                                                                            </option>
+                                                                        ))}
 
-                                                                            </>
-                                                                        )
-                                                                    })
-                                                                }
                                                                 </select>
-                                                                
+
                                                             </div>
-                                                    <div className='mt-5 w-25'>
-                                                        <button className='btn bg-danger text-white' onClick={handleBussiness}>Add Business Details</button>
-                                                    </div>
+                                                            <div className='mt-5 w-25'>
+                                                                <button className='btn bg-danger text-white' onClick={handleBussiness}>Add Business Details</button>
+                                                            </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
 
@@ -673,6 +674,15 @@ const Addprovider = () => {
                                                                     <div className='me-3 form-floating'>
                                                                         <input type='text' className='form-control' value={bussinesstdsdetails} onChange={(e) => setBussinesstdsdetails(e.target.value)} placeholder='Business TDS Details' />
                                                                         <label htmlFor="floatingTextarea">Business TDS Details</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mb-5'>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Product and Service <span className='text-red'>*</span></label>
+                                                                <div className='col-sm-9 col-lg-10'>
+                                                                    <div className='me-3 form-floating'>
+                                                                        <input type='text' className='form-control' value={productandservice} onChange={(e) => setProductandservice(e.target.value)} placeholder='Product and Service' />
+                                                                        <label htmlFor="floatingTextarea">Product and Service</label>
                                                                     </div>
                                                                 </div>
                                                             </div>

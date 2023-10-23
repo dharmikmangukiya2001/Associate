@@ -1,6 +1,7 @@
 import './App.css';
 import './components/admin/Home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Error from './components/Error/Error';
 import Home from './components/admin/Home';
 import Login from './components/admin/Login'
 import Addservice from './components/admin/Addservice'
@@ -9,6 +10,7 @@ import Servicedetails from './components/admin/Servicedetails'
 import Addprovider from './components/admin/Addprovider';
 import Showprovider from './components/admin/Showprovider';
 import Providerdetails from './components/admin/Providerdetails';
+import Adduser from './components/admin/Adduser';
 import { Route, Routes } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
@@ -59,6 +61,8 @@ function App() {
     <>
 
       <Routes>
+
+        <Route path="*" element={<Error/>} />
         {/* ADMIN SITE START */}
         <Route path="/admin" element={<Login />}/>
         <Route path="/admin_home"element={<Home />}/>
@@ -70,6 +74,8 @@ function App() {
         <Route path="/admin_showproviders" element={<Showprovider/>} />
         <Route path="/admin_providerdetails/:id" element={<Providerdetails/>} />
 
+        <Route path='/admin_adduser' element={<Adduser/>} />
+
         {/* ADMIN SITE END */}
 
         {/* PROVIDER SITE START */}
@@ -80,8 +86,8 @@ function App() {
 
 
         {/* PROVIDER SITE START */}
-        {/* <Route path="/" element={<User />} /> */}
-        {/* <Route path="/user_login" element={<UserLogin/>} /> */}
+        <Route path="/user" element={<User />} />
+        <Route path="/" element={<UserLogin/>} />
         {/* <Route path="/servicedetails/:id" element={<ServiceDetails />} /> */}
         {/* PROVIDER SITE END */}
       </Routes>

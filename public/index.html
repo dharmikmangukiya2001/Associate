@@ -44,7 +44,24 @@
   <script  src="./assets/vendor/php-email-form/validate.js"></script>
   <script  src="./assets/js/main.js"></script>
 
-
+  <script>
+    $('#multiple-select').mobiscroll().select({
+inputElement: document.getElementById('my-input'),
+touchUi: false
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('input[type=password]').on('change input', function(){
+        if ($(this).val()) {
+          $('.arrow-submit').addClass('active');
+        } else {
+          $('.arrow-submit').removeClass('active');
+        }
+    });
+});
+</script>
   <!-- user site -->
 
 </body>

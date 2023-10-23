@@ -270,12 +270,12 @@ const Header = () => {
                         </a>
                         <ul id="forms-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
-                                <a href="forms-elements.html" class="a-none ps-0">
+                                <a href="/admin_addservice" class="a-none ps-0">
                                     <Link className='a-none' to='/admin_addservice'><i className="bi bi-plus-square fs-5" /><span>Add Services</span></Link>
                                 </a>
                             </li>
                             <li>
-                                <a href="forms-layouts.html" class="a-none ps-0">
+                                <a href="/admin_showservices" class="a-none ps-0">
                                     <Link className='a-none' to="/admin_showservices"><i className="bi bi-server fs-5" /><span>Show Services</span></Link>
                                 </a>
                             </li>
@@ -287,12 +287,12 @@ const Header = () => {
                         </a>
                         <ul id="tables-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
-                                <a href="tables-general.html" class="a-none ps-0">
+                                <a href="/admin_addprovider" class="a-none ps-0">
                                     <Link className='a-none' to='/admin_addprovider'><i className="bi bi-plus-square fs-5" /><span>Add Provider</span></Link>
                                 </a>
                             </li>
                             <li>
-                                <a href="tables-data.html" class="a-none ps-0">
+                                <a href="/admin_showproviders" class="a-none ps-0">
                                     <Link className='a-none' to='/admin_showproviders'><i className="bi bi-server fs-5" /><span>Show Providers</span></Link>
                                 </a>
                             </li>
@@ -300,22 +300,22 @@ const Header = () => {
                     </li>{/* End Tables Nav */}
                     <li className="nav-item">
                         <a className="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                            <i className="bi bi-bar-chart" /><span>Charts</span><i className="bi bi-chevron-down ms-auto" />
+                            <i className="bi bi-bar-chart" /><span>Users</span><i className="bi bi-chevron-down ms-auto" />
                         </a>
                         <ul id="charts-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
-                                <a href="charts-chartjs.html">
-                                    <i className="bi bi-circle" /><span>Chart.js</span>
+                                <a href="/admin_adduser"class="a-none ps-0" >
+                                <Link className='a-none' to="/admin_adduser"><i className="bi bi-plus-square fs-5" /><span>Add User</span></Link>
                                 </a>
                             </li>
                             <li>
                                 <a href="charts-apexcharts.html">
-                                    <i className="bi bi-circle" /><span>ApexCharts</span>
+                                    {/* <i className="bi bi-circle" /><span>ApexCharts</span> */}
                                 </a>
                             </li>
                             <li>
                                 <a href="charts-echarts.html">
-                                    <i className="bi bi-circle" /><span>ECharts</span>
+                                    {/* <i className="bi bi-circle" /><span>ECharts</span> */}
                                 </a>
                             </li>
                         </ul>
