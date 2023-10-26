@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Header from "./Header";
+import axios from "axios";
 
 const Adduser = () => {
 
@@ -15,7 +16,7 @@ const Adduser = () => {
         name: name,
         email: email,
         number: number,
-        date: date,
+        DOB: date,
         occupation:occupation,
         reference:reference
     }
@@ -24,27 +25,26 @@ const Adduser = () => {
         console.log(userdata,"userdata:::::");
 
             
-
         try {
-            const response = fetch(`${process.env.REACT_APP_URL}/provider/addservices`, {
-                method: "POST",
-                body: userdata,
-                headers: { token }
+            axios.post(`${process.env.REACT_APP_URL}/admin/adduser`, userdata, {
+                headers: {
+                    'token': token,
+                }
             })
             .then(response => {
             if (response) {
-                console.log("Successfully uploaded images");
+                console.log("Successfully data added");
                 // Handle the response data if needed
-                const data = response.json();
+                const data = response.data;
+                // console.log(token);
                 console.log('jasd', data);
                 // nevigate('/admin_showservices')
             } else {
-                console.log("Error uploading images");
+                console.log("Error datas");
             }})
         } catch (error) {
             console.error("An error occurred:", error);
         }
-
 
     }
     
@@ -107,7 +107,7 @@ const Adduser = () => {
                                                         <label className="col-sm-2 col-form-label fw-bold">D.O.B. : <span className='text-red'>*</span></label>
                                                         <div className="col-sm-10">
                                                         <div className="form-floating mb-3">
-                                                                <input type="text" className="form-control" id="floatingInput" value={date} onChange={(e) => setDate(e.target.value)} placeholder="User D.O.B." />
+                                                                <input type="date" className="form-control" id="floatingInput" value={date} onChange={(e) => setDate(e.target.value)} placeholder="User D.O.B." />
                                                                 <label htmlFor="floatingInput">User D.O.B.</label>
                                                             </div>
                                                             

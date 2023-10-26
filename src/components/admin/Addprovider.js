@@ -24,7 +24,7 @@ const Addprovider = () => {
     const [bussinesstype, setBussinesstype] = useState('');
     const [bussinessformation, setBussinessformation] = useState('');
     const [bussinesstdsdetails, setBussinesstdsdetails] = useState('');
-    const [productandservice, setProductandservice] = useState('');
+    const [productandservice, setProductandservice] = useState([]);
     const [bussinesspancardnumber, setBussinesspancardnumber] = useState('');
     // const [sbcatid, setSbcatid] = useState('');
     const [bussinessaddress, setBussinessaddress] = useState('');
@@ -168,6 +168,41 @@ const Addprovider = () => {
 
     };
 
+
+
+
+
+
+
+
+    const [selectedBrok, setSelectedBrok] = useState([]);
+    const [inputValueBrok, setInputValueBrok] = useState('');
+    const [nextIdBrok, setNextIdBrok] = useState(1);
+
+
+    const handleInputChangeRoom = (e) => {
+        setInputValueBrok(e.target.value);
+    };
+
+    const handleAddAmenityBrok = () => {
+        if (inputValueBrok.trim() !== '') {
+            const newAmenity = {
+                id: nextIdBrok,
+                name: inputValueBrok.trim()
+            }
+            setNextIdBrok(nextIdBrok + 1);
+            setSelectedBrok([...selectedBrok, newAmenity]);
+            setInputValueBrok('');
+        }
+    }
+
+    const hendleAmenityRemoveBrok = (idToRemove) => {
+        const updatedAmenities = selectedBrok.filter(
+            (amenity) => amenity.id !== idToRemove
+        );
+        setSelectedBrok(updatedAmenities);
+    }
+
     // image and document parh all End
 
     const data = {
@@ -188,7 +223,7 @@ const Addprovider = () => {
         bussinesstype,
         bussinessformation,
         bussinesstdsdetails,
-        productandservice,
+        productandservice: JSON.stringify(selectedBrok),
         bussinesspancardnumber,
         sbcatid,
         bussinessaddress,
@@ -549,6 +584,37 @@ const Addprovider = () => {
                                                                 </select>
 
                                                             </div>
+                                                            <div className='row mb-5 mt-5'>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Product / Service <span className='text-red'>*</span></label>
+                                                                <div className='col-sm-9 col-lg-10'>
+                                                                    <div className='me-3 form-floating'>
+                                                                        {/* <input type='text' className='form-control' value={productandservice} onChange={(e) => setProductandservice(e.target.value)} placeholder='Product and Service' /> */}
+                                                                        {/* <label htmlFor="floatingTextarea">Product and Service</label> */}
+
+                                                                        <div className='tags-input-container d-flex'>
+                                                                            <input
+                                                                                type='text'
+                                                                                className='form-control w-75'
+                                                                                placeholder='Type something and press Add buttton to add'
+                                                                                value={inputValueBrok}
+                                                                                onChange={(e) => handleInputChangeRoom(e)}
+                                                                            />
+                                                                            <button type='buttom' onClick={handleAddAmenityBrok} className='add-btn btn-primary w-25'>
+                                                                                add
+                                                                            </button>
+                                                                        </div>
+                                                                        {
+                                                                            selectedBrok && selectedBrok.map((item) => (
+                                                                                <div>
+                                                                                    <button type='buttom' style={{ width: 'fit-content' }} onClick={hendleAmenityRemoveBrok} className='p-2 mt-2 add-btn btn-warning'>
+                                                                                        {item.name}
+                                                                                    </button>
+                                                                                </div>
+                                                                            ))
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <div className='mt-5 w-25'>
                                                                 <button className='btn bg-danger text-white' onClick={handleBussiness}>Add Business Details</button>
                                                             </div>
@@ -677,15 +743,7 @@ const Addprovider = () => {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div className='row mb-5'>
-                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Product and Service <span className='text-red'>*</span></label>
-                                                                <div className='col-sm-9 col-lg-10'>
-                                                                    <div className='me-3 form-floating'>
-                                                                        <input type='text' className='form-control' value={productandservice} onChange={(e) => setProductandservice(e.target.value)} placeholder='Product and Service' />
-                                                                        <label htmlFor="floatingTextarea">Product and Service</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+
                                                             <div className='row mb-5'>
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Pan Card Number</label>
                                                                 <div className='col-sm-9 col-lg-10'>

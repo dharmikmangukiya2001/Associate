@@ -1,3 +1,5 @@
+import axios from "axios";
+import { BsSearch } from "react-icons/bs";
 import React, { useEffect, useState } from "react";
 
 const UserHeader = () => {
@@ -19,29 +21,43 @@ const UserHeader = () => {
     }, []);
     // Toggl Bar Closed
 
-    return(
+ 
+ 
+
+
+
+    return (
         <>
-        
-        <header id="header" className="header fixed-top d-flex align-items-center">
+
+            <header id="header" className="header fixed-top d-flex align-items-center">
                 <div className="d-flex align-items-center justify-content-between">
                     <a href="/" className="logo d-flex align-items-center">
                         <img src="/assets/img/Logos.png" alt="Logos" />
                     </a>
-                    <i className="bi bi-list toggle-sidebar-btn d-lg-none" onClick={toggleSidebar} />
+                    <i className="bi bi-list toggle-sidebar-btn d-lg-none " onClick={toggleSidebar}></i>
+                    <div className="search-bar">
+            {/* <div className="search-form d-flex align-items-center">
+                <input
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    name="query"
+                    placeholder="Search"
+                    title="Enter search keyword"
+                />
+                <button type="submit" onClick={handleAdd} className="btn" title="Search">
+                    <i>
+                        <BsSearch />
+                    </i>
+                </button>
+            </div> */}
+            
+        </div>
                 </div>{/* End Logo */}
-                <div className="search-bar">
-                    <form className="search-form d-flex align-items-center" method="POST" action="#">
-                        <input type="text" name="query" placeholder="Search" title="Enter search keyword" />
-                        <button type="submit" title="Search"><i className="bi bi-search" /></button>
-                    </form>
-                </div>{/* End Search Bar */}
+
                 <nav className="header-nav ms-auto">
                     <ul className="d-flex align-items-center">
-                        <li className="nav-item d-block d-lg-none">
-                            <a className="nav-link nav-icon search-bar-toggle " href="#">
-                                <i className="bi bi-search" />
-                            </a>
-                        </li>{/* End Search Icon*/}
+                        {/* End Search Icon*/}
 
 
                         <li className="nav-item dropdown pe-3">
@@ -96,55 +112,56 @@ const UserHeader = () => {
                     </ul>
                 </nav>{/* End Icons Navigation */}
             </header>{/* End Header */}
-                <aside id="sidebar" className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
-                    <ul className="sidebar-nav" id="sidebar-nav">
-                        <li className="nav-item">
-                            <a className="nav-link ">
-                                <i className="bi bi-grid" />
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="/">
-                                <i className="bi bi-menu-button-wide" /><span>All Services</span>
-                            </a>
-                        </li>
+            <aside id="sidebar" className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
+                <ul className="sidebar-nav" id="sidebar-nav">
+                    <li className="nav-item">
+                        <a className="nav-link ">
+                            <i className="bi bi-grid" />
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li className="nav-item">
+                        <a className="nav-link collapsed" href="/">
+                            <i className="bi bi-menu-button-wide" /><span>All Services</span>
+                        </a>
+                    </li>
 
 
-                        <li className="nav-heading">Pages</li>
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="">
-                                <i className="bi bi-person" />
-                                <span>Profile</span>
-                            </a>
-                        </li>{/* End Profile Page Nav */}
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="">
-                                <i className="bi bi-question-circle" />
-                                <span>F.A.Q</span>
-                            </a>
-                        </li>{/* End F.A.Q Page Nav */}
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="">
-                                <i className="bi bi-envelope" />
-                                <span>Contact</span>
-                            </a>
-                        </li>{/* End Contact Page Nav */}
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="/user_login">
-                                <i className="bi bi-card-list" />
-                                <span>Register</span>
-                            </a>
-                        </li>{/* End Register Page Nav */}
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="/user_login">
-                                <i className="bi bi-box-arrow-in-right" />
-                                <span>Login</span>
-                            </a>
-                        </li>{/* End Login Page Nav */}
-                    </ul>
-                </aside>
-        
+                    <li className="nav-heading">Pages</li>
+                    <li className="nav-item">
+                        <a className="nav-link collapsed" href="">
+                            <i className="bi bi-person" />
+                            <span>Profile</span>
+                        </a>
+                    </li>{/* End Profile Page Nav */}
+                    <li className="nav-item">
+                        <a className="nav-link collapsed" href="">
+                            <i className="bi bi-question-circle" />
+                            <span>F.A.Q</span>
+                        </a>
+                    </li>{/* End F.A.Q Page Nav */}
+                    <li className="nav-item">
+                        <a className="nav-link collapsed" href="">
+                            <i className="bi bi-envelope" />
+                            <span>Contact</span>
+                        </a>
+                    </li>{/* End Contact Page Nav */}
+                    <li className="nav-item">
+                        <a className="nav-link collapsed" href="/user_login">
+                            <i className="bi bi-card-list" />
+                            <span>Register</span>
+                        </a>
+                    </li>{/* End Register Page Nav */}
+                    <li className="nav-item">
+                        <a className="nav-link collapsed" href="/user_login">
+                            <i className="bi bi-box-arrow-in-right" />
+                            <span>Login</span>
+                        </a>
+                    </li>{/* End Login Page Nav */}
+                </ul>
+            </aside>
+
         </>
     )
 }

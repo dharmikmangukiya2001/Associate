@@ -132,6 +132,56 @@ const Addservice = () => {
             })
 
     };
+
+
+    //Select Bussiness category
+    const [bsubcategory, setBsubcategory] = useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_cat_subcat`).then(function (response) {
+            // handle success
+
+            // console.log(response.data, "ddd");
+            setBsubcategory(response.data.bsubcategory);
+            // console.log("Bussiness Category:::", bussinesscategory);
+
+
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
+
+
+
+
+    const [subbcategoryid,setSubBcategoryid] = useState('')
+    const [product, setProduct] = useState('')
+    const handleProduct = (e) => {
+        e.preventDefault();
+
+        const ProductService = {
+            bsubcategoryid: subbcategoryid,
+            product:product
+        }
+
+        setSubBcategoryid(subbcategoryid);
+        setProduct(product);
+
+        console.log("subbcategoryid:::",subbcategoryid,"product:::",product);
+
+        axios.post(`${process.env.REACT_APP_URL}/admin/add_product`, ProductService)
+            .then(function (response) {
+                // hendle success
+                console.log(response.data);
+                setProduct('')
+                // setBcategoryid('')
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+
+    };
 // ================================================================================================================================================
     return (
         <>
@@ -254,6 +304,51 @@ const Addservice = () => {
                                                             <div className="form-floating mb-4">
                                                                 <input type="text" className="form-control" placeholder="Provider Name" value={bussinesssubcategory} onChange={(e) => setBussinesssubcategory(e.target.value)} aria-label="Provideremail" aria-describedby="basic-addon1" />
                                                                 <label htmlFor="floatingTextarea">Bussiness Subcategory</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row mb-0 justify-content-end">
+                                                        <div className="col-sm-2">
+                                                            <div className="input-group">
+                                                                <input type="submit" className="form-control bg-success text-white" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>{/* End General Form Elements */}
+
+                                            </div>
+                                        </div>
+                                        <div className="card recent-sales overflow-auto">
+                                            <div className="card-body">
+                                                        <label className="col-sm-4 fs-5 col-form-label mb-3 fw-bold"> Select Product and Service :</label>
+                                                <form onSubmit={handleProduct}>
+                                                    <div className="row mb-2">
+                                                        <label className="col-sm-2 col-form-label fw-bold"> Subcategory</label>
+                                                        <div className="col-sm-10 ">
+                                                            <div className="form-floating mb-4">
+                                                                <select class="form-select" aria-label="Default select example" value={subbcategoryid} onChange={(e) => setSubBcategoryid(e.target.value)}>
+                                                                    <option selected>---- Select Subcategory ----</option>
+                                                                   
+                                                                {
+                                                                    bsubcategory && bsubcategory.map((item, i) => {
+                                                                        return (
+                                                                            <>
+
+                                                                                    <option value={item._id}>{item.bussinesssubcategory}</option>
+
+                                                                            </>
+                                                                        )
+                                                                    })
+                                                                }
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+                                                        <label className="col-sm-2 col-form-label fw-bold">Product / Service</label>
+                                                        <div className="col-sm-10 ">
+                                                            <div className="form-floating mb-4">
+                                                                <input type="text" className="form-control" placeholder="Provider Name" value={product} onChange={(e) => setProduct(e.target.value)} aria-label="Provideremail" aria-describedby="basic-addon1" />
+                                                                <label htmlFor="floatingTextarea">Product and Service</label>
                                                             </div>
                                                         </div>
                                                     </div>

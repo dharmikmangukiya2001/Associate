@@ -119,7 +119,7 @@ h3 {
   font-size: 1.5em;
   color: #cecece;
 }
-h3:before {
+/* h3:before {
   content: "\25C0";
   position: absolute;
   left: -50px;
@@ -132,7 +132,7 @@ h3:after {
   right: -50px;
   -webkit-animation: leftRight 2s linear infinite reverse;
   animation: leftRight 2s linear infinite reverse;
-}
+} */
 @-webkit-keyframes leftRight {
   0% {
     -webkit-transform: translateX(0);
@@ -201,18 +201,6 @@ h3:after {
 
 
 
-
-
-/**
-* Template Name: NiceAdmin - v2.5.0
-* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
 :root {
   scroll-behavior: smooth;
 }
@@ -621,7 +609,7 @@ h6 {
   padding: 0 20px;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 992px) {
   .header .search-bar {
     position: fixed;
     top: 50px;
@@ -666,10 +654,11 @@ h6 {
 }
 
 .header .search-form button {
-  border: 0;
-  padding: 0;
-  margin-left: -30px;
-  background: none;
+    border: 0;
+    padding: 0;
+    width: 30px;
+    margin-left: -30px;
+  /* background: none; */
 }
 
 .header .search-form button i {
@@ -1270,178 +1259,6 @@ h6 {
   max-width: 120px;
 }
 
-/*--------------------------------------------------------------
-# F.A.Q Page
---------------------------------------------------------------*/
-.faq .basic h6 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #4154f1;
-}
-
-.faq .basic p {
-  color: #6980aa;
-}
-
-/*--------------------------------------------------------------
-# Contact
---------------------------------------------------------------*/
-.contact .info-box {
-  padding: 28px 30px;
-}
-
-.contact .info-box i {
-  font-size: 38px;
-  line-height: 0;
-  color: #4154f1;
-}
-
-.contact .info-box h3 {
-  font-size: 20px;
-  color: #012970;
-  font-weight: 700;
-  margin: 20px 0 10px 0;
-}
-
-.contact .info-box p {
-  padding: 0;
-  line-height: 24px;
-  font-size: 14px;
-  margin-bottom: 0;
-}
-
-.contact .php-email-form .error-message {
-  display: none;
-  color: #fff;
-  background: #ed3c0d;
-  text-align: left;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .sent-message {
-  display: none;
-  color: #fff;
-  background: #18d26e;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .loading {
-  display: none;
-  background: #fff;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-}
-
-.contact .php-email-form .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
-  border-top-color: #eee;
-  -webkit-animation: animate-loading 1s linear infinite;
-  animation: animate-loading 1s linear infinite;
-}
-
-.contact .php-email-form input,
-.contact .php-email-form textarea {
-  border-radius: 0;
-  box-shadow: none;
-  font-size: 14px;
-  border-radius: 0;
-}
-
-.contact .php-email-form input:focus,
-.contact .php-email-form textarea:focus {
-  border-color: #4154f1;
-}
-
-.contact .php-email-form input {
-  padding: 10px 15px;
-}
-
-.contact .php-email-form textarea {
-  padding: 12px 15px;
-}
-
-.contact .php-email-form button[type=submit] {
-  background: #4154f1;
-  border: 0;
-  padding: 10px 30px;
-  color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
-}
-
-.contact .php-email-form button[type=submit]:hover {
-  background: #5969f3;
-}
-
-@-webkit-keyframes animate-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes animate-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/*--------------------------------------------------------------
-# Error 404
---------------------------------------------------------------*/
-.error-404 {
-  padding: 30px;
-}
-
-.error-404 h1 {
-  font-size: 180px;
-  font-weight: 700;
-  color: #4154f1;
-  margin-bottom: 0;
-  line-height: 150px;
-}
-
-.error-404 h2 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #012970;
-  margin-bottom: 30px;
-}
-
-.error-404 .btn {
-  background: #51678f;
-  color: #fff;
-  padding: 8px 30px;
-}
-
-.error-404 .btn:hover {
-  background: #3e4f6f;
-}
-
-@media (min-width: 992px) {
-  .error-404 img {
-    max-width: 50%;
-  }
-}
 
 /*--------------------------------------------------------------
 # Footer
@@ -1588,11 +1405,124 @@ button{
   text-decoration: underline;
 }
 
+.btn:focus {
+  outline: 0;
+  box-shadow: none;
+}
 
 
 
 
 
 
+.boddy {
+  font-family: tahoma;
+  /* height: 100vh; */
+  /* background-image: url(https://picsum.photos/g/3000/2000); */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
 
+.our-team {
+  padding: 30px 0 40px;
+  margin-bottom: 30px;
+  background-color: #ffffff;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
 
+.our-team .picture {
+  display: inline-block;
+  height: 130px;
+  width: 130px;
+  margin-bottom: 50px;
+  z-index: 1;
+  position: relative;
+}
+
+.our-team .picture::before {
+  content: "";
+  width: 100%;
+  height: 0;
+  border-radius: 50%;
+  background-color: #1369ce;
+  position: absolute;
+  bottom: 135%;
+  right: 0;
+  left: 0;
+  opacity: 0.9;
+  transform: scale(3);
+  transition: all 0.3s linear 0s;
+}
+
+.our-team:hover .picture::before {
+  height: 100%;
+}
+
+.our-team .picture::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #1369ce;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.our-team .picture img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 0.9s ease 0s;
+}
+
+.our-team:hover .picture img {
+  box-shadow: 0 0 0 14px #f7f5ec;
+  transform: scale(0.7);
+}
+
+.our-team .title {
+  display: block;
+  font-size: 15px;
+  color: #4e5052;
+  text-transform: capitalize;
+}
+
+.our-team .social {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #1369ce;
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  transition: all 0.5s ease 0s;
+}
+
+.our-team:hover .social {
+  bottom: 0;
+}
+
+.our-team .social li {
+  display: inline-block;
+}
+
+.our-team .social li a {
+  display: block;
+  padding: 10px;
+  font-size: 17px;
+  color: white;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+
+.our-team .social li a:hover {
+  color: #1369ce;
+  background-color: #f7f5ec;
+}

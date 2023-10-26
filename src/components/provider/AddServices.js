@@ -3,7 +3,7 @@ import Provider_Header from "./Provider_Header";
 import axios from "axios";
 // import { useNavigate } from 'react-router-dom'
 const providertoken = localStorage.getItem("providertoken");
-console.log(providertoken);
+// console.log(providertoken);
 
 const AddService = () => {
 
@@ -50,8 +50,8 @@ const AddService = () => {
                 console.log("Successfully uploaded images");
                 // Handle the response data if needed
                 const data = response.data;
-                console.log(providertoken);
-                console.log('jasd', data);
+                // console.log(providertoken);
+                // console.log('jasd', data);
                 // nevigate('/admin_showservices')
             } else {
                 console.log("Error uploading images");
