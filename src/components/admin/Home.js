@@ -11,21 +11,16 @@ const Home = () => {
     // loader
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
-        // Set the duration for showing the loader in milliseconds
-        const showTime = 5000; // 5 seconds
+        const showTime = 5000;
 
-        // Function to hide the loader and set isLoading to false
         function hideLoader() {
             setIsLoading(false);
         }
 
-        // Show the loader for the specified showTime
         const timer = setTimeout(hideLoader, showTime);
 
-        // Clear the timer when the component unmounts to avoid memory leaks
         return () => clearTimeout(timer);
     }, []);
-    // loader closed
 
     
     // LOGOUT
@@ -43,7 +38,7 @@ const Home = () => {
                     <div>
                         <main id="main" className="main">
                             <div className="pagetitle">
-                                <h1 className="text-start">Dashboard</h1>
+                                <h1 className="text-start m-0">Dashboard</h1>
                                 <nav>
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -140,28 +135,7 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                             </div>{/* End Customers Card */}
-                                            {/* Reports */}
-                                            <div className="col-12">
-                                                <div className="card">
-                                                    <div className="filter">
-                                                        <a className="icon" href="#" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
-                                                        <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                            <li className="dropdown-header text-start">
-                                                                <h6>Filter</h6>
-                                                            </li>
-                                                            <li><a className="dropdown-item" href="#">Today</a></li>
-                                                            <li><a className="dropdown-item" href="#">This Month</a></li>
-                                                            <li><a className="dropdown-item" href="#">This Year</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div className="card-body">
-                                                        <h5 className="card-title">Reports <span>/Today</span></h5>
-                                                        {/* Line Chart */}
-                                                        <div id="reportsChart" />
-                                                        {/* End Line Chart */}
-                                                    </div>
-                                                </div>
-                                            </div>{/* End Reports */}
+                                           
                                             {/* Recent Sales */}
                                             <div className="col-12">
                                                 <div className="card recent-sales overflow-auto">
@@ -361,42 +335,8 @@ const Home = () => {
                                                 </div>
                                             </div>
                                         </div>{/* End Recent Activity */}
-                                        {/* Budget Report */}
-                                        <div className="card">
-                                            <div className="filter">
-                                                <a className="icon" href="#" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
-                                                <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                    <li className="dropdown-header text-start">
-                                                        <h6>Filter</h6>
-                                                    </li>
-                                                    <li><a className="dropdown-item" href="#">Today</a></li>
-                                                    <li><a className="dropdown-item" href="#">This Month</a></li>
-                                                    <li><a className="dropdown-item" href="#">This Year</a></li>
-                                                </ul>
-                                            </div>
-                                            <div className="card-body pb-0">
-                                                <h5 className="card-title">Budget Report <span>| This Month</span></h5>
-                                                <div id="budgetChart" style={{ minHeight: 400 }} className="echart" />
-                                            </div>
-                                        </div>{/* End Budget Report */}
-                                        {/* Website Traffic */}
-                                        <div className="card">
-                                            <div className="filter">
-                                                <a className="icon" href="#" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
-                                                <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                    <li className="dropdown-header text-start">
-                                                        <h6>Filter</h6>
-                                                    </li>
-                                                    <li><a className="dropdown-item" href="#">Today</a></li>
-                                                    <li><a className="dropdown-item" href="#">This Month</a></li>
-                                                    <li><a className="dropdown-item" href="#">This Year</a></li>
-                                                </ul>
-                                            </div>
-                                            <div className="card-body pb-0">
-                                                <h5 className="card-title">Website Traffic <span>| Today</span></h5>
-                                                <div id="trafficChart" style={{ minHeight: 400 }} className="echart" />
-                                            </div>
-                                        </div>{/* End Website Traffic */}
+                                        
+                                        
                                         {/* News & Updates Traffic */}
                                         <div className="card">
                                             <div className="filter">
@@ -447,14 +387,13 @@ const Home = () => {
                         </main>{/* End #main */}
                         {/* ======= Footer ======= */}
                         <footer id="footer" className="footer">
-                            <div className="copyright">
-                                © Copyright <strong><span>Sky Digital</span></strong>. All Rights Reserved
-                            </div>
-                            <div className="credits">
-                                Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Manguliya</a>
-                            </div>
-                        </footer>{/* End Footer */}
-                        <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short" /></a>
+                    <div className="copyright">
+                        © Copyright <strong><span>Morsy Infotech</span></strong>. All Rights Reserved
+                    </div>
+                    <div className="credits">
+                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
+                    </div>
+                </footer>{/* End Footer */}
                     </div>
                 </>)
             }

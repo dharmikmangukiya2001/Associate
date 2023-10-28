@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header.js';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 import Multiselect from 'multiselect-react-dropdown';
 
 
@@ -87,11 +88,73 @@ const Addprovider = () => {
                 })
         }
         else {
-            console.log("category id not found");
+            console.log("error");
         }
 
     };
     // SELECT OPTION END
+
+
+
+    // SELECT OPTION FOR SHOW DIV DATA
+    const [productValue, setProductValue] = useState([])
+    const [productService, setProductService] = useState('')
+    const [nextProductIdBrok, setNextProductIdBrok] = useState(1);
+
+    const handleSecondSelectProduct = (e) => {
+
+        // console.log(bcatid,"dfsdfdsf");
+        if (sbcatid) {
+            axios.post(`${process.env.REACT_APP_URL}/admin/showproduct`, sbcatid).then(function (response) {
+                // hendle success
+                console.log(response.data);
+                const pro = response.data.productService
+                setProductService(pro);
+
+            })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+        }
+        else {
+            console.log("error");
+        }
+
+    };
+
+
+    const handleProductInputChangeRoom = (e) => {
+        setProductValue(e.target.value);
+    };
+
+    const handleProductAddAmenityBrok = () => {
+        if (productValue.trim() !== '') {
+            const newAmenity = {
+                id: nextProductIdBrok,
+                name: productValue.trim()
+            }
+            setNextProductIdBrok(nextProductIdBrok + 1);
+            setProductService([...productService, newAmenity]);
+            setProductValue('');
+        }
+    }
+
+   
+
+
+    const handleProductRemoveBrok = (nameToRemove) => {
+        const updatedAmenities = productService.filter(
+            (amenity) => amenity !== nameToRemove
+        );
+        setProductService(updatedAmenities);
+    }
+
+    // SELECT OPTION END
+
+
+
+
     // ADD SELES PROSAN DIV SHOW
     const [selectedSelesOption, setSelectedSelesOption] = useState(false);
     const personAdd = (e) => {
@@ -114,7 +177,7 @@ const Addprovider = () => {
     }
     // ADD IMAGE DOCUMENT DIV END
 
-
+    
 
     // image and document parh all start
     const [pfiles, setPfiles] = useState([]);
@@ -175,7 +238,7 @@ const Addprovider = () => {
 
 
 
-    const [selectedBrok, setSelectedBrok] = useState([]);
+    const [selectedBrok, setSelectedBrok] = useState('');
     const [inputValueBrok, setInputValueBrok] = useState('');
     const [nextIdBrok, setNextIdBrok] = useState(1);
 
@@ -192,6 +255,8 @@ const Addprovider = () => {
             }
             setNextIdBrok(nextIdBrok + 1);
             setSelectedBrok([...selectedBrok, newAmenity]);
+
+
             setInputValueBrok('');
         }
     }
@@ -202,6 +267,17 @@ const Addprovider = () => {
         );
         setSelectedBrok(updatedAmenities);
     }
+
+    let merged = [];
+    
+    if (Array.isArray(selectedBrok)) {
+        merged = selectedBrok.map(item => item.name);
+    }
+    
+    merged = merged.concat(productService);
+    
+    // console.log(merged,"dsddssd");
+    // console.log(merged);
 
     // image and document parh all End
 
@@ -223,7 +299,7 @@ const Addprovider = () => {
         bussinesstype,
         bussinessformation,
         bussinesstdsdetails,
-        productandservice: JSON.stringify(selectedBrok),
+        productandservice: merged,
         bussinesspancardnumber,
         sbcatid,
         bussinessaddress,
@@ -246,9 +322,13 @@ const Addprovider = () => {
         agreementfiles
     }
 
+    // const merged = selectedBrok.map(item => item.name).concat(productService);
+    // const merged1 = [...selectedBrok, ...productService];
+    
+    
+    
 
-
-
+    const nevigate = useNavigate();
     const handleSubmit = (e) => {
 
 
@@ -317,14 +397,15 @@ const Addprovider = () => {
 
         try {
             axios.post(`${process.env.REACT_APP_URL}/admin/addprovider`, formData, {
-                // headers: {
-                //     'token': token,
-                //     'Content-Type': 'multipart/form-data', // Set the content type for file uploads
-                // }
+                headers: {
+                    'token': token,
+                    'Content-Type': 'multipart/form-data', // Set the content type for file uploads
+                }
             })
                 .then((response) => {
                     console.log(response.data);
                     // console.log(data,"dsd");
+                    nevigate('/admin_showproviders')
                 })
                 .catch((error) => {
                     console.error(error);
@@ -414,7 +495,7 @@ const Addprovider = () => {
             <div>
                 <main id="main" className='main'>
                     <div className='pagetitle'>
-                        <h1 className='text-start'>Add Providers</h1>
+                        <h1 className='text-start m-0'>Add Providers</h1>
                         <nav>
                             <ol className='breadcrumb'>
                                 <li className='breadcrumb-item'>Home</li>
@@ -510,20 +591,16 @@ const Addprovider = () => {
                                                             <div className='col-sm-9 col-lg-10'>
                                                                 <select class="form-select" aria-label="Default select example" value={bussinesstype} onChange={(e) => setBussinesstype(e.target.value)}>
                                                                     <option selected>---- Select Business Type ----</option>
-
                                                                     {
                                                                         bussinessType && bussinessType.map((item, i) => {
                                                                             return (
                                                                                 <>
-
                                                                                     <option value={item.btype}>{item.btype}</option>
-
                                                                                 </>
                                                                             )
                                                                         })
                                                                     }
                                                                 </select>
-
                                                             </div>
                                                         </div>
                                                         <div className='row mt-5 mb-5'>
@@ -531,20 +608,16 @@ const Addprovider = () => {
                                                             <div className='col-sm-9 col-lg-10'>
                                                                 <select class="form-select" aria-label="Default select example" value={bussinessformation} onChange={(e) => setBussinessformation(e.target.value)}>
                                                                     <option selected>---- Select Business Formation ----</option>
-
                                                                     {
                                                                         bussinessFormation && bussinessFormation.map((item, i) => {
                                                                             return (
                                                                                 <>
-
                                                                                     <option value={item.bussinessformation}>{item.bussinessformation}</option>
-
                                                                                 </>
                                                                             )
                                                                         })
                                                                     }
                                                                 </select>
-
                                                             </div>
                                                         </div>
                                                         <div className='row mt-5 mb-5'>
@@ -552,74 +625,96 @@ const Addprovider = () => {
                                                             <div className='col-sm-9 col-lg-10'>
                                                                 <select class="form-select" aria-label="Default select example" value={bcatid} onChange={(e) => setBcatid(e.target.value)} onClick={handleSecondSelectChange}>
                                                                     <option selected>---- Select Category ----</option>
-
                                                                     {
                                                                         bcategory && bcategory.map((item, i) => {
                                                                             return (
                                                                                 <>
-
                                                                                     <option value={item._id}>{item.bussinesscategory}</option>
-
                                                                                 </>
                                                                             )
                                                                         })
                                                                     }
                                                                 </select>
-
                                                             </div>
                                                         </div>
                                                         <div className='row mt-5 mb-5'>
                                                             <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Subcategory <span className='text-red'>*</span></label>
                                                             <div className='col-sm-9 col-lg-10'>
-                                                                <select class="form-select" aria-label="Default select example" multiple value={sbcatid} onChange={(e) => setSbcatid(Array.from(e.target.selectedOptions, option => option.value))} >
-                                                                    <option selected>---- Select Subcategory ----</option>
-
+                                                                <select class="form-select" aria-label="Default select example" multiple value={sbcatid} onChange={(e) => setSbcatid(Array.from(e.target.selectedOptions, option => option.value))} onClick={handleSecondSelectProduct}>
+                                                                    {/* <option selected>---- Select Subcategory ----</option> */}
                                                                     {bsubcategorys &&
                                                                         bsubcategorys.map((item, i) => (
                                                                             <option value={item._id} key={i}>
                                                                                 {item.bussinesssubcategory}
                                                                             </option>
                                                                         ))}
-
                                                                 </select>
-
                                                             </div>
-                                                            <div className='row mb-5 mt-5'>
-                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Product / Service <span className='text-red'>*</span></label>
-                                                                <div className='col-sm-9 col-lg-10'>
-                                                                    <div className='me-3 form-floating'>
-                                                                        {/* <input type='text' className='form-control' value={productandservice} onChange={(e) => setProductandservice(e.target.value)} placeholder='Product and Service' /> */}
-                                                                        {/* <label htmlFor="floatingTextarea">Product and Service</label> */}
-
-                                                                        <div className='tags-input-container d-flex'>
-                                                                            <input
-                                                                                type='text'
-                                                                                className='form-control w-75'
-                                                                                placeholder='Type something and press Add buttton to add'
-                                                                                value={inputValueBrok}
-                                                                                onChange={(e) => handleInputChangeRoom(e)}
-                                                                            />
-                                                                            <button type='buttom' onClick={handleAddAmenityBrok} className='add-btn btn-primary w-25'>
-                                                                                add
-                                                                            </button>
+                                                        </div>
+                                                        <div className='row mt-5 mb-5'>
+                                                            <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Product and Service <span className='text-red'>*</span></label>
+                                                            <div className='col-sm-9 col-lg-10'>
+                                                                <div className="tags-input-container d-flex">
+                                                                    <input
+                                                                        hidden
+                                                                        type="text"
+                                                                        className="form-control w-75"
+                                                                        placeholder="Type something and press Add button to add"
+                                                                        value={productValue}
+                                                                        onChange={(e) => handleProductInputChangeRoom(e)}
+                                                                    />
+                                                                    <div type="button" hidden onClick={handleProductAddAmenityBrok} className="text-center fs-4 add-btn btn-primary w-25">
+                                                                        Add
+                                                                    </div>
+                                                                </div>
+                                                                <div className="d-flex flex-wrap">
+                                                                    {productService &&
+                                                                        productService.map((item, i) => (
+                                                                            <div className="tag-item mx-1 mt-2 btn btn-warning" key={i}>
+                                                                                <span className="text fs-5">{item}</span>
+                                                                                <span onClick={() => handleProductRemoveBrok(item)} className="close fs-4">
+                                                                                    &nbsp; &times;
+                                                                                </span>
+                                                                            </div>
+                                                                        ))
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className='row mb-5 mt-5'>
+                                                            <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'> Add Product / Service <span className='text-red'>*</span></label>
+                                                            <div className='col-sm-9 col-lg-10'>
+                                                                <div className='me-3 form-floating'>
+                                                                    <div className='tags-input-container d-flex'>
+                                                                        <input
+                                                                            type='text'
+                                                                            className='form-control w-75'
+                                                                            placeholder='Type something and press Add buttton to add'
+                                                                            value={inputValueBrok}
+                                                                            onChange={(e) => handleInputChangeRoom(e)}
+                                                                        />
+                                                                        <div type='buttom' onClick={handleAddAmenityBrok} className='rounded text-center fs-4 add-btn btn-primary w-25'>
+                                                                            Add
                                                                         </div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-wrap' >
                                                                         {
                                                                             selectedBrok && selectedBrok.map((item) => (
-                                                                                <div>
-                                                                                    <button type='buttom' style={{ width: 'fit-content' }} onClick={hendleAmenityRemoveBrok} className='p-2 mt-2 add-btn btn-warning'>
-                                                                                        {item.name}
-                                                                                    </button>
+                                                                                <div className='tag-item mx-1 btn btn-warning mt-2' key={item.id}>
+                                                                                    <span className='text fs-5'> {item.name}</span>
+                                                                                    <span onClick={() => hendleAmenityRemoveBrok(item.id)} className='close fs-4'>
+                                                                                        &nbsp; &times;
+                                                                                    </span>
                                                                                 </div>
                                                                             ))
                                                                         }
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div className='mt-5 w-25'>
-                                                                <button className='btn bg-danger text-white' onClick={handleBussiness}>Add Business Details</button>
-                                                            </div>
                                                         </div>
-
+                                                        <div className='mt-5 w-25'>
+                                                            <button className='btn bg-danger text-white' onClick={handleBussiness}>Add Business Details</button>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -980,14 +1075,14 @@ const Addprovider = () => {
                         </div>
                     </section>
                 </main>
-                <footer id='footer' className='footer'>
-                    <div className='copyright'>
-                        © Copyright <strong><span>Sky Digital</span></strong>. All Rights Reserved
+                <footer id="footer" className="footer">
+                    <div className="copyright">
+                        © Copyright <strong><span>Morsy Infotech</span></strong>. All Rights Reserved
                     </div>
-                    <div className='credits'>
-                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Manguliya</a>
+                    <div className="credits">
+                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
                     </div>
-                </footer>
+                </footer>{/* End Footer */}
             </div >
         </>
     )

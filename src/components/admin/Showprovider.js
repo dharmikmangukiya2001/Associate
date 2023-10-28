@@ -128,7 +128,7 @@ const Showprovider = () => {
                                                                         </td>
                                                                         <td data-th="Net Amount">
                                                                             <Link to={`/admin_providerdetails/${item._id}`}>
-                                                                                <button type="button" className="btn btn-danger btn-sm">Show All Details</button>
+                                                                                <button type="button" className="btn btn-danger btn-sm">Show</button>
                                                                             </Link>
                                                                         </td>
                                                                     </tr>
@@ -150,14 +150,14 @@ const Showprovider = () => {
                         </div>
                     </section>
                 </main>
-                <footer id='footer' className='footer'>
-                    <div className='copyright'>
-                        © Copyright <strong><span>Sky Digital</span></strong>. All Rights Reserved
+                <footer id="footer" className="footer">
+                    <div className="copyright">
+                        © Copyright <strong><span>Morsy Infotech</span></strong>. All Rights Reserved
                     </div>
-                    <div className='credits'>
-                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Manguliya</a>
+                    <div className="credits">
+                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
                     </div>
-                </footer>
+                </footer>{/* End Footer */}
             </div >
 
         </>

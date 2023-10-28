@@ -10,9 +10,8 @@ import Servicedetails from './components/admin/Servicedetails'
 import Addprovider from './components/admin/Addprovider';
 import Showprovider from './components/admin/Showprovider';
 import Providerdetails from './components/admin/Providerdetails';
-import Adduser from './components/admin/Adduser';
+import Addmember from './components/admin/Addmember';
 import { Route, Routes } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
 
 import Provider_Login from './components/provider/Provider_Login';
 import Provider_Dashboard from './components/provider/Provider_Dashboard';
@@ -22,6 +21,7 @@ import { useEffect, useState } from 'react';
 import User from './components/user/User';
 import UserLogin from './components/user/UserLogin';
 import ServiceDetails from './components/user/ServiceDetails';
+import UserProviderDetails from './components/user/UserProviderDetails';
 
 function App() {
 
@@ -62,6 +62,10 @@ function App() {
 
       <Routes>
 
+
+
+
+
         <Route path="*" element={<Error/>} />
         {/* ADMIN SITE START */}
         <Route path="/admin" element={<Login />}/>
@@ -74,9 +78,12 @@ function App() {
         <Route path="/admin_showproviders" element={<Showprovider/>} />
         <Route path="/admin_providerdetails/:id" element={<Providerdetails/>} />
 
-        <Route path='/admin_adduser' element={<Adduser/>} />
-
+        <Route path='/admin_addmember' element={<Addmember/>} />
         {/* ADMIN SITE END */}
+
+
+
+
 
         {/* PROVIDER SITE START */}
         <Route path="/provider" element={<Provider_Login />} />
@@ -85,11 +92,21 @@ function App() {
         {/* PROVIDER SITE END */}
 
 
+
+
+
+
+
         {/* PROVIDER SITE START */}
         <Route path="/user" element={<User />} />
         <Route path="/" element={<UserLogin/>} />
         {/* <Route path="/servicedetails/:id" element={<ServiceDetails />} /> */}
+        <Route path='/userproviderdetails/:id' element={<UserProviderDetails />} />
         {/* PROVIDER SITE END */}
+
+
+
+
       </Routes>
 
 

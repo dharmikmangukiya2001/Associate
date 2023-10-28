@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "./Header";
 import axios from "axios";
 
-const Adduser = () => {
+const Addmember = () => {
 
     const token = localStorage.getItem("token");
     const [name, setName] = useState('');
@@ -11,56 +11,65 @@ const Adduser = () => {
     const [date, setDate] = useState('');
     const [occupation, setOccupation] = useState('');
     const [reference, setReference] = useState('');
-
+    const [address, setAddress] = useState('');
     const userdata = {
         name: name,
         email: email,
         number: number,
         DOB: date,
-        occupation:occupation,
-        reference:reference
+        address: address,
+        occupation: occupation,
+        reference: reference
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(userdata,"userdata:::::");
+        // console.log(userdata,"userdata:::::");
 
-            
+
         try {
             axios.post(`${process.env.REACT_APP_URL}/admin/adduser`, userdata, {
                 headers: {
                     'token': token,
                 }
             })
-            .then(response => {
-            if (response) {
-                console.log("Successfully data added");
-                // Handle the response data if needed
-                const data = response.data;
-                // console.log(token);
-                console.log('jasd', data);
-                // nevigate('/admin_showservices')
-            } else {
-                console.log("Error datas");
-            }})
+                .then(response => {
+                    if (response) {
+                        // Handle the response data if needed
+                        const memberdtails = response.data;
+                        console.log("member data :::", memberdtails);
+                        // console.log(token);
+                        setName('')
+                        setEmail('')
+                        setNumber('')
+                        setDate('')
+                        setAddress('')
+                        setOccupation('')
+                        setReference('')
+                        // console.log('jasd', data);
+                        // nevigate('/admin_showservices')
+                    } else {
+                        console.log("Error datas");
+                    }
+                })
         } catch (error) {
             console.error("An error occurred:", error);
         }
 
     }
-    
 
-    return(
+
+    return (
         <>
-        <Header/>
+            <Header />
 
-        <div>
+            <div>
                 <main id="main" className="main">
                     <div className="pagetitle">
-                        <h1 className="text-start" >Add User</h1>
+                        <h1 className="text-start m-0" >Add Member</h1>
                         <nav>
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item">Home</li>
-                                <li className="breadcrumb-item active">Users</li>
+                                <li className="breadcrumb-item active">Members</li>
                             </ol>
                         </nav>
                     </div>{/* End Page Title */}
@@ -72,68 +81,78 @@ const Adduser = () => {
                                     <div className="col-12">
                                         <div className="card recent-sales overflow-auto">
                                             <div className="card-body">
-                                                <h5 className="card-title">User Form</h5>
+                                                <h5 className="card-title">Member Form</h5>
                                                 <form onSubmit={handleSubmit} encType="multipart/formData">
                                                     <div className="row mb-3">
                                                         <label className="col-sm-2 col-form-label fw-bold">Name : <span className='text-red'>*</span></label>
                                                         <div className="col-sm-10">
                                                             <div className="form-floating mb-3">
-                                                                <input type="text" className="form-control" id="floatingInput" value={name} onChange={(e) => setName(e.target.value)} placeholder="User name" />
-                                                                <label htmlFor="floatingInput">User Name</label>
+                                                                <input type="text" required className="form-control" id="floatingInput" value={name} onChange={(e) => setName(e.target.value)} placeholder="Member name" />
+                                                                <label htmlFor="floatingInput">Member Name</label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="row mb-3">
                                                         <label className="col-sm-2 col-form-label fw-bold">Email ID : <span className='text-red'>*</span></label>
                                                         <div className="col-sm-10">
-                                                        <div className="form-floating mb-3">
-                                                                <input type="text" className="form-control" id="floatingInput" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email ID" />
+                                                            <div className="form-floating mb-3">
+                                                                <input type="text" required className="form-control" id="floatingInput" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email ID" />
                                                                 <label htmlFor="floatingInput">Email ID</label>
                                                             </div>
-                                                            
+
                                                         </div>
                                                     </div>
                                                     <div className="row mb-3">
                                                         <label className="col-sm-2 col-form-label fw-bold">Numbar : <span className='text-red'>*</span></label>
                                                         <div className="col-sm-10">
-                                                        <div className="form-floating mb-3">
-                                                                <input type="text" className="form-control" id="floatingInput" value={number} onChange={(e) => setNumber(e.target.value)} placeholder="User Numbar" />
-                                                                <label htmlFor="floatingInput">User Number</label>
+                                                            <div className="form-floating mb-3">
+                                                                <input type="text" required className="form-control" id="floatingInput" value={number} onChange={(e) => setNumber(e.target.value)} placeholder="Member Numbar" />
+                                                                <label htmlFor="floatingInput">Member Number</label>
                                                             </div>
-                                                            
+
                                                         </div>
                                                     </div>
                                                     <div className="row mb-3">
                                                         <label className="col-sm-2 col-form-label fw-bold">D.O.B. : <span className='text-red'>*</span></label>
                                                         <div className="col-sm-10">
-                                                        <div className="form-floating mb-3">
-                                                                <input type="date" className="form-control" id="floatingInput" value={date} onChange={(e) => setDate(e.target.value)} placeholder="User D.O.B." />
-                                                                <label htmlFor="floatingInput">User D.O.B.</label>
+                                                            <div className="form-floating mb-3">
+                                                                <input type="date" required className="form-control" id="floatingInput" value={date} onChange={(e) => setDate(e.target.value)} placeholder="User D.O.B." />
+                                                                <label htmlFor="floatingInput">Member D.O.B.</label>
                                                             </div>
-                                                            
+
+                                                        </div>
+                                                    </div>
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-2 col-form-label fw-bold">Address : <span className='text-red'>*</span></label>
+                                                        <div className="col-sm-10">
+                                                            <div className="form-floating mb-3">
+                                                                <input type="text" required className="form-control" id="floatingInput" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="User D.O.B." />
+                                                                <label htmlFor="floatingInput">Member Address</label>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                     <div className="row mb-3">
                                                         <label className="col-sm-2 col-form-label fw-bold">Occupation :</label>
                                                         <div className="col-sm-10">
-                                                        <div className="form-floating mb-3">
+                                                            <div className="form-floating mb-3">
                                                                 <input type="text" className="form-control" id="floatingInput" value={occupation} onChange={(e) => setOccupation(e.target.value)} placeholder="User Occupation" />
-                                                                <label htmlFor="floatingInput">User Occupation</label>
+                                                                <label htmlFor="floatingInput">Member Occupation</label>
                                                             </div>
-                                                            
+
                                                         </div>
                                                     </div>
                                                     <div className="row mb-3">
                                                         <label className="col-sm-2 col-form-label fw-bold">Reference By :</label>
                                                         <div className="col-sm-10">
-                                                        <div className="form-floating mb-3">
+                                                            <div className="form-floating mb-3">
                                                                 <input type="text" className="form-control" id="floatingInput" value={reference} onChange={(e) => setReference(e.target.value)} placeholder="User Reference By" />
-                                                                <label htmlFor="floatingInput">User Reference By</label>
+                                                                <label htmlFor="floatingInput">Member Reference By</label>
                                                             </div>
-                                                            
+
                                                         </div>
                                                     </div>
-                                                    
+
 
 
 
@@ -158,16 +177,15 @@ const Adduser = () => {
                 {/* ======= Footer ======= */}
                 <footer id="footer" className="footer">
                     <div className="copyright">
-                        © Copyright <strong><span>Sky Digital</span></strong>. All Rights Reserved
+                        © Copyright <strong><span>Morsy Infotech</span></strong>. All Rights Reserved
                     </div>
                     <div className="credits">
-                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Manguliya</a>
+                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
                     </div>
                 </footer>{/* End Footer */}
-                <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short" /></a>
             </div>
         </>
     )
 
 }
-export default Adduser;
+export default Addmember;

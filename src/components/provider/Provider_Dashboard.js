@@ -414,14 +414,13 @@ const Provider_Dashboard = () => {
         </main>{/* End #main */}
         {/* ======= Footer ======= */}
         <footer id="footer" className="footer">
-          <div className="copyright">
-            © Copyright <strong><span>Sky Digital</span></strong>. All Rights Reserved
-          </div>
-          <div className="credits">
-            Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Manguliya</a>
-          </div>
-        </footer>{/* End Footer */}
-        <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short" /></a>
+                    <div className="copyright">
+                        © Copyright <strong><span>Morsy Infotech</span></strong>. All Rights Reserved
+                    </div>
+                    <div className="credits">
+                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
+                    </div>
+                </footer>{/* End Footer */}
       </div>
     </>
   )

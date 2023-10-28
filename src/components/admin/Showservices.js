@@ -6,43 +6,43 @@ import axios from "axios";
 const Showservices = () => {
 
     // Service Types
-    // const [servicetype, setServicetype] = useState([])
+    const [bussinessType, setServicetype] = useState([])
     // const token = localStorage.getItem("token");
     // console.log("token: ", token);
-    // useEffect(() => {
-    //     axios.get(`${process.env.REACT_APP_URL}/admin/showservicetype`).then(function (response) {
-    //         // handle success
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_btype`).then(function (response) {
+            // handle success
             
-    //         // console.log(response.data,"ddd");
-    //         setServicetype(response.data.servicetype);
-    //         // console.log("Service Types:::", servicetype);
+            // console.log(response.data,"ddd");
+            setServicetype(response.data.bussinessType);
+            // console.log("Service Types:::", servicetype);
 
 
-    //     })
-    //         .catch(function (error) {
-    //             // handle error
-    //             console.log(error);
-    //         })
-    // }, [])
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
 
 
     // Bussiness Formation
-    // const [bussinessformation, setBussinessformation] = useState([])
-    // useEffect(() => {
-    //     axios.get(`${process.env.REACT_APP_URL}/admin/showbussinessformation`).then(function (response) {
-    //         // handle success
+    const [bussinessFormation, setBussinessformation] = useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_bformation`).then(function (response) {
+            // handle success
             
-    //         // console.log(response.data,"ddd");
-    //         setBussinessformation(response.data.bussinessformation);
-    //         // console.log("Bussiness Formation:::", bussinessformation);
+            // console.log(response.data,"ddd");
+            setBussinessformation(response.data.bussinessFormation);
+            // console.log("Bussiness Formation:::", bussinessformation);
 
 
-    //     })
-    //         .catch(function (error) {
-    //             // handle error
-    //             console.log(error);
-    //         })
-    // }, [])
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
 
 
     // Bussiness category
@@ -51,7 +51,7 @@ const Showservices = () => {
         axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`).then(function (response) {
             // handle success
             
-            console.log(response.data,"ddd");
+            // console.log(response.data,"ddd");
             setBcategory(response.data.bcategory);
             // console.log("Bussiness Category:::", bussinesscategory);
 
@@ -104,15 +104,16 @@ const Showservices = () => {
                                     <div className="col-5">
                                         <div className="card">
                                             <div className="card-body d-flex">
-                                                {/* <table className="rwd-table">
+                                                <table className="rwd-table">
                                                     <tbody>
                                                         <tr>
                                                             <th>Service Type</th>
+                                                            <th>Delete</th>
                                                             
                                                         </tr>
 
                                                         {
-                                                            servicetype && servicetype.map((item, i) => {
+                                                            bussinessType && bussinessType.map((item, i) => {
                                                                 // {const id=localStorage.setItem('id', item._id)}
                                                                 return (
                                                                     <>
@@ -120,7 +121,10 @@ const Showservices = () => {
 
                                                                         <tr>
                                                                             <td data-th="Supplier Name">
-                                                                                <p>{item.servicetype}</p>
+                                                                                <p>{item.btype}</p>
+                                                                            </td>
+                                                                            <td data-th="Supplier Name">
+                                                                                <button className="btn btn-danger">Delect Type</button>
                                                                             </td>
                                                                            
                                                                         </tr>
@@ -130,14 +134,14 @@ const Showservices = () => {
                                                         }
                                                         
                                                     </tbody>
-                                                </table> */}
+                                                </table>
                                                 
 
                                             </div>
                                         </div>
                                        
                                     </div>
-                                    {/* <div className="col-5">
+                                     <div className="col-5">
                                         <div className="card">
                                             <div className="card-body d-flex">
                                             <div className="card">
@@ -146,10 +150,11 @@ const Showservices = () => {
                                                     <tbody>
                                                         <tr>
                                                             <th>Bussiness Formation</th>
+                                                            <th>Delect</th>
                                                         </tr>
 
                                                         {
-                                                             bussinessformation && bussinessformation.map((item, i) => {
+                                                             bussinessFormation && bussinessFormation.map((item, i) => {
                                                                 // {const id=localStorage.setItem('id', item._id)}
                                                                 return (
                                                                     <>
@@ -158,7 +163,9 @@ const Showservices = () => {
                                                                             <td data-th="Supplier Name">
                                                                                 <p>{item.bussinessformation}</p>
                                                                             </td>
-                                                                           
+                                                                            <td data-th="Supplier Name">
+                                                                                <button className="btn btn-danger">Delect Formation</button>
+                                                                            </td>
                                                                         </tr>
                                                                     </>
                                                                 )
@@ -175,7 +182,7 @@ const Showservices = () => {
                                             </div>
                                         </div>
                                        
-                                    </div> */}
+                                    </div> 
                                 </div>
                             </div>
                             </div>
@@ -192,6 +199,7 @@ const Showservices = () => {
                                                     <tbody>
                                                         <tr>
                                                             <th>Bussiness Category</th>
+                                                            <th>Delect</th>
                                                             
                                                         </tr>
 
@@ -206,7 +214,9 @@ const Showservices = () => {
                                                                             <td data-th="Supplier Name">
                                                                                 <p>{item.bussinesscategory}</p>
                                                                             </td>
-                                                                           
+                                                                            <td data-th="Supplier Name">
+                                                                                <button className="btn btn-danger">Delect Category</button>
+                                                                            </td>
                                                                         </tr>
                                                                     </>
                                                                 )
@@ -269,13 +279,12 @@ const Showservices = () => {
                 {/* ======= Footer ======= */}
                 <footer id="footer" className="footer">
                     <div className="copyright">
-                        © Copyright <strong><span>Sky Digital</span></strong>. All Rights Reserved
+                        © Copyright <strong><span>Morsy Infotech</span></strong>. All Rights Reserved
                     </div>
                     <div className="credits">
-                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Manguliya</a>
+                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
                     </div>
                 </footer>{/* End Footer */}
-                <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short" /></a>
             </div>
         </>
     )

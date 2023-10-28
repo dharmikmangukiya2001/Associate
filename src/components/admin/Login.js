@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/style.css';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -16,27 +15,26 @@ const Login = ({ onLogin }) => {
             email: email,
             password: password
         }
-        // console.log("EMAIL:", email, "PASSWORD:", password);
         setEmail(email);
         setPassword(password);
 
         // data get karavava mate
         axios.post(`${process.env.REACT_APP_URL}/admin/login`, userdetail)
-        .then(function (response) {
-            // handle success
-            const token = response.data.token;
-            localStorage.setItem('token', token);
-            console.log(response.data, "Successfully logged in");
-            // console.log('tokenn::', token);
-            // onLogin();
-           if(response.data.token){
-            nevigate('/admin_home')
-           }
-           else{
-            localStorage.removeItem('isLoggedIn');
-            navigator('/admin')
-           }
-        })
+            .then(function (response) {
+                // handle success
+                const token = response.data.token;
+                localStorage.setItem('token', token);
+                console.log(response.data, "Successfully logged in");
+                // console.log('tokenn::', token);
+                // onLogin();
+                if (response.data.token) {
+                    nevigate('/admin_home')
+                }
+                else {
+                    localStorage.removeItem('isLoggedIn');
+                    navigator('/admin')
+                }
+            })
             .catch(function (error) {
                 // handle error
                 console.log(error);

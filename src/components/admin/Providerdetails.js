@@ -36,7 +36,7 @@ function Providerdetails() {
 
         axios.delete(`${process.env.REACT_APP_URL}/admin/deleteprovider/${providerid}`).then(function (response) {
             // handle success
-            console.log(response.data);
+            // console.log(response.data);
             nevigate('/admin_showproviders')
         })
             .catch(function (error) {
@@ -72,7 +72,7 @@ function Providerdetails() {
                                     <div className="col-12">
                                         <div className="card recent-sales overflow-auto">
                                             <div className="card-body">
-                                                <h5 className="card-title">Services Details</h5>
+                                                <h5 className="card-title">Provider Details</h5>
                                                 <div>
                                                     <div className="col-12 border shadow-sm p-3 mb-5 bg-body rounded">
                                                         <div className="ms-3 d-flex col-12 pb-5">
@@ -298,14 +298,14 @@ function Providerdetails() {
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
-                                                                                
+
                                                                                 {
                                                                                     subcatdata.map((item, i) => (
                                                                                         <>
-                                                                                        
+
                                                                                             {/* {item.bussinesssubcategory} */}
                                                                                             {
-                                                                                                
+
                                                                                                 subcatdata.map((item, i) => (
                                                                                                     <>
                                                                                                         {Object.entries(item).map(([key, value], index) => {
@@ -347,12 +347,12 @@ function Providerdetails() {
                                                                                 {
                                                                                     subcatdata.map((item, i) => (
                                                                                         <>
-                                                                                           
-                                                                                                <div key={i}>{
-                                                                                                    item.bussinesssubcategory
 
-                                                                                                }</div>
-                                                                                          
+                                                                                            <div key={i}>{
+                                                                                                item.bussinesssubcategory
+
+                                                                                            }</div>
+
                                                                                         </>
                                                                                     ))
                                                                                 }
@@ -592,7 +592,7 @@ function Providerdetails() {
                                                                                 {
                                                                                     Object.entries(item).map(([key, value], index) => {
                                                                                         return (
-                                                                                            <>{key == 'Baddress' ? (<>
+                                                                                            <>{key == 'B_GSTnumber' ? (<>
                                                                                                 {value}
                                                                                             </>) : null}
 
@@ -665,7 +665,13 @@ function Providerdetails() {
                                                                                     Object.entries(item).map(([key, value], index) => {
                                                                                         return (
                                                                                             <>{key == 'product_service' ? (<>
-                                                                                                {value}
+                                                                                                <div className="d-flex flex-wrap">
+                                                                                                    <div className="tag-item mx-1 mt-2 ">
+                                                                                                        <span className="text">
+                                                                                                            {value}
+                                                                                                        </span>
+                                                                                                    </div>
+                                                                                                </div>
                                                                                             </>) : null}
 
                                                                                             </>
@@ -1088,13 +1094,12 @@ function Providerdetails() {
                 {/* ======= Footer ======= */}
                 <footer id="footer" className="footer">
                     <div className="copyright">
-                        © Copyright <strong><span>Sky Digital</span></strong>. All Rights Reserved
+                        © Copyright <strong><span>Morsy Infotech</span></strong>. All Rights Reserved
                     </div>
                     <div className="credits">
-                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Manguliya</a>
+                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
                     </div>
                 </footer>{/* End Footer */}
-                <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short" /></a>
             </div>
         </>
     )

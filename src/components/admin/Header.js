@@ -62,11 +62,8 @@ const Header = () => {
                 <div className="d-flex align-items-center justify-content-between">
                     <a href="index.html" className="logo d-flex align-items-center">
                         <Link to="/admin_home"><img src="/assets/img/Logos.png" alt="Logos" /></Link>
-                        {/* <img src={require('../../public/assets/img/Logos.png')} width="250px" alt /> */}
-                        {/* <span className="d-none d-lg-block">NiceAdmin</span> */}
                     </a>
                     <i className="bi bi-list toggle-sidebar-btn d-lg-none" onClick={toggleSidebar} />
-                    {/* <i className="bi bi-list toggle-sidebar-btn d-lg-none d-block" onClick={tablettoggleSidebar} /> */}
                 </div>{/* End Logo */}
                 <div className="search-bar">
                     <form className="search-form d-flex align-items-center" method="POST" action="#">
@@ -84,10 +81,10 @@ const Header = () => {
                         <li className="nav-item dropdown">
                             <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                                 <i className="bi bi-bell" />
-                                {/* <span className="badge bg-primary badge-number">4</span> */}
+                                <span className="badge bg-primary badge-number">4</span>
                             </a>{/* End Notification Icon */}
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                                {/* <li className="dropdown-header">
+                                <li className="dropdown-header">
                             You have 4 new notifications
                             <a href="#"><span className="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                         </li>
@@ -140,16 +137,16 @@ const Header = () => {
                         </li>
                         <li className="dropdown-footer">
                             <a href="#">Show all notifications</a>
-                        </li> */}
+                        </li>
                             </ul>{/* End Notification Dropdown Items */}
                         </li>{/* End Notification Nav */}
                         <li className="nav-item dropdown">
                             <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                                 <i className="bi bi-chat-left-text" />
-                                {/* <span className="badge bg-success badge-number">3</span> */}
+                                <span className="badge bg-success badge-number">3</span>
                             </a>{/* End Messages Icon */}
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                                {/* <li className="dropdown-header">
+                                <li className="dropdown-header">
                             You have 3 new messages
                             <a href="#"><span className="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                         </li>
@@ -197,19 +194,18 @@ const Header = () => {
                         </li>
                         <li className="dropdown-footer">
                             <a href="#">Show all messages</a>
-                        </li> */}
+                        </li>
                             </ul>{/* End Messages Dropdown Items */}
                         </li>{/* End Messages Nav */}
                         <li className="nav-item dropdown pe-3">
                             <a className="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                                 <img src="../assets/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
-                                {/* <span className="d-none d-md-block dropdown-toggle ps-2">{admins.name}</span> */}
-                                {/* <span className="d-none d-md-block dropdown-toggle ps-2">{admins.name}</span> */}
+                                <span className="d-none d-md-block dropdown-toggle ps-2">{admins.name}</span>
                             </a>{/* End Profile Iamge Icon */}
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li className="dropdown-header">
-                                    {/* <h6>{admins.name}</h6> */}
-                                    {/* <span>{admins.email}</span> */}
+                                    <h6>{admins.name}</h6>
+                                    <span>{admins.email}</span>
                                 </li>
                                 <li>
                                     <hr className="dropdown-divider" />
@@ -300,17 +296,17 @@ const Header = () => {
                     </li>{/* End Tables Nav */}
                     <li className="nav-item">
                         <a className="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                            <i className="bi bi-bar-chart" /><span>Users</span><i className="bi bi-chevron-down ms-auto" />
+                            <i className="bi bi-bar-chart" /><span>Member</span><i className="bi bi-chevron-down ms-auto" />
                         </a>
                         <ul id="charts-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
                                 <a href="/admin_adduser"class="a-none ps-0" >
-                                <Link className='a-none' to="/admin_adduser"><i className="bi bi-plus-square fs-5" /><span>Add User</span></Link>
+                                <Link className='a-none' to="/admin_addmember"><i className="bi bi-plus-square fs-5" /><span>Add Member</span></Link>
                                 </a>
                             </li>
                             <li>
-                                <a href="charts-apexcharts.html">
-                                    {/* <i className="bi bi-circle" /><span>ApexCharts</span> */}
+                            <a href="/admin_adduser"class="a-none ps-0" >
+                                <Link className='a-none' to="/admin_showmember"><i className="bi bi-server fs-5" /><span>Show Member</span></Link>
                                 </a>
                             </li>
                             <li>
@@ -322,23 +318,13 @@ const Header = () => {
                     </li>{/* End Charts Nav */}
                     <li className="nav-item">
                         <a className="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                            <i className="bi bi-gem" /><span>Icons</span><i className="bi bi-chevron-down ms-auto" />
+                            <i className="bi  bi-bell" /><span>Notification</span><i className="bi bi-chevron-down ms-auto" />
                         </a>
                         <ul id="icons-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
-                                <a href="icons-bootstrap.html">
-                                    <i className="bi bi-circle" /><span>Bootstrap Icons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="icons-remix.html">
-                                    <i className="bi bi-circle" /><span>Remix Icons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="icons-boxicons.html">
-                                    <i className="bi bi-circle" /><span>Boxicons</span>
-                                </a>
+                                <Link className='a-none' to="">
+                                    <i className="bi bi-cart fs-4" /><span>Show Order</span>
+                                </Link>
                             </li>
                         </ul>
                     </li>{/* End Icons Nav */}
@@ -354,37 +340,37 @@ const Header = () => {
                             <i className="bi bi-question-circle" />
                             <span>F.A.Q</span>
                         </a>
-                    </li>{/* End F.A.Q Page Nav */}
+                    </li>
                     <li className="nav-item">
                         <a className="nav-link collapsed" href="pages-contact.html">
                             <i className="bi bi-envelope" />
                             <span>Contact</span>
                         </a>
-                    </li>{/* End Contact Page Nav */}
+                    </li>
                     <li className="nav-item">
                         <a className="nav-link collapsed" href="pages-register.html">
                             <i className="bi bi-card-list" />
                             <span>Register</span>
                         </a>
-                    </li>{/* End Register Page Nav */}
+                    </li>
                     <li className="nav-item">
                         <a className="nav-link collapsed" href="pages-login.html">
                             <i className="bi bi-box-arrow-in-right" />
                             <span>Login</span>
                         </a>
-                    </li>{/* End Login Page Nav */}
+                    </li>
                     <li className="nav-item">
                         <a className="nav-link collapsed" href="pages-error-404.html">
                             <i className="bi bi-dash-circle" />
                             <span>Error 404</span>
                         </a>
-                    </li>{/* End Error 404 Page Nav */}
+                    </li>
                     <li className="nav-item">
                         <a className="nav-link collapsed" href="pages-blank.html">
                             <i className="bi bi-file-earmark" />
                             <span>Blank</span>
                         </a>
-                    </li>{/* End Blank Page Nav */}
+                    </li>
                 </ul>
             </aside>
 

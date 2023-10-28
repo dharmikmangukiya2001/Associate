@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 const Addservice = () => {
 
-// =====================================================| Service Type  |==========================================================================
+    // =====================================================| Service Type  |==========================================================================
 
     const token = localStorage.getItem("token");
     const nevigate = useNavigate();
@@ -32,7 +32,7 @@ const Addservice = () => {
             })
 
     };
-// ==================================================| Bussiness Formation  |======================================================================
+    // ==================================================| Bussiness Formation  |======================================================================
 
     // bussiness formation
     const [bussinessformation, setBussinessformation] = useState('')
@@ -58,7 +58,7 @@ const Addservice = () => {
             })
 
     };
-// ========================================================| Category  |===========================================================================
+    // ========================================================| Category  |===========================================================================
 
     // category
     const [bussinesscategory, setBussinesscategory] = useState('')
@@ -84,8 +84,8 @@ const Addservice = () => {
 
     };
 
-// ================================================| Select Bussiness Category  |==================================================================
-    
+    // ================================================| Select Bussiness Category  |==================================================================
+
     //Select Bussiness category
     const [bcategory, setBcategory] = useState([])
     useEffect(() => {
@@ -105,20 +105,20 @@ const Addservice = () => {
     }, [])
 
     // subcategory
-    const [bcategoryid,setBcategoryid] = useState('')
+    const [bcategoryid, setBcategoryid] = useState('')
     const [bussinesssubcategory, setBussinesssubcategory] = useState('')
     const handleSubcategory = (e) => {
         e.preventDefault();
 
         const subcategorydetails = {
             bussinesssubcategory: bussinesssubcategory,
-            bcategoryid:bcategoryid
+            bcategoryid: bcategoryid
         }
 
         setBussinesssubcategory(bussinesssubcategory);
         setBcategoryid(bcategoryid);
 
-        console.log("Bussiness Subcategory:::",bussinesssubcategory,"Bussiness Category:::",bcategoryid);
+        console.log("Bussiness Subcategory:::", bussinesssubcategory, "Bussiness Category:::", bcategoryid);
 
         axios.post(`${process.env.REACT_APP_URL}/admin/add_bsubcategory`, subcategorydetails)
             .then(function (response) {
@@ -155,20 +155,20 @@ const Addservice = () => {
 
 
 
-    const [subbcategoryid,setSubBcategoryid] = useState('')
+    const [subbcategoryid, setSubBcategoryid] = useState('')
     const [product, setProduct] = useState('')
     const handleProduct = (e) => {
         e.preventDefault();
 
         const ProductService = {
             bsubcategoryid: subbcategoryid,
-            product:product
+            product: product
         }
 
         setSubBcategoryid(subbcategoryid);
         setProduct(product);
 
-        console.log("subbcategoryid:::",subbcategoryid,"product:::",product);
+        console.log("subbcategoryid:::", subbcategoryid, "product:::", product);
 
         axios.post(`${process.env.REACT_APP_URL}/admin/add_product`, ProductService)
             .then(function (response) {
@@ -182,14 +182,14 @@ const Addservice = () => {
             })
 
     };
-// ================================================================================================================================================
+    // ================================================================================================================================================
     return (
         <>
             <Header />
             <div>
                 <main id="main" className="main">
                     <div className="pagetitle">
-                        <h1 className="text-start" >Add Services</h1>
+                        <h1 className="text-start m-0" >Add Services</h1>
                         <nav>
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item">Home</li>
@@ -205,6 +205,7 @@ const Addservice = () => {
                                     <div className="col-12">
                                         <div className="card recent-sales overflow-auto">
                                             <div className="card-body">
+                                            <label className="col-sm-2 fs-5 col-form-label mb-3 fw-bold"> Add Bussiness Type :</label>
                                                 <form onSubmit={handleServiceType}>
                                                     <div className="row mb-2">
                                                         <label className="col-sm-2 col-form-label fw-bold">Business Type</label>
@@ -228,8 +229,8 @@ const Addservice = () => {
                                         </div>
                                         <div className="card recent-sales overflow-auto">
                                             <div className="card-body">
+                                            <label className="col-sm-3 fs-5 col-form-label mb-3 fw-bold"> Add Business Formation :</label>
                                                 <form onSubmit={handleBussinessFormation}>
-
                                                     <div className="row mb-2">
                                                         <label className="col-sm-2 col-form-label fw-bold">Bussiness Formation</label>
                                                         <div className="col-sm-10 ">
@@ -252,6 +253,7 @@ const Addservice = () => {
                                         </div>
                                         <div className="card recent-sales overflow-auto">
                                             <div className="card-body">
+                                            <label className="col-sm-2 fs-5 col-form-label mb-3 fw-bold"> Add Category :</label>
                                                 <form onSubmit={handleCategory}>
                                                     <div className="row mb-2">
                                                         <label className="col-sm-2 col-form-label fw-bold">Bussiness Category</label>
@@ -275,7 +277,7 @@ const Addservice = () => {
                                         </div>
                                         <div className="card recent-sales overflow-auto">
                                             <div className="card-body">
-                                                        <label className="col-sm-2 fs-5 col-form-label mb-3 fw-bold"> Select Category :</label>
+                                                <label className="col-sm-2 fs-5 col-form-label mb-3 fw-bold"> Add Sub Category :</label>
                                                 <form onSubmit={handleSubcategory}>
                                                     <div className="row mb-2">
                                                         <label className="col-sm-2 col-form-label fw-bold"> Category</label>
@@ -283,18 +285,18 @@ const Addservice = () => {
                                                             <div className="form-floating mb-4">
                                                                 <select class="form-select" aria-label="Default select example" value={bcategoryid} onChange={(e) => setBcategoryid(e.target.value)}>
                                                                     <option selected>---- Select Category ----</option>
-                                                                   
-                                                                {
-                                                                    bcategory && bcategory.map((item, i) => {
-                                                                        return (
-                                                                            <>
+
+                                                                    {
+                                                                        bcategory && bcategory.map((item, i) => {
+                                                                            return (
+                                                                                <>
 
                                                                                     <option value={item._id}>{item.bussinesscategory}</option>
 
-                                                                            </>
-                                                                        )
-                                                                    })
-                                                                }
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    }
                                                                 </select>
 
                                                             </div>
@@ -320,7 +322,7 @@ const Addservice = () => {
                                         </div>
                                         <div className="card recent-sales overflow-auto">
                                             <div className="card-body">
-                                                        <label className="col-sm-4 fs-5 col-form-label mb-3 fw-bold"> Select Product and Service :</label>
+                                                <label className="col-sm-4 fs-5 col-form-label mb-3 fw-bold"> Add Product and Service :</label>
                                                 <form onSubmit={handleProduct}>
                                                     <div className="row mb-2">
                                                         <label className="col-sm-2 col-form-label fw-bold"> Subcategory</label>
@@ -328,18 +330,18 @@ const Addservice = () => {
                                                             <div className="form-floating mb-4">
                                                                 <select class="form-select" aria-label="Default select example" value={subbcategoryid} onChange={(e) => setSubBcategoryid(e.target.value)}>
                                                                     <option selected>---- Select Subcategory ----</option>
-                                                                   
-                                                                {
-                                                                    bsubcategory && bsubcategory.map((item, i) => {
-                                                                        return (
-                                                                            <>
+
+                                                                    {
+                                                                        bsubcategory && bsubcategory.map((item, i) => {
+                                                                            return (
+                                                                                <>
 
                                                                                     <option value={item._id}>{item.bussinesssubcategory}</option>
 
-                                                                            </>
-                                                                        )
-                                                                    })
-                                                                }
+                                                                                </>
+                                                                            )
+                                                                        })
+                                                                    }
                                                                 </select>
 
                                                             </div>
@@ -372,13 +374,12 @@ const Addservice = () => {
                 {/* <=+=+=+=+=+=+=| Footer |=+=+=+=+=+=+=> */}
                 <footer id="footer" className="footer">
                     <div className="copyright">
-                        © Copyright <strong><span>Sky Digital</span></strong>. All Rights Reserved
+                        © Copyright <strong><span>Morsy Infotech</span></strong>. All Rights Reserved
                     </div>
                     <div className="credits">
-                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Manguliya</a>
+                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
                     </div>
                 </footer>{/* End Footer */}
-                <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short" /></a>
             </div>
 
         </>

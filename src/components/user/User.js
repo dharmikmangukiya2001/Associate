@@ -50,8 +50,8 @@ const User = () => {
         axios.post(`${process.env.REACT_APP_URL}/user/search`, { search })
             .then(response => {
                 setSearchData(response.data);
-                console.log("Search::", response.data);
-                console.log("Search Data::", searchData);
+                // console.log("Search::", response.data);
+                // console.log("Search Data::", searchData);
             })
             .catch(error => {
                 console.log("Error", error);
@@ -59,9 +59,9 @@ const User = () => {
 
     }
 
-    useEffect(() => {
-        console.log("Search Data::", searchData)
-    })
+    // useEffect(() => {
+        // console.log("Search Data::", searchData)
+    // })
 
     const searchResultsArray = Object.entries(searchData);
 
@@ -93,7 +93,12 @@ const User = () => {
                 {/* <div className="pagetitle d-flex flex-row-reverse me-5"> */}
 
 
+                        {/* <div className="text-end"> */}
 
+                        <button class="position-fixed z-3 custom-btn btn-10 p-0" style={{bottom: '20px',right:' 20px'}}>
+                            Add Ask
+                            </button>
+                        {/* </div> */}
 
                     {/* <div class="container"> */}
                     <div class="row">
@@ -101,7 +106,7 @@ const User = () => {
                             <div className="col-12">
                                 <div class="col-12 flex-wrap d-flex" key={i}>
                                     {value.map((value1, j) => (
-                                        <div class="our-team shadow col-lg-2 col-md-3 col-12 col-sm-6 m-3" key={j}>
+                                        <div class="our-team shadow border border-2 rounded col-lg-2 col-md-3 col-12 col-sm-6 m-3 p-3" key={j}>
                                             <div class="picture">
                                                 {value1.profile && (
                                                     <div>
@@ -110,12 +115,14 @@ const User = () => {
                                                 )}
                                             </div>
                                             <div class="team-content">
-                                                <h3 class="name">{value1.name}</h3>
-                                                <p class="title">{value1.email}</p>
+                                                <h3 class="name fs-4 text-capitalize">{value1.name}</h3>
+                                                <p class="title mb-5 text-lowercase">{value1.email}</p>
                                                 {/* Add other fields you want to display */}
                                             </div>
                                             <ul class="social">
+                                                <Link to={`/userproviderdetails/${value1._id}`}>
                                                 <button className="btn text-white">Viwe More</button>
+                                                </Link>
                                             </ul>
                                         </div>
                                     ))}
@@ -123,29 +130,7 @@ const User = () => {
                             </div>
                         ))}
                     </div>
-                    {/* </div> */}
-
-
-
-
-
-                    {/* <div key={i}>
-                        {value.map((value1, j) => (
-                            <div key={j}>
-                                {Object.entries(value1).map(([key12, value12], n) => (
-                                    <div key={n}>
-                                        <div key={n}>
-                                            {
-                                                key12 == 'name' ? (<>{value12}</>) : (null)
-                                            }
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
-                    </div> */}
-
-                {/* </div> */}
+                   
 
                 <section className="section dashboard">
                     <div className="row">
@@ -295,7 +280,7 @@ const User = () => {
                             <div className="row">
 
                                 <div className="text-center">
-                                    <button onClick={handleAdd} className="btn w-25 btn-danger">Viwe More</button>
+                                    <button onClick={handleAdd} className="btn btn-danger" style={{width:'200px'}}>Viwe More</button>
                                 </div>
                             </div>
                         </div>
@@ -822,14 +807,13 @@ const User = () => {
             </main > {/* End #main */}
             {/* ======= Footer ======= */}
             <footer id="footer" className="footer">
-                <div className="copyright">
-                    © Copyright <strong><span>Sky Digital</span></strong>. All Rights Reserved
-                </div>
-                <div className="credits">
-                    Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Manguliya</a>
-                </div>
-            </footer>{/* End Footer */}
-            <a href="#" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short" /></a>
+                    <div className="copyright">
+                        © Copyright <strong><span>Morsy Infotech</span></strong>. All Rights Reserved
+                    </div>
+                    <div className="credits">
+                        Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
+                    </div>
+                </footer>{/* End Footer */}
         </>
     )
 }
