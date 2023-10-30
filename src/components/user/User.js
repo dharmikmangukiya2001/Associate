@@ -95,9 +95,9 @@ const User = () => {
 
                         {/* <div className="text-end"> */}
 
-                        <button class="position-fixed z-3 custom-btn btn-10 p-0" style={{bottom: '20px',right:' 20px'}}>
+                        <Link to='/member_addask'><button class="position-fixed z-3 custom-btn btn-10 p-0" style={{bottom: '20px',right:' 20px'}}>
                             Add Ask
-                            </button>
+                            </button></Link>
                         {/* </div> */}
 
                     {/* <div class="container"> */}
@@ -120,7 +120,7 @@ const User = () => {
                                                 {/* Add other fields you want to display */}
                                             </div>
                                             <ul class="social">
-                                                <Link to={`/userproviderdetails/${value1._id}`}>
+                                                <Link to={`/member_provider_details/${value1._id}`}>
                                                 <button className="btn text-white">Viwe More</button>
                                                 </Link>
                                             </ul>

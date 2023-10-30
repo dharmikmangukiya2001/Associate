@@ -28,7 +28,7 @@ const UserLogin = () => {
         // console.log('tokenn::', token);
         // onLogin();
         if(usertoken){
-          nevigate('/user')
+          nevigate('/member')
        }
        else{
         localStorage.removeItem('isLoggedIn');

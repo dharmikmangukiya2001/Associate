@@ -12,7 +12,7 @@ function Providerdetails() {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL}/admin/providerdetails/${providerid}`).then(function (response) {
             // handle success
-            console.log(response.data);
+            console.log(response.data, "dsdsdsd");
             setProviders([response.data.providers]);
             setSubcatdata(response.data.subcatData);
 
@@ -664,20 +664,21 @@ function Providerdetails() {
                                                                                 {
                                                                                     Object.entries(item).map(([key, value], index) => {
                                                                                         return (
-                                                                                            <>{key == 'product_service' ? (<>
-                                                                                                <div className="d-flex flex-wrap">
-                                                                                                    <div className="tag-item mx-1 mt-2 ">
-                                                                                                        <span className="text">
-                                                                                                            {value}
-                                                                                                        </span>
+                                                                                            <>
+                                                                                                {key === 'product_service' ? (
+                                                                                                    <div className="d-flex flex-wrap" key={index}>
+                                                                                                        {Array.isArray(value) ? (
+                                                                                                            value.map((item, index1) => (
+                                                                                                                <button className='btn m-1 bg-primary-subtle p-2 rounded-md m-1' style={{width:'fit-content'}} key={index1}>{item}</button>
+                                                                                                            ))
+                                                                                                        ) : null}
                                                                                                     </div>
-                                                                                                </div>
-                                                                                            </>) : null}
-
+                                                                                                ) : null}
                                                                                             </>
                                                                                         )
                                                                                     })
                                                                                 }
+
                                                                             </span>
                                                                         </p>
                                                                     </div>

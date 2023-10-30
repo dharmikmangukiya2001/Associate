@@ -20,7 +20,7 @@ import { useEffect, useState } from 'react';
 
 import User from './components/user/User';
 import UserLogin from './components/user/UserLogin';
-import ServiceDetails from './components/user/ServiceDetails';
+import ServiceFrom from './components/user/ServiceFrom';
 import UserProviderDetails from './components/user/UserProviderDetails';
 
 function App() {
@@ -98,10 +98,10 @@ function App() {
 
 
         {/* PROVIDER SITE START */}
-        <Route path="/user" element={<User />} />
+        <Route path="/member" element={<User />} />
         <Route path="/" element={<UserLogin/>} />
-        {/* <Route path="/servicedetails/:id" element={<ServiceDetails />} /> */}
-        <Route path='/userproviderdetails/:id' element={<UserProviderDetails />} />
+        <Route path="/member_addask" element={<ServiceFrom />} />
+        <Route path='/member_provider_details/:id' element={<UserProviderDetails />} />
         {/* PROVIDER SITE END */}
 
 

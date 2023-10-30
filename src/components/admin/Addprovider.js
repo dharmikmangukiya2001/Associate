@@ -299,7 +299,7 @@ const Addprovider = () => {
         bussinesstype,
         bussinessformation,
         bussinesstdsdetails,
-        productandservice: merged,
+        productandservice:Array(merged),
         bussinesspancardnumber,
         sbcatid,
         bussinessaddress,
