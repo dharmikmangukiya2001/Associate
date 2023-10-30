@@ -8,7 +8,9 @@ function Providerdetails() {
     const [subcatdata, setSubcatdata] = useState([])
     const id = useParams()
     const providerid = id.id
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token"); 
+
+    
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL}/admin/providerdetails/${providerid}`).then(function (response) {
             // handle success

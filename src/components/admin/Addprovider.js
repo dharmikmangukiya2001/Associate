@@ -107,7 +107,7 @@ const Addprovider = () => {
         if (sbcatid) {
             axios.post(`${process.env.REACT_APP_URL}/admin/showproduct`, sbcatid).then(function (response) {
                 // hendle success
-                console.log(response.data);
+                console.log(response.data,":::::");
                 const pro = response.data.productService
                 setProductService(pro);
 
@@ -521,7 +521,7 @@ const Addprovider = () => {
                                                     <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Provider Profile Photos <span className='text-red'>*</span></label>
                                                     <div className='col-sm-9 col-lg-10'>
                                                         <div className='me-3'>
-                                                            <input type='file'
+                                                            <input type='file' required
                                                                 name="provide-profile"
                                                                 onChange={handleProfile}
                                                                 className='form-control' placeholder='Provider Name' />
@@ -532,7 +532,7 @@ const Addprovider = () => {
                                                     <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Provider Name <span className='text-red'>*</span></label>
                                                     <div className='col-sm-9 col-lg-10'>
                                                         <div className='me-3 form-floating'>
-                                                            <input type='text' className='form-control' value={providername} onChange={(e) => setProvidername(e.target.value)} placeholder='Provider Name' />
+                                                            <input type='text' className='form-control' required value={providername} onChange={(e) => setProvidername(e.target.value)} placeholder='Provider Name' />
                                                             <label htmlFor="floatingTextarea">Provider Name</label>
                                                         </div>
                                                     </div>
@@ -541,7 +541,7 @@ const Addprovider = () => {
                                                     <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Provider Numbar <span className='text-red'>*</span></label>
                                                     <div className='col-sm-9 col-lg-10'>
                                                         <div className='me-3 form-floating'>
-                                                            <input type='number' className='form-control' value={providernumber} onChange={(e) => setProvidernumber(e.target.value)} placeholder='Provider Numbar' />
+                                                            <input type='number' className='form-control' required value={providernumber} onChange={(e) => setProvidernumber(e.target.value)} placeholder='Provider Numbar' />
                                                             <label htmlFor="floatingTextarea">Provider Number</label>
                                                         </div>
                                                     </div>
@@ -550,7 +550,7 @@ const Addprovider = () => {
                                                     <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Provider Email ID <span className='text-red'>*</span></label>
                                                     <div className='col-sm-9 col-lg-10'>
                                                         <div className='me-3 form-floating'>
-                                                            <input type='text' className='form-control' value={provideremailid} onChange={(e) => setProvideremailid(e.target.value)} placeholder='Provider Email ID' />
+                                                            <input type='email' required className='form-control' value={provideremailid} onChange={(e) => setProvideremailid(e.target.value)} placeholder='Provider Email ID' />
                                                             <label htmlFor="floatingTextarea">Provider Email ID</label>
                                                         </div>
                                                     </div>
@@ -559,7 +559,7 @@ const Addprovider = () => {
                                                     <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Provider B.O.D. <span className='text-red'>*</span></label>
                                                     <div className='col-sm-9 col-lg-10'>
                                                         <div className='me-3 form-floating'>
-                                                            <input type='date' className='form-control' value={providerbod} onChange={(e) => setProviderbod(e.target.value)} placeholder='Provider B.O.D' />
+                                                            <input type='date' required className='form-control' value={providerbod} onChange={(e) => setProviderbod(e.target.value)} placeholder='Provider B.O.D' />
                                                             <label htmlFor="floatingTextarea">Provider B.O.D.</label>
                                                         </div>
                                                     </div>
@@ -568,7 +568,7 @@ const Addprovider = () => {
                                                     <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Provider Address <span className='text-red'>*</span></label>
                                                     <div className='col-sm-9 col-lg-10'>
                                                         <div className='me-3 form-floating'>
-                                                            <input type='text' className='form-control' value={provideraddress} onChange={(e) => setProvideraddress(e.target.value)} placeholder='Provider Address' />
+                                                            <input type='text' required className='form-control' value={provideraddress} onChange={(e) => setProvideraddress(e.target.value)} placeholder='Provider Address' />
                                                             <label htmlFor="floatingTextarea">Provider Address</label>
                                                         </div>
                                                     </div>
@@ -589,7 +589,7 @@ const Addprovider = () => {
                                                         <div className='row mt-5 mb-5'>
                                                             <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Type <span className='text-red'>*</span></label>
                                                             <div className='col-sm-9 col-lg-10'>
-                                                                <select class="form-select" aria-label="Default select example" value={bussinesstype} onChange={(e) => setBussinesstype(e.target.value)}>
+                                                                <select class="form-select" required aria-label="Default select example" value={bussinesstype} onChange={(e) => setBussinesstype(e.target.value)}>
                                                                     <option selected>---- Select Business Type ----</option>
                                                                     {
                                                                         bussinessType && bussinessType.map((item, i) => {
@@ -606,7 +606,7 @@ const Addprovider = () => {
                                                         <div className='row mt-5 mb-5'>
                                                             <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Formation <span className='text-red'>*</span></label>
                                                             <div className='col-sm-9 col-lg-10'>
-                                                                <select class="form-select" aria-label="Default select example" value={bussinessformation} onChange={(e) => setBussinessformation(e.target.value)}>
+                                                                <select class="form-select" required aria-label="Default select example" value={bussinessformation} onChange={(e) => setBussinessformation(e.target.value)}>
                                                                     <option selected>---- Select Business Formation ----</option>
                                                                     {
                                                                         bussinessFormation && bussinessFormation.map((item, i) => {
@@ -623,7 +623,7 @@ const Addprovider = () => {
                                                         <div className='row mt-5 mb-5'>
                                                             <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Category <span className='text-red'>*</span></label>
                                                             <div className='col-sm-9 col-lg-10'>
-                                                                <select class="form-select" aria-label="Default select example" value={bcatid} onChange={(e) => setBcatid(e.target.value)} onClick={handleSecondSelectChange}>
+                                                                <select class="form-select" required aria-label="Default select example" value={bcatid} onChange={(e) => setBcatid(e.target.value)} onClick={handleSecondSelectChange}>
                                                                     <option selected>---- Select Category ----</option>
                                                                     {
                                                                         bcategory && bcategory.map((item, i) => {
@@ -640,7 +640,7 @@ const Addprovider = () => {
                                                         <div className='row mt-5 mb-5'>
                                                             <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Subcategory <span className='text-red'>*</span></label>
                                                             <div className='col-sm-9 col-lg-10'>
-                                                                <select class="form-select" aria-label="Default select example" multiple value={sbcatid} onChange={(e) => setSbcatid(Array.from(e.target.selectedOptions, option => option.value))} onClick={handleSecondSelectProduct}>
+                                                                <select class="form-select" required aria-label="Default select example" multiple value={sbcatid} onChange={(e) => setSbcatid(Array.from(e.target.selectedOptions, option => option.value))} onClick={handleSecondSelectProduct}>
                                                                     {/* <option selected>---- Select Subcategory ----</option> */}
                                                                     {bsubcategorys &&
                                                                         bsubcategorys.map((item, i) => (
@@ -735,7 +735,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Name <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
-                                                                        <input type='text' className='form-control' value={bussinessname} onChange={(e) => setBussinessname(e.target.value)} placeholder='Business Name' />
+                                                                        <input type='text' required className='form-control' value={bussinessname} onChange={(e) => setBussinessname(e.target.value)} placeholder='Business Name' />
                                                                         <label htmlFor="floatingTextarea">Business Name</label>
                                                                     </div>
                                                                 </div>
@@ -744,7 +744,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Numbar <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
-                                                                        <input type='number' className='form-control' value={bussinessnumber} onChange={(e) => setBussinessnumber(e.target.value)} placeholder='Business Numbar' />
+                                                                        <input type='number' required className='form-control' value={bussinessnumber} onChange={(e) => setBussinessnumber(e.target.value)} placeholder='Business Numbar' />
                                                                         <label htmlFor="floatingTextarea">Business Number</label>
                                                                     </div>
                                                                 </div>
@@ -753,13 +753,13 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Email ID <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
-                                                                        <input type='text' className='form-control' value={bussinessemailid} onChange={(e) => setBussinessemailid(e.target.value)} placeholder='Business Email ID' />
+                                                                        <input type='email' required className='form-control' value={bussinessemailid} onChange={(e) => setBussinessemailid(e.target.value)} placeholder='Business Email ID' />
                                                                         <label htmlFor="floatingTextarea">Business Email ID</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div className='row mb-5'>
-                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Website Url <span className='text-red'>*</span></label>
+                                                                <label className='col-sm-3  col-lg-2 col-form-lable fw-bold'>Business Website Url <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
                                                                         <input type='text' className='form-control' value={bussinesswebsiteurl} onChange={(e) => setBussinesswebsiteurl(e.target.value)} placeholder='Business Website Url' />
@@ -798,7 +798,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Details <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
-                                                                        <input type='text' className='form-control' value={bussinessdetails} onChange={(e) => setBussinessdetails(e.target.value)} placeholder='Business Details' />
+                                                                        <input type='text' required className='form-control' value={bussinessdetails} onChange={(e) => setBussinessdetails(e.target.value)} placeholder='Business Details' />
                                                                         <label htmlFor="floatingTextarea">Business Details</label>
                                                                     </div>
                                                                 </div>
@@ -815,7 +815,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Address <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
-                                                                        <input type='text' className='form-control' value={bussinessaddress} onChange={(e) => setBussinessaddress(e.target.value)} placeholder='Business Address' />
+                                                                        <input type='text' required className='form-control' value={bussinessaddress} onChange={(e) => setBussinessaddress(e.target.value)} placeholder='Business Address' />
                                                                         <label htmlFor="floatingTextarea">Business Address</label>
                                                                     </div>
                                                                 </div>
@@ -914,7 +914,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Sales Person Number </label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
-                                                                        <input type='text' className='form-control' value={salespersonnumber} onChange={(e) => setSalespersonnumber(e.target.value)} placeholder='Sales Person Number' />
+                                                                        <input type='number' className='form-control' value={salespersonnumber} onChange={(e) => setSalespersonnumber(e.target.value)} placeholder='Sales Person Number' />
                                                                         <label htmlFor="floatingTextarea">Sales Person Number</label>
                                                                     </div>
                                                                 </div>
@@ -923,7 +923,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Sales Person Email ID </label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
-                                                                        <input type='text' className='form-control' value={salespersonemailid} onChange={(e) => setSalespersonemailid(e.target.value)} placeholder='Sales Person Email ID' />
+                                                                        <input type='email' className='form-control' value={salespersonemailid} onChange={(e) => setSalespersonemailid(e.target.value)} placeholder='Sales Person Email ID' />
                                                                         <label htmlFor="floatingTextarea">Sales Person Email ID</label>
                                                                     </div>
                                                                 </div>
@@ -962,7 +962,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Bank Name <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
-                                                                        <input type='text' className='form-control' value={bankname} onChange={(e) => setBankname(e.target.value)} placeholder='Bank Name' />
+                                                                        <input type='text' required className='form-control' value={bankname} onChange={(e) => setBankname(e.target.value)} placeholder='Bank Name' />
                                                                         <label htmlFor="floatingTextarea">Bank Name</label>
                                                                     </div>
                                                                 </div>
@@ -971,7 +971,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Bank Account Number <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
-                                                                        <input type='text' className='form-control' value={bankaccountnumber} onChange={(e) => setBankaccountnumber(e.target.value)} placeholder='Banck Account Number' />
+                                                                        <input type='number' required className='form-control' value={bankaccountnumber} onChange={(e) => setBankaccountnumber(e.target.value)} placeholder='Banck Account Number' />
                                                                         <label htmlFor="floatingTextarea">Banck Account Number</label>
                                                                     </div>
                                                                 </div>
@@ -980,7 +980,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Bank IFSC Code <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
-                                                                        <input type='text' className='form-control' value={bankifsccode} onChange={(e) => setBankifsccode(e.target.value)} placeholder='Bank IFSC Code' />
+                                                                        <input type='text' required className='form-control' value={bankifsccode} onChange={(e) => setBankifsccode(e.target.value)} placeholder='Bank IFSC Code' />
                                                                         <label htmlFor="floatingTextarea">Bank IFSC Code</label>
                                                                     </div>
                                                                 </div>
@@ -989,7 +989,7 @@ const Addprovider = () => {
                                                                 <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Bank Branch Name <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
-                                                                        <input type='text' className='form-control' value={bankbranchname} onChange={(e) => setBankbranchname(e.target.value)} placeholder='Bank Branch Name' />
+                                                                        <input type='text' required className='form-control' value={bankbranchname} onChange={(e) => setBankbranchname(e.target.value)} placeholder='Bank Branch Name' />
                                                                         <label htmlFor="floatingTextarea">Bank Branch Name</label>
                                                                     </div>
                                                                 </div>

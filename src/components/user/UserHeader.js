@@ -31,7 +31,7 @@ const UserHeader = () => {
 
             <header id="header" className="header fixed-top d-flex align-items-center">
                 <div className="d-flex align-items-center justify-content-between">
-                    <a href="/" className="logo d-flex align-items-center">
+                    <a href="/member" className="logo d-flex align-items-center">
                         <img src="/assets/img/Logos.png" alt="Logos" />
                     </a>
                     <i className="bi bi-list toggle-sidebar-btn d-lg-none " onClick={toggleSidebar}></i>
@@ -122,7 +122,7 @@ const UserHeader = () => {
                     </li>
 
                     <li className="nav-item">
-                        <a className="nav-link collapsed" href="/">
+                        <a className="nav-link collapsed" href="/member">
                             <i className="bi bi-menu-button-wide" /><span>All Services</span>
                         </a>
                     </li>

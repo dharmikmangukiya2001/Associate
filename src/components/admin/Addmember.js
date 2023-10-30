@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Addmember = () => {
-
+    const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');

@@ -27,10 +27,10 @@ const Provider_Header = () => {
 
     const [provider, setProvider] = useState([])
 
-    const token = localStorage.getItem("providertoken");
+    const providertoken = localStorage.getItem("providertoken");
     // console.log("token: ", token);
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/provider/home`, { headers: { token } }).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/provider/home`, { headers: { providertoken } }).then(function (response) {
             // handle success
             setProvider(response.data.providerdata)
             // console.log(response.data,"provider:::");
@@ -188,13 +188,13 @@ const Provider_Header = () => {
                         <li className="nav-item dropdown pe-3">
                             <a className="nav-link nav-profile d-flex align-items-center pe-0" href="" data-bs-toggle="dropdown">
                                 {/* <img src="../assets/img/profile-img.jpg" alt="Profile" className="rounded-circle" /> */}
-                                {/* <img className="rounded-circle" src={provider.profile} height={50} /> */}
-                                {/* <span className="d-none d-md-block dropdown-toggle ps-2">{provider.Bname}</span> */}
+                                <img className="rounded-circle" src={provider.profile} height={50} />
+                                <span className="d-none d-md-block dropdown-toggle ps-2">{provider.Bname}</span>
                             </a>{/* End Profile Iamge Icon */}
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li className="dropdown-header">
-                                    {/* <h6>{provider.Bname}</h6> */}
-                                    {/* <span>{provider.Bemail }</span> */}
+                                    <h6>{provider.Bname}</h6>
+                                    <span>{provider.Bemail }</span>
                                 </li>
                                 <li>
                                     <hr className="dropdown-divider" />

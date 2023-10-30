@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Provider_Login = () => {
+const Provider_Login = ({ onLogin }) => {
 
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
@@ -15,9 +15,6 @@ const Provider_Login = () => {
             email : email,
             number : password
         }
-        // console.log("EMAIL:", email, "PASSWORD:", password);
-        setEmail(email);
-        setPassword(password);
 
         axios.post(`${process.env.REACT_APP_URL}/provider/login`, providerdetails)
         .then(function(response){
@@ -25,8 +22,10 @@ const Provider_Login = () => {
             const providertoken =response.data.providertoken;
             localStorage.setItem('providertoken', providertoken);
             // console.log(response.data,"Successfully logged in");
-            nevigate('/provider_dashboard')
-
+            onLogin();
+            if (providertoken) {// console.log('tokenn::', token);
+                nevigate('/provider_dashboard')
+                }
         })
         .catch(function (error) {
             console.log(error);

@@ -11,7 +11,9 @@ import Addprovider from './components/admin/Addprovider';
 import Showprovider from './components/admin/Showprovider';
 import Providerdetails from './components/admin/Providerdetails';
 import Addmember from './components/admin/Addmember';
+import Allorder from './components/admin/Allorder';
 import { Route, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import Provider_Login from './components/provider/Provider_Login';
 import Provider_Dashboard from './components/provider/Provider_Dashboard';
@@ -25,60 +27,125 @@ import UserProviderDetails from './components/user/UserProviderDetails';
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    localStorage.setItem('isLoggedIn', 'true');
-  };
+  // admin Login Security Start
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem('isLoggedIn');
+  const [isLoggedInAdmin, setIsLoggedInAdmin] = useState(false);
+
+  const adminhandleLogin = () => {
+    setIsLoggedInAdmin(true);
+    localStorage.setItem('isLoggedInAdmin', 'true');
+    console.log('User logged in.');
   };
+  
+  const adminhandleLogout = () => {
+    setIsLoggedInAdmin(false);
+    localStorage.removeItem('isLoggedInAdmin');
+    console.log('User logged out.');
+  };
+  
 
   useEffect(() => {
-    try {
-      const savedLoginStatus = localStorage.getItem('isLoggedIn');
+
+      const savedLoginStatus = localStorage.getItem('isLoggedInAdmin');
       if (savedLoginStatus === 'true') {
-        setIsLoggedIn(true);
+        setIsLoggedInAdmin(true);
       } else {
-        setIsLoggedIn(false);
+        setIsLoggedInAdmin(false);
       }
-
-      const adminControl = JSON.parse(localStorage.getItem('admincontrol'));
-      // console.log('admincontrol:', adminControl);
-    } catch (error) {
-      console.error('Error while handling local storage:', error);
-    }
+      
+   
   }, []);
-
-  // console.log('isLoggedIn:', isLoggedIn);
-
+  // admin Login Security End
 
 
+  // Provider Login Security Start
+
+  const [isLoggedInProvider, setIsLoggedInProvider] = useState(false);
+
+  const ProviderhandleLogin = () => {
+    setIsLoggedInProvider(true);
+    localStorage.setItem('isLoggedInProvider', 'true');
+    console.log('User logged in.');
+  };
+  
+  const ProviderhandleLogout = () => {
+    setIsLoggedInProvider(false);
+    localStorage.removeItem('isLoggedInProvider');
+    console.log('User logged out.');
+  };
+  
+
+  useEffect(() => {
+
+      const savedLoginStatus = localStorage.getItem('isLoggedInProvider');
+      if (savedLoginStatus === 'true') {
+        setIsLoggedInProvider(true);
+      } else {
+        setIsLoggedInProvider(false);
+      }
+      
+   
+  }, []);
+  // Provider Login Security End
+
+
+
+  // Member Login Security Start
+
+  const [isLoggedInMember, setIsLoggedInMember] = useState(false);
+
+  const MemberhandleLogin = () => {
+    setIsLoggedInMember(true);
+    localStorage.setItem('isLoggedInMember', 'true');
+    console.log('User logged in.');
+  };
+  
+  const MemberhandleLogout = () => {
+    setIsLoggedInMember(false);
+    localStorage.removeItem('isLoggedInMember');
+    console.log('User logged out.');
+  };
+  
+
+  useEffect(() => {
+
+      const savedLoginStatus = localStorage.getItem('isLoggedInMember');
+      if (savedLoginStatus === 'true') {
+        setIsLoggedInMember(true);
+      } else {
+        setIsLoggedInMember(false);
+      }
+      
+   
+  }, []);
+  // Member Login Security End
+  
+  
+  
   return (
     <>
 
       <Routes>
 
-
+        
 
 
 
         <Route path="*" element={<Error/>} />
         {/* ADMIN SITE START */}
-        <Route path="/admin" element={<Login />}/>
-        <Route path="/admin_home"element={<Home />}/>
-        <Route path="/admin_addservice" element={<Addservice/>} />
-        <Route path="/admin_showservices" element={<Showservices/>} />
-        {/* <Route path="/admin_servicesdetails/:id" element={isLoggedIn ? <Servicedetails onLogout={handleLogout} /> : <Navigate to="/admin"/>} /> */}
+        <Route path="/admin" element={!isLoggedInAdmin ? <Login onLogin={adminhandleLogin} onLogout={adminhandleLogout} /> : <Navigate to="/admin_home" />} />
+        <Route path="/admin_home" element={isLoggedInAdmin ? <Home onLogout={adminhandleLogout} /> : <Navigate to="/admin" />} />
+        <Route path="/admin_addservice" element={isLoggedInAdmin ? <Addservice onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
+        <Route path="/admin_showservices" element={isLoggedInAdmin ? <Showservices onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
+        {/* <Route path="/admin_servicesdetails/:id" element={isLoggedInAdmin ? <Servicedetails onLogout={adminhandleLogout} /> : <Navigate to="/admin"/>} /> */}
 
-        <Route path="/admin_addprovider" element={<Addprovider/>} />
-        <Route path="/admin_showproviders" element={<Showprovider/>} />
-        <Route path="/admin_providerdetails/:id" element={<Providerdetails/>} />
+        <Route path="/admin_addprovider" element={isLoggedInAdmin ? <Addprovider onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
+        <Route path="/admin_showproviders" element={isLoggedInAdmin ? <Showprovider onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
+        <Route path="/admin_providerdetails/:id" element={isLoggedInAdmin ? <Providerdetails onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
 
-        <Route path='/admin_addmember' element={<Addmember/>} />
+        <Route path='/admin_addmember' element={isLoggedInAdmin ?< Addmember onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
+        <Route path='/admin_allorder' element={isLoggedInAdmin ?< Allorder onLogout={adminhandleLogout}/>:<Navigate to="/admin"/> }/>
         {/* ADMIN SITE END */}
 
 
@@ -86,9 +153,9 @@ function App() {
 
 
         {/* PROVIDER SITE START */}
-        <Route path="/provider" element={<Provider_Login />} />
-        <Route path="/provider_dashboard" element={<Provider_Dashboard />} />
-        <Route path="/provider_addservice" element={<AddService/>} />
+        <Route path="/provider" element={!isLoggedInProvider ? <Provider_Login onLogin={ProviderhandleLogin} />:<Navigate to="/provider_dashboard"/>} />
+        <Route path="/provider_dashboard" element={isLoggedInProvider ? <Provider_Dashboard  onLogin={ProviderhandleLogout} />:<Navigate to="/provider"/>} />
+        <Route path="/provider_addservice" element={isLoggedInProvider ? <AddService onLogin={ProviderhandleLogout} />:<Navigate to="/provider"/>} />
         {/* PROVIDER SITE END */}
 
 
@@ -98,10 +165,10 @@ function App() {
 
 
         {/* PROVIDER SITE START */}
-        <Route path="/member" element={<User />} />
-        <Route path="/" element={<UserLogin/>} />
-        <Route path="/member_addask" element={<ServiceFrom />} />
-        <Route path='/member_provider_details/:id' element={<UserProviderDetails />} />
+        <Route path="/" element={!isLoggedInMember ? <UserLogin onLogin={MemberhandleLogin} />:<Navigate to="/member"/>} />
+        <Route path="/member" element={isLoggedInMember ? <User onLogin={MemberhandleLogout} />:<Navigate to="/"/>} />
+        <Route path="/member_addask" element={isLoggedInMember ? <ServiceFrom onLogin={MemberhandleLogout} />:<Navigate to="/"/>} />
+        <Route path='/member_provider_details/:id' element={isLoggedInMember ? <UserProviderDetails onLogin={MemberhandleLogout} />:<Navigate to="/"/>} />
         {/* PROVIDER SITE END */}
 
 

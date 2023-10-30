@@ -5,34 +5,30 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
-const UserLogin = () => {
+const UserLogin = ({ onLogin }) => {
+
+
   const [email,setEmail]= useState('')
   const [number,setNumber]= useState('')
   const nevigate = useNavigate();
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const userdetail = {
         email: email,
         number: number
     }
-    setEmail(email);
-    setNumber(number);
-
-    // data get karavava mate
+  
     axios.post(`${process.env.REACT_APP_URL}/user/login`, userdetail)
     .then(function (response) {
         // handle success
         const usertoken = response.data.usertoken;
         localStorage.setItem('usertoken', usertoken);
-        console.log(response.data, "Successfully logged in");
+        // console.log(response.data, "Successfully logged in");
         // console.log('tokenn::', token);
-        // onLogin();
+        onLogin();
         if(usertoken){
           nevigate('/member')
-       }
-       else{
-        localStorage.removeItem('isLoggedIn');
-        nevigate('/')
        }
     })
         .catch(function (error) {

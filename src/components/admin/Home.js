@@ -8,19 +8,19 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 
-    // loader
-    const [isLoading, setIsLoading] = useState(true)
-    useEffect(() => {
-        const showTime = 5000;
+    // // loader
+    // const [isLoading, setIsLoading] = useState(true)
+    // useEffect(() => {
+    //     const showTime = 5000;
 
-        function hideLoader() {
-            setIsLoading(false);
-        }
+    //     function hideLoader() {
+    //         setIsLoading(false);
+    //     }
 
-        const timer = setTimeout(hideLoader, showTime);
+    //     const timer = setTimeout(hideLoader, showTime);
 
-        return () => clearTimeout(timer);
-    }, []);
+    //     return () => clearTimeout(timer);
+    // }, []);
 
     
     // LOGOUT
@@ -29,8 +29,7 @@ const Home = () => {
 
     return (
         <>
-            {
-                isLoading ? (<><Loader /></>) : (<>
+            
                     <Header />
 
 
@@ -395,8 +394,7 @@ const Home = () => {
                     </div>
                 </footer>{/* End Footer */}
                     </div>
-                </>)
-            }
+                
 
 
 

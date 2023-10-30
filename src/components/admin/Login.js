@@ -6,7 +6,6 @@ const Login = ({ onLogin }) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [users, setUsers] = useState([])
     const nevigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -15,25 +14,20 @@ const Login = ({ onLogin }) => {
             email: email,
             password: password
         }
-        setEmail(email);
-        setPassword(password);
 
         // data get karavava mate
         axios.post(`${process.env.REACT_APP_URL}/admin/login`, userdetail)
             .then(function (response) {
                 // handle success
+                console.log(response.data, "Successfully logged in");
                 const token = response.data.token;
                 localStorage.setItem('token', token);
-                console.log(response.data, "Successfully logged in");
-                // console.log('tokenn::', token);
-                // onLogin();
-                if (response.data.token) {
+                onLogin();
+                if (token) {// console.log('tokenn::', token);
                     nevigate('/admin_home')
                 }
-                else {
-                    localStorage.removeItem('isLoggedIn');
-                    navigator('/admin')
-                }
+                // window.location.reload();
+
             })
             .catch(function (error) {
                 // handle error

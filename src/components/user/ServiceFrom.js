@@ -1,17 +1,42 @@
 import React, { useEffect, useState } from "react";
 import UserHeader from "./UserHeader";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 const ServiceFrom = () => {
 
+    const nevigate = useNavigate();
     const [description, setDescription] = useState('')
     const [customername, setCustomername] = useState('');
     const [customernumber, setCustomernumber] = useState('');
     const [selectedValue, setSelectedValue] = useState('');
 
+
+    // Select Bussiness Category START
+    const [bcategory, setBcategory] = useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`).then(function (response) {
+            // handle success
+
+            // console.log(response.data, "Show_bcategory");
+            setBcategory(response.data.bcategory);
+            // console.log("Bussiness Category:::", bussinesscategory);
+
+
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
+    // Select Bussiness Category END
+
+
+
+
+
     // SELECT OPTION FOR SHOW DIV DATA
     const [bcatid, setBcatid] = useState('')
-    const [sbcatid, setSbcatid] = useState([])
+    const [sbcatid, setSbcatid] = useState()
     const [bsubcategorys, setBsubcategorys] = useState('')
 
     const handleSecondSelectChange = (e) => {
@@ -20,7 +45,7 @@ const ServiceFrom = () => {
         if (bcatid) {
             axios.post(`${process.env.REACT_APP_URL}/admin/subcatdata`, { bcatid: bcatid }).then(function (response) {
                 // hendle success
-                //    console.log(response.data);
+                //    console.log(response.data,"subcatdata");
                 const sub = response.data.bsubcategorys
                 setBsubcategorys(sub);
 
@@ -40,16 +65,16 @@ const ServiceFrom = () => {
 
 
     // SELECT OPTION FOR SHOW DIV DATA
-    const [productValue, setProductValue] = useState([])
+    const [productValue, setProductValue] = useState('')
     const [productService, setProductService] = useState('')
 
     const handleSecondSelectProduct = (e) => {
 
         // console.log(bcatid,"dfsdfdsf");
         if (sbcatid) {
-            axios.post(`${process.env.REACT_APP_URL}/admin/showproduct`, sbcatid).then(function (response) {
+            axios.post(`${process.env.REACT_APP_URL}/admin/productid`, sbcatid).then(function (response) {
                 // hendle success
-                // console.log(response.data);
+                console.log(response.data, "showproduct");
                 const pro = response.data.productService
                 setProductService(pro);
 
@@ -67,24 +92,7 @@ const ServiceFrom = () => {
 
 
 
-    // Select Bussiness Category START
-    const [bcategory, setBcategory] = useState([])
-    useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`).then(function (response) {
-            // handle success
 
-            // console.log(response.data, "ddd");
-            setBcategory(response.data.bcategory);
-            // console.log("Bussiness Category:::", bussinesscategory);
-
-
-        })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-    }, [])
-    // Select Bussiness Category END
 
 
     const [selectedSelesOption, setSelectedSelesOption] = useState(false);
@@ -102,36 +110,36 @@ const ServiceFrom = () => {
 
 
     const askdata = {
-        productid:sbcatid,
+        productid: productValue,
         description,
-        otherName:customername,
-        otherNumber:customernumber,
+        otherName: customername,
+        otherNumber: customernumber,
         selectedValue
-       
-    }
 
+    }
+    console.log(askdata);
     const handleRadioChange = (e) => {
         setSelectedValue(e.target.value);
     };
 
 
-    const usertoken =localStorage.getItem('usertoken')
+    const usertoken = localStorage.getItem('usertoken')
     // console.log(usertoken);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        
+
+
         try {
             axios.post(`${process.env.REACT_APP_URL}/user/userform`, askdata, {
                 headers: {
                     'usertoken': usertoken,
                 }
             })
-            .then((response) => {
-                    console.log(response.data,"sdsdsd");
+                .then((response) => {
+                    console.log(response.data, "sdsdsd");
                     // console.log(data,"dsd");
-                    // nevigate('/admin_showproviders')
+                    nevigate('/member')
                 })
                 .catch((error) => {
                     console.error(error);
@@ -194,14 +202,14 @@ const ServiceFrom = () => {
                                                         </div>
                                                     </div>
                                                     <div className='row mt-5 mb-5'>
-                                                        <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Subcategory <span className='text-red'>*</span></label>
+                                                        <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Product and Service <span className='text-red'>*</span></label>
                                                         <div className='col-sm-9 col-lg-10'>
                                                             <select class="form-select" aria-label="Default select example" value={productValue} onChange={(e) => setProductValue(Array.from(e.target.selectedOptions, option => option.value))}>
                                                                 <option selected> Select Subcategory </option>
                                                                 {productService &&
                                                                     productService.map((item, i) => (
                                                                         <option value={item._id} key={i}>
-                                                                            {item}
+                                                                            {item.product}
                                                                         </option>
                                                                     ))}
                                                             </select>
@@ -227,7 +235,7 @@ const ServiceFrom = () => {
                                                                     onChange={handleRadioChange}
                                                                     onClick={handleAdd0}
                                                                 />
-                                                               &nbsp; Your Self
+                                                                &nbsp; Your Self
                                                             </label>
                                                             <label>
                                                                 <input
@@ -237,7 +245,7 @@ const ServiceFrom = () => {
                                                                     onChange={handleRadioChange}
                                                                     onClick={handleAdd}
                                                                 />
-                                                               &nbsp; Other Person
+                                                                &nbsp; Other Person
                                                             </label>
 
 
