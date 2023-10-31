@@ -33,7 +33,7 @@ const User = () => {
 
 
 
-
+    const usertoken = localStorage.getItem('usertoken')
 
     const [seletedOption, setSeletedOption] = useState(false);
     const handleAdd = (e) => {
@@ -47,7 +47,7 @@ const User = () => {
     const [search, setSearch] = useState('');
     const handleSearch = (e) => {
 
-        axios.post(`${process.env.REACT_APP_URL}/user/search`, { search })
+        axios.post(`${process.env.REACT_APP_URL}/user/search`, { search },{headers: {'usertoken': usertoken}})
             .then(response => {
                 setSearchData(response.data);
                 // console.log("Search::", response.data);

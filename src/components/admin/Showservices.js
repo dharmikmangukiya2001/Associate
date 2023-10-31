@@ -7,10 +7,10 @@ const Showservices = () => {
 
     // Service Types
     const [bussinessType, setServicetype] = useState([])
-    // const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     // console.log("token: ", token);
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/show_btype`).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_btype`,{headers: {'token': token}}).then(function (response) {
             // handle success
             
             // console.log(response.data,"ddd");
@@ -29,7 +29,7 @@ const Showservices = () => {
     // Bussiness Formation
     const [bussinessFormation, setBussinessformation] = useState([])
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/show_bformation`).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_bformation`,{headers: {'token': token}}).then(function (response) {
             // handle success
             
             // console.log(response.data,"ddd");
@@ -48,7 +48,7 @@ const Showservices = () => {
     // Bussiness category
     const [bcategory, setBcategory] = useState([])
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`,{headers: {'token': token}}).then(function (response) {
             // handle success
             
             // console.log(response.data,"ddd");

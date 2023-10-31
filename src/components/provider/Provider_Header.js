@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../../App.css'
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Provider_Header = () => {
 
@@ -42,6 +43,23 @@ const Provider_Header = () => {
                 console.log(error);
             })
     }, [])
+
+
+
+    const nevigate = useNavigate();
+    const handleLogout = () => {
+        axios.get(`${process.env.REACT_APP_URL}/provider/logout`).then(function (response) {
+            localStorage.removeItem('providertoken');
+            localStorage.removeItem('isLoggedInProvider');
+            nevigate('/provider');
+            window.location.reload();
+        })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+
     return (
         <>
 
@@ -227,7 +245,7 @@ const Provider_Header = () => {
                                     <hr className="dropdown-divider" />
                                 </li>
                                 <li>
-                                    <a className="dropdown-item d-flex align-items-center" href="">
+                                    <a className="dropdown-item d-flex align-items-center" onClick={handleLogout} href="">
                                         <i className="bi bi-box-arrow-right" />
                                         <span>Sign Out</span>
                                     </a>

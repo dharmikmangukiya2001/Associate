@@ -22,13 +22,17 @@ const UserLogin = ({ onLogin }) => {
     axios.post(`${process.env.REACT_APP_URL}/user/login`, userdetail)
     .then(function (response) {
         // handle success
+        console.log(response.data, "Member");
         const usertoken = response.data.usertoken;
         localStorage.setItem('usertoken', usertoken);
-        // console.log(response.data, "Successfully logged in");
-        // console.log('tokenn::', token);
-        onLogin();
+        // console.log('tokenn::', usertoken);
         if(usertoken){
+          onLogin();
           nevigate('/member')
+        }
+        else{
+          nevigate('/')
+
        }
     })
         .catch(function (error) {

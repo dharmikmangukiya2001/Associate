@@ -12,7 +12,7 @@ const Showprovider = () => {
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/showproviders`).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/showproviders`,{headers: {'token': token}}).then(function (response) {
             // handle success
             // console.log(response.data);
             setProviders(response.data.providers);

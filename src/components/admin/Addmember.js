@@ -12,6 +12,7 @@ const Addmember = () => {
     const [date, setDate] = useState('');
     const [occupation, setOccupation] = useState('');
     const [reference, setReference] = useState('');
+    const [referencenumber,setReferencenumber]= useState('')
     const [address, setAddress] = useState('');
     const userdata = {
         name: name,
@@ -20,7 +21,8 @@ const Addmember = () => {
         DOB: date,
         address: address,
         occupation: occupation,
-        reference: reference
+        reference: reference,
+        ref_no:referencenumber
     }
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,16 +30,12 @@ const Addmember = () => {
 
 
         try {
-            axios.post(`${process.env.REACT_APP_URL}/admin/adduser`, userdata, {
-                headers: {
-                    'token': token,
-                }
-            })
+            axios.post(`${process.env.REACT_APP_URL}/admin/adduser`, userdata, {headers: {'token': token}})
                 .then(response => {
                     if (response) {
                         // Handle the response data if needed
                         const memberdtails = response.data;
-                        console.log("member data :::", memberdtails);
+                        // console.log("member data :::", memberdtails);
                         // console.log(token);
                         setName('')
                         setEmail('')
@@ -46,8 +44,9 @@ const Addmember = () => {
                         setAddress('')
                         setOccupation('')
                         setReference('')
+                        setReferencenumber('')
                         // console.log('jasd', data);
-                        // nevigate('/admin_showservices')
+                        navigate('/admin_allmember')
                     } else {
                         console.log("Error datas");
                     }
@@ -149,6 +148,16 @@ const Addmember = () => {
                                                             <div className="form-floating mb-3">
                                                                 <input type="text" className="form-control" id="floatingInput" value={reference} onChange={(e) => setReference(e.target.value)} placeholder="User Reference By" />
                                                                 <label htmlFor="floatingInput">Member Reference By</label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div className="row mb-3">
+                                                        <label className="col-sm-2 col-form-label fw-bold">Reference Mobile No. :</label>
+                                                        <div className="col-sm-10">
+                                                            <div className="form-floating mb-3">
+                                                                <input type="number" className="form-control" id="floatingInput" value={referencenumber} onChange={(e) => setReferencenumber(e.target.value)} placeholder="User Reference By" />
+                                                                <label htmlFor="floatingInput">Reference Mobile No.</label>
                                                             </div>
 
                                                         </div>

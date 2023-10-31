@@ -9,15 +9,16 @@ const ServiceFrom = () => {
     const [customername, setCustomername] = useState('');
     const [customernumber, setCustomernumber] = useState('');
     const [selectedValue, setSelectedValue] = useState('');
-
+    const token = localStorage.getItem('token')
+    const usertoken = localStorage.getItem('usertoken')
 
     // Select Bussiness Category START
     const [bcategory, setBcategory] = useState([])
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`,{headers: {'token': token}}).then(function (response) {
             // handle success
 
-            // console.log(response.data, "Show_bcategory");
+            console.log(response.data, "Show_bcategory");
             setBcategory(response.data.bcategory);
             // console.log("Bussiness Category:::", bussinesscategory);
 
@@ -43,7 +44,7 @@ const ServiceFrom = () => {
 
         // console.log(bcatid,"dfsdfdsf");
         if (bcatid) {
-            axios.post(`${process.env.REACT_APP_URL}/admin/subcatdata`, { bcatid: bcatid }).then(function (response) {
+            axios.post(`${process.env.REACT_APP_URL}/admin/subcatdata`, { bcatid: bcatid },{headers: {'token': token}}).then(function (response) {
                 // hendle success
                 //    console.log(response.data,"subcatdata");
                 const sub = response.data.bsubcategorys
@@ -72,7 +73,7 @@ const ServiceFrom = () => {
 
         // console.log(bcatid,"dfsdfdsf");
         if (sbcatid) {
-            axios.post(`${process.env.REACT_APP_URL}/admin/productid`, sbcatid).then(function (response) {
+            axios.post(`${process.env.REACT_APP_URL}/admin/productid`, sbcatid,{headers: {'token': token}}).then(function (response) {
                 // hendle success
                 console.log(response.data, "showproduct");
                 const pro = response.data.productService
@@ -123,7 +124,7 @@ const ServiceFrom = () => {
     };
 
 
-    const usertoken = localStorage.getItem('usertoken')
+  
     // console.log(usertoken);
 
     const handleSubmit = (e) => {

@@ -21,7 +21,7 @@ const Addservice = () => {
         setServicetype(servicetype);
         console.log(servicetype);
 
-        axios.post(`${process.env.REACT_APP_URL}/admin/add_btype`, typedetails)
+        axios.post(`${process.env.REACT_APP_URL}/admin/add_btype`, typedetails,{headers: {'token': token}})
             .then(function (response) {
                 // hendle success
                 console.log(response.data);
@@ -47,7 +47,7 @@ const Addservice = () => {
         setBussinessformation(bussinessformation);
         console.log(bussinessformation);
 
-        axios.post(`${process.env.REACT_APP_URL}/admin/add_bformation`, formationdetails)
+        axios.post(`${process.env.REACT_APP_URL}/admin/add_bformation`, formationdetails,{headers: {'token': token}})
             .then(function (response) {
                 // hendle success
                 console.log(response.data);
@@ -72,7 +72,7 @@ const Addservice = () => {
         setBussinesscategory(bussinesscategory);
         console.log(bussinesscategory);
 
-        axios.post(`${process.env.REACT_APP_URL}/admin/add_bcategory`, categorydetails)
+        axios.post(`${process.env.REACT_APP_URL}/admin/add_bcategory`, categorydetails,{headers: {'token': token}})
             .then(function (response) {
                 // hendle success
                 console.log(response.data);
@@ -89,7 +89,7 @@ const Addservice = () => {
     //Select Bussiness category
     const [bcategory, setBcategory] = useState([])
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`,{headers: {'token': token}}).then(function (response) {
             // handle success
 
             // console.log(response.data, "ddd");
@@ -120,7 +120,7 @@ const Addservice = () => {
 
         console.log("Bussiness Subcategory:::", bussinesssubcategory, "Bussiness Category:::", bcategoryid);
 
-        axios.post(`${process.env.REACT_APP_URL}/admin/add_bsubcategory`, subcategorydetails)
+        axios.post(`${process.env.REACT_APP_URL}/admin/add_bsubcategory`, subcategorydetails,{headers: {'token': token}})
             .then(function (response) {
                 // hendle success
                 console.log(response.data);
@@ -137,7 +137,7 @@ const Addservice = () => {
     //Select Bussiness category
     const [bsubcategory, setBsubcategory] = useState([])
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/show_cat_subcat`).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_cat_subcat`,{headers: {'token': token}}).then(function (response) {
             // handle success
 
             // console.log(response.data, "ddd");
@@ -170,7 +170,7 @@ const Addservice = () => {
 
         console.log("subbcategoryid:::", subbcategoryid, "product:::", product);
 
-        axios.post(`${process.env.REACT_APP_URL}/admin/add_product`, ProductService)
+        axios.post(`${process.env.REACT_APP_URL}/admin/add_product`, ProductService,{headers: {'token': token}})
             .then(function (response) {
                 // hendle success
                 console.log(response.data);

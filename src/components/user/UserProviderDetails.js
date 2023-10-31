@@ -11,9 +11,9 @@ const UserProviderDetails = ()=>{
     const [subcatdata, setSubcatdata] = useState([])
     const id = useParams()
     const providerid = id.id
-    const token = localStorage.getItem("token");
+    const usertoken = localStorage.getItem('usertoken')
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/providerdetails/${providerid}`).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/providerdetails/${providerid}`,{headers: {'usertoken': usertoken}}).then(function (response) {
             // handle success
             console.log(response.data);
             setProviders([response.data.providers]);

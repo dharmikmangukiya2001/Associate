@@ -30,7 +30,7 @@ const Header = () => {
     const token = localStorage.getItem("token");
     // console.log("token: ", token);
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/home`, { headers: { token } }).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/home`, { headers: { 'token': token } }).then(function (response) {
             // handle success
             // console.log(response.data,"admindata:::");
             setAdmins(response.data.admindata)
@@ -47,7 +47,7 @@ const Header = () => {
     const handleLogout = () => {
         axios.get(`${process.env.REACT_APP_URL}/admin/logout`).then(function (response) {
             localStorage.removeItem('token');
-            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('isLoggedInAdmin');
             nevigate('/admin');
             window.location.reload();
         })
@@ -56,8 +56,23 @@ const Header = () => {
             })
     }
 
+
+    const [userForms, setUserForms] = useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/admin/all_userform`, { headers: { 'token': token } }).then(function (response) {
+            // handle success
+            // console.log(response.data);
+            setUserForms(response.data.userForms);
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
+
     return (
         <>
+
             <header id="header" className="header fixed-top d-flex align-items-center">
                 <div className="d-flex align-items-center justify-content-between">
                     <a href="index.html" className="logo d-flex align-items-center">
@@ -81,62 +96,36 @@ const Header = () => {
                         <li className="nav-item dropdown">
                             <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                                 <i className="bi bi-bell" />
-                                <span className="badge bg-primary badge-number">4</span>
+                                {userForms &&
+                                <span className="badge bg-primary badge-number">{userForms.length}</span>
+                            }
                             </a>{/* End Notification Icon */}
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                            {userForms &&
+                                    
+                                    
                                 <li className="dropdown-header">
-                                    You have 4 new notifications
+                                    You have {userForms.length} new notifications
                                     <a href="#"><span className="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                                 </li>
+                                 }
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
-                                <li className="notification-item">
-                                    <i className="bi bi-exclamation-circle text-warning" />
-                                    <div>
-                                        <h4>Lorem Ipsum</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>30 min. ago</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="notification-item">
-                                    <i className="bi bi-x-circle text-danger" />
-                                    <div>
-                                        <h4>Atque rerum nesciunt</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>1 hr. ago</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="notification-item">
-                                    <i className="bi bi-check-circle text-success" />
-                                    <div>
-                                        <h4>Sit rerum fuga</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>2 hrs. ago</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li className="notification-item">
-                                    <i className="bi bi-info-circle text-primary" />
-                                    <div>
-                                        <h4>Dicta reprehenderit</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>4 hrs. ago</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
+                                {userForms &&
+                                    userForms.map((item, i) => (
+                                        <li className="notification-item">
+                                            <i className="bi bi-exclamation-circle text-warning" />
+                                            <div>
+                                                <h4>{item.userid.name}</h4>
+                                                <p>{item.description}</p>
+                                                <p>{item.productid.product}</p>
+                                            </div>
+                                        </li>
+
+                                    ))}
                                 <li className="dropdown-footer">
-                                    <a href="#">Show all notifications</a>
+                                    <a href="/admin_allorder">Show all notifications</a>
                                 </li>
                             </ul>{/* End Notification Dropdown Items */}
                         </li>{/* End Notification Nav */}
@@ -238,7 +227,7 @@ const Header = () => {
                                     <hr className="dropdown-divider" />
                                 </li>
                                 <li>
-                                    <a className="dropdown-item d-flex align-items-center" onClick={handleLogout} href="#">
+                                    <a className="dropdown-item d-flex align-items-center" onClick={handleLogout} href="">
                                         <i className="bi bi-box-arrow-right" />
                                         <span>Sign Out</span>
                                     </a>
@@ -306,7 +295,7 @@ const Header = () => {
                             </li>
                             <li>
                                 <a href="/admin_adduser" class="a-none ps-0" >
-                                    <Link className='a-none' to="/admin_showmember"><i className="bi bi-server fs-5" /><span>Show Member</span></Link>
+                                    <Link className='a-none' to="/admin_allmember"><i className="bi bi-server fs-5" /><span>Show Member</span></Link>
                                 </a>
                             </li>
                             <li>

@@ -1,19 +1,20 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
-import axios from "axios";
-
-const Allorder = () => {
 
 
-    const [userForms, setUserForms] = useState([])
+const AllMember = () => {
+
+
+const [users, setUsers] = useState([])
     const token = localStorage.getItem("token");
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/all_userform`,{headers: {'token': token}}).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/alluser`,{headers: {'token': token}}).then(function (response) {
             // handle success
-            // console.log(response.data);
-            setUserForms(response.data.userForms);
+            // console.log(response.data,"fgdg");
+            setUsers(response.data.users);
         })
             .catch(function (error) {
                 // handle error
@@ -61,69 +62,71 @@ const Allorder = () => {
                                                             <th>Member ID</th>
                                                             <th>Member Name</th>
                                                             <th>Member Number</th>
-                                                            <th>Category</th>
-                                                            <th>Sub Category</th>
-                                                            <th>Product and Service</th>
-                                                            <th>Description</th>
-                                                            <th>Customer Name</th>
-                                                            <th>Customer Number</th>
+                                                            <th>Email ID</th>
+                                                            <th>Address</th>
+                                                            <th>Reference By</th>
+                                                            <th>Reference Number</th>
+                                                            <th>Occupation</th>
+                                                            <th>D.O.B.</th>
+                                                            
                                                             <th>Show</th>
                                                         </tr>
 
                                                         <>
-                                                            {userForms &&
-                                                                userForms.map((item, i) => (
+                                                            {users &&
+                                                                users.map((item, i) => (
                                                                     <tr key={i}>
 
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.userid.ids}
+                                                                                {item.ids}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.userid.name}
+                                                                                {item.name}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.userid.number}
+                                                                                {item.number}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
+                                                                                {item.email}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.productid.bsubcategoryid[0].bussinesssubcategory}
+                                                                                {item.address}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.productid.product}
+                                                                                {item.reference}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.description}
+                                                                                {item.ref_no}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.otherName}
+                                                                                {item.occupation}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.otherNumber}
+                                                                                {item.DOB}
                                                                             </h6>
                                                                         </td>
+                                                                        
                                                                         <td data-th="Net Amount">
-                                                                            {/* <Link to={`/admin_providerdetails/${}`}> */}
-                                                                            <button type="button" className="btn btn-danger btn-sm">Show</button>
-                                                                            {/* </Link> */}
+                                                                           
+                                                                            <button type="button" className="btn btn-danger btn-sm">Delete</button>
+                                                                          
                                                                         </td>
                                                                     </tr>
 
@@ -153,8 +156,12 @@ const Allorder = () => {
             </div >
 
 
-        </>
-    )
+
+</>
+)
+
 
 }
-export default Allorder;
+ 
+
+export default AllMember

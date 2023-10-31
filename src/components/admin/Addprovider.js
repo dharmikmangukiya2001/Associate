@@ -75,7 +75,7 @@ const Addprovider = () => {
 
         // console.log(bcatid,"dfsdfdsf");
         if (bcatid) {
-            axios.post(`${process.env.REACT_APP_URL}/admin/subcatdata`, { bcatid: bcatid }).then(function (response) {
+            axios.post(`${process.env.REACT_APP_URL}/admin/subcatdata`, { bcatid: bcatid },{headers: {'token': token}}).then(function (response) {
                 // hendle success
                 //    console.log(response.data);
                 const sub = response.data.bsubcategorys
@@ -105,7 +105,7 @@ const Addprovider = () => {
 
         // console.log(bcatid,"dfsdfdsf");
         if (sbcatid) {
-            axios.post(`${process.env.REACT_APP_URL}/admin/showproduct`, sbcatid).then(function (response) {
+            axios.post(`${process.env.REACT_APP_URL}/admin/showproduct`, sbcatid,{headers: {'token': token}}).then(function (response) {
                 // hendle success
                 console.log(response.data,":::::");
                 const pro = response.data.productService
@@ -424,7 +424,7 @@ const Addprovider = () => {
     // Select Bussiness Category START
     const [bcategory, setBcategory] = useState([])
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`,{headers: {'token': token}}).then(function (response) {
             // handle success
 
             // console.log(response.data, "ddd");
@@ -445,7 +445,7 @@ const Addprovider = () => {
     // Select Bussiness Types START
     const [bussinessType, setBussinessType] = useState([])
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/show_btype`).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_btype`,{headers: {'token': token}}).then(function (response) {
             // handle success
 
             // console.log(response.data, "ddd");
@@ -467,7 +467,7 @@ const Addprovider = () => {
     // Select Bussiness Formation START
     const [bussinessFormation, setBussinessFormation] = useState([])
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/show_bformation`).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/show_bformation`,{headers: {'token': token}}).then(function (response) {
             // handle success
 
             // console.log(response.data, "ddd");
@@ -670,7 +670,7 @@ const Addprovider = () => {
                                                                 <div className="d-flex flex-wrap">
                                                                     {productService &&
                                                                         productService.map((item, i) => (
-                                                                            <div className="tag-item mx-1 mt-2 btn btn-warning" key={i}>
+                                                                            <div className="tag-item mx-1 mt-2 btn bg-primary-subtle" key={i}>
                                                                                 <span className="text fs-5">{item}</span>
                                                                                 <span onClick={() => handleProductRemoveBrok(item)} className="close fs-4">
                                                                                     &nbsp; &times;
@@ -693,7 +693,7 @@ const Addprovider = () => {
                                                                             value={inputValueBrok}
                                                                             onChange={(e) => handleInputChangeRoom(e)}
                                                                         />
-                                                                        <div type='buttom' onClick={handleAddAmenityBrok} className='rounded text-center fs-4 add-btn btn-primary w-25'>
+                                                                        <div type='buttom' onClick={handleAddAmenityBrok} className='rounded text-center fs-4 ms-3 add-btn bg-primary-subtle w-25'>
                                                                             Add
                                                                         </div>
                                                                     </div>

@@ -6,12 +6,12 @@ import Home from './components/admin/Home';
 import Login from './components/admin/Login'
 import Addservice from './components/admin/Addservice'
 import Showservices from './components/admin/Showservices'
-import Servicedetails from './components/admin/Servicedetails'
 import Addprovider from './components/admin/Addprovider';
 import Showprovider from './components/admin/Showprovider';
 import Providerdetails from './components/admin/Providerdetails';
 import Addmember from './components/admin/Addmember';
 import Allorder from './components/admin/Allorder';
+import AllMember from './components/admin/AllMember';
 import { Route, Routes } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
@@ -24,6 +24,9 @@ import User from './components/user/User';
 import UserLogin from './components/user/UserLogin';
 import ServiceFrom from './components/user/ServiceFrom';
 import UserProviderDetails from './components/user/UserProviderDetails';
+
+
+
 
 function App() {
 
@@ -122,30 +125,26 @@ function App() {
   // Member Login Security End
   
   
-  
   return (
     <>
-
+    
       <Routes>
-
-        
-
 
 
         <Route path="*" element={<Error/>} />
         {/* ADMIN SITE START */}
         <Route path="/admin" element={!isLoggedInAdmin ? <Login onLogin={adminhandleLogin} onLogout={adminhandleLogout} /> : <Navigate to="/admin_home" />} />
-        <Route path="/admin_home" element={isLoggedInAdmin ? <Home onLogout={adminhandleLogout} /> : <Navigate to="/admin" />} />
-        <Route path="/admin_addservice" element={isLoggedInAdmin ? <Addservice onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
-        <Route path="/admin_showservices" element={isLoggedInAdmin ? <Showservices onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
-        {/* <Route path="/admin_servicesdetails/:id" element={isLoggedInAdmin ? <Servicedetails onLogout={adminhandleLogout} /> : <Navigate to="/admin"/>} /> */}
+        <Route path="/admin_home" element={isLoggedInAdmin ? <Home onLogout={adminhandleLogout} /> : <Navigate to="/admin_home" />} />
+        <Route path="/admin_addservice" element={isLoggedInAdmin ? <Addservice onLogout={adminhandleLogout}/>:<Navigate to="/admin_addservice"/>} />
+        <Route path="/admin_showservices" element={isLoggedInAdmin ? <Showservices onLogout={adminhandleLogout}/>:<Navigate to="/admin_showservices"/>} />
 
-        <Route path="/admin_addprovider" element={isLoggedInAdmin ? <Addprovider onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
-        <Route path="/admin_showproviders" element={isLoggedInAdmin ? <Showprovider onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
-        <Route path="/admin_providerdetails/:id" element={isLoggedInAdmin ? <Providerdetails onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
+        <Route path="/admin_addprovider" element={isLoggedInAdmin ? <Addprovider onLogout={adminhandleLogout}/>:<Navigate to="/admin_addprovider"/>} />
+        <Route path="/admin_showproviders" element={isLoggedInAdmin ? <Showprovider onLogout={adminhandleLogout}/>:<Navigate to="/admin_showproviders"/>} />
+        <Route path="/admin_providerdetails/:id" element={isLoggedInAdmin ? <Providerdetails onLogout={adminhandleLogout}/>:<Providerdetails onLogout={adminhandleLogout}/>} />
 
-        <Route path='/admin_addmember' element={isLoggedInAdmin ?< Addmember onLogout={adminhandleLogout}/>:<Navigate to="/admin"/>} />
-        <Route path='/admin_allorder' element={isLoggedInAdmin ?< Allorder onLogout={adminhandleLogout}/>:<Navigate to="/admin"/> }/>
+        <Route path='/admin_addmember' element={isLoggedInAdmin ?< Addmember onLogout={adminhandleLogout}/>:<Navigate to="/admin_addmember"/>} />
+        <Route path='/admin_allorder' element={isLoggedInAdmin ?< Allorder onLogout={adminhandleLogout}/>:<Navigate to="/admin_allorder"/> }/>
+        <Route path="/admin_allmember" element={isLoggedInAdmin ? <AllMember onLogout={adminhandleLogout} /> : <Navigate to="/admin_allmember"/>} />
         {/* ADMIN SITE END */}
 
 
@@ -154,8 +153,8 @@ function App() {
 
         {/* PROVIDER SITE START */}
         <Route path="/provider" element={!isLoggedInProvider ? <Provider_Login onLogin={ProviderhandleLogin} />:<Navigate to="/provider_dashboard"/>} />
-        <Route path="/provider_dashboard" element={isLoggedInProvider ? <Provider_Dashboard  onLogin={ProviderhandleLogout} />:<Navigate to="/provider"/>} />
-        <Route path="/provider_addservice" element={isLoggedInProvider ? <AddService onLogin={ProviderhandleLogout} />:<Navigate to="/provider"/>} />
+        <Route path="/provider_dashboard" element={isLoggedInProvider ? <Provider_Dashboard  onLogin={ProviderhandleLogout} />:<Navigate to="/provider_dashboard"/>} />
+        <Route path="/provider_addservice" element={isLoggedInProvider ? <AddService onLogin={ProviderhandleLogout} />:<Navigate to="/provider_addservice"/>} />
         {/* PROVIDER SITE END */}
 
 
@@ -166,9 +165,9 @@ function App() {
 
         {/* PROVIDER SITE START */}
         <Route path="/" element={!isLoggedInMember ? <UserLogin onLogin={MemberhandleLogin} />:<Navigate to="/member"/>} />
-        <Route path="/member" element={isLoggedInMember ? <User onLogin={MemberhandleLogout} />:<Navigate to="/"/>} />
-        <Route path="/member_addask" element={isLoggedInMember ? <ServiceFrom onLogin={MemberhandleLogout} />:<Navigate to="/"/>} />
-        <Route path='/member_provider_details/:id' element={isLoggedInMember ? <UserProviderDetails onLogin={MemberhandleLogout} />:<Navigate to="/"/>} />
+        <Route path="/member" element={isLoggedInMember ? <User onLogin={MemberhandleLogout} />:<Navigate to="/member"/>} />
+        <Route path="/member_addask" element={isLoggedInMember ? <ServiceFrom onLogin={MemberhandleLogout} />:<Navigate to="/member_addask"/>} />
+        <Route path='/member_provider_details/:id' element={isLoggedInMember ? <UserProviderDetails onLogin={MemberhandleLogout} />:<Navigate to="/member_provider_details/:id"/>} />
         {/* PROVIDER SITE END */}
 
 
