@@ -106,7 +106,7 @@ const Header = () => {
                                     
                                 <li className="dropdown-header">
                                     You have {userForms.length} new notifications
-                                    <a href="#"><span className="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                                    <a href="/admin_Allorder"><span className="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                                 </li>
                                  }
                                 <li>

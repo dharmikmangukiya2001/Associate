@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
-
+import { Link } from "react-router-dom";
 
 const AllMember = () => {
 
@@ -22,7 +22,29 @@ const [users, setUsers] = useState([])
             })
     }, [])
 
+    const XLSX = require('xlsx');
+    const exportToExcel = () => {
+        const headers = ['Member ID', 'Member Name', 'Member Number', 'Email ID', 'Address','Reference By','Reference Number', 'Occupation','D.O.B.'];
+        // Fetch data from the API and store it in the 'data' variable
+        const dataAsArray = users.map((item) => [
+            item.ids,
+            item.name,
+            item.number,
+            item.email,
+            item.address,
+            item.reference,
+            item.ref_no,
+            item.occupation,
+            item.DOB
+        ]);
 
+        const excelData = [headers, ...dataAsArray];
+        const ws = XLSX.utils.json_to_sheet(excelData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        XLSX.writeFile(wb, 'exported_data.xlsx');
+    }
     return (
         <>
             <Header />
@@ -51,7 +73,9 @@ const [users, setUsers] = useState([])
                                                     <div className="col-10">
                                                         <h5 className="card-title">Show All Member</h5>
                                                     </div>
-
+                                                    <div className="col-2">
+                                                        <button className="btn btn-success" onClick={exportToExcel}>Export to Excel</button>
+                                                    </div>
                                                 </div>
                                                 <table className="rwd-table">
 
@@ -124,9 +148,9 @@ const [users, setUsers] = useState([])
                                                                         </td>
                                                                         
                                                                         <td data-th="Net Amount">
-                                                                           
-                                                                            <button type="button" className="btn btn-danger btn-sm">Delete</button>
-                                                                          
+                                                                           <Link to={`/admin_memberdetails/${item._id}`}>
+                                                                            <button type="button" className="btn btn-danger btn-sm">Show</button>
+                                                                            </Link>
                                                                         </td>
                                                                     </tr>
 

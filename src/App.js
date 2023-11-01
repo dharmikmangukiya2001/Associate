@@ -12,6 +12,7 @@ import Providerdetails from './components/admin/Providerdetails';
 import Addmember from './components/admin/Addmember';
 import Allorder from './components/admin/Allorder';
 import AllMember from './components/admin/AllMember';
+import Memberdetails from './components/admin/Memberdetails';
 import { Route, Routes } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
@@ -145,6 +146,7 @@ function App() {
         <Route path='/admin_addmember' element={isLoggedInAdmin ?< Addmember onLogout={adminhandleLogout}/>:<Navigate to="/admin_addmember"/>} />
         <Route path='/admin_allorder' element={isLoggedInAdmin ?< Allorder onLogout={adminhandleLogout}/>:<Navigate to="/admin_allorder"/> }/>
         <Route path="/admin_allmember" element={isLoggedInAdmin ? <AllMember onLogout={adminhandleLogout} /> : <Navigate to="/admin_allmember"/>} />
+        <Route path="/admin_memberdetails/:id" element={isLoggedInAdmin ? <Memberdetails onLogout={adminhandleLogout}/>:<Memberdetails onLogout={adminhandleLogout}/>} />
         {/* ADMIN SITE END */}
 
 

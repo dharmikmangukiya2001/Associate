@@ -14,7 +14,7 @@ function Providerdetails() {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL}/admin/providerdetails/${providerid}`, { headers: { 'token': token } }).then(function (response) {
             // handle success
-            // console.log(response.data, "dsdsdsd");
+            console.log(response.data, "dsdsdsd");
             setProviders([response.data.providers]);
             setSubcatdata(response.data.subcatData);
             setTempservice(response.data.providers);
@@ -53,7 +53,7 @@ function Providerdetails() {
 
     // Update provider
     const [changed, setChanged] = useState(false);
-    const [tempservice, setTempservice] = useState([],{ productService: [] })
+    const [tempservice, setTempservice] = useState([], { productService: [] })
     const [UpdateAddOption, setUpdateAddOption] = useState(false);
     const UpdateAdd = (e) => {
         e.preventDefault();
@@ -61,51 +61,7 @@ function Providerdetails() {
     };
 
 
-    useEffect(() => {
-        console.log('tempservice 1', tempservice);
-    });
-
-
-    // const [providername, setProvidername] = useState('');
-    // const [providernumber, setProvidernumber] = useState('');
-    // const [provideremailid, setProvideremailid] = useState('');
-    // const [providerbod, setProviderbod] = useState('');
-    // const [provideraddress, setProvideraddress] = useState('');
-    // // Bussiness Details
-    // const [bussinessname, setBussinessname] = useState('');
-    // const [bussinessnumber, setBussinessnumber] = useState('');
-    // const [bussinessemailid, setBussinessemailid] = useState('');
-    // const [bussinessdetails, setBussinessdetails] = useState('');
-    // const [bussinesswebsiteurl, setBussinesswebsiteurl] = useState('');
-    // const [bussinessfacebookurl, setBussinessfacebookurl] = useState('');
-    // const [bussinessinstagramurl, setBussinessinstagramurl] = useState('');
-    // const [bussinessyoutubeurl, setBussinessyoutubeurl] = useState('');
-    // const [bussinessgstnumber, setBussinessgstnumber] = useState('');
-    // const [bussinesstype, setBussinesstype] = useState('');
-    // const [bussinessformation, setBussinessformation] = useState('');
-    // const [bussinesstdsdetails, setBussinesstdsdetails] = useState('');
-    // const [productandservice, setProductandservice] = useState([]);
-    // const [bussinesspancardnumber, setBussinesspancardnumber] = useState('');
-    // // const [sbcatid, setSbcatid] = useState('');
-    // const [bussinessaddress, setBussinessaddress] = useState('');
-    // const [collaborationdetails, setCollaborationdetails] = useState('');
-    // // Sales Details
-    // const [salespersonname, setSalespersonname] = useState('');
-    // const [salespersonnumber, setSalespersonnumber] = useState('');
-    // const [salespersonemailid, setSalespersonemailid] = useState('');
-    // const [salespersonposition, setSalespersonposition] = useState('');
-    // // Bank Details
-    // const [bankname, setBankname] = useState('');
-    // const [bankaccountnumber, setBankaccountnumber] = useState('');
-    // const [bankifsccode, setBankifsccode] = useState('');
-    // const [bankbranchname, setBankbranchname] = useState('');
-    // Files
-    //const [img, setImg] = useState([]);
-
-    // Main object
-
-    // Token
-
+    
 
     // ADD BUSINESS DIV SHOW SELECT INPUT
     const [seletedOption, setSeletedOption] = useState(false);
@@ -127,7 +83,7 @@ function Providerdetails() {
     // SELECT OPTION FOR SHOW DIV DATA
     const [bcatid, setBcatid] = useState('')
     const [sbcatid, setSbcatid] = useState([])
-   
+
     const [bsubcategorys, setBsubcategorys] = useState('')
 
     const handleSecondSelectChange = (e) => {
@@ -329,76 +285,24 @@ function Providerdetails() {
 
     // const [tempservice, setTempservice] = useState({ productService: [] });
 
-// Create a separate state to hold the merged data
-const [mergedData, setMergedData] = useState([]);
+    // Create a separate state to hold the merged data
+    const [mergedData, setMergedData] = useState([]);
 
-useEffect(() => {
-  let merged = [];
+    useEffect(() => {
+        let merged = [];
 
-  if (Array.isArray(selectedBrok)) {
-    merged = selectedBrok.map(item => item.name);
-  }
+        if (Array.isArray(selectedBrok)) {
+            merged = selectedBrok.map(item => item.name);
+        }
 
-  // Update the merged data in the state
-  setMergedData(merged.concat(productService));
-}, [selectedBrok, productService]);
+        // Update the merged data in the state
+        setMergedData(merged.concat(productService));
+    }, [selectedBrok, productService]);
 
-// Now, you can update the tempservice state using mergedData
-useEffect(() => {
-  setTempservice({ ...tempservice, productService: mergedData });
-}, [mergedData]);
-
-    
-
-    // console.log(merged,"dsddssd");
-    // console.log(merged);
-
-    // image and document parh all End
-
-    // const data = {
-    //     providername,
-    //     providernumber,
-    //     provideremailid,
-    //     providerbod,
-    //     provideraddress,
-    //     bussinessname,
-    //     bussinessnumber,
-    //     bussinessemailid,
-    //     bussinessdetails,
-    //     bussinesswebsiteurl,
-    //     bussinessfacebookurl,
-    //     bussinessinstagramurl,
-    //     bussinessyoutubeurl,
-    //     bussinessgstnumber,
-    //     bussinesstype,
-    //     bussinessformation,
-    //     bussinesstdsdetails,
-    //     productandservice: Array(merged),
-    //     bussinesspancardnumber,
-    //     sbcatid,
-    //     bussinessaddress,
-    //     collaborationdetails,
-    //     salespersonname,
-    //     salespersonnumber,
-    //     salespersonemailid,
-    //     salespersonposition,
-    //     bankname,
-    //     bankaccountnumber,
-    //     bankifsccode,
-    //     bankbranchname,
-    //     // Image data
-    //     pfiles,
-    //     bfiles,
-    //     adharfiles,
-    //     pancardfiles,
-    //     gstfiles,
-    //     tdsfiles,
-    //     agreementfiles
-    // }
-
-    // const merged = selectedBrok.map(item => item.name).concat(productService);
-    // const merged1 = [...selectedBrok, ...productService];
-
+    // Now, you can update the tempservice state using mergedData
+    useEffect(() => {
+        setTempservice({ ...tempservice, productService: mergedData });
+    }, [mergedData]);
 
 
 
@@ -440,44 +344,13 @@ useEffect(() => {
 
         formData.append("sbcatid", sbcatid);
         formData.append("product_service", productValue);
-        // formData.append("name", data.providername);
-        // formData.append("number", data.providernumber);
-        // formData.append("email", data.provideremailid);
-        // formData.append("BOD", data.providerbod);
-        // formData.append("address", data.provideraddress);
-        // formData.append("Btype", data.bussinesstype);
-        // formData.append("Bformation", data.bussinessformation);
-        // formData.append("bsubcategoryid", data.sbcatid);
-        // formData.append("Bname", data.bussinessname);
-        // formData.append("Bnumber", data.bussinessnumber);
-        // formData.append("Bemail", data.bussinessemailid);
-        // formData.append("Bsocialmedia", data.bussinesswebsiteurl);
-        // formData.append("Bsocialmedia", data.bussinessfacebookurl);
-        // formData.append("Bsocialmedia", data.bussinessinstagramurl);
-        // formData.append("Bsocialmedia", data.bussinessyoutubeurl);
-        // formData.append("Bdetails", data.bussinessdetails);
-        // formData.append("Baddress", data.bussinessaddress);
-        // formData.append("B_GSTnumber", data.bussinessgstnumber);
-        // formData.append("Bpancardnumber", data.bussinesspancardnumber);
-        // formData.append("Btdsdetails", data.bussinesstdsdetails);
-        // formData.append("product_service", data.productandservice);
-        // formData.append("collaborationDetails", data.collaborationdetails);
-        // formData.append("salespersonName", data.salespersonname);
-        // formData.append("salespersonNumber", data.salespersonnumber);
-        // formData.append("salespersonEmail", data.salespersonemailid);
-        // formData.append("salespersonPosition", data.salespersonposition);
-        // formData.append("bankName", data.bankname);
-        // formData.append("bankAccountnumber", data.bankaccountnumber);
-        // formData.append("bankIFSCcode", data.bankifsccode);
-        // formData.append("bankBranchname", data.bankbranchname);
-
 
 
         try {
             axios.patch(`${process.env.REACT_APP_URL}/admin/updateprovider/${providerid}`, formData, {
                 headers: {
                     'token': token,
-                    'Content-Type': 'multipart/form-data', // Set the content type for file uploads
+                    'Content-Type': 'multipart/form-data',
                 }
             })
                 .then((response) => {
