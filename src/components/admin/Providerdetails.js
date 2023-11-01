@@ -53,7 +53,7 @@ function Providerdetails() {
 
     // Update provider
     const [changed, setChanged] = useState(false);
-    const [tempservice, setTempservice] = useState([])
+    const [tempservice, setTempservice] = useState([],{ productService: [] })
     const [UpdateAddOption, setUpdateAddOption] = useState(false);
     const UpdateAdd = (e) => {
         e.preventDefault();
@@ -127,6 +127,7 @@ function Providerdetails() {
     // SELECT OPTION FOR SHOW DIV DATA
     const [bcatid, setBcatid] = useState('')
     const [sbcatid, setSbcatid] = useState([])
+   
     const [bsubcategorys, setBsubcategorys] = useState('')
 
     const handleSecondSelectChange = (e) => {
@@ -326,13 +327,28 @@ function Providerdetails() {
         setSelectedBrok(updatedAmenities);
     }
 
-    let merged = [];
+    // const [tempservice, setTempservice] = useState({ productService: [] });
 
-    if (Array.isArray(selectedBrok)) {
-        merged = selectedBrok.map(item => item.name);
-    }
+// Create a separate state to hold the merged data
+const [mergedData, setMergedData] = useState([]);
 
-    merged = merged.concat(productService);
+useEffect(() => {
+  let merged = [];
+
+  if (Array.isArray(selectedBrok)) {
+    merged = selectedBrok.map(item => item.name);
+  }
+
+  // Update the merged data in the state
+  setMergedData(merged.concat(productService));
+}, [selectedBrok, productService]);
+
+// Now, you can update the tempservice state using mergedData
+useEffect(() => {
+  setTempservice({ ...tempservice, productService: mergedData });
+}, [mergedData]);
+
+    
 
     // console.log(merged,"dsddssd");
     // console.log(merged);
@@ -422,6 +438,8 @@ function Providerdetails() {
             formData.append(key, value);
         }
 
+        formData.append("sbcatid", sbcatid);
+        formData.append("product_service", productValue);
         // formData.append("name", data.providername);
         // formData.append("number", data.providernumber);
         // formData.append("email", data.provideremailid);
@@ -1683,52 +1701,71 @@ function Providerdetails() {
                                                                                         <div className='row mt-5 mb-5'>
                                                                                             <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Type <span className='text-red'>*</span></label>
                                                                                             <div className='col-sm-9 col-lg-10'>
-                                                                                                <select class="form-select" required aria-label="Default select example" value={tempservice.Btype} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, Btype: e.target.value, }) }}>
+                                                                                                <select
+                                                                                                    className="form-select"
+                                                                                                    required
+                                                                                                    aria-label="Default select example"
+                                                                                                    value={tempservice.Btype}
+                                                                                                    onChange={(e) => {
+                                                                                                        setChanged(true);
+                                                                                                        setTempservice({
+                                                                                                            ...tempservice,
+                                                                                                            Btype: e.target.value,
+                                                                                                        });
+                                                                                                    }}
+                                                                                                >
                                                                                                     <option selected>---- Select Business Type ----</option>
-                                                                                                    {
-                                                                                                        bussinessType && bussinessType.map((item, i) => {
-                                                                                                            return (
-                                                                                                                <>
-                                                                                                                    <option value={item.btype}>{item.btype}</option>
-                                                                                                                </>
-                                                                                                            )
-                                                                                                        })
-                                                                                                    }
+                                                                                                    {bussinessType &&
+                                                                                                        bussinessType.map((item, i) => (
+                                                                                                            <option value={item.btype}>{item.btype}</option>
+                                                                                                        ))}
                                                                                                 </select>
+
                                                                                             </div>
                                                                                         </div>
                                                                                         <div className='row mt-5 mb-5'>
                                                                                             <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Formation <span className='text-red'>*</span></label>
                                                                                             <div className='col-sm-9 col-lg-10'>
-                                                                                                <select class="form-select" required aria-label="Default select example" value={tempservice.Bformation} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, Bformation: e.target.value, }) }}>
+                                                                                                <select
+                                                                                                    className="form-select"
+                                                                                                    required
+                                                                                                    aria-label="Default select example"
+                                                                                                    value={tempservice.Bformation}
+                                                                                                    onChange={(e) => {
+                                                                                                        setChanged(true);
+                                                                                                        setTempservice({
+                                                                                                            ...tempservice,
+                                                                                                            Bformation: e.target.value,
+                                                                                                        });
+                                                                                                    }}
+                                                                                                >
                                                                                                     <option selected>---- Select Business Formation ----</option>
-                                                                                                    {
-                                                                                                        bussinessFormation && bussinessFormation.map((item, i) => {
-                                                                                                            return (
-                                                                                                                <>
-                                                                                                                    <option value={item.bussinessformation}>{item.bussinessformation}</option>
-                                                                                                                </>
-                                                                                                            )
-                                                                                                        })
-                                                                                                    }
+                                                                                                    {bussinessFormation &&
+                                                                                                        bussinessFormation.map((item, i) => (
+                                                                                                            <option value={item.bussinessformation}>{item.bussinessformation}</option>
+                                                                                                        ))}
                                                                                                 </select>
+
                                                                                             </div>
                                                                                         </div>
                                                                                         <div className='row mt-5 mb-5'>
                                                                                             <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Business Category <span className='text-red'>*</span></label>
                                                                                             <div className='col-sm-9 col-lg-10'>
-                                                                                                <select class="form-select" required aria-label="Default select example" value={bcatid} onChange={(e) => setBcatid(e.target.value)} onClick={handleSecondSelectChange}>
+                                                                                                <select
+                                                                                                    className="form-select"
+                                                                                                    required
+                                                                                                    aria-label="Default select example"
+                                                                                                    value={bcatid}
+                                                                                                    onChange={(e) => setBcatid(e.target.value)}
+                                                                                                    onClick={handleSecondSelectChange}
+                                                                                                >
                                                                                                     <option selected>---- Select Category ----</option>
-                                                                                                    {
-                                                                                                        bcategory && bcategory.map((item, i) => {
-                                                                                                            return (
-                                                                                                                <>
-                                                                                                                    <option value={item._id}>{item.bussinesscategory}</option>
-                                                                                                                </>
-                                                                                                            )
-                                                                                                        })
-                                                                                                    }
+                                                                                                    {bcategory &&
+                                                                                                        bcategory.map((item, i) => (
+                                                                                                            <option value={item._id}>{item.bussinesscategory}</option>
+                                                                                                        ))}
                                                                                                 </select>
+
                                                                                             </div>
                                                                                         </div>
                                                                                         <div className='row mt-5 mb-5'>
@@ -1784,7 +1821,7 @@ function Providerdetails() {
                                                                                                             type='text'
                                                                                                             className='form-control w-75'
                                                                                                             placeholder='Type something and press Add buttton to add'
-                                                                                                            value={inputValueBrok}
+                                                                                                            value={tempservice.inputValueBrok}
                                                                                                             onChange={(e) => handleInputChangeRoom(e)}
                                                                                                         />
                                                                                                         <div type='buttom' onClick={handleAddAmenityBrok} className='rounded text-center fs-4 add-btn btn-primary w-25'>
@@ -2166,12 +2203,12 @@ function Providerdetails() {
                                                                             <div className="input-group mb-3">
                                                                                 {changed ? (
                                                                                     <>
-                                                                                    <div>
-                                                                                        <button onClick={(e) => {setTempservice({ ...providers }); setChanged(false);}} className="btn bg-primary-subtle">Cancel</button>                                                        
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <button onClick={handleSubmit} className="btn bg-primary-subtle">Update</button>
-                                                                                    </div>
+                                                                                        <div>
+                                                                                            <button onClick={(e) => { setTempservice({ ...providers }); setChanged(false); }} className="btn bg-primary-subtle">Cancel</button>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <button onClick={handleSubmit} className="btn bg-primary-subtle">Update</button>
+                                                                                        </div>
                                                                                     </>
                                                                                 ) : null}
                                                                             </div>
