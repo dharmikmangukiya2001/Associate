@@ -10,9 +10,12 @@ import Addprovider from './components/admin/Addprovider';
 import Showprovider from './components/admin/Showprovider';
 import Providerdetails from './components/admin/Providerdetails';
 import Addmember from './components/admin/Addmember';
-import Allorder from './components/admin/Allorder';
 import AllMember from './components/admin/AllMember';
 import Memberdetails from './components/admin/Memberdetails';
+import Allorder from './components/admin/Allorder';
+import Orderdetails from './components/admin/Orderdetails';
+import Addmanager from './components/admin/Addmanager';
+import Allmanager from './components/admin/Allmanager';
 import { Route, Routes } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
@@ -144,9 +147,14 @@ function App() {
         <Route path="/admin_providerdetails/:id" element={isLoggedInAdmin ? <Providerdetails onLogout={adminhandleLogout}/>:<Providerdetails onLogout={adminhandleLogout}/>} />
 
         <Route path='/admin_addmember' element={isLoggedInAdmin ?< Addmember onLogout={adminhandleLogout}/>:<Navigate to="/admin_addmember"/>} />
-        <Route path='/admin_allorder' element={isLoggedInAdmin ?< Allorder onLogout={adminhandleLogout}/>:<Navigate to="/admin_allorder"/> }/>
         <Route path="/admin_allmember" element={isLoggedInAdmin ? <AllMember onLogout={adminhandleLogout} /> : <Navigate to="/admin_allmember"/>} />
         <Route path="/admin_memberdetails/:id" element={isLoggedInAdmin ? <Memberdetails onLogout={adminhandleLogout}/>:<Memberdetails onLogout={adminhandleLogout}/>} />
+        <Route path='/admin_allorder' element={isLoggedInAdmin ?< Allorder onLogout={adminhandleLogout}/>:<Navigate to="/admin_allorder"/> }/>
+        <Route path="/admin_orderdetails/:id" element={isLoggedInAdmin ? <Orderdetails onLogout={adminhandleLogout}/>:<Orderdetails onLogout={adminhandleLogout}/>} />
+
+        <Route path='/admin_addmanager' element={isLoggedInAdmin ?< Addmanager onLogout={adminhandleLogout}/>:<Navigate to="/admin_addmanager"/>} />
+        <Route path="/admin_allmanager" element={isLoggedInAdmin ? <Allmanager onLogout={adminhandleLogout} /> : <Navigate to="/admin_allmanager"/>} />
+
         {/* ADMIN SITE END */}
 
 

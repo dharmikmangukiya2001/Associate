@@ -1,10 +1,11 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Header from "./Header";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
-const AllMember = () => {
-
+const Allmanager = () => {
 
     const [users, setUsers] = useState([])
     const token = localStorage.getItem("token");
@@ -24,18 +25,12 @@ const AllMember = () => {
 
     const XLSX = require('xlsx');
     const exportToExcel = () => {
-        const headers = ['Member ID', 'Member Name', 'Member Number', 'Email ID', 'Address', 'Reference By', 'Reference Number', 'Occupation', 'D.O.B.'];
+        const headers = ['Manager Name', 'Manager Number', 'Manager Email ID'];
         // Fetch data from the API and store it in the 'data' variable
         const dataAsArray = users.map((item) => [
-            item.ids,
             item.name,
             item.number,
             item.email,
-            item.address,
-            item.reference,
-            item.ref_no,
-            item.occupation,
-            item.DOB
         ]);
 
         const excelData = [headers, ...dataAsArray];
@@ -52,11 +47,11 @@ const AllMember = () => {
             <div>
                 <main id="main" className='main'>
                     <div className='pagetitle'>
-                        <h1 className='text-start'>Show Allorder</h1>
+                        <h1 className='text-start'>Show Manager</h1>
                         <nav>
                             <ol className='breadcrumb'>
                                 <li className='breadcrumb-item'>Home</li>
-                                <li className='breadcrumb-item activ'>Order</li>
+                                <li className='breadcrumb-item activ'>Manager</li>
                             </ol>
                         </nav>
                     </div>
@@ -71,7 +66,7 @@ const AllMember = () => {
                                             <div className="card-body">
                                                 <div className="d-flex">
                                                     <div className="col-10">
-                                                        <h5 className="card-title">Show All Member</h5>
+                                                        <h5 className="card-title">Show All Manager</h5>
                                                     </div>
                                                     <div className="col-2">
                                                         <button className="btn btn-success" onClick={exportToExcel}>Export to Excel</button>
@@ -83,16 +78,10 @@ const AllMember = () => {
                                                     <tbody>
 
                                                         <tr>
-                                                            <th>Member ID</th>
-                                                            <th>Member Name</th>
-                                                            <th>Member Number</th>
-                                                            <th>Email ID</th>
-                                                            <th>Address</th>
-                                                            <th>Reference By</th>
-                                                            <th>Reference Number</th>
-                                                            <th>Occupation</th>
-                                                            <th>D.O.B.</th>
-
+                                                            <th>No</th>
+                                                            <th>Manager Name</th>
+                                                            <th>Manager Number</th>
+                                                            <th>Manager Email ID</th>
                                                             <th>Show</th>
                                                         </tr>
 
@@ -103,7 +92,7 @@ const AllMember = () => {
 
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.ids}
+                                                                                {i+1}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
@@ -121,31 +110,7 @@ const AllMember = () => {
                                                                                 {item.email}
                                                                             </h6>
                                                                         </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.address}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.reference}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.ref_no}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.occupation}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.DOB}
-                                                                            </h6>
-                                                                        </td>
+                                                                        
 
                                                                         <td data-th="Net Amount">
                                                                             <Link to={`/admin_memberdetails/${item._id}`}>
@@ -179,13 +144,7 @@ const AllMember = () => {
                 </footer>{/* End Footer */}
             </div >
 
-
-
         </>
     )
-
-
 }
-
-
-export default AllMember
+export default Allmanager;

@@ -57,19 +57,24 @@ const Header = () => {
     }
 
 
-    const [userForms, setUserForms] = useState([])
+    // Toady Order Start
+
+    const [orders, setOrders] = useState([])
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/all_userform`, { headers: { 'token': token } }).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/today_order`, { headers: { 'token': token } }).then(function (response) {
             // handle success
             // console.log(response.data);
-            setUserForms(response.data.userForms);
+            setOrders(response.data.orders);
         })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             })
     }, [])
+     // Toady Order End
 
+
+    
     return (
         <>
 
@@ -96,24 +101,24 @@ const Header = () => {
                         <li className="nav-item dropdown">
                             <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                                 <i className="bi bi-bell" />
-                                {userForms &&
-                                <span className="badge bg-primary badge-number">{userForms.length}</span>
+                                {orders &&
+                                <span className="badge bg-primary badge-number">{orders.length}</span>
                             }
                             </a>{/* End Notification Icon */}
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                            {userForms &&
+                            {orders &&
                                     
                                     
                                 <li className="dropdown-header">
-                                    You have {userForms.length} new notifications
+                                    You have {orders.length} new notifications
                                     <a href="/admin_Allorder"><span className="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                                 </li>
                                  }
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
-                                {userForms &&
-                                    userForms.map((item, i) => (
+                                {orders &&
+                                    orders.map((item, i) => (
                                         <li className="notification-item">
                                             <i className="bi bi-exclamation-circle text-warning" />
                                             <div>
@@ -256,12 +261,12 @@ const Header = () => {
                         <ul id="forms-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
                                 <a href="/admin_addservice" class="a-none ps-0">
-                                    <Link className='a-none' to='/admin_addservice'><i className="bi bi-plus-square fs-5" /><span>Add Services</span></Link>
+                                    <Link className='a-none' to='/admin_addservice'><i className="bi bi-person-plus fs-5" /><span>Add Services</span></Link>
                                 </a>
                             </li>
                             <li>
                                 <a href="/admin_showservices" class="a-none ps-0">
-                                    <Link className='a-none' to="/admin_showservices"><i className="bi bi-server fs-5" /><span>Show Services</span></Link>
+                                    <Link className='a-none' to="/admin_showservices"><i className="bi bi-clipboard-data fs-5" /><span>Show Services</span></Link>
                                 </a>
                             </li>
                         </ul>
@@ -273,12 +278,12 @@ const Header = () => {
                         <ul id="tables-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
                                 <a href="/admin_addprovider" class="a-none ps-0">
-                                    <Link className='a-none' to='/admin_addprovider'><i className="bi bi-plus-square fs-5" /><span>Add Provider</span></Link>
+                                    <Link className='a-none' to='/admin_addprovider'><i className="bi bi-person-plus fs-5" /><span>Add Provider</span></Link>
                                 </a>
                             </li>
                             <li>
                                 <a href="/admin_showproviders" class="a-none ps-0">
-                                    <Link className='a-none' to='/admin_showproviders'><i className="bi bi-server fs-5" /><span>Show Providers</span></Link>
+                                    <Link className='a-none' to='/admin_showproviders'><i className="bi bi-clipboard-data fs-5" /><span>Show Providers</span></Link>
                                 </a>
                             </li>
                         </ul>
@@ -290,12 +295,12 @@ const Header = () => {
                         <ul id="charts-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
                                 <a href="/admin_adduser" class="a-none ps-0" >
-                                    <Link className='a-none' to="/admin_addmember"><i className="bi bi-plus-square fs-5" /><span>Add Member</span></Link>
+                                    <Link className='a-none' to="/admin_addmember"><i className="bi bi-person-plus fs-5" /><span>Add Member</span></Link>
                                 </a>
                             </li>
                             <li>
                                 <a href="/admin_adduser" class="a-none ps-0" >
-                                    <Link className='a-none' to="/admin_allmember"><i className="bi bi-server fs-5" /><span>Show Member</span></Link>
+                                    <Link className='a-none' to="/admin_allmember"><i className="bi bi-clipboard-data fs-5" /><span>Show Member</span></Link>
                                 </a>
                             </li>
                             <li>
@@ -306,17 +311,34 @@ const Header = () => {
                         </ul>
                     </li>{/* End Charts Nav */}
                     <li className="nav-item">
-                        <a className="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                            <i className="bi  bi-bell" /><span>Notification</span><i className="bi bi-chevron-down ms-auto" />
+                        <a className="nav-link collapsed" data-bs-target="#Manager" data-bs-toggle="collapse" href="#">
+                            <i className="bi  bi-kanban" /><span>Manager</span><i className="bi bi-chevron-down ms-auto" />
                         </a>
-                        <ul id="icons-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <ul id="Manager" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
-                                <Link className='a-none' to="/admin_Allorder">
-                                    <i className="bi bi-cart fs-4" /><span>Show Order</span>
+                                <Link className='a-none' to="/admin_addmanager">
+                                    <i className="bi-person-plus fs-5" /><span>Add Manager</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className='a-none' to="/admin_allmanager">
+                                    <i className="bi-clipboard-data fs-5" /><span>Show Manager</span>
                                 </Link>
                             </li>
                         </ul>
                     </li>{/* End Icons Nav */}
+                    <li className="nav-item">
+                        <a className="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                            <i className="bi  bi-cart" /><span>Order</span><i className="bi bi-chevron-down ms-auto" />
+                        </a>
+                        <ul id="icons-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
+                            <li>
+                                <Link className='a-none' to="/admin_Allorder">
+                                    <i className="bi bi-basket3 fs-5" /><span>Show Order</span>
+                                </Link>
+                            </li>
+                        </ul>
+                    </li>{/* End Icons Nav */}                    
                     <li className="nav-heading">Pages</li>
                     <li className="nav-item">
                         <a className="nav-link collapsed" href="users-profile.html">
@@ -324,42 +346,7 @@ const Header = () => {
                             <span>Profile</span>
                         </a>
                     </li>{/* End Profile Page Nav */}
-                    <li className="nav-item">
-                        <a className="nav-link collapsed" href="pages-faq.html">
-                            <i className="bi bi-question-circle" />
-                            <span>F.A.Q</span>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link collapsed" href="pages-contact.html">
-                            <i className="bi bi-envelope" />
-                            <span>Contact</span>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link collapsed" href="pages-register.html">
-                            <i className="bi bi-card-list" />
-                            <span>Register</span>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link collapsed" href="pages-login.html">
-                            <i className="bi bi-box-arrow-in-right" />
-                            <span>Login</span>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link collapsed" href="pages-error-404.html">
-                            <i className="bi bi-dash-circle" />
-                            <span>Error 404</span>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link collapsed" href="pages-blank.html">
-                            <i className="bi bi-file-earmark" />
-                            <span>Blank</span>
-                        </a>
-                    </li>
+                    
                 </ul>
             </aside>
 

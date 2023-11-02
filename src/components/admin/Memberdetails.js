@@ -71,16 +71,17 @@ const Memberdetails = () => {
 
 
         try {
-            axios.patch(`${process.env.REACT_APP_URL}/admin/updateuser/${memberid}`, tempservice, {
+            axios.patch(`${process.env.REACT_APP_URL}/admin/updateuser/${memberid}`,tempservice, {
                 headers: {
                     'token': token,
-                    'Content-Type': 'multipart/form-data',
+                   
+                    // 'Content-Type': 'multipart/form-data',
                 }
             })
                 .then((response) => {
                     console.log(response.data,"defsdd");
                     console.log(tempservice,"dsd");
-                    // nevigate('/admin_showproviders')
+                    window.location.reload();
                 })
                 .catch((error) => {
                     console.error(error);
@@ -379,6 +380,15 @@ const Memberdetails = () => {
                                                                                     <div className='col-sm-9 col-lg-10'>
                                                                                         <div className='me-3 form-floating'>
                                                                                             <input type='Email' className='form-control' required value={tempservice.email} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, email: e.target.value, }) }} placeholder='Provider Numbar' />
+                                                                                            <label htmlFor="floatingTextarea">Member Number</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> 
+                                                                                <div className='row mb-5'>
+                                                                                    <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Member Numbar <span className='text-red'>*</span></label>
+                                                                                    <div className='col-sm-9 col-lg-10'>
+                                                                                        <div className='me-3 form-floating'>
+                                                                                            <input type='Email' className='form-control' required value={tempservice.number} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, number: e.target.value, }) }} placeholder='Provider Numbar' />
                                                                                             <label htmlFor="floatingTextarea">Member Number</label>
                                                                                         </div>
                                                                                     </div>

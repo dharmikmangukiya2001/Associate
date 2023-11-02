@@ -22,13 +22,12 @@ const Home = () => {
     }, []);
 
 
-    // LOGOUT
+    // Show All Order For Member Start
     const token = localStorage.getItem("token");
     const [userForms, setUserForms] = useState([])
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL}/admin/all_userform`, { headers: { 'token': token } }).then(function (response) {
             // handle success
-            // console.log(response.data);
             setUserForms(response.data.userForms);
         })
             .catch(function (error) {
@@ -36,6 +35,40 @@ const Home = () => {
                 console.log(error);
             })
     }, [])
+    // Show All Order For Member End
+
+
+
+    // Show All Member Start
+    const [users, setUsers] = useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/admin/alluser`, { headers: { 'token': token } }).then(function (response) {
+            // handle success
+            setUsers(response.data.users);
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
+    // Show All Member End
+
+
+    // Show All Provider Start
+    const [providers, setProviders] = useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/admin/showproviders`,{headers: {'token': token}}).then(function (response) {
+            // handle success
+            setProviders(response.data.providers);
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
+    // Show All Provider End
+
+
 
     return (
         <>
@@ -68,15 +101,15 @@ const Home = () => {
                                                 <a className="icon" href="#" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
                                                 <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                     <li className="dropdown-header text-start">
-                                                        <h6>Filter</h6>
+                                                        <h6>Show</h6>
                                                     </li>
-                                                    <li><a className="dropdown-item" href="#">Today</a></li>
-                                                    <li><a className="dropdown-item" href="#">This Month</a></li>
-                                                    <li><a className="dropdown-item" href="#">This Year</a></li>
+                                                    <li><a className="dropdown-item" href="/admin_Allorder">All Order</a></li>
+                                                    {/* <li><a className="dropdown-item" href="#">This Month</a></li> */}
+                                                    {/* <li><a className="dropdown-item" href="#">This Year</a></li> */}
                                                 </ul>
                                             </div>
                                             <div className="card-body">
-                                                <h5 className="card-title">Order <span>| Today</span></h5>
+                                                <h5 className="card-title">Order</h5>
                                                 <div className="d-flex align-items-center">
                                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                                         <i className="bi bi-cart" />
@@ -85,7 +118,7 @@ const Home = () => {
                                                         {userForms &&
                                                             <h6>{userForms.length}</h6>
                                                         }
-                                                        <span className="text-success small pt-1 fw-bold">12%</span> <span className="text-muted small pt-2 ps-1">increase</span>
+                                                        {/* <span className="text-success small pt-1 fw-bold">12%</span> <span className="text-muted small pt-2 ps-1">increase</span> */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -95,25 +128,27 @@ const Home = () => {
                                     <div className="col-xxl-4 col-md-6">
                                         <div className="card info-card revenue-card">
                                             <div className="filter">
-                                                <a className="icon" href="#" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
+                                                <a className="icon" href="" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
                                                 <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                     <li className="dropdown-header text-start">
-                                                        <h6>Filter</h6>
+                                                        <h6>Show</h6>
                                                     </li>
-                                                    <li><a className="dropdown-item" href="#">Today</a></li>
-                                                    <li><a className="dropdown-item" href="#">This Month</a></li>
-                                                    <li><a className="dropdown-item" href="#">This Year</a></li>
+                                                    <li><a className="dropdown-item" href="admin_allmember">All Member</a></li>
+                                                    {/* <li><a className="dropdown-item" href="#">This Month</a></li> */}
+                                                    {/* <li><a className="dropdown-item" href="#">This Year</a></li> */}
                                                 </ul>
                                             </div>
                                             <div className="card-body">
-                                                <h5 className="card-title">Revenue <span>| This Month</span></h5>
+                                                <h5 className="card-title">Member</h5>
                                                 <div className="d-flex align-items-center">
                                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                        <i className="bi bi-currency-dollar" />
+                                                        <i className="bi bi-people" />
                                                     </div>
                                                     <div className="ps-3">
-                                                        <h6>$3,264</h6>
-                                                        <span className="text-success small pt-1 fw-bold">8%</span> <span className="text-muted small pt-2 ps-1">increase</span>
+                                                        {users &&
+                                                        <h6>{users.length}</h6>
+                                                    }
+                                                        {/* <span className="text-success small pt-1 fw-bold">8%</span> <span className="text-muted small pt-2 ps-1">increase</span> */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -123,25 +158,27 @@ const Home = () => {
                                     <div className="col-xxl-4 col-xl-12">
                                         <div className="card info-card customers-card">
                                             <div className="filter">
-                                                <a className="icon" href="#" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
+                                                <a className="icon" href="" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
                                                 <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                                     <li className="dropdown-header text-start">
-                                                        <h6>Filter</h6>
+                                                        <h6>Show</h6>
                                                     </li>
-                                                    <li><a className="dropdown-item" href="#">Today</a></li>
-                                                    <li><a className="dropdown-item" href="#">This Month</a></li>
-                                                    <li><a className="dropdown-item" href="#">This Year</a></li>
+                                                    <li><a className="dropdown-item" href="admin_showproviders">All Provider</a></li>
+                                                    {/* <li><a className="dropdown-item" href="#">This Month</a></li> */}
+                                                    {/* <li><a className="dropdown-item" href="#">This Year</a></li> */}
                                                 </ul>
                                             </div>
                                             <div className="card-body">
-                                                <h5 className="card-title">Providers <span>| This Year</span></h5>
+                                                <h5 className="card-title">Providers</h5>
                                                 <div className="d-flex align-items-center">
                                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                                         <i className="bi bi-people" />
                                                     </div>
                                                     <div className="ps-3">
-                                                        <h6>1244</h6>
-                                                        <span className="text-danger small pt-1 fw-bold">12%</span> <span className="text-muted small pt-2 ps-1">decrease</span>
+                                                        {providers &&
+                                                        <h6>{providers.length}</h6>
+                                                        // <span className="text-danger small pt-1 fw-bold">12%</span> <span className="text-muted small pt-2 ps-1">decrease</span>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
