@@ -7,15 +7,15 @@ import axios from "axios";
 
 const Allmanager = () => {
 
-    const [users, setUsers] = useState([])
+    const [managers, setManagers] = useState([])
     const token = localStorage.getItem("token");
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/alluser`, { headers: { 'token': token } }).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/allmanager`, { headers: { 'token': token } }).then(function (response) {
             // handle success
             // console.log(response.data,"fgdg");
-            setUsers(response.data.users);
+            setManagers(response.data.managers);
         })
             .catch(function (error) {
                 // handle error
@@ -27,7 +27,7 @@ const Allmanager = () => {
     const exportToExcel = () => {
         const headers = ['Manager Name', 'Manager Number', 'Manager Email ID'];
         // Fetch data from the API and store it in the 'data' variable
-        const dataAsArray = users.map((item) => [
+        const dataAsArray = managers.map((item) => [
             item.name,
             item.number,
             item.email,
@@ -86,8 +86,8 @@ const Allmanager = () => {
                                                         </tr>
 
                                                         <>
-                                                            {users &&
-                                                                users.map((item, i) => (
+                                                            {managers &&
+                                                                managers.map((item, i) => (
                                                                     <tr key={i}>
 
                                                                         <td>
@@ -113,7 +113,7 @@ const Allmanager = () => {
                                                                         
 
                                                                         <td data-th="Net Amount">
-                                                                            <Link to={`/admin_memberdetails/${item._id}`}>
+                                                                            <Link to={`/admin_managerdetails/${item._id}`}>
                                                                                 <button type="button" className="btn btn-danger btn-sm">Show</button>
                                                                             </Link>
                                                                         </td>

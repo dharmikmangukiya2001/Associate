@@ -1,20 +1,36 @@
-import React, { useEffect, useState } from "react";
-import Header from "./Header";
+import React from "react";
+import ManagerHeader from "./ManagerHeader";
+import { useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
+const Manager_Order = () => {
 
-const Allorder = () => {
-
-
-    const [userForms, setUserForms] = useState([])
-    const token = localStorage.getItem("token");
-
+    const managertoken = localStorage.getItem("managertoken");
+    const [adminorder, setAdminorder] = useState([])
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/all_userform`, { headers: { 'token': token } }).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/manager/showorders`, { headers: { 'managertoken': managertoken } }).then(function (response) {
+            // handle success
+            setAdminorder(response.data.adminorder);
+            // console.log(adminorder,"Order:::");
+
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
+    // Show All Order For Member End
+
+    // Provider show data
+
+const [providers, setProvider]= useState('')
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/manager/allprovider`, { headers: { 'managertoken': managertoken } }).then(function (response) {
             // handle success
             // console.log(response.data);
-            setUserForms(response.data.userForms);
+            setProvider(response.data.providers);
         })
             .catch(function (error) {
                 // handle error
@@ -23,13 +39,101 @@ const Allorder = () => {
     }, [])
 
 
-    adminorder
+
+
+
+    const XLSX = require('xlsx');
+    const exportToExcel = () => {
+        const headers = ['Member ID', 'Member Name', 'Member Number', 'D.O.B.', 'Category', 'Sub Category', 'Product and Service', 'Reference Name', 'Reference Number', 'Description'];
+        // Fetch data from the API and store it in the 'data' variable
+        const dataAsArray = adminorder.map((item) => [
+            item.userid.ids,
+            item.userid.name,
+            item.userid.number,
+            item.userid.DOB,
+            item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory,
+            item.productid.bsubcategoryid[0].bussinesssubcategory,
+            item.productid.product,
+            item.otherName,
+            item.otherNumber,
+            item.description,
+        ]);
+
+        const excelData = [headers, ...dataAsArray];
+        const ws = XLSX.utils.json_to_sheet(excelData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        XLSX.writeFile(wb, 'exported_data.xlsx');
+    }
+
+
+    //Order Multiple Select Options
+
+    const [selectedProviderIds, setSelectedProviderIds] = useState([]);
+
+    // Function to handle checkbox changes
+    const handleProviderCheckboxChange = (itemId) => {
+        if (selectedProviderIds.includes(itemId)) {
+            // If the ID is already in the array, remove it
+            setSelectedProviderIds(selectedProviderIds.filter(id => id !== itemId));
+        } else {
+            // If the ID is not in the array, add it
+            setSelectedProviderIds([...selectedProviderIds, itemId]);
+        }
+    };
+    // console.log(selectedProviderIds,"Provider");
+
+
+
+
+ //Order Multiple Select Options
+
+ const [selectedOrderIds, setSelectedOrderIds] = useState([]);
+
+ // Function to handle checkbox changes
+ const handleCheckboxChange = (itemId) => {
+     if (selectedOrderIds.includes(itemId)) {
+         // If the ID is already in the array, remove it
+         setSelectedOrderIds(selectedOrderIds.filter(id => id !== itemId));
+     } else {
+         // If the ID is not in the array, add it
+         setSelectedOrderIds([...selectedOrderIds, itemId]);
+     }
+ };
+//  console.log(selectedOrderIds,"Order");
+    
+
+
+
+
+ const handleSubmit = (e) => {
+    e.preventDefault();
+    const OrderData = {
+        Orderid: selectedOrderIds,
+        Providerid: selectedProviderIds
+    }
+
+    // data get karavava mate
+    axios.post(`${process.env.REACT_APP_URL}/manager/provider_order`, OrderData,{ headers: { 'managertoken': managertoken } })
+        .then(function (response) {
+           console.log(response.data);
+           window.location.reload();
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+
+}
 
 
 
     return (
         <>
-            <Header />
+
+            <ManagerHeader />
+
 
             <div>
                 <main id="main" className='main'>
@@ -51,7 +155,7 @@ const Allorder = () => {
                                     <div className="col-12">
                                         <div class="collapse col-12" id="collapseExample">
                                             <div class="card card-body">
-                                                {managers && managers.map((item, i) => (
+                                                {providers && providers.map((item, i) => (
                                                     <div key={i}>
                                                         <p>
                                                             <span>
@@ -60,8 +164,8 @@ const Allorder = () => {
                                                                     type="checkbox"
                                                                     value={item._id}
                                                                     id="flexCheckMDefault"
-                                                                    onChange={() => handleManagerCheckboxChange(item._id)}
-                                                                    checked={selectedManagerIds.includes(item._id)}
+                                                                    onChange={() => handleProviderCheckboxChange(item._id)}
+                                                                    checked={selectedProviderIds.includes(item._id)}
                                                                 />
                                                             </span>
                                                             <strong>
@@ -71,8 +175,8 @@ const Allorder = () => {
                                                         </p>
 
                                                     </div>
-                                                ))}
-                                                <button onClick={handleSubmit} className="btn btn-dark" style={{width:'fit-content'}}>Send</button>
+                                                ))} 
+                                                <button onClick={handleSubmit} className="btn btn-dark" style={{ width: 'fit-content' }}>Send</button>
                                                 <div>
 
                                                 </div>
@@ -89,7 +193,7 @@ const Allorder = () => {
                                                     </div>
                                                     <div className="col-2">
                                                         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                                            Send to Manager
+                                                            Send to Provider
                                                         </button>
                                                     </div>
                                                 </div>
@@ -113,8 +217,8 @@ const Allorder = () => {
                                                         </tr>
 
                                                         <>
-                                                            {userForms &&
-                                                                userForms.map((item, i) => (
+                                                            {adminorder &&
+                                                                adminorder.map((item, i) => (
                                                                     <tr key={i}>
 
                                                                         <td>
@@ -210,10 +314,7 @@ const Allorder = () => {
                     </div>
                 </footer>{/* End Footer */}
             </div >
-
-
         </>
     )
-
 }
-export default Allorder;
+export default Manager_Order;

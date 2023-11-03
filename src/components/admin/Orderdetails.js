@@ -15,7 +15,7 @@ const Orderdetails = () => {
      useEffect(() => {
          axios.get(`${process.env.REACT_APP_URL}/admin/userform_details/${orderid}`, { headers: { 'token': token } }).then(function (response) {
              // handle success
-             console.log(response.data, "dsdsdsd");
+            //  console.log(response.data, "dsdsdsd");
              setOrder([response.data.order]);
             //  setTempservice(response.data.user);
  
