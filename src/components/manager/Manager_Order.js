@@ -25,7 +25,7 @@ const Manager_Order = () => {
 
     // Provider show data
 
-const [providers, setProvider]= useState('')
+    const [providers, setProvider] = useState('')
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL}/manager/allprovider`, { headers: { 'managertoken': managertoken } }).then(function (response) {
             // handle success
@@ -87,45 +87,45 @@ const [providers, setProvider]= useState('')
 
 
 
- //Order Multiple Select Options
+    //Order Multiple Select Options
 
- const [selectedOrderIds, setSelectedOrderIds] = useState([]);
+    const [selectedOrderIds, setSelectedOrderIds] = useState([]);
 
- // Function to handle checkbox changes
- const handleCheckboxChange = (itemId) => {
-     if (selectedOrderIds.includes(itemId)) {
-         // If the ID is already in the array, remove it
-         setSelectedOrderIds(selectedOrderIds.filter(id => id !== itemId));
-     } else {
-         // If the ID is not in the array, add it
-         setSelectedOrderIds([...selectedOrderIds, itemId]);
-     }
- };
-//  console.log(selectedOrderIds,"Order");
-    
-
+    // Function to handle checkbox changes
+    const handleCheckboxChange = (itemId) => {
+        if (selectedOrderIds.includes(itemId)) {
+            // If the ID is already in the array, remove it
+            setSelectedOrderIds(selectedOrderIds.filter(id => id !== itemId));
+        } else {
+            // If the ID is not in the array, add it
+            setSelectedOrderIds([...selectedOrderIds, itemId]);
+        }
+    };
+    //  console.log(selectedOrderIds,"Order");
 
 
 
- const handleSubmit = (e) => {
-    e.preventDefault();
-    const OrderData = {
-        Orderid: selectedOrderIds,
-        Providerid: selectedProviderIds
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const OrderData = {
+            Orderid: selectedOrderIds,
+            Providerid: selectedProviderIds
+        }
+
+        // data get karavava mate
+        axios.post(`${process.env.REACT_APP_URL}/manager/provider_order`, OrderData, { headers: { 'managertoken': managertoken } })
+            .then(function (response) {
+                console.log(response.data);
+                window.location.reload();
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+
     }
-
-    // data get karavava mate
-    axios.post(`${process.env.REACT_APP_URL}/manager/provider_order`, OrderData,{ headers: { 'managertoken': managertoken } })
-        .then(function (response) {
-           console.log(response.data);
-           window.location.reload();
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-
-}
 
 
 
@@ -175,7 +175,7 @@ const [providers, setProvider]= useState('')
                                                         </p>
 
                                                     </div>
-                                                ))} 
+                                                ))}
                                                 <button onClick={handleSubmit} className="btn btn-dark" style={{ width: 'fit-content' }}>Send</button>
                                                 <div>
 

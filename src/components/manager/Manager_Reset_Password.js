@@ -1,20 +1,22 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const Manager_Reset_Password = () => {
 
 
   const [password, setPassword] = useState('');
+  const [cpassword, setCpassword] = useState('');
     const nevigate = useNavigate()
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const ForgetPassword = {
-          password: password,
+          number: password,
+          cnumber: cpassword,
         }
 
-        axios.post(`${process.env.REACT_APP_URL}/manager/verify_otp`, ForgetPassword)
+        axios.post(`${process.env.REACT_APP_URL}/manager/forget_number`, ForgetPassword)
             .then(function (response) {
                 // handle success
                 console.log(response.data)
@@ -39,11 +41,16 @@ const Manager_Reset_Password = () => {
                   <p class="mb-2">Enter your New Password
                   </p>
                 </div>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div class="mb-3">
-                    <label for="password" class="form-label">Otp</label>
-                    <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} class="form-control" name="Password" placeholder="Enter Your Password"
+                    <label for="password" class="form-label">New Password</label>
+                    <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} class="form-control mb-2" name="Password" placeholder="Enter Your New Password"
                       required="" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label"> ConfirmPassword</label>
+                    <input type="password" id="password1" value={cpassword} onChange={(e) => setCpassword(e.target.value)} class="form-control" name="Password" placeholder="Enter Your Confirm  Password"
+                      required="" />                    
                   </div>
                   <div class="mb-3 d-grid">
                     <button type="submit" class="btn btn-primary">

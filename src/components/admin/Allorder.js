@@ -23,8 +23,104 @@ const Allorder = () => {
     }, [])
 
 
-    adminorder
+// Provider show data
 
+const [managers, setManagers] = useState('')
+useEffect(() => {
+    axios.get(`${process.env.REACT_APP_URL}/admin/allmanager`, { headers: { 'token': token } }).then(function (response) {
+        // handle success
+        // console.log(response.data);
+        setManagers(response.data.managers);
+    })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+}, [])
+
+const XLSX = require('xlsx');
+    const exportToExcel = () => {
+        const headers = ['Member ID', 'Member Name', 'Member Number', 'D.O.B.', 'Category', 'Sub Category', 'Product and Service', 'Reference Name', 'Reference Number', 'Description'];
+        // Fetch data from the API and store it in the 'data' variable
+        const dataAsArray = userForms.map((item) => [
+            item.userid.ids,
+            item.userid.name,
+            item.userid.number,
+            item.userid.DOB,
+            item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory,
+            item.productid.bsubcategoryid[0].bussinesssubcategory,
+            item.productid.product,
+            item.otherName,
+            item.otherNumber,
+            item.description,
+        ]);
+
+        const excelData = [headers, ...dataAsArray];
+        const ws = XLSX.utils.json_to_sheet(excelData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        XLSX.writeFile(wb, 'exported_data.xlsx');
+    }
+
+
+
+    //Order Multiple Select Options
+
+    const [selectedManagerIds, setSetSelectedManagerIds] = useState([]);
+
+    // Function to handle checkbox changes
+    const handleManagerCheckboxChange = (itemId) => {
+        if (selectedManagerIds.includes(itemId)) {
+            // If the ID is already in the array, remove it
+            setSetSelectedManagerIds(selectedManagerIds.filter(id => id !== itemId));
+        } else {
+            // If the ID is not in the array, add it
+            setSetSelectedManagerIds([...selectedManagerIds, itemId]);
+        }
+    };
+    // console.log(selectedProviderIds,"Provider");
+
+
+
+
+    //Order Multiple Select Options
+
+    const [selectedOrderIds, setSelectedOrderIds] = useState([]);
+
+    // Function to handle checkbox changes
+    const handleCheckboxChange = (itemId) => {
+        if (selectedOrderIds.includes(itemId)) {
+            // If the ID is already in the array, remove it
+            setSelectedOrderIds(selectedOrderIds.filter(id => id !== itemId));
+        } else {
+            // If the ID is not in the array, add it
+            setSelectedOrderIds([...selectedOrderIds, itemId]);
+        }
+    };
+    //  console.log(selectedOrderIds,"Order");
+
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const OrderData = {
+            Orderid: selectedOrderIds,
+            Managerid: selectedManagerIds
+        }
+
+        // data get karavava mate
+        axios.post(`${process.env.REACT_APP_URL}/admin/forward_order`, OrderData, { headers: { 'token': token } })
+            .then(function (response) {
+                console.log(response.data);
+                window.location.reload();
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+
+    }
 
 
     return (

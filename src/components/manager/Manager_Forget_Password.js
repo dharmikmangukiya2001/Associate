@@ -15,8 +15,8 @@ const Manager_Forget_Password = () => {
             email: email,
         }
 
-       
-            axios.post(`${process.env.REACT_APP_URL}/manager/checkemail`, Forget)
+
+        axios.post(`${process.env.REACT_APP_URL}/manager/checkemail`, Forget)
             .then(function (response) {
                 // handle success
                 console.log(response.data);
@@ -25,7 +25,7 @@ const Manager_Forget_Password = () => {
             .catch(function (error) {
                 console.log(error);
             })
-     
+
 
     }
 
@@ -42,14 +42,14 @@ const Manager_Forget_Password = () => {
                                     <p class="mb-2">Enter your registered email ID to reset the password
                                     </p>
                                 </div>
-                                <form onSubmit={handleSubmit}>
+                                <form onSubmit={handleSubmit} >
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
                                         <input type="email" id="email" class="form-control" value={email} onChange={(e) => setEmail(e.target.value)} name="email" placeholder="Enter Your Email"
                                             required="" />
                                     </div>
                                     <div class="mb-3 d-grid">
-                                        <button type="submit"  class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary">
                                             Send Your Otp
                                         </button>
                                     </div>

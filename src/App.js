@@ -210,7 +210,7 @@ function App() {
 
 
         {/* G MANAGER SITE START */}
-        <Route path="/manager" element={!isLoggedInManager ? <ManagerLogin onLogin={ManagerhandleLogin} onLogout={ManagerhandleLogout} /> : <Navigate to="/manager_dashbord" />} />
+        <Route path="/manager" element={!isLoggedInManager ? <ManagerLogin onLogin={ManagerhandleLogin} onLogout={ManagerhandleLogout} /> : <Navigate to="/manager_dashboard" />} />
         <Route path="/manager_forget_password" element={!isLoggedInManager ? <Manager_Forget_Password onLogout={ManagerhandleLogout} /> : <Navigate to="/manager" />} />
         <Route path="/manager_send_otp" element={!isLoggedInManager ? <Manager_Forget_Password_Otp onLogout={ManagerhandleLogout} /> : <Navigate to="/manager" />} />
         <Route path="/manager_Reset_password" element={!isLoggedInManager ? <Manager_Reset_Password onLogout={ManagerhandleLogout} /> : <Navigate to="/manager" />} />

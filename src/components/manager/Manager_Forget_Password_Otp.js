@@ -6,25 +6,29 @@ import { useNavigate } from "react-router-dom";
 const Manager_Forget_Password = () => {
 
   const [number, setNumber] = useState('');
-  const nevigate = useNavigate()
+  const navigate = useNavigate()
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const Forget = {
-      otp: number,
+      otp: number, // Make sure 'number' is defined and contains the OTP
+    };
+  
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_URL}/manager/verify_otp`, Forget);
+      console.log(response.data);
+  
+      if (response.data.status === true) {
+        navigate('/manager_Reset_password');
+      } else {
+        console.log("OTP verification failed");
+      }
+    } catch (error) {
+      console.error(error);
     }
-    
-      axios.post(`${process.env.REACT_APP_URL}/manager/verify_otp`, Forget)
-        .then(function (response) {
-          // handle success
-          console.log(response.data)
-          // nevigate('/manager_send_otp')
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-  }
+  };
+  
 
   return (
     <>
