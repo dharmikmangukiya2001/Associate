@@ -5,8 +5,32 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
 const Managerdetails = () => {
+
+    // // loader
+    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState(null);
+    useEffect(() => {
+      // Simulate an API call
+      fetchData().then((result) => {
+        setData(result);
+        setIsLoading(false);
+      });
+    }, []);
+  
+    const fetchData = async () => {
+      // Simulate an API call or any asynchronous operation
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Data from API");
+        }, 1000);
+      });
+    };
+
+
+
 
     // Show Manager details
 
@@ -83,7 +107,7 @@ const Managerdetails = () => {
                 .then((response) => {
                     // console.log(response.data,"defsdd");
                     // console.log(tempservice,"dsd");
-                    window.location.reload();
+                    // window.location.reload();
                 })
                 .catch((error) => {
                     console.error(error);
@@ -98,9 +122,10 @@ const Managerdetails = () => {
 
     return(
         <>
+         {
+            isLoading ? (<><Loader /></>) : (<>
+
         <Header/>
-
-
         <main id="main" className="main">
                 <div className="pagetitle">
                     <h1 className="text-start m-0">Orders Details</h1>
@@ -262,6 +287,7 @@ const Managerdetails = () => {
 
             </main>
 
+        </>)}
         </>
     )
 }

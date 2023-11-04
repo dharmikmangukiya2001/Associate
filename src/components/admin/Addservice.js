@@ -2,8 +2,31 @@ import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import Loader from './Loader'
 const Addservice = () => {
 
+    // =====================================================| Loarder  |==========================================================================
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+      // Simulate an API call
+      fetchData().then((result) => {
+        setData(result);
+        setIsLoading(false);
+      });
+    }, []);
+  
+    const fetchData = async () => {
+      // Simulate an API call or any asynchronous operation
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Data from API");
+        }, 1000);
+      });
+    };
     // =====================================================| Service Type  |==========================================================================
 
     const token = localStorage.getItem("token");
@@ -185,6 +208,8 @@ const Addservice = () => {
     // ================================================================================================================================================
     return (
         <>
+        {
+            isLoading ? (<><Loader /></>) : (<>
             <Header />
             <div>
                 <main id="main" className="main">
@@ -381,6 +406,9 @@ const Addservice = () => {
                     </div>
                 </footer>{/* End Footer */}
             </div>
+
+            </>
+            )}
 
         </>
     )

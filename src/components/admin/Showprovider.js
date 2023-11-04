@@ -4,8 +4,33 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { logDOM } from "@testing-library/react";
+import Loader from "./Loader.js";
 
 const Showprovider = () => {
+
+    //loarder
+    const [isLoading, setIsLoading] = useState(true);
+    const [data1, setData] = useState(null);
+
+    useEffect(() => {
+      // Simulate an API call
+      fetchData().then((result) => {
+        setData(result);
+        setIsLoading(false);
+      });
+    }, []);
+  
+    const fetchData = async () => {
+      // Simulate an API call or any asynchronous operation
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Data from API");
+        }, 1000);
+      });
+    };
+
+
+
 
     const [providers, setProviders] = useState([])
     const token = localStorage.getItem("token");
@@ -44,6 +69,9 @@ const Showprovider = () => {
 
     return (
         <>
+        {
+            isLoading ? (<><Loader /></>) : (<>
+
             <Header />
             <div>
                 <main id="main" className='main'>
@@ -159,6 +187,8 @@ const Showprovider = () => {
                     </div>
                 </footer>{/* End Footer */}
             </div >
+
+            </>)}
 
         </>
     )

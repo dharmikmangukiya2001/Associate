@@ -3,9 +3,34 @@ import Header from './Header.js';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import Multiselect from 'multiselect-react-dropdown';
+import Loader from './Loader.js';
 
 
 const Addprovider = () => {
+
+    //loarder
+
+    const [isLoading, setIsLoading] = useState(true);
+    const [data1, setData] = useState(null);
+
+    useEffect(() => {
+      // Simulate an API call
+      fetchData().then((result) => {
+        setData(result);
+        setIsLoading(false);
+      });
+    }, []);
+  
+    const fetchData = async () => {
+      // Simulate an API call or any asynchronous operation
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Data from API");
+        }, 1000);
+      });
+    };
+
+
 
     const [providername, setProvidername] = useState('');
     const [providernumber, setProvidernumber] = useState('');
@@ -29,7 +54,8 @@ const Addprovider = () => {
     const [bussinesspancardnumber, setBussinesspancardnumber] = useState('');
     // const [sbcatid, setSbcatid] = useState('');
     const [bussinessaddress, setBussinessaddress] = useState('');
-    const [collaborationdetails, setCollaborationdetails] = useState('');
+    const [collaborationcompany, setCollaborationcompany] = useState('');
+    const [collaborationmember, setCollaborationmember] = useState('');
     // Sales Details
     const [salespersonname, setSalespersonname] = useState('');
     const [salespersonnumber, setSalespersonnumber] = useState('');
@@ -40,6 +66,7 @@ const Addprovider = () => {
     const [bankaccountnumber, setBankaccountnumber] = useState('');
     const [bankifsccode, setBankifsccode] = useState('');
     const [bankbranchname, setBankbranchname] = useState('');
+    const [upiid, setUpiid] = useState('');
     // Files
     //const [img, setImg] = useState([]);
 
@@ -303,7 +330,8 @@ const Addprovider = () => {
         bussinesspancardnumber,
         sbcatid,
         bussinessaddress,
-        collaborationdetails,
+        collaborationcompany,
+        collaborationmember,
         salespersonname,
         salespersonnumber,
         salespersonemailid,
@@ -312,6 +340,7 @@ const Addprovider = () => {
         bankaccountnumber,
         bankifsccode,
         bankbranchname,
+        upiid,
         // Image data
         pfiles,
         bfiles,
@@ -383,7 +412,8 @@ const Addprovider = () => {
         formData.append("Bpancardnumber", data.bussinesspancardnumber);
         formData.append("Btdsdetails", data.bussinesstdsdetails);
         formData.append("product_service", data.productandservice);
-        formData.append("collaborationDetails", data.collaborationdetails);
+        formData.append("collaborationCompany", data.collaborationcompany);
+        formData.append("collaborationMember", data.collaborationmember);
         formData.append("salespersonName", data.salespersonname);
         formData.append("salespersonNumber", data.salespersonnumber);
         formData.append("salespersonEmail", data.salespersonemailid);
@@ -392,6 +422,7 @@ const Addprovider = () => {
         formData.append("bankAccountnumber", data.bankaccountnumber);
         formData.append("bankIFSCcode", data.bankifsccode);
         formData.append("bankBranchname", data.bankbranchname);
+        formData.append("upiid", data.upiid);
 
 
 
@@ -491,6 +522,9 @@ const Addprovider = () => {
 
     return (
         <>
+        {
+            isLoading ? (<><Loader /></>) : (<>
+
             <Header />
             <div>
                 <main id="main" className='main'>
@@ -867,13 +901,24 @@ const Addprovider = () => {
                                                                 </div>
                                                             </div> */}
                                                             <div className='row mb-5'>
-                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Collaboration Details <span className='text-red'>*</span></label>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Collaboration with Company (%) <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
                                                                         {/* <input type='text' className='form-control' placeholder='Business Type' /> */}
-                                                                        <textarea className="form-control" value={collaborationdetails} onChange={(e) => setCollaborationdetails(e.target.value)} placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: 100 }} defaultValue={""} />
+                                                                        <input className="form-control" value={collaborationcompany} onChange={(e) => setCollaborationcompany(e.target.value)} placeholder="Leave a comment here" />
 
-                                                                        <label for="floatingTextarea2">Comments</label>
+                                                                        <label for="floatingTextarea2">Collaboration with Company (%)</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mb-5'>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Collaboration with Member (%) <span className='text-red'>*</span></label>
+                                                                <div className='col-sm-9 col-lg-10'>
+                                                                    <div className='me-3 form-floating'>
+                                                                        {/* <input type='text' className='form-control' placeholder='Business Type' /> */}
+                                                                        <input className="form-control" value={collaborationmember} onChange={(e) => setCollaborationmember(e.target.value)} placeholder="Leave a comment here"/>
+
+                                                                        <label for="floatingTextarea2">Collaboration with Member (%)</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -994,6 +1039,15 @@ const Addprovider = () => {
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div className='row mb-5'>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>UPI ID <span className='text-red'>*</span></label>
+                                                                <div className='col-sm-9 col-lg-10'>
+                                                                    <div className='me-3 form-floating'>
+                                                                        <input type='text' required className='form-control' value={upiid} onChange={(e) => setUpiid(e.target.value)} placeholder='Bank Branch Name' />
+                                                                        <label htmlFor="floatingTextarea">UPI ID</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <div className='row mb-5 text-end me-2'>
                                                                 <div className='w-25'>
                                                                     <button className='btn bg-danger text-white' onClick={documentAdd}>Add Document</button>
@@ -1084,6 +1138,10 @@ const Addprovider = () => {
                     </div>
                 </footer>{/* End Footer */}
             </div >
+
+            </>
+            )}
+
         </>
     )
 

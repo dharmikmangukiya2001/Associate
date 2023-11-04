@@ -2,8 +2,32 @@ import React, { useState } from "react";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Loader from "./Loader";
+import { useEffect } from "react";
 
 const Addmanager = () => {
+
+     // // loader
+     const [isLoading, setIsLoading] = useState(true);
+     const [data, setData] = useState(null);
+     useEffect(() => {
+       // Simulate an API call
+       fetchData().then((result) => {
+         setData(result);
+         setIsLoading(false);
+       });
+     }, []);
+   
+     const fetchData = async () => {
+       // Simulate an API call or any asynchronous operation
+       return new Promise((resolve) => {
+         setTimeout(() => {
+           resolve("Data from API");
+         }, 1000);
+       });
+     };
+
+
 
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
@@ -46,6 +70,11 @@ const Addmanager = () => {
 
     return(
     <>
+     {
+            isLoading ? (<><Loader /></>) : (<>
+
+
+
     <Header/>
     <div>
                 <main id="main" className="main">
@@ -129,7 +158,10 @@ const Addmanager = () => {
                         Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
                     </div>
                 </footer>{/* End Footer */}
-            </div>
+    </div>
+
+
+</>)}
     </>
     )
 }

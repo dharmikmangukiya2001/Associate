@@ -3,8 +3,34 @@ import Header from "./Header";
 import { Link, useParams } from "react-router-dom";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
 const Memberdetails = () => {
+
+
+    //loarder
+    const [isLoading, setIsLoading] = useState(true);
+    const [data1, setData] = useState(null);
+
+    useEffect(() => {
+      // Simulate an API call
+      fetchData().then((result) => {
+        setData(result);
+        setIsLoading(false);
+      });
+    }, []);
+  
+    const fetchData = async () => {
+      // Simulate an API call or any asynchronous operation
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Data from API");
+        }, 1000);
+      });
+    };
+
+
+
 
 
     //  Show Member data
@@ -60,7 +86,7 @@ const Memberdetails = () => {
 
 
     useEffect(()=>{
-        console.log(tempservice,'dsdd');
+        // console.log(tempservice,'dsdd');
     })
 
 
@@ -98,9 +124,10 @@ const Memberdetails = () => {
 
     return (
         <>
+{
+            isLoading ? (<><Loader /></>) : (<>
 
             <Header />
-
             <main id="main" className="main">
                 <div className="pagetitle">
                     <h1 className="text-start">Member Details</h1>
@@ -474,6 +501,7 @@ const Memberdetails = () => {
                 </section>
 
             </main>
+            </>)}
         </>
     )
 

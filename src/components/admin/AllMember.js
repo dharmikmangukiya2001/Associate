@@ -2,8 +2,34 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { Link } from "react-router-dom";
+import Loader from "./Loader";
 
 const AllMember = () => {
+
+
+    //loarder
+    const [isLoading, setIsLoading] = useState(true);
+    const [data1, setData] = useState(null);
+
+    useEffect(() => {
+      // Simulate an API call
+      fetchData().then((result) => {
+        setData(result);
+        setIsLoading(false);
+      });
+    }, []);
+  
+    const fetchData = async () => {
+      // Simulate an API call or any asynchronous operation
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Data from API");
+        }, 1000);
+      });
+    };
+
+
+
 
 
     const [users, setUsers] = useState([])
@@ -47,8 +73,10 @@ const AllMember = () => {
     }
     return (
         <>
-            <Header />
+        {
+            isLoading ? (<><Loader /></>) : (<>
 
+            <Header />
             <div>
                 <main id="main" className='main'>
                     <div className='pagetitle'>
@@ -179,7 +207,7 @@ const AllMember = () => {
                 </footer>{/* End Footer */}
             </div >
 
-
+</>)}
 
         </>
     )

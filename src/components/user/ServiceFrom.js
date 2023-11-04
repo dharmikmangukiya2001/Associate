@@ -8,6 +8,7 @@ const ServiceFrom = () => {
     const [description, setDescription] = useState('')
     const [customername, setCustomername] = useState('');
     const [customernumber, setCustomernumber] = useState('');
+    const [customeremail, setCustomeremail] = useState('');
     const [selectedValue, setSelectedValue] = useState('');
     const token = localStorage.getItem('token')
     const usertoken = localStorage.getItem('usertoken')
@@ -115,6 +116,7 @@ const ServiceFrom = () => {
         description,
         otherName: customername,
         otherNumber: customernumber,
+        otherEmail:customeremail,
         selectedValue
 
     }
@@ -225,7 +227,7 @@ const ServiceFrom = () => {
                                                             </textarea>
                                                         </div>
                                                     </div>
-                                                    <div className='row mt-5 mb-5'>
+                                                    {/* <div className='row mt-5 mb-5'>
                                                         <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Select Option <span className='text-red'>*</span></label>
                                                         <div className='col-sm-9 col-lg-10'>
                                                             <label className="me-5">
@@ -253,17 +255,26 @@ const ServiceFrom = () => {
 
 
                                                         </div>
-                                                    </div>
+                                                    </div> */}
 
-                                                    {
+                                                    {/* {
                                                         selectedSelesOption ? (
-                                                            <>
+                                                            <> */}
                                                                 <div className='row mb-5'>
                                                                     <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Customer Name <span className='text-red'>*</span></label>
                                                                     <div className='col-sm-9 col-lg-10'>
                                                                         <div className='me-3 form-floating'>
                                                                             <input type='text' className='form-control' value={customername} onChange={(e) => setCustomername(e.target.value)} placeholder='customer Name' />
                                                                             <label htmlFor="floatingTextarea">Customer Name</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className='row mb-5'>
+                                                                    <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Customer Email <span className='text-red'>*</span></label>
+                                                                    <div className='col-sm-9 col-lg-10'>
+                                                                        <div className='me-3 form-floating'>
+                                                                            <input type='text' className='form-control' value={customeremail} onChange={(e) => setCustomeremail(e.target.value)} placeholder='customer Name' />
+                                                                            <label htmlFor="floatingTextarea">Customer Email</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -277,9 +288,9 @@ const ServiceFrom = () => {
                                                                     </div>
                                                                 </div>
 
-                                                            </>
+                                                            {/* </>
                                                         ) : null
-                                                    }
+                                                    } */}
 
                                                     <div className='row mb-5'>
 

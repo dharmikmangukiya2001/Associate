@@ -8,19 +8,26 @@ import axios from "axios";
 const Home = () => {
 
     // // loader
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [data, setData] = useState(null);
+
     useEffect(() => {
-        const showTime = 5000;
-
-        function hideLoader() {
-            setIsLoading(false);
-        }
-
-        const timer = setTimeout(hideLoader, showTime);
-
-        return () => clearTimeout(timer);
+      // Simulate an API call
+      fetchData().then((result) => {
+        setData(result);
+        setIsLoading(false);
+      });
     }, []);
-
+  
+    const fetchData = async () => {
+      // Simulate an API call or any asynchronous operation
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Data from API");
+        }, 1000);
+      });
+    };
 
     // Show All Order For Member Start
     const token = localStorage.getItem("token");
@@ -72,12 +79,11 @@ const Home = () => {
 
     return (
         <>
-            {/* { */}
-            {/* isLoading ? (<><Loader /></>) : (<>*/}
+            {
+            isLoading ? (<><Loader /></>) : (<>
+
+
             <Header />
-
-
-
             <div>
                 <main id="main" className="main">
                     <div className="pagetitle">
@@ -445,8 +451,8 @@ const Home = () => {
                 </footer>{/* End Footer */}
             </div>
 
-            {/* </>) */}
-            {/* } */}
+            </>
+            )}
 
 
 

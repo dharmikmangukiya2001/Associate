@@ -110,8 +110,8 @@ const Manager_Order = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const OrderData = {
-            Orderid: selectedOrderIds,
-            Providerid: selectedProviderIds
+            orderid: selectedOrderIds,
+            providerid: selectedProviderIds
         }
 
         // data get karavava mate

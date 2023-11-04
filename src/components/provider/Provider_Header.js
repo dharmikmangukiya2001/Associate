@@ -272,12 +272,12 @@ const Provider_Header = () => {
 
                     <li className="nav-item">
                         <a className="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse">
-                            <i className="bi bi-journal-text" /><span>Services Details</span><i className="bi bi-chevron-down ms-auto" />
+                            <i className="bi bi-journal-text" /><span>Orders</span><i className="bi bi-chevron-down ms-auto" />
                         </a>
                         <ul id="forms-nav" className="nav-content collapse ">
                             <li>
-                                <a href="/provider_addservice" class="a-none">
-                                    <i className="bi bi-plus-square fs-5" /><span>Add Services</span>
+                                <a href="/provider_allorder" class="a-none">
+                                    <i className="bi bi-plus-square fs-5" /><span>Add Order</span>
                                 </a>
                             </li>
                             <li>

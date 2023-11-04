@@ -22,7 +22,8 @@ import { Navigate } from 'react-router-dom';
 
 import Provider_Login from './components/provider/Provider_Login';
 import Provider_Dashboard from './components/provider/Provider_Dashboard';
-import AddService from './components/provider/AddServices';
+import Provider_Profile from './components/provider/Provider_Profile';
+import Provider_Allorder from './components/provider/Provider_Allorder';
 import { useEffect, useState } from 'react';
 
 import ManagerLogin from './components/manager/ManagerLogin'
@@ -204,7 +205,8 @@ function App() {
         {/* PROVIDER SITE START */}
         <Route path="/provider" element={!isLoggedInProvider ? <Provider_Login onLogin={ProviderhandleLogin} /> : <Navigate to="/provider_dashboard" />} />
         <Route path="/provider_dashboard" element={isLoggedInProvider ? <Provider_Dashboard onLogin={ProviderhandleLogout} /> : <Navigate to="/provider_dashboard" />} />
-        <Route path="/provider_addservice" element={isLoggedInProvider ? <AddService onLogin={ProviderhandleLogout} /> : <Navigate to="/provider_addservice" />} />
+        <Route path="/provider_profile" element={isLoggedInProvider ? <Provider_Profile onLogin={ProviderhandleLogout} /> : <Navigate to="/provider_profile" />} />
+        <Route path='/provider_allorder' element={isLoggedInProvider ? < Provider_Allorder onLogout={ProviderhandleLogout} /> : <Navigate to="/provider_allorder" />} />
         {/* PROVIDER SITE END */}
 
 

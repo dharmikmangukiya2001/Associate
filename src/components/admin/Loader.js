@@ -3,15 +3,19 @@ import "./Spinner.css";
 
 export default function Loader() {
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <div class="loadingio-spinner-ripple-wsf5cxo48ch">
-      <div class="ldio-japzwhp0h9j">
-        <div>
-        </div>
-        <div>
+    <div className="bodY">
+      <div id="cupcake" class="box">
+      <span class="letter">M</span>
 
-        </div>
-      </div>
+      <div class="cupcakeCircle box">
+        <div class="cupcakeInner box">
+          <div class="cupcakeCore box"></div>
+
+        </div></div>
+
+      <span class="letter box">R</span>
+      <span class="letter box">S</span>
+      <span class="letter box">Y</span>
     </div>
     </div>
   );
