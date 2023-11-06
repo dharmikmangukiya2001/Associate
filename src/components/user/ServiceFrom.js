@@ -5,11 +5,7 @@ import { useNavigate } from "react-router-dom";
 const ServiceFrom = () => {
 
     const nevigate = useNavigate();
-    const [description, setDescription] = useState('')
-    const [customername, setCustomername] = useState('');
-    const [customernumber, setCustomernumber] = useState('');
-    const [customeremail, setCustomeremail] = useState('');
-    const [selectedValue, setSelectedValue] = useState('');
+    
     const token = localStorage.getItem('token')
     const usertoken = localStorage.getItem('usertoken')
 
@@ -19,7 +15,7 @@ const ServiceFrom = () => {
         axios.get(`${process.env.REACT_APP_URL}/admin/show_bcategory`,{headers: {'token': token}}).then(function (response) {
             // handle success
 
-            console.log(response.data, "Show_bcategory");
+            // console.log(response.data, "Show_bcategory");
             setBcategory(response.data.bcategory);
             // console.log("Bussiness Category:::", bussinesscategory);
 
@@ -76,7 +72,7 @@ const ServiceFrom = () => {
         if (sbcatid) {
             axios.post(`${process.env.REACT_APP_URL}/admin/productid`, sbcatid,{headers: {'token': token}}).then(function (response) {
                 // hendle success
-                console.log(response.data, "showproduct");
+                // console.log(response.data, "showproduct");
                 const pro = response.data.productService
                 setProductService(pro);
 
@@ -94,7 +90,12 @@ const ServiceFrom = () => {
 
 
 
-
+    const [description, setDescription] = useState('')
+    const [customername, setCustomername] = useState('');
+    const [customernumber, setCustomernumber] = useState('');
+    const [customeremail, setCustomeremail] = useState('');
+    const [budget, setBudget] = useState('');
+    const [selectedValue, setSelectedValue] = useState('');
 
 
     const [selectedSelesOption, setSelectedSelesOption] = useState(false);
@@ -117,10 +118,10 @@ const ServiceFrom = () => {
         otherName: customername,
         otherNumber: customernumber,
         otherEmail:customeremail,
-        selectedValue
-
+        selectedValue,
+        budget
     }
-    console.log(askdata);
+    // console.log(askdata);
     const handleRadioChange = (e) => {
         setSelectedValue(e.target.value);
     };
@@ -140,7 +141,7 @@ const ServiceFrom = () => {
                 }
             })
                 .then((response) => {
-                    console.log(response.data, "sdsdsd");
+                    // console.log(response.data, "sdsdsd");
                     // console.log(data,"dsd");
                     nevigate('/member')
                 })
@@ -284,6 +285,15 @@ const ServiceFrom = () => {
                                                                         <div className='me-3 form-floating'>
                                                                             <input type='number' className='form-control' value={customernumber} onChange={(e) => setCustomernumber(e.target.value)} placeholder='customer Numbar' />
                                                                             <label htmlFor="floatingTextarea">Customer Number</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className='row mb-5'>
+                                                                    <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Budget <span className='text-red'>*</span></label>
+                                                                    <div className='col-sm-9 col-lg-10'>
+                                                                        <div className='me-3 form-floating'>
+                                                                            <input type='number' className='form-control' value={budget} onChange={(e) => setBudget(e.target.value)} placeholder='customer Numbar' />
+                                                                            <label htmlFor="floatingTextarea">Budget</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>

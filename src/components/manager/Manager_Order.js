@@ -13,7 +13,7 @@ const Manager_Order = () => {
         axios.get(`${process.env.REACT_APP_URL}/manager/showorders`, { headers: { 'managertoken': managertoken } }).then(function (response) {
             // handle success
             setAdminorder(response.data.adminorder);
-            // console.log(adminorder,"Order:::");
+            // console.log(adminorder, "Order:::");
 
         })
             .catch(function (error) {
@@ -23,21 +23,25 @@ const Manager_Order = () => {
     }, [])
     // Show All Order For Member End
 
-    // Provider show data
-
+    const [seletedOption, setSeletedOption] = useState(false);
     const [providers, setProvider] = useState('')
-    useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/manager/allprovider`, { headers: { 'managertoken': managertoken } }).then(function (response) {
-            // handle success
-            // console.log(response.data);
-            setProvider(response.data.providers);
-        })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-    }, [])
-
+    // Provider show data
+    const hendleProvider = (e) => {
+        e.preventDefault();
+        setSeletedOption(true)
+        // useEffect(() => {
+            axios.post(`${process.env.REACT_APP_URL}/manager/allprovider`, selectedOrderIds, { headers: { 'managertoken': managertoken } })
+                .then(function (response) {
+                    // handle success
+                    // console.log(response.data);
+                    setProvider(response.data.providers);
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+        // }, [])
+    }
 
 
 
@@ -82,7 +86,7 @@ const Manager_Order = () => {
             setSelectedProviderIds([...selectedProviderIds, itemId]);
         }
     };
-    // console.log(selectedProviderIds,"Provider");
+    console.log(selectedProviderIds, "Provider");
 
 
 
@@ -101,7 +105,7 @@ const Manager_Order = () => {
             setSelectedOrderIds([...selectedOrderIds, itemId]);
         }
     };
-    //  console.log(selectedOrderIds,"Order");
+    console.log(selectedOrderIds, "Order");
 
 
 
@@ -117,7 +121,7 @@ const Manager_Order = () => {
         // data get karavava mate
         axios.post(`${process.env.REACT_APP_URL}/manager/provider_order`, OrderData, { headers: { 'managertoken': managertoken } })
             .then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
                 window.location.reload();
             })
             .catch(function (error) {
@@ -126,6 +130,36 @@ const Manager_Order = () => {
             })
 
     }
+
+
+
+    // search Input
+    const [searchInput, setSearchInput] = useState('');
+    const [filteredData, setFilteredData] = useState([]);
+
+    // Assuming your initial data is stored in the `adminorder` state
+    // const [adminorder, setAdminOrder] = useState([]);
+
+    useEffect(() => {
+        // Filter the data based on the search input
+        const filtered = adminorder.filter((item) => {
+            return (
+                item.userid.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+                (typeof item.userid.number === 'string' && item.userid.number.includes(searchInput)) ||
+                (item.no.toString().includes(searchInput.toLowerCase())) ||  // Convert to string
+                item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory.toLowerCase().includes(searchInput.toLowerCase()) ||
+                item.productid.bsubcategoryid[0].bussinesssubcategory.toLowerCase().includes(searchInput.toLowerCase()) ||
+                item.productid.product.toLowerCase().includes(searchInput.toLowerCase())
+            );
+        });
+
+        setFilteredData(filtered);
+    }, [searchInput, adminorder]);
+
+    // Handler for the search input change
+    const handleSearchInputChange = (e) => {
+        setSearchInput(e.target.value);
+    };
 
 
 
@@ -149,158 +183,141 @@ const Manager_Order = () => {
 
                     <section className="section dashboard">
                         <div className="row">
-                            {/* Left side columns */}
                             <div className="col-lg-12">
                                 <div className="row">
-                                    <div className="col-12">
-                                        <div class="collapse col-12" id="collapseExample">
-                                            <div class="card card-body">
-                                                {providers && providers.map((item, i) => (
-                                                    <div key={i}>
-                                                        <p>
-                                                            <span>
-                                                                <input
-                                                                    className="form-check-input me-3"
-                                                                    type="checkbox"
-                                                                    value={item._id}
-                                                                    id="flexCheckMDefault"
-                                                                    onChange={() => handleProviderCheckboxChange(item._id)}
-                                                                    checked={selectedProviderIds.includes(item._id)}
-                                                                />
-                                                            </span>
-                                                            <strong>
-                                                                {item.name}
-                                                            </strong>
+                                    {
+                                        seletedOption ? (
+                                            <>
+                                                <div class="card card-body">
+                                                    {providers && providers.map((item, i) => (
+                                                        <div key={i}>
+                                                            <p>
+                                                                <span>
+                                                                    <input
+                                                                        className="form-check-input me-3"
+                                                                        type="checkbox"
+                                                                        value={item._id}
+                                                                        id="flexCheckMDefault"
+                                                                        onChange={() => handleProviderCheckboxChange(item._id)}
+                                                                        checked={selectedProviderIds.includes(item._id)}
+                                                                    />
+                                                                </span>
+                                                                <strong>
+                                                                    {item.name}
+                                                                </strong>
 
-                                                        </p>
+                                                            </p>
+
+                                                        </div>
+                                                    ))}
+                                                    <button onClick={handleSubmit} className="btn btn-dark" style={{ width: 'fit-content' }}>Submit</button>
+                                                    <div>
 
                                                     </div>
-                                                ))}
-                                                <button onClick={handleSubmit} className="btn btn-dark" style={{ width: 'fit-content' }}>Send</button>
-                                                <div>
+                                                </div>
 
+                                            </>
+                                        ) : (<></>)
+                                    }
+                                    <div class="card card-body">
+                                        <div className="col-12 d-flex">
+
+                                            <div className="col-7 ms-5 me-3">
+                                                <div className="input-group mb-3">
+                                                    <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        aria-label="Recipient's username"
+                                                        aria-describedby="basic-addon2"
+                                                        placeholder="Search Term"
+                                                        value={searchInput}
+                                                        onChange={handleSearchInputChange}
+                                                    />
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="card recent-sales overflow-auto">
-                                            <div className="card-body">
-                                                <div className="d-flex">
-                                                    <div className="col-7">
-                                                        <h5 className="card-title">Show All Member</h5>
-                                                    </div>
-                                                    <div className="col-2 ms-5 me-3">
-                                                        <button className="btn btn-success" onClick={exportToExcel}>Export to Excel</button>
-                                                    </div>
-                                                    <div className="col-2">
-                                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                                            Send to Provider
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                                <table className="rwd-table">
-                                                    <tbody>
-
-                                                        <tr>
-                                                            <th>Select</th>
-                                                            <th>Member ID</th>
-                                                            <th>Member Name</th>
-                                                            <th>Member Number</th>
-                                                            <th>Category</th>
-                                                            <th>Sub Category</th>
-                                                            <th>Product and Service</th>
-                                                            {/* <th>Description</th> */}
-                                                            {/* <th>Customer Name</th> */}
-                                                            {/* <th>Customer Number</th> */}
-                                                            {/* <th>Send</th> */}
-                                                            <th>Show</th>
-                                                        </tr>
-
-                                                        <>
-                                                            {adminorder &&
-                                                                adminorder.map((item, i) => (
-                                                                    <tr key={i}>
-
-                                                                        <td>
-                                                                            <div class="form-check">
-                                                                                <input
-                                                                                    className="form-check-input"
-                                                                                    type="checkbox"
-                                                                                    value={item._id}
-                                                                                    id="flexCheckDefault"
-                                                                                    onChange={() => handleCheckboxChange(item._id)}
-                                                                                    checked={selectedOrderIds.includes(item._id)}
-                                                                                />
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.userid.ids}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.userid.name}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.userid.number}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.productid.bsubcategoryid[0].bussinesssubcategory}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.productid.product}
-                                                                            </h6>
-                                                                        </td>
-                                                                        {/* <td>
-                                                                            <h6 className="">
-                                                                                {item.description}
-                                                                            </h6>
-                                                                        </td> */}
-                                                                        {/* <td>
-                                                                            <h6 className="">
-                                                                                {item.otherName}
-                                                                            </h6>
-                                                                        </td> */}
-                                                                        {/* <td>
-                                                                            <h6 className="">
-                                                                                {item.otherNumber}
-                                                                            </h6>
-                                                                        </td> */}
-                                                                        {/* <td data-th="Net Amount">
-                                                                            <Link to={`/admin_providerdetails/${}`}>
-                                                                            <button type="button" className="btn btn-success btn-sm">Send Manager</button>
-                                                                            </Link>
-                                                                        </td>                                                 */}
-                                                                        <td data-th="Net Amount">
-                                                                            <Link to={`/admin_orderdetails/${item._id}`}>
-                                                                                <button type="button" className="btn btn-primary btn-sm">Show</button>
-                                                                            </Link>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                ))}
-                                                        </>
-
-
-                                                    </tbody>
-                                                </table>
-
+                                            <div className="col-2  me-3">
+                                                <button className="btn btn-success" onClick={exportToExcel}>Export to Excel</button>
+                                            </div>
+                                            <div className="col-2">
+                                                <button className="btn btn-primary" onClick={hendleProvider} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                    Send to Provider
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="card card-body">
+                                <table className="rwd-table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Order Numbar</th>
+                                            <th>Member ID</th>
+                                            <th>Member Name</th>
+                                            <th>Member Number</th>
+                                            <th>Category</th>
+                                            <th>Sub Category</th>
+                                            <th>Product and Service</th>
+                                            <th>Show</th>
+                                        </tr>
+                                        {filteredData.map((item, i) => (
+                                            <tr key={i}>
+                                                <td>
+                                                    <div className="form-check">
+                                                        <input
+                                                            className="form-check-input"
+                                                            type="checkbox"
+                                                            value={item._id}
+                                                            onChange={() => handleCheckboxChange(item._id)}
+                                                            checked={selectedOrderIds.includes(item._id)}
+                                                        />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h6 className="">
+                                                        {item.no}
+                                                    </h6>
+                                                </td>
+                                                <td>
+                                                    <h6 className="">
+                                                        {item.userid.ids}
+                                                    </h6>
+                                                </td>
+                                                <td>
+                                                    <h6 className="">
+                                                        {item.userid.name}
+                                                    </h6>
+                                                </td>
+                                                <td>
+                                                    <h6 className="">
+                                                        {item.userid.number}
+                                                    </h6>
+                                                </td>
+                                                <td>
+                                                    <h6 className="">
+                                                        {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
+                                                    </h6>
+                                                </td>
+                                                <td>
+                                                    <h6 className="">
+                                                        {item.productid.bsubcategoryid[0].bussinesssubcategory}
+                                                    </h6>
+                                                </td>
+                                                <td>
+                                                    <h6 className="">
+                                                        {item.productid.product}
+                                                    </h6>
+                                                </td>
+                                                <td data-th="Net Amount">
+                                                    <Link to={`/manager_orderdetails/${item._id}`}>
+                                                        <button type="button" className="btn btn-primary btn-sm">Show</button>
+                                                    </Link>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </section>

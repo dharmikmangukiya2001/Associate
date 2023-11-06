@@ -100,7 +100,7 @@ const Provider_Allorder = () => {
                                                             <th>Sub Category</th>
                                                             <th>Product and Service</th>
                                                             <th>Description</th>
-                                                            {/* <th>Show</th> */}
+                                                            <th>Accept Order</th>
                                                         </tr>
 
                                                         <>
@@ -149,11 +149,11 @@ const Provider_Allorder = () => {
                                                                                 {item.description}
                                                                             </h6>
                                                                         </td>
-                                                                        {/* <td data-th="Net Amount">
-                                                                            <Link to={`/admin_orderdetails/${item._id}`}>
-                                                                                <button type="button" className="btn btn-primary btn-sm">Show</button>
+                                                                        <td data-th="Net Amount">
+                                                                            <Link to="">
+                                                                                <button type="button" className="btn btn-primary btn-sm">Accept Order</button>
                                                                             </Link>
-                                                                        </td> */}
+                                                                        </td>
                                                                     </tr>
 
                                                                 ))}

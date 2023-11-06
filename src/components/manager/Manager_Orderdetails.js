@@ -1,44 +1,22 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import Loader from "./Loader";
+import ManagerHeader from "./ManagerHeader";
 
 const Orderdetails = () => {
 
-    // // loader
-    const [isLoading, setIsLoading] = useState(true);
-    const [data, setData] = useState(null);
-    useEffect(() => {
-      // Simulate an API call
-      fetchData().then((result) => {
-        setData(result);
-        setIsLoading(false);
-      });
-    }, []);
-  
-    const fetchData = async () => {
-      // Simulate an API call or any asynchronous operation
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve("Data from API");
-        }, 1200);
-      });
-    };
+   
 
-
-
-
-     //  Show Member data
-     const [order, setOrder] = useState([])
-     const id = useParams()
-     const orderid = id.id
-     const token = localStorage.getItem("token");
+    
+    //  Show Member data
+    const [order, setOrder] = useState([])
+    const id = useParams()
+    const orderid = id.id
+    const managertoken = localStorage.getItem("managertoken");
      useEffect(() => {
-         axios.get(`${process.env.REACT_APP_URL}/admin/userform_details/${orderid}`, { headers: { 'token': token } }).then(function (response) {
+         axios.get(`${process.env.REACT_APP_URL}/manager/orderdetail/${orderid}`, { headers: { 'managertoken': managertoken } }).then(function (response) {
              // handle success
-            //  console.log(response.data, "dsdsdsd");
+             console.log(response.data, "dsdsdsd");
              setOrder([response.data.order]);
             //  setTempservice(response.data.user);
  
@@ -48,12 +26,13 @@ const Orderdetails = () => {
                  console.log(error);
              })
      }, [orderid]);
+
+
     return(
         <>
-        {
-            isLoading ? (<><Loader /></>) : (<>
+        
 
-        <Header/>
+        <ManagerHeader/>
         <main id="main" className="main">
                 <div className="pagetitle">
                     <h1 className="text-start m-0">Orders Details</h1>
@@ -74,9 +53,7 @@ const Orderdetails = () => {
                                     <div className="card recent-sales overflow-auto">
                                         <div className="card-body">
                                             <h5 className="card-title">Order Details :</h5>
-                                            <div className="pe-4 col-12 text-end">
-                                                {/* <Link><button  className="btn btn-danger px-5 me-2 w-25 mb-3">Delete</button></Link> */}
-                                            </div>
+                                            
 
                                             {order.map((item, i) => (
                                                 <div className='prodetails'>
@@ -254,7 +231,6 @@ const Orderdetails = () => {
                 </section>
 
             </main>
-        </>)}
         </>
     )
 }

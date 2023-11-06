@@ -105,8 +105,8 @@ const Memberdetails = () => {
                 }
             })
                 .then((response) => {
-                    console.log(response.data,"defsdd");
-                    console.log(tempservice,"dsd");
+                    // console.log(response.data,"defsdd");
+                    // console.log(tempservice,"dsd");
                     window.location.reload();
                 })
                 .catch((error) => {
@@ -415,7 +415,7 @@ const Memberdetails = () => {
                                                                                     <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Member Numbar <span className='text-red'>*</span></label>
                                                                                     <div className='col-sm-9 col-lg-10'>
                                                                                         <div className='me-3 form-floating'>
-                                                                                            <input type='Email' className='form-control' required value={tempservice.number} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, number: e.target.value, }) }} placeholder='Provider Numbar' />
+                                                                                            <input type='email' className='form-control' required value={tempservice.number} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, number: e.target.value, }) }} placeholder='Provider Numbar' />
                                                                                             <label htmlFor="floatingTextarea">Member Number</label>
                                                                                         </div>
                                                                                     </div>
@@ -460,7 +460,7 @@ const Memberdetails = () => {
                                                                                     <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Reference Number <span className='text-red'>*</span></label>
                                                                                     <div className='col-sm-9 col-lg-10'>
                                                                                         <div className='me-3 form-floating'>
-                                                                                            <input type='text' className='form-control' required value={tempservice.ref_no} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, ref_no : e.target.value, }) }} placeholder='Provider Numbar' />
+                                                                                            <input type='number' className='form-control' required value={tempservice.ref_no} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, ref_no : e.target.value, }) }} placeholder='Provider Numbar' />
                                                                                             <label htmlFor="floatingTextarea">Reference Number </label>
                                                                                         </div>
                                                                                     </div>

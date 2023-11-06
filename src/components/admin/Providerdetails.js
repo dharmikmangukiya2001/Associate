@@ -1099,7 +1099,7 @@ function Providerdetails() {
                                                                         <div className="ms-3 d-flex col-12">
                                                                             <div className="col-4">
                                                                                 <p className="fs-6">
-                                                                                    <strong>Collaboration Details &nbsp;&nbsp;: </strong>
+                                                                                    <strong>Collaboration Company &nbsp;&nbsp;: </strong>
                                                                                 </p>
                                                                             </div>
                                                                             <div className="col-8 pe-3">
@@ -1108,8 +1108,32 @@ function Providerdetails() {
                                                                                         {
                                                                                             Object.entries(item).map(([key, value], index) => {
                                                                                                 return (
-                                                                                                    <>{key == 'collaborationDetails' ? (<>
-                                                                                                        {value}
+                                                                                                    <>{key == 'collaborationCompany' ? (<>
+                                                                                                        {value} %
+                                                                                                    </>) : null}
+
+                                                                                                    </>
+                                                                                                )
+                                                                                            })
+                                                                                        }
+                                                                                    </span>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="ms-3 d-flex col-12">
+                                                                            <div className="col-4">
+                                                                                <p className="fs-6">
+                                                                                    <strong>Collaboration Member &nbsp;&nbsp;: </strong>
+                                                                                </p>
+                                                                            </div>
+                                                                            <div className="col-8 pe-3">
+                                                                                <p>
+                                                                                    <span className="fs-6">
+                                                                                        {
+                                                                                            Object.entries(item).map(([key, value], index) => {
+                                                                                                return (
+                                                                                                    <>{key == 'collaborationMember' ? (<>
+                                                                                                        {value} %
                                                                                                     </>) : null}
 
                                                                                                     </>
@@ -1301,6 +1325,30 @@ function Providerdetails() {
                                                                                             Object.entries(item).map(([key, value], index) => {
                                                                                                 return (
                                                                                                     <>{key == 'bankBranchname' ? (<>
+                                                                                                        {value}
+                                                                                                    </>) : null}
+
+                                                                                                    </>
+                                                                                                )
+                                                                                            })
+                                                                                        }
+                                                                                    </span>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="ms-3 d-flex col-12">
+                                                                            <div className="col-4">
+                                                                                <p className="fs-6">
+                                                                                    <strong>UIP ID&nbsp;&nbsp;: </strong>
+                                                                                </p>
+                                                                            </div>
+                                                                            <div className="col-8 pe-3">
+                                                                                <p>
+                                                                                    <span className="fs-6">
+                                                                                        {
+                                                                                            Object.entries(item).map(([key, value], index) => {
+                                                                                                return (
+                                                                                                    <>{key == 'upiid' ? (<>
                                                                                                         {value}
                                                                                                     </>) : null}
 
@@ -1888,11 +1936,22 @@ function Providerdetails() {
                                                                 </div>
                                                             </div> */}
                                                                                                     <div className='row mb-5'>
-                                                                                                        <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Collaboration Details <span className='text-red'>*</span></label>
+                                                                                                        <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Collaboration Company <span className='text-red'>*</span></label>
                                                                                                         <div className='col-sm-9 col-lg-10'>
                                                                                                             <div className='me-3 form-floating'>
                                                                                                                 {/* <input type='text' className='form-control' placeholder='Business Type' /> */}
-                                                                                                                <textarea className="form-control" value={tempservice.collaborationDetails} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, collaborationDetails: e.target.value, }) }} placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: 100 }} defaultValue={""} />
+                                                                                                                <input className="form-control" value={tempservice.collaborationCompany} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, collaborationCompany: e.target.value, }) }} placeholder="Leave a comment here" />
+
+                                                                                                                <label for="floatingTextarea2">Comments</label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div className='row mb-5'>
+                                                                                                        <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Collaboration Member <span className='text-red'>*</span></label>
+                                                                                                        <div className='col-sm-9 col-lg-10'>
+                                                                                                            <div className='me-3 form-floating'>
+                                                                                                                {/* <input type='text' className='form-control' placeholder='Business Type' /> */}
+                                                                                                                <textarea className="form-control" value={tempservice.collaborationMember} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, collaborationMember: e.target.value, }) }} placeholder="Leave a comment here" />
 
                                                                                                                 <label for="floatingTextarea2">Comments</label>
                                                                                                             </div>
@@ -2012,6 +2071,15 @@ function Providerdetails() {
                                                                                                             <div className='me-3 form-floating'>
                                                                                                                 <input type='text' required className='form-control' value={tempservice.bankBranchname} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, bankBranchname: e.target.value, }) }} placeholder='Bank Branch Name' />
                                                                                                                 <label htmlFor="floatingTextarea">Bank Branch Name</label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div className='row mb-5'>
+                                                                                                        <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>UPI ID <span className='text-red'>*</span></label>
+                                                                                                        <div className='col-sm-9 col-lg-10'>
+                                                                                                            <div className='me-3 form-floating'>
+                                                                                                                <input type='text' required className='form-control' value={tempservice.upiid} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, upiid: e.target.value, }) }} placeholder='Bank Branch Name' />
+                                                                                                                <label htmlFor="floatingTextarea">UPI ID</label>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>

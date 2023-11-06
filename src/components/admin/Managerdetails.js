@@ -107,7 +107,7 @@ const Managerdetails = () => {
                 .then((response) => {
                     // console.log(response.data,"defsdd");
                     // console.log(tempservice,"dsd");
-                    // window.location.reload();
+                    window.location.reload();
                 })
                 .catch((error) => {
                     console.error(error);

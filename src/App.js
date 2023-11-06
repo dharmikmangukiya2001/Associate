@@ -1,7 +1,19 @@
 import './App.css';
 import './components/admin/Home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Route, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+
+
+// Error Panel Page Start
 import Error from './components/Error/Error';
+// Error Panel Page End
+
+
+
+// Admin Panel Page Start
 import Home from './components/admin/Home';
 import Login from './components/admin/Login'
 import Addservice from './components/admin/Addservice'
@@ -17,26 +29,47 @@ import Orderdetails from './components/admin/Orderdetails';
 import Addmanager from './components/admin/Addmanager';
 import Allmanager from './components/admin/Allmanager';
 import Managerdetails from './components/admin/Managerdetails'
-import { Route, Routes } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+// Admin Panel Page End
 
+
+
+// Provider Panel Page Start
 import Provider_Login from './components/provider/Provider_Login';
 import Provider_Dashboard from './components/provider/Provider_Dashboard';
 import Provider_Profile from './components/provider/Provider_Profile';
 import Provider_Allorder from './components/provider/Provider_Allorder';
-import { useEffect, useState } from 'react';
+// Provider Panel Page End
 
+
+
+// Manager Panel Page Start
 import ManagerLogin from './components/manager/ManagerLogin'
 import Manager_Forget_Password from './components/manager/Manager_Forget_Password'
 import Manager_Forget_Password_Otp from './components/manager/Manager_Forget_Password_Otp'
 import Manager_Reset_Password from './components/manager/Manager_Reset_Password'
 import Manager_dashboard from './components/manager/Manager_dashboard'
 import Manager_Order from './components/manager/Manager_Order'
+import Manager_Orderdetails from './components/manager/Manager_Orderdetails'
+// Manager Panel Page End
 
+
+
+// Member Panel Page Start
 import User from './components/user/User';
 import UserLogin from './components/user/UserLogin';
 import ServiceFrom from './components/user/ServiceFrom';
 import UserProviderDetails from './components/user/UserProviderDetails';
+// Member Panel Page End
+
+
+
+// Payment Panel Page Start
+import Dashboard from './components/payment/Dashboard'
+// Payment Panel Page End
+
+
+
+
 
 
 
@@ -218,13 +251,14 @@ function App() {
         <Route path="/manager_Reset_password" element={!isLoggedInManager ? <Manager_Reset_Password onLogout={ManagerhandleLogout} /> : <Navigate to="/manager" />} />
         <Route path="/manager_dashboard" element={isLoggedInManager ? <Manager_dashboard onLogin={ManagerhandleLogout} /> : <Navigate to="/manager_dashboard" />} />
         <Route path="/manager_allorder" element={isLoggedInManager ? <Manager_Order onLogin={ManagerhandleLogout} /> : <Navigate to="/manager_allorder" />} />
+        <Route path="/manager_orderdetails/:id" element={isLoggedInManager ? <Manager_Orderdetails onLogout={ManagerhandleLogout} /> : <Manager_Orderdetails onLogout={ManagerhandleLogout} />} />
         {/* G MANAGER SITE END */}
 
 
 
 
-        {/* R MANAGER SITE START */}
-
+        {/* PAYMENT SITE START */}
+        <Route path='/payment_dashboard' element={<Dashboard/>}/>
         {/* R MANAGER SITE END */}
 
 
