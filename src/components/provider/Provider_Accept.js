@@ -84,22 +84,21 @@ const Provider_Accept = () => {
 
     //---------------------------------------------------------------------|   AMOUNT   |------------------------------------------------------------------------------------------------//
 
-    const [dealamount, setDealamount] = useState('');
-    // console.log(dealamount,"dsds");
-    const handleAmount = (id) => {
-        // data get karavava mate
-        axios.post(`${process.env.REACT_APP_URL}/provider/tracking/${id}/amount`, { body: "amount", dealamount }, { headers: { 'providertoken': providertoken } })
-            .then(function (response) {
-                // handle success
-                console.log(response.data, "dealamount:::");
-                window.location.reload('')
+    const [dealamount, setDealamount] = useState({}); // Use an object to store values for each item
 
+    const handleAmount = (id) => {
+        axios
+            .post(`${process.env.REACT_APP_URL}/provider/tracking/${id}/amount`, {
+                body: "amount",
+                dealamount: dealamount[id] // Get the dealamount for the specific item
+            }, { headers: { 'providertoken': providertoken } })
+            .then(function (response) {
+                console.log(response.data, "dealamount:::");
+                window.location.reload('');
             })
             .catch(function (error) {
-                // handle error
                 console.log(error);
-            })
-
+            });
     }
 
 
@@ -225,22 +224,43 @@ const Provider_Accept = () => {
                                                                                 <button type="button" onClick={() => handleMeeting(item._id)} className="btn btn-danger btn-sm">Meeting Done</button>}
                                                                         </td>
                                                                         <td data-th="">
-                                                                        {item.deal === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span>:
-                                                                            <button type="button" onClick={() => handleDeal(item._id)} className="btn btn-danger btn-sm">Deal Done</button>}
+                                                                            {item.deal === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                <button type="button" onClick={() => handleDeal(item._id)} className="btn btn-danger btn-sm">Deal Done</button>}
                                                                         </td>
                                                                         <td data-th="">
-                                                                        {item.amount === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span>:
-                                                                            <div class="input-group mb-3">
-                                                                                <input type="number" class="form-control" value={dealamount} onChange={(e) => setDealamount(e.target.value)} placeholder="Enter Your Deal Amount" aria-label="Recipient's username" aria-describedby="button-addon2" />
-                                                                                <button class="btn btn-danger" onClick={() => handleAmount(item._id)} type="button" id="button-addon2">Deal Amount</button>
-                                                                            </div>}
+                                                                            {item.amount === true ? (
+                                                                                <span>
+                                                                                    <i className="bi-check-lg fs-2 text-success"></i>
+                                                                                </span>
+                                                                            ) : (
+                                                                                <div className="input-group mb-3">
+                                                                                    <input
+                                                                                        type="number"
+                                                                                        className="form-control"
+                                                                                        value={dealamount[item._id]|| dealamount || ''}
+                                                                                        onChange={(e) => setDealamount({ ...dealamount, [item._id]: e.target.value })}
+                                                                                        placeholder="Enter Your Deal Amount"
+                                                                                        aria-label="Recipient's username"
+                                                                                        aria-describedby="button-addon2"
+                                                                                    />
+                                                                                    <button
+                                                                                        className="btn btn-danger"
+                                                                                        onClick={() => handleAmount(item._id)}
+                                                                                        type="button"
+                                                                                        id="button-addon2"
+                                                                                    >
+                                                                                        Deal Amount
+                                                                                    </button>
+                                                                                </div>
+                                                                            )}
+
                                                                         </td>
                                                                         <td data-th="">
-                                                                        {item.work === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span>:
-                                                                            <button type="button" onClick={() => handleWork(item._id)} className="btn btn-danger btn-sm">Work Done</button>}
+                                                                            {item.work === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                <button type="button" onClick={() => handleWork(item._id)} className="btn btn-danger btn-sm">Work Done</button>}
                                                                         </td>
                                                                         <td data-th="">
-                                                                        {item.payment === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span>:
+                                                                            {item.payment === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
                                                                                 <button type="button" onClick={() => handlePayMent(item._id)} className="btn btn-danger btn-sm">PayMent Done</button>}
                                                                         </td>
                                                                     </tr>

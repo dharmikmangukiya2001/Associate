@@ -63,7 +63,7 @@ import ServiceFrom from './components/user/ServiceFrom';
 import ShowAskFrom from './components/user/ShowAskFrom';
 import Showorder from './components/user/Showorder';
 import PayMent from './components/user/PayMent';
-// import CompletedOrder from './components/user/CompletedOrder';
+import CompletedOrder from './components/user/CompletedOrder';
 // Member Panel Page End
 
 
@@ -277,7 +277,7 @@ function App() {
         <Route path='/member_showaskform' element={isLoggedInMember ? <ShowAskFrom onLogin={MemberhandleLogout} /> : <Navigate to="/member_showaskform" />} />
         <Route path='/user_showorder/:id' element={isLoggedInMember ? <Showorder onLogin={MemberhandleLogout} /> : <Showorder onLogin={MemberhandleLogout} />} />
         <Route path='/member_yourpayment' element={isLoggedInMember ? <PayMent onLogin={MemberhandleLogout} /> :  <Navigate to="/member_yourpayment" />}/>
-        {/* <Route path='/member_completedorder' element={isLoggedInMember ? <CompletedOrder onLogin={MemberhandleLogout} /> :  <Navigate to="/member_completedorder" />}/> */}
+        <Route path='/member_completedorder' element={isLoggedInMember ? <CompletedOrder onLogin={MemberhandleLogout} /> :  <Navigate to="/member_completedorder" />}/>
         {/* PROVIDER SITE END */}
 
 

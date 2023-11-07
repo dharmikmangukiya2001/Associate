@@ -14,7 +14,7 @@ const Provider_Allorder = () => {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL}/provider/orders`, { headers: { 'providertoken': providertoken } }).then(function (response) {
             // handle success
-            console.log(response.data);
+            // console.log(response.data);
             setProviderorder(response.data.providerorder);
         })
             .catch(function (error) {
@@ -28,6 +28,22 @@ const Provider_Allorder = () => {
 
         // data get karavava mate
         axios.get(`${process.env.REACT_APP_URL}/provider/accept_order/${id}`, { headers: { 'providertoken': providertoken } })
+            .then(function (response) {
+                // handle success
+                // console.log(response.data, "Successfully logged in");
+                window.location.reload('')
+
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+
+    }
+    const handleCancel = (id) => {
+
+        // data get karavava mate
+        axios.get(`${process.env.REACT_APP_URL}/provider/decline_order/${id}`, { headers: { 'providertoken': providertoken } })
             .then(function (response) {
                 // handle success
                 // console.log(response.data, "Successfully logged in");
@@ -91,6 +107,7 @@ const Provider_Allorder = () => {
                                                             <th>Product and Service</th>
                                                             <th>Description</th>
                                                             <th>Accept</th>
+                                                            <th>Cancel</th>
                                                         </tr>
 
                                                         <>
@@ -141,6 +158,9 @@ const Provider_Allorder = () => {
                                                                         </td>
                                                                         <td data-th="Net Amount">
                                                                             <button type="button" onClick={() => handleAccept(item._id)} className="btn btn-danger btn-sm">Accept</button>
+                                                                        </td>
+                                                                        <td data-th="Net Amount">
+                                                                            <button type="button" onClick={() => handleCancel(item._id)} className="btn btn-danger btn-sm">Cancel</button>
                                                                         </td>
                                                                     </tr>
 

@@ -1,5 +1,6 @@
 import React from "react";
 import UserHeader from "./UserHeader";
+import { Link } from "react-router-dom";
 
 const PayMent = () => {
     return (
@@ -24,63 +25,67 @@ const PayMent = () => {
                                 <div className="row">
                                     {/* Sales Card */}
                                     <div className="col-xxl-3 col-md-6">
-                                        <div className="card info-card sales-card">
-                                            <div className="filter">
-                                                <a className="icon" href="#" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
-                                                <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                    <li className="dropdown-header text-start">
-                                                        <h6>Show</h6>
-                                                    </li>
-                                                    <li><a className="dropdown-item" href="/admin_Allorder">All Order</a></li>
-                                                    {/* <li><a className="dropdown-item" href="#">This Month</a></li> */}
-                                                    {/* <li><a className="dropdown-item" href="#">This Year</a></li> */}
-                                                </ul>
-                                            </div>
-                                            <div className="card-body">
-                                                <h5 className="card-title">Totel Order</h5>
-                                                <div className="d-flex align-items-center">
-                                                    <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                        <i className="bi bi-cart" />
-                                                    </div>
-                                                    <div className="ps-3">
-                                                        {/* {userForms && */}
-                                                        {/* <h6>{userForms.length}</h6> */}
-                                                        {/*  } */}
-                                                        {/* <span className="text-success small pt-1 fw-bold">12%</span> <span className="text-muted small pt-2 ps-1">increase</span> */}
+                                        <Link className="a-none" to="/member_completedorder">
+                                            <div className="card info-card sales-card">
+                                                <div className="filter">
+                                                    <a className="icon" href="#" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
+                                                    <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                        <li className="dropdown-header text-start">
+                                                            <h6>Show</h6>
+                                                        </li>
+                                                        <li><a className="dropdown-item" href="/admin_Allorder">All Order</a></li>
+                                                        {/* <li><a className="dropdown-item" href="#">This Month</a></li> */}
+                                                        {/* <li><a className="dropdown-item" href="#">This Year</a></li> */}
+                                                    </ul>
+                                                </div>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">Totel Order</h5>
+                                                    <div className="d-flex align-items-center">
+                                                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                            <i className="bi bi-cart" />
+                                                        </div>
+                                                        <div className="ps-3">
+                                                            {/* {userForms && */}
+                                                            {/* <h6>{userForms.length}</h6> */}
+                                                            {/*  } */}
+                                                            {/* <span className="text-success small pt-1 fw-bold">12%</span> <span className="text-muted small pt-2 ps-1">increase</span> */}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     </div>{/* End Sales Card */}
                                     {/* Revenue Card */}
                                     <div className="col-xxl-3 col-md-6">
-                                        <div className="card info-card revenue-card">
-                                            <div className="filter">
-                                                <a className="icon" href="" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
-                                                <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                                    <li className="dropdown-header text-start">
-                                                        <h6>Show</h6>
-                                                    </li>
-                                                    <li><a className="dropdown-item" href="admin_allmember">All Member</a></li>
-                                                    {/* <li><a className="dropdown-item" href="#">This Month</a></li> */}
-                                                    {/* <li><a className="dropdown-item" href="#">This Year</a></li> */}
-                                                </ul>
-                                            </div>
-                                            <div className="card-body">
-                                                <h5 className="card-title">Totel Commission</h5>
-                                                <div className="d-flex align-items-center">
-                                                    <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                        <i className="bi bi-shield" />
-                                                    </div>
-                                                    <div className="ps-3">
-                                                        {/* {users && */}
-                                                        {/* <h6>{users.length}</h6> */}
-                                                        {/* } */}
-                                                        {/* <span className="text-success small pt-1 fw-bold">8%</span> <span className="text-muted small pt-2 ps-1">increase</span> */}
+                                        <Link className="a-none" to="/member_completedorder">
+                                            <div className="card info-card revenue-card">
+                                                <div className="filter">
+                                                    <a className="icon" href="" data-bs-toggle="dropdown"><i className="bi bi-three-dots" /></a>
+                                                    <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                        <li className="dropdown-header text-start">
+                                                            <h6>Show</h6>
+                                                        </li>
+                                                        <li><a className="dropdown-item" href="admin_allmember">All Member</a></li>
+                                                        {/* <li><a className="dropdown-item" href="#">This Month</a></li> */}
+                                                        {/* <li><a className="dropdown-item" href="#">This Year</a></li> */}
+                                                    </ul>
+                                                </div>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">Totel Commission</h5>
+                                                    <div className="d-flex align-items-center">
+                                                        <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                            <i className="bi bi-shield" />
+                                                        </div>
+                                                        <div className="ps-3">
+                                                            {/* {users && */}
+                                                            {/* <h6>{users.length}</h6> */}
+                                                            {/* } */}
+                                                            {/* <span className="text-success small pt-1 fw-bold">8%</span> <span className="text-muted small pt-2 ps-1">increase</span> */}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     </div>{/* End Revenue Card */}
                                     {/* Customers Card */}
                                     <div className="col-xxl-3 col-md-6">
@@ -111,7 +116,7 @@ const PayMent = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>{/* End Customers Card */} 
+                                    </div>{/* End Customers Card */}
                                     {/* Customers Card */}
                                     <div className="col-xxl-3 col-md-6">
                                         <div className="card info-card customers-card1">
@@ -141,11 +146,11 @@ const PayMent = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>{/* End Customers Card */}                                
-                                                                   
+                                    </div>{/* End Customers Card */}
+
                                 </div>
                             </div>
-                           
+
                         </div>
                     </section>
                 </main>{/* End #main */}
