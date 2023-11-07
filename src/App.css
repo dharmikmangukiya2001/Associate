@@ -1042,8 +1042,12 @@ h6 {
 }
 
 .dashboard .customers-card .card-icon {
-  color: #ff771d;
-  background: #ffecdf;
+  color: #ca382e;
+  background: #f8e3e0;
+}
+.dashboard .customers-card1 .card-icon {
+  color: #2eca6a;
+  background: #e0f8e9;
 }
 
 /* Activity */

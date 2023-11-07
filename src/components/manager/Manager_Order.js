@@ -33,7 +33,7 @@ const Manager_Order = () => {
             axios.post(`${process.env.REACT_APP_URL}/manager/allprovider`, selectedOrderIds, { headers: { 'managertoken': managertoken } })
                 .then(function (response) {
                     // handle success
-                    // console.log(response.data);
+                    // console.log(response.data,'SDSDS');
                     setProvider(response.data.providers);
                 })
                 .catch(function (error) {
@@ -86,7 +86,7 @@ const Manager_Order = () => {
             setSelectedProviderIds([...selectedProviderIds, itemId]);
         }
     };
-    console.log(selectedProviderIds, "Provider");
+    // console.log(selectedProviderIds, "Provider");
 
 
 
@@ -105,7 +105,7 @@ const Manager_Order = () => {
             setSelectedOrderIds([...selectedOrderIds, itemId]);
         }
     };
-    console.log(selectedOrderIds, "Order");
+    // console.log(selectedOrderIds, "Order");
 
 
 
@@ -136,9 +136,6 @@ const Manager_Order = () => {
     // search Input
     const [searchInput, setSearchInput] = useState('');
     const [filteredData, setFilteredData] = useState([]);
-
-    // Assuming your initial data is stored in the `adminorder` state
-    // const [adminorder, setAdminOrder] = useState([]);
 
     useEffect(() => {
         // Filter the data based on the search input

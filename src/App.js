@@ -38,6 +38,8 @@ import Provider_Login from './components/provider/Provider_Login';
 import Provider_Dashboard from './components/provider/Provider_Dashboard';
 import Provider_Profile from './components/provider/Provider_Profile';
 import Provider_Allorder from './components/provider/Provider_Allorder';
+import Provider_Accept from './components/provider/Provider_Accept';
+import Provider_Completed from './components/provider/Provider_Completed';
 // Provider Panel Page End
 
 
@@ -58,7 +60,10 @@ import Manager_Orderdetails from './components/manager/Manager_Orderdetails'
 import User from './components/user/User';
 import UserLogin from './components/user/UserLogin';
 import ServiceFrom from './components/user/ServiceFrom';
-import UserProviderDetails from './components/user/UserProviderDetails';
+import ShowAskFrom from './components/user/ShowAskFrom';
+import Showorder from './components/user/Showorder';
+import PayMent from './components/user/PayMent';
+// import CompletedOrder from './components/user/CompletedOrder';
 // Member Panel Page End
 
 
@@ -239,7 +244,9 @@ function App() {
         <Route path="/provider" element={!isLoggedInProvider ? <Provider_Login onLogin={ProviderhandleLogin} /> : <Navigate to="/provider_dashboard" />} />
         <Route path="/provider_dashboard" element={isLoggedInProvider ? <Provider_Dashboard onLogin={ProviderhandleLogout} /> : <Navigate to="/provider_dashboard" />} />
         <Route path="/provider_profile" element={isLoggedInProvider ? <Provider_Profile onLogin={ProviderhandleLogout} /> : <Navigate to="/provider_profile" />} />
-        <Route path='/provider_allorder' element={isLoggedInProvider ? < Provider_Allorder onLogout={ProviderhandleLogout} /> : <Navigate to="/provider_allorder" />} />
+        <Route path='/provider_allorder' element={isLoggedInProvider ? < Provider_Allorder onLogout={ProviderhandleLogout} /> : < Provider_Allorder onLogout={ProviderhandleLogout} />} />
+        <Route path='/provider_acceptorder' element={isLoggedInProvider ? < Provider_Accept onLogout={ProviderhandleLogout} /> : < Provider_Accept onLogout={ProviderhandleLogout} />} />
+        <Route path='/provider_completedorder' element={isLoggedInProvider ? < Provider_Completed onLogout={ProviderhandleLogout} /> : < Provider_Completed onLogout={ProviderhandleLogout} />} />
         {/* PROVIDER SITE END */}
 
 
@@ -267,7 +274,10 @@ function App() {
         <Route path="/" element={!isLoggedInMember ? <UserLogin onLogin={MemberhandleLogin} /> : <Navigate to="/member" />} />
         <Route path="/member" element={isLoggedInMember ? <User onLogin={MemberhandleLogout} /> : <Navigate to="/member" />} />
         <Route path="/member_addask" element={isLoggedInMember ? <ServiceFrom onLogin={MemberhandleLogout} /> : <Navigate to="/member_addask" />} />
-        <Route path='/member_provider_details/:id' element={isLoggedInMember ? <UserProviderDetails onLogin={MemberhandleLogout} /> : <Navigate to="/member_provider_details/:id" />} />
+        <Route path='/member_showaskform' element={isLoggedInMember ? <ShowAskFrom onLogin={MemberhandleLogout} /> : <Navigate to="/member_showaskform" />} />
+        <Route path='/user_showorder/:id' element={isLoggedInMember ? <Showorder onLogin={MemberhandleLogout} /> : <Showorder onLogin={MemberhandleLogout} />} />
+        <Route path='/member_yourpayment' element={isLoggedInMember ? <PayMent onLogin={MemberhandleLogout} /> :  <Navigate to="/member_yourpayment" />}/>
+        {/* <Route path='/member_completedorder' element={isLoggedInMember ? <CompletedOrder onLogin={MemberhandleLogout} /> :  <Navigate to="/member_completedorder" />}/> */}
         {/* PROVIDER SITE END */}
 
 

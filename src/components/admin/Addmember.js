@@ -85,6 +85,11 @@ const Addmember = () => {
                         setOccupation('')
                         setReference('')
                         setReferencenumber('')
+                        setBankname('')
+                        setBankaccount('')
+                        setBankifsc('')
+                        setBankbranch('')
+                        setUpiid('')
                         // console.log('jasd', data);
                         navigate('/admin_allmember')
                     } else {
@@ -210,7 +215,7 @@ const Addmember = () => {
                                                                 <label className="col-sm-2 col-form-label fw-bold">Bank Name :</label>
                                                                 <div className="col-sm-10">
                                                                     <div className="form-floating mb-3">
-                                                                        <input type="number" className="form-control" id="floatingInput" value={bankname} onChange={(e) => setBankname(e.target.value)} placeholder="Bank Name" />
+                                                                        <input type="text" className="form-control" id="floatingInput" value={bankname} onChange={(e) => setBankname(e.target.value)} placeholder="Bank Name" />
                                                                         <label htmlFor="floatingInput">Bank Name</label>
                                                                     </div>
 
@@ -230,7 +235,7 @@ const Addmember = () => {
                                                                 <label className="col-sm-2 col-form-label fw-bold">Bank IFSC No. :</label>
                                                                 <div className="col-sm-10">
                                                                     <div className="form-floating mb-3">
-                                                                        <input type="number" className="form-control" id="floatingInput" value={bankifsc} onChange={(e) => setBankifsc(e.target.value)} placeholder="Bank IFSC No." />
+                                                                        <input type="text" className="form-control" id="floatingInput" value={bankifsc} onChange={(e) => setBankifsc(e.target.value)} placeholder="Bank IFSC No." />
                                                                         <label htmlFor="floatingInput">Bank IFSC Number</label>
                                                                     </div>
 
@@ -240,7 +245,7 @@ const Addmember = () => {
                                                                 <label className="col-sm-2 col-form-label fw-bold">Bank Branch :</label>
                                                                 <div className="col-sm-10">
                                                                     <div className="form-floating mb-3">
-                                                                        <input type="number" className="form-control" id="floatingInput" value={bankbranch} onChange={(e) => setBankbranch(e.target.value)} placeholder="Bank Branch Name" />
+                                                                        <input type="text" className="form-control" id="floatingInput" value={bankbranch} onChange={(e) => setBankbranch(e.target.value)} placeholder="Bank Branch Name" />
                                                                         <label htmlFor="floatingInput">Bank Branch Name</label>
                                                                     </div>
 
@@ -250,7 +255,7 @@ const Addmember = () => {
                                                                 <label className="col-sm-2 col-form-label fw-bold">UPI ID:</label>
                                                                 <div className="col-sm-10">
                                                                     <div className="form-floating mb-3">
-                                                                        <input type="number" className="form-control" id="floatingInput" value={upiid} onChange={(e) => setUpiid(e.target.value)} placeholder="UPI ID" />
+                                                                        <input type="text" className="form-control" id="floatingInput" value={upiid} onChange={(e) => setUpiid(e.target.value)} placeholder="UPI ID" />
                                                                         <label htmlFor="floatingInput">UPI ID</label>
                                                                     </div>
 

@@ -156,6 +156,16 @@ const UserHeader = () => {
                             <i className="bi bi-menu-button-wide" /><span>All Services</span>
                         </a>
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link collapsed" href="/member_showaskform">
+                            <i className="bi bi-bag" /><span>Your Order</span>
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link collapsed" href="/member_yourpayment">
+                            <i className="bi bi-wallet2" /><span>Your PayMent</span>
+                        </a>
+                    </li>
 
 
                     <li className="nav-heading">Pages</li>

@@ -3,44 +3,25 @@ import Provider_Header from "./Provider_Header";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
-const Provider_Allorder = () => {
+const Provider_Completed = () => {
 
     const providertoken = localStorage.getItem("providertoken");
 
-    const [providerorder, setProviderorder] = useState('');
+    const [completed, setCompleted] = useState('');
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/provider/orders`, { headers: { 'providertoken': providertoken } }).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/provider/completed_order`, { headers: { 'providertoken': providertoken } }).then(function (response) {
             // handle success
             console.log(response.data);
-            setProviderorder(response.data.providerorder);
+            setCompleted(response.data.completed);
         })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             })
     }, [])
-
-    const { id } = useParams();
-    const handleAccept = (id) => {
-
-        // data get karavava mate
-        axios.get(`${process.env.REACT_APP_URL}/provider/accept_order/${id}`, { headers: { 'providertoken': providertoken } })
-            .then(function (response) {
-                // handle success
-                // console.log(response.data, "Successfully logged in");
-                window.location.reload('')
-
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-
-    }
-
 
     return (
         <>
@@ -49,17 +30,18 @@ const Provider_Allorder = () => {
             <div>
                 <main id="main" className='main'>
                     <div className='pagetitle'>
-                        <h1 className='text-start m-0'>Allorder</h1>
+                        <h1 className='text-start m-0'>Completed Order</h1>
                         <nav>
                             <ol className='breadcrumb'>
                                 <li className='breadcrumb-item'>Home</li>
-                                <li className='breadcrumb-item activ'>Show Order</li>
+                                <li className='breadcrumb-item activ'>Orders</li>
                             </ol>
                         </nav>
                     </div>
 
                     <section className="section dashboard">
                         <div className="row">
+                            {/* Left side columns */}
                             <div className="col-lg-12">
                                 <div className="row">
                                     <div className="col-12">
@@ -70,7 +52,7 @@ const Provider_Allorder = () => {
                                             <div className="card-body">
                                                 <div className="d-flex">
                                                     <div className="col-7">
-                                                        <h5 className="card-title">All Order</h5>
+                                                        <h5 className="card-title">Completed Order</h5>
                                                     </div>
                                                     <div className="col-2 ms-5 me-3">
                                                     </div>
@@ -82,26 +64,26 @@ const Provider_Allorder = () => {
                                                     <tbody>
 
                                                         <tr>
-                                                            <th>No.</th>
+                                                            <th>Orderid</th>
                                                             <th>Customer Name</th>
                                                             <th>Customer Number</th>
-                                                            <th>Customer Email</th>
-                                                            <th>Category</th>
-                                                            <th>Sub Category</th>
-                                                            <th>Product and Service</th>
-                                                            <th>Description</th>
-                                                            <th>Accept</th>
+                                                            <th>Call</th>
+                                                            <th>Meeting</th>
+                                                            <th>Deal</th>
+                                                            <th>Amount</th>
+                                                            <th>Work</th>
+                                                            <th>Payment</th>
                                                         </tr>
 
                                                         <>
-                                                            {providerorder &&
-                                                                providerorder.map((item, i) => (
+                                                            {completed &&
+                                                                completed.map((item, i) => (
                                                                     <tr key={i}>
 
 
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {i + 1}
+                                                                                {item.no}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
@@ -114,33 +96,34 @@ const Provider_Allorder = () => {
                                                                                 {item.otherNumber}
                                                                             </h6>
                                                                         </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.otherEmail}
-                                                                            </h6>
+                                                                        <td data-th="">
+                                                                            {item.call === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                <a href={`tel:${item.otherNumber}`}>
+                                                                                    <button type="button" className="btn btn-danger btn-sm">Call Done</button>
+                                                                                </a>}
                                                                         </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
-                                                                            </h6>
+                                                                        <td data-th="">
+                                                                            {item.meeting === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                <button type="button" className="btn btn-danger btn-sm">Meeting Done</button>}
                                                                         </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.productid.bsubcategoryid[0].bussinesssubcategory}
-                                                                            </h6>
+                                                                        <td data-th="">
+                                                                            {item.deal === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                <button type="button" className="btn btn-danger btn-sm">Deal Done</button>}
                                                                         </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.productid.product}
-                                                                            </h6>
+                                                                        <td data-th="">
+                                                                            {item.amount === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                <div class="input-group mb-3">
+                                                                                    <input type="number" class="form-control" placeholder="Enter Your Deal Amount" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                                                                                    <button class="btn btn-danger" type="button" id="button-addon2">Deal Amount</button>
+                                                                                </div>}
                                                                         </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.description}
-                                                                            </h6>
+                                                                        <td data-th="">
+                                                                            {item.work === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                <button type="button" className="btn btn-danger btn-sm">Work Done</button>}
                                                                         </td>
-                                                                        <td data-th="Net Amount">
-                                                                            <button type="button" onClick={() => handleAccept(item._id)} className="btn btn-danger btn-sm">Accept</button>
+                                                                        <td data-th="">
+                                                                            {item.payment === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                <button type="button" className="btn btn-danger btn-sm">PayMent Done</button>}
                                                                         </td>
                                                                     </tr>
 
@@ -170,4 +153,4 @@ const Provider_Allorder = () => {
         </>
     )
 }
-export default Provider_Allorder;
+export default Provider_Completed;

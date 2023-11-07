@@ -1,21 +1,20 @@
-import React from "react";
-import Provider_Header from "./Provider_Header";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import UserHeader from "./UserHeader";
 import axios from "axios";
-import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 
-const Provider_Allorder = () => {
+const ShowAskFrom = () => {
 
-    const providertoken = localStorage.getItem("providertoken");
 
-    const [providerorder, setProviderorder] = useState('');
+    const usertoken = localStorage.getItem("usertoken");
+
+    const [order, setOrder] = useState('');
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/provider/orders`, { headers: { 'providertoken': providertoken } }).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/user/show_order`, { headers: { 'usertoken': usertoken } }).then(function (response) {
             // handle success
             console.log(response.data);
-            setProviderorder(response.data.providerorder);
+            setOrder(response.data.order);
         })
             .catch(function (error) {
                 // handle error
@@ -23,37 +22,20 @@ const Provider_Allorder = () => {
             })
     }, [])
 
-    const { id } = useParams();
-    const handleAccept = (id) => {
-
-        // data get karavava mate
-        axios.get(`${process.env.REACT_APP_URL}/provider/accept_order/${id}`, { headers: { 'providertoken': providertoken } })
-            .then(function (response) {
-                // handle success
-                // console.log(response.data, "Successfully logged in");
-                window.location.reload('')
-
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-
-    }
 
 
     return (
         <>
-            <Provider_Header />
+            <UserHeader />
 
             <div>
                 <main id="main" className='main'>
                     <div className='pagetitle'>
-                        <h1 className='text-start m-0'>Allorder</h1>
+                        <h1 className='text-start m-0'>Your Order</h1>
                         <nav>
                             <ol className='breadcrumb'>
                                 <li className='breadcrumb-item'>Home</li>
-                                <li className='breadcrumb-item activ'>Show Order</li>
+                                <li className='breadcrumb-item activ'>Your Order</li>
                             </ol>
                         </nav>
                     </div>
@@ -70,7 +52,7 @@ const Provider_Allorder = () => {
                                             <div className="card-body">
                                                 <div className="d-flex">
                                                     <div className="col-7">
-                                                        <h5 className="card-title">All Order</h5>
+                                                        {/* <h5 className="card-title">Your Order</h5> */}
                                                     </div>
                                                     <div className="col-2 ms-5 me-3">
                                                     </div>
@@ -82,7 +64,7 @@ const Provider_Allorder = () => {
                                                     <tbody>
 
                                                         <tr>
-                                                            <th>No.</th>
+                                                            <th>Order Id</th>
                                                             <th>Customer Name</th>
                                                             <th>Customer Number</th>
                                                             <th>Customer Email</th>
@@ -90,18 +72,18 @@ const Provider_Allorder = () => {
                                                             <th>Sub Category</th>
                                                             <th>Product and Service</th>
                                                             <th>Description</th>
-                                                            <th>Accept</th>
+                                                            <th>Show</th>
                                                         </tr>
 
                                                         <>
-                                                            {providerorder &&
-                                                                providerorder.map((item, i) => (
+                                                            {order &&
+                                                                order.map((item, i) => (
                                                                     <tr key={i}>
 
 
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {i + 1}
+                                                                                {item.no}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
@@ -140,7 +122,9 @@ const Provider_Allorder = () => {
                                                                             </h6>
                                                                         </td>
                                                                         <td data-th="Net Amount">
-                                                                            <button type="button" onClick={() => handleAccept(item._id)} className="btn btn-danger btn-sm">Accept</button>
+                                                                            <Link to={`/user_showorder/${item._id}`}>
+                                                                                <button type="button" className="btn btn-primary btn-sm">Show</button>
+                                                                            </Link>
                                                                         </td>
                                                                     </tr>
 
@@ -170,4 +154,4 @@ const Provider_Allorder = () => {
         </>
     )
 }
-export default Provider_Allorder;
+export default ShowAskFrom

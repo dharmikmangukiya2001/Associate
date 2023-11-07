@@ -16,6 +16,7 @@
     "env-cmd": "^10.1.0",
     "jquery": "^3.7.1",
     "mobiscroll": "^3.0.0-beta6",
+    "moment": "^2.29.4",
     "multiselect-react-dropdown": "^2.0.25",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",

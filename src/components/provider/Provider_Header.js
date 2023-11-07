@@ -218,7 +218,7 @@ const Provider_Header = () => {
                                     <hr className="dropdown-divider" />
                                 </li>
                                 <li>
-                                    <a className="dropdown-item d-flex align-items-center" href="">
+                                    <a className="dropdown-item d-flex align-items-center" href="/provider_profile">
                                         <i className="bi bi-person" />
                                         <span>My Profile</span>
                                     </a>
@@ -277,17 +277,22 @@ const Provider_Header = () => {
                         <ul id="forms-nav" className="nav-content collapse ">
                             <li>
                                 <a href="/provider_allorder" class="a-none">
-                                    <i className="bi bi-plus-square fs-5" /><span>Add Order</span>
+                                    <i className="bi bi-bag fs-5" /><span>All Order</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="a-none">
-                                    <i className="bi bi-server fs-5" /><span>Show Services</span>
+                                <a href="/provider_acceptorder" class="a-none">
+                                    <i className="bi bi-bag-check fs-5" /><span>Accept Order</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/provider_completedorder" class="a-none">
+                                    <i className="bi bi-bag-check-fill fs-5" /><span>Completed Order</span>
                                 </a>
                             </li>
                         </ul>
                     </li>{/* End Forms Nav */}
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <a className="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse">
                             <i className="bi bi-layout-text-window-reverse" /><span>Provider Details</span><i className="bi bi-chevron-down ms-auto" />
                         </a>
@@ -303,11 +308,11 @@ const Provider_Header = () => {
                                 </a>
                             </li>
                         </ul>
-                    </li>{/* End Tables Nav */}
+                    </li>End Tables Nav */}
                    
                     <li className="nav-heading">Pages</li>
                     <li className="nav-item">
-                        <a className="nav-link collapsed" href="">
+                        <a className="nav-link collapsed" href="/provider_profile">
                             <i className="bi bi-person" />
                             <span>Profile</span>
                         </a>

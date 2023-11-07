@@ -355,6 +355,116 @@ const Memberdetails = () => {
                                                                 </p>
                                                             </div>
                                                         </div>
+                                                        <div className="ms-3 d-flex col-12">
+                                                            <div className="col-4">
+                                                                <p><strong>Bank Name :</strong></p>
+                                                            </div>
+                                                            <div className="col-8">
+                                                                <p>
+                                                                    <span className="fs-6">
+                                                                        {
+                                                                            Object.entries(item).map(([key, value], index) => {
+                                                                                return (
+                                                                                    <>{key == 'bankname' ? (<>
+                                                                                        {value}
+                                                                                    </>) : null}
+
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="ms-3 d-flex col-12">
+                                                            <div className="col-4">
+                                                                <p><strong>Bank Account :</strong></p>
+                                                            </div>
+                                                            <div className="col-8">
+                                                                <p>
+                                                                    <span className="fs-6">
+                                                                        {
+                                                                            Object.entries(item).map(([key, value], index) => {
+                                                                                return (
+                                                                                    <>{key == 'bankaccount' ? (<>
+                                                                                        {value}
+                                                                                    </>) : null}
+
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="ms-3 d-flex col-12">
+                                                            <div className="col-4">
+                                                                <p><strong>Bank IFSC :</strong></p>
+                                                            </div>
+                                                            <div className="col-8">
+                                                                <p>
+                                                                    <span className="fs-6">
+                                                                        {
+                                                                            Object.entries(item).map(([key, value], index) => {
+                                                                                return (
+                                                                                    <>{key == 'bankifsc' ? (<>
+                                                                                        {value}
+                                                                                    </>) : null}
+
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="ms-3 d-flex col-12">
+                                                            <div className="col-4">
+                                                                <p><strong>Bank Branch :</strong></p>
+                                                            </div>
+                                                            <div className="col-8">
+                                                                <p>
+                                                                    <span className="fs-6">
+                                                                        {
+                                                                            Object.entries(item).map(([key, value], index) => {
+                                                                                return (
+                                                                                    <>{key == 'bankbranch' ? (<>
+                                                                                        {value}
+                                                                                    </>) : null}
+
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="ms-3 d-flex col-12">
+                                                            <div className="col-4">
+                                                                <p><strong>UPI ID :</strong></p>
+                                                            </div>
+                                                            <div className="col-8">
+                                                                <p>
+                                                                    <span className="fs-6">
+                                                                        {
+                                                                            Object.entries(item).map(([key, value], index) => {
+                                                                                return (
+                                                                                    <>{key == 'upiid' ? (<>
+                                                                                        {value}
+                                                                                    </>) : null}
+
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             ))}
@@ -465,6 +575,51 @@ const Memberdetails = () => {
                                                                                         </div>
                                                                                     </div>
                                                                                 </div> 
+                                                                                <div className='row mb-5'>
+                                                                                    <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Bank Name <span className='text-red'>*</span></label>
+                                                                                    <div className='col-sm-9 col-lg-10'>
+                                                                                        <div className='me-3 form-floating'>
+                                                                                            <input type='text' className='form-control' required value={tempservice.bankname} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice,bankname : e.target.value, }) }} placeholder='Provider Numbar' />
+                                                                                            <label htmlFor="floatingTextarea">Bank Name</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> 
+                                                                                <div className='row mb-5'>
+                                                                                    <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Bank Account <span className='text-red'>*</span></label>
+                                                                                    <div className='col-sm-9 col-lg-10'>
+                                                                                        <div className='me-3 form-floating'>
+                                                                                            <input type='number' className='form-control' required value={tempservice.bankaccount} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice,bankaccount : e.target.value, }) }} placeholder='Provider Numbar' />
+                                                                                            <label htmlFor="floatingTextarea">Bank Account</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> 
+                                                                                <div className='row mb-5'>
+                                                                                    <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Bank IFSC <span className='text-red'>*</span></label>
+                                                                                    <div className='col-sm-9 col-lg-10'>
+                                                                                        <div className='me-3 form-floating'>
+                                                                                            <input type='text' className='form-control' required value={tempservice.bankifsc} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice,bankifsc : e.target.value, }) }} placeholder='Provider Numbar' />
+                                                                                            <label htmlFor="floatingTextarea">Bank IFSC</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> 
+                                                                                <div className='row mb-5'>
+                                                                                    <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Bank Branch <span className='text-red'>*</span></label>
+                                                                                    <div className='col-sm-9 col-lg-10'>
+                                                                                        <div className='me-3 form-floating'>
+                                                                                            <input type='text' className='form-control' required value={tempservice.bankbranch} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice,bankbranch : e.target.value, }) }} placeholder='Provider Numbar' />
+                                                                                            <label htmlFor="floatingTextarea">Bank Branch</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> 
+                                                                                <div className='row mb-5'>
+                                                                                    <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>UPI ID <span className='text-red'>*</span></label>
+                                                                                    <div className='col-sm-9 col-lg-10'>
+                                                                                        <div className='me-3 form-floating'>
+                                                                                            <input type='text' className='form-control' required value={tempservice.upiid} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice,upiid : e.target.value, }) }} placeholder='Provider Numbar' />
+                                                                                            <label htmlFor="floatingTextarea">UPI ID</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> 
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -474,7 +629,7 @@ const Memberdetails = () => {
                                                                                 {changed ? (
                                                                                     <>
                                                                                         <div>
-                                                                                            <button onClick={(e) => { setTempservice({ ...user }); setChanged(false); }} className="btn bg-primary-subtle">Cancel</button>
+                                                                                            <button onClick={(e) => { setTempservice({ ...user }); setChanged(false); }} className="btn bg-primary-subtle me-3">Cancel</button>
                                                                                         </div>
                                                                                         <div>
                                                                                             <button onClick={handleSubmit} className="btn bg-primary-subtle">Update</button>
