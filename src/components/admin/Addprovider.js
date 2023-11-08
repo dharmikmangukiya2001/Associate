@@ -54,6 +54,7 @@ const Addprovider = () => {
     const [bussinesspancardnumber, setBussinesspancardnumber] = useState('');
     // const [sbcatid, setSbcatid] = useState('');
     const [bussinessaddress, setBussinessaddress] = useState('');
+    const [collaboration, setCollaboration] = useState('');
     const [collaborationcompany, setCollaborationcompany] = useState('');
     const [collaborationmember, setCollaborationmember] = useState('');
     // Sales Details
@@ -330,6 +331,7 @@ const Addprovider = () => {
         bussinesspancardnumber,
         sbcatid,
         bussinessaddress,
+        collaboration,
         collaborationcompany,
         collaborationmember,
         salespersonname,
@@ -402,16 +404,17 @@ const Addprovider = () => {
         formData.append("Bname", data.bussinessname);
         formData.append("Bnumber", data.bussinessnumber);
         formData.append("Bemail", data.bussinessemailid);
-        formData.append("Bsocialmedia", data.bussinesswebsiteurl);
-        formData.append("Bsocialmedia", data.bussinessfacebookurl);
-        formData.append("Bsocialmedia", data.bussinessinstagramurl);
-        formData.append("Bsocialmedia", data.bussinessyoutubeurl);
+        formData.append("socialmedia1", data.bussinesswebsiteurl);
+        formData.append("socialmedia2", data.bussinessfacebookurl);
+        formData.append("socialmedia3", data.bussinessinstagramurl);
+        formData.append("socialmedia4", data.bussinessyoutubeurl);
         formData.append("Bdetails", data.bussinessdetails);
         formData.append("Baddress", data.bussinessaddress);
         formData.append("B_GSTnumber", data.bussinessgstnumber);
         formData.append("Bpancardnumber", data.bussinesspancardnumber);
         formData.append("Btdsdetails", data.bussinesstdsdetails);
         formData.append("product_service", data.productandservice);
+        formData.append("collaboration", data.collaboration);
         formData.append("collaborationCompany", data.collaborationcompany);
         formData.append("collaborationMember", data.collaborationmember);
         formData.append("salespersonName", data.salespersonname);
@@ -905,20 +908,31 @@ const Addprovider = () => {
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
                                                                         {/* <input type='text' className='form-control' placeholder='Business Type' /> */}
-                                                                        <input className="form-control" value={collaborationcompany} onChange={(e) => setCollaborationcompany(e.target.value)} placeholder="Leave a comment here" />
+                                                                        <input className="form-control" value={collaboration} onChange={(e) => setCollaboration(e.target.value)} placeholder="Leave a comment here" />
 
                                                                         <label for="floatingTextarea2">Collaboration with Company (%)</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div className='row mb-5'>
-                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Collaboration with Member (%) <span className='text-red'>*</span></label>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Company Profit (%) <span className='text-red'>*</span></label>
+                                                                <div className='col-sm-9 col-lg-10'>
+                                                                    <div className='me-3 form-floating'>
+                                                                        {/* <input type='text' className='form-control' placeholder='Business Type' /> */}
+                                                                        <input className="form-control" value={collaborationcompany} onChange={(e) => setCollaborationcompany(e.target.value)} placeholder="Leave a comment here" />
+
+                                                                        <label for="floatingTextarea2">Company Profit (%)</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mb-5'>
+                                                                <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Member Profit (%) <span className='text-red'>*</span></label>
                                                                 <div className='col-sm-9 col-lg-10'>
                                                                     <div className='me-3 form-floating'>
                                                                         {/* <input type='text' className='form-control' placeholder='Business Type' /> */}
                                                                         <input className="form-control" value={collaborationmember} onChange={(e) => setCollaborationmember(e.target.value)} placeholder="Leave a comment here"/>
 
-                                                                        <label for="floatingTextarea2">Collaboration with Member (%)</label>
+                                                                        <label for="floatingTextarea2">Member Profit (%)</label>
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -1,20 +1,21 @@
 import React from "react";
-import UserHeader from "./UserHeader";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import moment from 'moment';
+import Header from "../admin/Header";
 
-const Showorder = () => {
+const DashboardShowOrder = () => {
+
+    const token = localStorage.getItem("token");
 
     //  Show Member data
     const [order, setOrder] = useState([])
     const id = useParams()
     const orderid = id.id
-    const usertoken = localStorage.getItem("usertoken");
      useEffect(() => {
-         axios.get(`${process.env.REACT_APP_URL}/user/order_detail/${orderid}`, { headers: { 'usertoken': usertoken } }).then(function (response) {
+         axios.get(`${process.env.REACT_APP_URL}/admin/order_detail/${orderid}`,{headers: {'token': token}}).then(function (response) {
              // handle success
             //  console.log(response.data, "dsdsdsd");
              setOrder([response.data.order]);
@@ -34,7 +35,7 @@ const Showorder = () => {
 
     return(
         <>
-        <UserHeader/>
+        <Header/>
         <main id="main" className="main">
                 <div className="pagetitle">
                     <h1 className="text-start m-0">Orders Details</h1>
@@ -334,4 +335,4 @@ const Showorder = () => {
         </>
     )
 }
-export default Showorder;
+export default DashboardShowOrder;

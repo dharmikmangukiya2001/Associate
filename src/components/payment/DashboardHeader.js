@@ -48,7 +48,7 @@ const DashboardHeader = () => {
             <header id="header" className="header fixed-top d-flex align-items-center">
                 <div className="d-flex align-items-center justify-content-between">
                     <a href="index.html" className="logo d-flex align-items-center">
-                        <Link to="/admin_home"><img src="/assets/img/Logos.png" alt="Logos" /></Link>
+                        <Link to="/payment_dashboard"><img src="/assets/img/Logos.png" alt="Logos" /></Link>
                     </a>
                     <i className="bi bi-list toggle-sidebar-btn d-lg-none" onClick={toggleSidebar} />
                 </div>{/* End Logo */}
@@ -188,7 +188,7 @@ const DashboardHeader = () => {
                         </a>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link collapsed" to='/admin_home'><i className="bi bi-menu-button-wide" /><span>Dashboard</span></Link>
+                        <Link className="nav-link collapsed" to='/payment_dashboard'><i className="bi bi-menu-button-wide" /><span>Dashboard</span></Link>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse">
@@ -196,18 +196,18 @@ const DashboardHeader = () => {
                         </a>
                         <ul id="forms-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
-                                <a href="#" class="a-none ps-0">
-                                    <Link className='a-none' to='/admin_addservice'><i className="bi bi-check2 fs-5" /><span>Accept Order</span></Link>
+                                <a href="/payment_dashboard_allorder" class="a-none ps-0">
+                                    <Link className='a-none' to='/payment_dashboard_allorder'><i className="bi bi-check2 fs-5" /><span>Accept Order</span></Link>
                                 </a>
                             </li>
                             <li>
-                                <a href="/admin_showservices" class="a-none ps-0">
-                                    <Link className='a-none' to="/admin_showservices"><i className="bi bi-check2-all fs-5" /><span>Done Order</span></Link>
+                                <a href="/payment_dashboard_doneorder" class="a-none ps-0">
+                                    <Link className='a-none' to="/payment_dashboard_doneorder"><i className="bi bi-check2-all fs-5" /><span>Done Order</span></Link>
                                 </a>
                             </li>
                         </ul>
                     </li>{/* End Forms Nav */}
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <a className="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse">
                             <i className="bi bi-layout-text-window-reverse" /><span>Providers</span><i className="bi bi-chevron-down ms-auto" />
                         </a>
@@ -223,8 +223,8 @@ const DashboardHeader = () => {
                                 </a>
                             </li>
                         </ul>
-                    </li>{/* End Tables Nav */}
-                    <li className="nav-item">
+                    </li>End Tables Nav */}
+                    {/* <li className="nav-item">
                         <a className="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
                             <i className="bi bi-bar-chart" /><span>Member</span><i className="bi bi-chevron-down ms-auto" />
                         </a>
@@ -241,47 +241,11 @@ const DashboardHeader = () => {
                             </li>
                             <li>
                                 <a href="charts-echarts.html">
-                                    {/* <i className="bi bi-circle" /><span>ECharts</span> */}
+                                     <i className="bi bi-circle" /><span>ECharts</span> 
                                 </a>
                             </li>
                         </ul>
-                    </li>{/* End Charts Nav */}
-                    <li className="nav-item">
-                        <a className="nav-link collapsed" data-bs-target="#Manager" data-bs-toggle="collapse" href="#">
-                            <i className="bi  bi-kanban" /><span>Manager</span><i className="bi bi-chevron-down ms-auto" />
-                        </a>
-                        <ul id="Manager" className="nav-content collapse " data-bs-parent="#sidebar-nav">
-                            <li>
-                                <Link className='a-none' to="/admin_addmanager">
-                                    <i className="bi-person-plus fs-5" /><span>Add Manager</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='a-none' to="/admin_allmanager">
-                                    <i className="bi-clipboard-data fs-5" /><span>Show Manager</span>
-                                </Link>
-                            </li>
-                        </ul>
-                    </li>{/* End Icons Nav */}
-                    <li className="nav-item">
-                        <a className="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                            <i className="bi  bi-cart" /><span>Order</span><i className="bi bi-chevron-down ms-auto" />
-                        </a>
-                        <ul id="icons-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
-                            <li>
-                                <Link className='a-none' to="/admin_Allorder">
-                                    <i className="bi bi-basket3 fs-5" /><span>Show Order</span>
-                                </Link>
-                            </li>
-                        </ul>
-                    </li>{/* End Icons Nav */}
-                    <li className="nav-heading">Pages</li>
-                    <li className="nav-item">
-                        <a className="nav-link collapsed" href="users-profile.html">
-                            <i className="bi bi-person" />
-                            <span>Profile</span>
-                        </a>
-                    </li>{/* End Profile Page Nav */}
+                    </li>End Charts Nav */}
 
                 </ul>
             </aside>

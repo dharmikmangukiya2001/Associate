@@ -29,6 +29,13 @@ import Orderdetails from './components/admin/Orderdetails';
 import Addmanager from './components/admin/Addmanager';
 import Allmanager from './components/admin/Allmanager';
 import Managerdetails from './components/admin/Managerdetails'
+// Payment Panel Page Start
+import DashboardOrder from './components/payment/DashboardOrder'
+import DashboardDoneOrder from './components/payment/DashboardDoneOrder'
+import DashboardShowOrder from './components/payment/DashboardShowOrder'
+import DashboardMamberCommission from './components/payment/DashboardMamberCommission'
+import DashboardMamberOrderShow from './components/payment/DashboardMamberOrderShow'
+// Payment Panel Page End
 // Admin Panel Page End
 
 
@@ -68,9 +75,6 @@ import CompletedOrder from './components/user/CompletedOrder';
 
 
 
-// Payment Panel Page Start
-import Dashboard from './components/payment/Dashboard'
-// Payment Panel Page End
 
 
 
@@ -234,6 +238,12 @@ function App() {
         <Route path='/admin_addmanager' element={isLoggedInAdmin ? < Addmanager onLogout={adminhandleLogout} /> : <Navigate to="/admin_addmanager" />} />
         <Route path="/admin_allmanager" element={isLoggedInAdmin ? <Allmanager onLogout={adminhandleLogout} /> : <Navigate to="/admin_allmanager" />} />
         <Route path="/admin_managerdetails/:id" element={isLoggedInAdmin ? <Managerdetails onLogout={adminhandleLogout} /> : <Managerdetails onLogout={adminhandleLogout} />} />
+        
+        <Route path='/admin_acceptorder'  element={isLoggedInAdmin ? <DashboardOrder onLogout={adminhandleLogout} /> : <Navigate to="/admin_acceptorder" />} />
+        <Route path='/admin_showacceptorder/:id' element={isLoggedInAdmin ? <DashboardShowOrder onLogout={adminhandleLogout} /> :  <DashboardShowOrder onLogout={adminhandleLogout}/>} />
+        <Route path='/admin_doneorder' element={isLoggedInAdmin ? <DashboardDoneOrder onLogout={adminhandleLogout} /> : <Navigate to="/admin_doneorder" />} />
+        <Route path='/admin_membercommission' element={isLoggedInAdmin ? <DashboardMamberCommission onLogout={adminhandleLogout} /> : <Navigate to="/admin_membercommission" />} />
+        <Route path='/admin_memberordershow/:id' element={isLoggedInAdmin ? <DashboardMamberOrderShow onLogout={adminhandleLogout} /> : <DashboardMamberOrderShow onLogout={adminhandleLogout} />} />
 
         {/* ADMIN SITE END */}
 
@@ -261,12 +271,6 @@ function App() {
         <Route path="/manager_orderdetails/:id" element={isLoggedInManager ? <Manager_Orderdetails onLogout={ManagerhandleLogout} /> : <Manager_Orderdetails onLogout={ManagerhandleLogout} />} />
         {/* G MANAGER SITE END */}
 
-
-
-
-        {/* PAYMENT SITE START */}
-        <Route path='/payment_dashboard' element={<Dashboard/>}/>
-        {/* R MANAGER SITE END */}
 
 
 

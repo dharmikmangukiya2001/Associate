@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from "react";
-import UserHeader from "./UserHeader";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import Header from "../admin/Header";
 
-
-const ShowAskFrom = () => {
-
-
-    const usertoken = localStorage.getItem("usertoken");
-
-    const [order, setOrder] = useState('');
+const DashboardDoneOrder = () => {
+    const token = localStorage.getItem("token");
+    const [orders, setOrders] = useState('');
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/user/show_order`, { headers: { 'usertoken': usertoken } }).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/done_order`,{headers: {'token': token}}).then(function (response) {
             // handle success
             // console.log(response.data);
-            setOrder(response.data.order);
+            setOrders(response.data.orders);
         })
             .catch(function (error) {
                 // handle error
@@ -22,20 +19,16 @@ const ShowAskFrom = () => {
             })
     }, [])
 
-
-
-    return (
+    return(
         <>
-            <UserHeader />
-
-            <div>
-                <main id="main" className='main'>
+        <Header/>
+        <main id="main" className='main'>
                     <div className='pagetitle'>
-                        <h1 className='text-start m-0'>Your Order</h1>
+                        <h1 className='text-start m-0'>Done Order</h1>
                         <nav>
                             <ol className='breadcrumb'>
                                 <li className='breadcrumb-item'>Home</li>
-                                <li className='breadcrumb-item activ'>Your Order</li>
+                                <li className='breadcrumb-item activ'>Done Order</li>
                             </ol>
                         </nav>
                     </div>
@@ -65,19 +58,19 @@ const ShowAskFrom = () => {
 
                                                         <tr>
                                                             <th>Order Id</th>
-                                                            <th>Customer Name</th>
-                                                            <th>Customer Number</th>
-                                                            <th>Customer Email</th>
-                                                            <th>Category</th>
-                                                            <th>Sub Category</th>
-                                                            <th>Product and Service</th>
-                                                            <th>Description</th>
-                                                            <th>Show</th>
+                                                            <th>Order Date</th>
+                                                            <th>Mamber Name</th>
+                                                            <th>Provider Name</th>
+                                                            <th>Order Service</th>
+                                                            <th>Order Deal Amount</th>
+                                                            <th>Mamber Commission</th>
+                                                            <th>Company Commission</th>
+                                                            
                                                         </tr>
 
                                                         <>
-                                                            {order &&
-                                                                order.map((item, i) => (
+                                                            {orders &&
+                                                                orders.map((item, i) => (
                                                                     <tr key={i}>
 
 
@@ -86,46 +79,55 @@ const ShowAskFrom = () => {
                                                                                 {item.no}
                                                                             </h6>
                                                                         </td>
+                                                                        
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.otherName}
+                                                                              {item.updatedAt.slice(0, 10)}
+
                                                                             </h6>
                                                                         </td>
+
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.otherNumber}
+                                                                              {item.userid.name}
+
                                                                             </h6>
                                                                         </td>
+
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.otherEmail}
+                                                                              {item.providerid[0].name}
+
                                                                             </h6>
                                                                         </td>
+                                                                        
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
+                                                                            {item.productid.bsubcategoryid[0].bussinesssubcategory}
                                                                             </h6>
                                                                         </td>
+                                                                        
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.productid.bsubcategoryid[0].bussinesssubcategory}
+                                                                              {item.dealamount}
+
                                                                             </h6>
                                                                         </td>
+                                                                        
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.productid.product}
+                                                                              {item.memberCommission}
+
                                                                             </h6>
                                                                         </td>
+
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.description}
+                                                                              {item.companyCommission}
+
                                                                             </h6>
                                                                         </td>
-                                                                        <td data-th="Net Amount">
-                                                                            <Link to={`/user_showorder/${item._id}`}>
-                                                                                <button type="button" className="btn btn-primary btn-sm">Show</button>
-                                                                            </Link>
-                                                                        </td>
+                                                                        
                                                                     </tr>
 
                                                                 ))}
@@ -150,8 +152,7 @@ const ShowAskFrom = () => {
                         Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
                     </div>
                 </footer>{/* End Footer */}
-            </div >
         </>
     )
 }
-export default ShowAskFrom
+export default DashboardDoneOrder;

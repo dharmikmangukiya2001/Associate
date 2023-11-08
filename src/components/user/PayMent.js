@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UserHeader from "./UserHeader";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const PayMent = () => {
+
+    const usertoken = localStorage.getItem("usertoken");
+
+    const [order, setOrder] = useState('');
+    const [commission, setCommission] = useState('');
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/user/completed_order`, { headers: { 'usertoken': usertoken } }).then(function (response) {
+            // handle success
+            // console.log(response.data);
+            setOrder(response.data.order);
+            setCommission(response.data.totalMemberCommission);
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [])
     return (
         <>
             <UserHeader />
@@ -45,9 +63,9 @@ const PayMent = () => {
                                                             <i className="bi bi-cart" />
                                                         </div>
                                                         <div className="ps-3">
-                                                            {/* {userForms && */}
-                                                            {/* <h6>{userForms.length}</h6> */}
-                                                            {/*  } */}
+                                                            {order &&
+                                                             <h6>{order.length}</h6>
+                                                            }
                                                             {/* <span className="text-success small pt-1 fw-bold">12%</span> <span className="text-muted small pt-2 ps-1">increase</span> */}
                                                         </div>
                                                     </div>
@@ -77,9 +95,9 @@ const PayMent = () => {
                                                             <i className="bi bi-shield" />
                                                         </div>
                                                         <div className="ps-3">
-                                                            {/* {users && */}
-                                                            {/* <h6>{users.length}</h6> */}
-                                                            {/* } */}
+                                                            {commission &&
+                                                            <h6>{commission}</h6>
+                                                            }
                                                             {/* <span className="text-success small pt-1 fw-bold">8%</span> <span className="text-muted small pt-2 ps-1">increase</span> */}
                                                         </div>
                                                     </div>

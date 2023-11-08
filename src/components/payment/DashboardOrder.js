@@ -1,34 +1,30 @@
-import React, { useEffect, useState } from "react";
-import UserHeader from "./UserHeader";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Header from "../admin/Header";
 
+const DashboardOrder = () => {
 
-const ShowAskFrom = () => {
+    const token = localStorage.getItem("token");
 
-
-    const usertoken = localStorage.getItem("usertoken");
-
-    const [order, setOrder] = useState('');
+    const [orders, setOrders] = useState('');
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/user/show_order`, { headers: { 'usertoken': usertoken } }).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/done_order`,{headers: {'token': token}}).then(function (response) {
             // handle success
             // console.log(response.data);
-            setOrder(response.data.order);
+            setOrders(response.data.orders);
         })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             })
     }, [])
-
-
-
-    return (
+    return(
         <>
-            <UserHeader />
-
-            <div>
+        <Header/>
+        <div>
                 <main id="main" className='main'>
                     <div className='pagetitle'>
                         <h1 className='text-start m-0'>Your Order</h1>
@@ -67,7 +63,8 @@ const ShowAskFrom = () => {
                                                             <th>Order Id</th>
                                                             <th>Customer Name</th>
                                                             <th>Customer Number</th>
-                                                            <th>Customer Email</th>
+                                                            <th>Provider Name</th>
+                                                            <th>Provider Numbar</th>
                                                             <th>Category</th>
                                                             <th>Sub Category</th>
                                                             <th>Product and Service</th>
@@ -76,8 +73,8 @@ const ShowAskFrom = () => {
                                                         </tr>
 
                                                         <>
-                                                            {order &&
-                                                                order.map((item, i) => (
+                                                            {orders &&
+                                                                orders.map((item, i) => (
                                                                     <tr key={i}>
 
 
@@ -98,7 +95,12 @@ const ShowAskFrom = () => {
                                                                         </td>
                                                                         <td>
                                                                             <h6 className="">
-                                                                                {item.otherEmail}
+                                                                                {item.providerid[0].name}
+                                                                            </h6>
+                                                                        </td>
+                                                                        <td>
+                                                                            <h6 className="">
+                                                                                {item.providerid[0].number}
                                                                             </h6>
                                                                         </td>
                                                                         <td>
@@ -122,7 +124,7 @@ const ShowAskFrom = () => {
                                                                             </h6>
                                                                         </td>
                                                                         <td data-th="Net Amount">
-                                                                            <Link to={`/user_showorder/${item._id}`}>
+                                                                            <Link to={`/admin_showacceptorder/${item._id}`}>
                                                                                 <button type="button" className="btn btn-primary btn-sm">Show</button>
                                                                             </Link>
                                                                         </td>
@@ -154,4 +156,4 @@ const ShowAskFrom = () => {
         </>
     )
 }
-export default ShowAskFrom
+export default DashboardOrder;

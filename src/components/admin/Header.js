@@ -330,12 +330,23 @@ const Header = () => {
                         </a>
                         <ul id="icons-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
                             <li>
-                                <Link className='a-none' to="/admin_Allorder">
-                                    <i className="bi bi-basket3 fs-5" /><span>Show Order</span>
+                                <Link className='a-none' to="/admin_allorder">
+                                    <i className="bi bi-bag fs-5" /><span>Show Order</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className='a-none' to="/admin_acceptorder">
+                                    <i className="bi bi-check2 fs-5" /><span>Accept Order</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className='a-none' to="/admin_doneorder">
+                                    <i className="bi bi-check2-all fs-5" /><span>Done Order</span>
                                 </Link>
                             </li>
                         </ul>
                     </li>{/* End Icons Nav */}                    
+                                     
                     <li className="nav-heading">Pages</li>
                     <li className="nav-item">
                         <a className="nav-link collapsed" href="users-profile.html">

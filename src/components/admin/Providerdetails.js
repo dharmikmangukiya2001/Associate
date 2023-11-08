@@ -10,20 +10,20 @@ function Providerdetails() {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-      // Simulate an API call
-      fetchData().then((result) => {
-        setData(result);
-        setIsLoading(false);
-      });
+        // Simulate an API call
+        fetchData().then((result) => {
+            setData(result);
+            setIsLoading(false);
+        });
     }, []);
-  
+
     const fetchData = async () => {
-      // Simulate an API call or any asynchronous operation
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve("Data from API");
-        }, 6000);
-      });
+        // Simulate an API call or any asynchronous operation
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve("Data from API");
+            }, 6000);
+        });
     };
 
 
@@ -782,16 +782,15 @@ function Providerdetails() {
                                                                             <div className="col-8 pe-3">
                                                                                 <p>
                                                                                     <span className="fs-6">
-                                                                                        {
+                                                                                    {
                                                                                             Object.entries(item).map(([key, value], index) => {
-                                                                                                if (key === 'Bsocialmedia' && Array.isArray(value) && value.length > 0) {
-                                                                                                    return (
-                                                                                                        <div key={index}>
-                                                                                                            {value[0]}
-                                                                                                        </div>
-                                                                                                    );
-                                                                                                }
-                                                                                                return null; // Handle other keys, if needed
+                                                                                                return (
+                                                                                                    <>{key == 'socialmedia1' ? (<>
+                                                                                                        {value}
+                                                                                                    </>) : null}
+
+                                                                                                    </>
+                                                                                                )
                                                                                             })
                                                                                         }
                                                                                     </span>
@@ -807,16 +806,15 @@ function Providerdetails() {
                                                                             <div className="col-8 pe-3">
                                                                                 <p>
                                                                                     <span className="fs-6">
-                                                                                        {
+                                                                                    {
                                                                                             Object.entries(item).map(([key, value], index) => {
-                                                                                                if (key === 'Bsocialmedia' && Array.isArray(value) && value.length > 0) {
-                                                                                                    return (
-                                                                                                        <div key={index}>
-                                                                                                            {value[1]}
-                                                                                                        </div>
-                                                                                                    );
-                                                                                                }
-                                                                                                return null; // Handle other keys, if needed
+                                                                                                return (
+                                                                                                    <>{key == 'socialmedia2' ? (<>
+                                                                                                        {value}
+                                                                                                    </>) : null}
+
+                                                                                                    </>
+                                                                                                )
                                                                                             })
                                                                                         }
                                                                                     </span>
@@ -832,16 +830,15 @@ function Providerdetails() {
                                                                             <div className="col-8 pe-3">
                                                                                 <p>
                                                                                     <span className="fs-6">
-                                                                                        {
+                                                                                    {
                                                                                             Object.entries(item).map(([key, value], index) => {
-                                                                                                if (key === 'Bsocialmedia' && Array.isArray(value) && value.length > 0) {
-                                                                                                    return (
-                                                                                                        <div key={index}>
-                                                                                                            {value[2]}
-                                                                                                        </div>
-                                                                                                    );
-                                                                                                }
-                                                                                                return null; // Handle other keys, if needed
+                                                                                                return (
+                                                                                                    <>{key == 'socialmedia3' ? (<>
+                                                                                                        {value}
+                                                                                                    </>) : null}
+
+                                                                                                    </>
+                                                                                                )
                                                                                             })
                                                                                         }
                                                                                     </span>
@@ -857,16 +854,15 @@ function Providerdetails() {
                                                                             <div className="col-8 pe-3">
                                                                                 <p>
                                                                                     <span className="fs-6">
-                                                                                        {
+                                                                                    {
                                                                                             Object.entries(item).map(([key, value], index) => {
-                                                                                                if (key === 'Bsocialmedia' && Array.isArray(value) && value.length > 0) {
-                                                                                                    return (
-                                                                                                        <div key={index}>
-                                                                                                            {value[3]}
-                                                                                                        </div>
-                                                                                                    );
-                                                                                                }
-                                                                                                return null; // Handle other keys, if needed
+                                                                                                return (
+                                                                                                    <>{key == 'socialmedia4' ? (<>
+                                                                                                        {value}
+                                                                                                    </>) : null}
+
+                                                                                                    </>
+                                                                                                )
                                                                                             })
                                                                                         }
                                                                                     </span>
@@ -1096,6 +1092,7 @@ function Providerdetails() {
                                                                                 </p>
                                                                             </div>
                                                                         </div>
+
                                                                         <div className="ms-3 d-flex col-12">
                                                                             <div className="col-4">
                                                                                 <p className="fs-6">
@@ -1108,7 +1105,7 @@ function Providerdetails() {
                                                                                         {
                                                                                             Object.entries(item).map(([key, value], index) => {
                                                                                                 return (
-                                                                                                    <>{key == 'collaborationCompany' ? (<>
+                                                                                                    <>{key == 'collaboration' ? (<>
                                                                                                         {value} %
                                                                                                     </>) : null}
 
@@ -1133,6 +1130,30 @@ function Providerdetails() {
                                                                                             Object.entries(item).map(([key, value], index) => {
                                                                                                 return (
                                                                                                     <>{key == 'collaborationMember' ? (<>
+                                                                                                        {value} %
+                                                                                                    </>) : null}
+
+                                                                                                    </>
+                                                                                                )
+                                                                                            })
+                                                                                        }
+                                                                                    </span>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="ms-3 d-flex col-12">
+                                                                            <div className="col-4">
+                                                                                <p className="fs-6">
+                                                                                    <strong>Company Profit &nbsp;&nbsp;: </strong>
+                                                                                </p>
+                                                                            </div>
+                                                                            <div className="col-8 pe-3">
+                                                                                <p>
+                                                                                    <span className="fs-6">
+                                                                                        {
+                                                                                            Object.entries(item).map(([key, value], index) => {
+                                                                                                return (
+                                                                                                    <>{key == 'collaborationCompany' ? (<>
                                                                                                         {value} %
                                                                                                     </>) : null}
 
@@ -1831,7 +1852,7 @@ function Providerdetails() {
                                                                                                         <label className='col-sm-3  col-lg-2 col-form-lable fw-bold'>Business Website Url  <span className='text-red'>*</span></label>
                                                                                                         <div className='col-sm-9 col-lg-10'>
                                                                                                             <div className='me-3 form-floating'>
-                                                                                                                <input type='text' className='form-control' value={tempservice.Bsocialmedia[0]} disabled onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, Bsocialmedia: e.target.value, }) }} placeholder='Business Website Url' />
+                                                                                                                <input type='text' className='form-control' value={tempservice.socialmedia1}  onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, socialmedia1: e.target.value, }) }} placeholder='Business Website Url' />
                                                                                                                 <label htmlFor="floatingTextarea">Business Website Url</label>
                                                                                                             </div>
                                                                                                         </div>
@@ -1840,7 +1861,7 @@ function Providerdetails() {
                                                                                                         <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Facebook Url <span className='text-red'>*</span></label>
                                                                                                         <div className='col-sm-9 col-lg-10'>
                                                                                                             <div className='me-3 form-floating'>
-                                                                                                                <input type='text' className='form-control' value={tempservice.Bsocialmedia[1]} disabled onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, Bsocialmedia: e.target.value, }) }} placeholder='Business Facebook Url' />
+                                                                                                                <input type='text' className='form-control' value={tempservice.socialmedia2}  onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, socialmedia2: e.target.value, }) }} placeholder='Business Facebook Url' />
                                                                                                                 <label htmlFor="floatingTextarea">Business Facebook Url</label>
                                                                                                             </div>
                                                                                                         </div>
@@ -1849,7 +1870,7 @@ function Providerdetails() {
                                                                                                         <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Instagram Url <span className='text-red'>*</span></label>
                                                                                                         <div className='col-sm-9 col-lg-10'>
                                                                                                             <div className='me-3 form-floating'>
-                                                                                                                <input type='text' className='form-control' value={tempservice.Bsocialmedia[2]} disabled onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, Bsocialmedia: e.target.value, }) }} placeholder='Business Instagram Url' />
+                                                                                                                <input type='text' className='form-control' value={tempservice.socialmedia3}  onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, socialmedia3: e.target.value, }) }} placeholder='Business Instagram Url' />
                                                                                                                 <label htmlFor="floatingTextarea">Business Instagram Url</label>
                                                                                                             </div>
                                                                                                         </div>
@@ -1858,7 +1879,7 @@ function Providerdetails() {
                                                                                                         <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Business Youtube Url <span className='text-red'>*</span></label>
                                                                                                         <div className='col-sm-9 col-lg-10'>
                                                                                                             <div className='me-3 form-floating'>
-                                                                                                                <input type='text' className='form-control' value={tempservice.Bsocialmedia[3]} disabled onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, Bsocialmedia: e.target.value, }) }} placeholder='Business Youtube Url' />
+                                                                                                                <input type='text' className='form-control' value={tempservice.socialmedia4}  onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, socialmedia4: e.target.value, }) }} placeholder='Business Youtube Url' />
                                                                                                                 <label htmlFor="floatingTextarea">Business Youtube Url</label>
                                                                                                             </div>
                                                                                                         </div>
@@ -1936,7 +1957,18 @@ function Providerdetails() {
                                                                 </div>
                                                             </div> */}
                                                                                                     <div className='row mb-5'>
-                                                                                                        <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Collaboration Company <span className='text-red'>*</span></label>
+                                                                                                        <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Collaboration Company<span className='text-red'>*</span></label>
+                                                                                                        <div className='col-sm-9 col-lg-10'>
+                                                                                                            <div className='me-3 form-floating'>
+                                                                                                                {/* <input type='text' className='form-control' placeholder='Business Type' /> */}
+                                                                                                                <input className="form-control" value={tempservice.collaboration} onChange={(e) => { setChanged(true); setTempservice({ ...tempservice, collaboration: e.target.value, }) }} placeholder="Leave a comment here" />
+
+                                                                                                                <label for="floatingTextarea2">Comments</label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div className='row mb-5'>
+                                                                                                        <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Company Profit <span className='text-red'>*</span></label>
                                                                                                         <div className='col-sm-9 col-lg-10'>
                                                                                                             <div className='me-3 form-floating'>
                                                                                                                 {/* <input type='text' className='form-control' placeholder='Business Type' /> */}
@@ -1946,6 +1978,7 @@ function Providerdetails() {
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
+
                                                                                                     <div className='row mb-5'>
                                                                                                         <label className='col-sm-3 col-lg-2 col-form-lable fw-bold'>Collaboration Member <span className='text-red'>*</span></label>
                                                                                                         <div className='col-sm-9 col-lg-10'>
@@ -1957,6 +1990,7 @@ function Providerdetails() {
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
+
                                                                                                     <div className='row mb-5 text-end me-2'>
                                                                                                         <div className='w-25'>
                                                                                                             <button className='btn bg-danger text-white' onClick={personAdd}>Add Sales Person</button>
