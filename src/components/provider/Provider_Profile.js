@@ -348,16 +348,15 @@ function Provider_Profile() {
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
-                                                                                {
+                                                                            {
                                                                                     Object.entries(item).map(([key, value], index) => {
-                                                                                        if (key === 'Bsocialmedia' && Array.isArray(value) && value.length > 0) {
-                                                                                            return (
-                                                                                                <div key={index}>
-                                                                                                    {value[0]}
-                                                                                                </div>
-                                                                                            );
-                                                                                        }
-                                                                                        return null; // Handle other keys, if needed
+                                                                                        return (
+                                                                                            <>{key == 'socialmedia1' ? (<>
+                                                                                                {value}
+                                                                                            </>) : null}
+
+                                                                                            </>
+                                                                                        )
                                                                                     })
                                                                                 }
                                                                             </span>
@@ -373,16 +372,15 @@ function Provider_Profile() {
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
-                                                                                {
+                                                                            {
                                                                                     Object.entries(item).map(([key, value], index) => {
-                                                                                        if (key === 'Bsocialmedia' && Array.isArray(value) && value.length > 0) {
-                                                                                            return (
-                                                                                                <div key={index}>
-                                                                                                    {value[1]}
-                                                                                                </div>
-                                                                                            );
-                                                                                        }
-                                                                                        return null; // Handle other keys, if needed
+                                                                                        return (
+                                                                                            <>{key == 'socialmedia2' ? (<>
+                                                                                                {value}
+                                                                                            </>) : null}
+
+                                                                                            </>
+                                                                                        )
                                                                                     })
                                                                                 }
                                                                             </span>
@@ -398,16 +396,15 @@ function Provider_Profile() {
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
-                                                                                {
+                                                                            {
                                                                                     Object.entries(item).map(([key, value], index) => {
-                                                                                        if (key === 'Bsocialmedia' && Array.isArray(value) && value.length > 0) {
-                                                                                            return (
-                                                                                                <div key={index}>
-                                                                                                    {value[2]}
-                                                                                                </div>
-                                                                                            );
-                                                                                        }
-                                                                                        return null; // Handle other keys, if needed
+                                                                                        return (
+                                                                                            <>{key == 'socialmedia3' ? (<>
+                                                                                                {value}
+                                                                                            </>) : null}
+
+                                                                                            </>
+                                                                                        )
                                                                                     })
                                                                                 }
                                                                             </span>
@@ -423,16 +420,15 @@ function Provider_Profile() {
                                                                     <div className="col-8 pe-3">
                                                                         <p>
                                                                             <span className="fs-6">
-                                                                                {
+                                                                            {
                                                                                     Object.entries(item).map(([key, value], index) => {
-                                                                                        if (key === 'Bsocialmedia' && Array.isArray(value) && value.length > 0) {
-                                                                                            return (
-                                                                                                <div key={index}>
-                                                                                                    {value[3]}
-                                                                                                </div>
-                                                                                            );
-                                                                                        }
-                                                                                        return null; // Handle other keys, if needed
+                                                                                        return (
+                                                                                            <>{key == 'socialmedia4' ? (<>
+                                                                                                {value}
+                                                                                            </>) : null}
+
+                                                                                            </>
+                                                                                        )
                                                                                     })
                                                                                 }
                                                                             </span>
@@ -674,8 +670,8 @@ function Provider_Profile() {
                                                                                 {
                                                                                     Object.entries(item).map(([key, value], index) => {
                                                                                         return (
-                                                                                            <>{key == 'collaborationDetails' ? (<>
-                                                                                                {value}
+                                                                                            <>{key == 'collaboration' ? (<>
+                                                                                                {value} %
                                                                                             </>) : null}
 
                                                                                             </>

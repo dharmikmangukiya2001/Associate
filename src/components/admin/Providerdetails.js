@@ -31,6 +31,7 @@ function Providerdetails() {
 
     const [providers, setProviders] = useState([])
     const [subcatdata, setSubcatdata] = useState([])
+    const [commission, setCommission] = useState([])
     const id = useParams()
     const providerid = id.id
     const token = localStorage.getItem("token");
@@ -39,10 +40,11 @@ function Providerdetails() {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL}/admin/providerdetails/${providerid}`, { headers: { 'token': token } }).then(function (response) {
             // handle success
-            // console.log(response.data, "dsdsdsd");
+            console.log(response.data, "dsdsdsd");
             setProviders([response.data.providers]);
             setSubcatdata(response.data.subcatData);
             setTempservice(response.data.providers);
+            setCommission(response.data.commission);
 
         })
             .catch(function (error) {
@@ -468,6 +470,38 @@ function Providerdetails() {
                                     </ol>
                                 </nav>
                             </div>{/* End Page Title */}
+                            <section className="section dashboard">
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <div className="card recent-sales overflow-auto">
+                                                <div className="card-body">
+                                                    <h5 className="card-title">Pay To Company Commission </h5>
+                                                    <div className='prodetails'>
+                                                        <div className="col-12 border shadow-sm p-3 mb-5 bg-body rounded">
+                                                            <div className="ms-3 d-flex col-12 ">
+                                                                <div className="col-4">
+                                                                    <strong className="fs-4">Provider Commission</strong>
+                                                                </div>
+                                                                <div className="col-8">
+                                                                        <span className="fs-6">
+                                                                            <div className="pe-4 col-12 text-end">
+                                                                                <p className="fs-4 fw-bold">₹ {commission}</p>
+                                                                            </div>
+                                                                        </span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                             <section className="section dashboard">
                                 <div className="row">
                                     {/* Provider Data */}
