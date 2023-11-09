@@ -68,9 +68,16 @@ const Memberdetails = () => {
             nevigate('/admin_allmember')
         })
             .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
+                if (error.response) {
+                    alert(error.response.data.message);
+                }
+                else if (error.request) {
+                    alert('Network error. Please try again')
+                }
+                else {
+                    alert('An error occurred. Please try again')
+                }
+            });
     }
 
 
@@ -111,8 +118,16 @@ const Memberdetails = () => {
                     // console.log(tempservice,"dsd");
                     window.location.reload();
                 })
-                .catch((error) => {
-                    console.error(error);
+                .catch(function (error) {
+                    if (error.response) {
+                        alert(error.response.data.message);
+                    }
+                    else if (error.request) {
+                        alert('Network error. Please try again')
+                    }
+                    else {
+                        alert('An error occurred. Please try again')
+                    }
                 });
         } catch (error) {
             console.error(error);
@@ -494,11 +509,11 @@ const Memberdetails = () => {
                                                                     <strong className="fs-4">Member Commission</strong>
                                                                 </div>
                                                                 <div className="col-8">
-                                                                        <span className="fs-6">
-                                                                            <div className="pe-4 col-12 text-end">
-                                                                                <p className="fs-4 fw-bold">₹ {totalMemberCommission}</p>
-                                                                            </div>
-                                                                        </span>
+                                                                    <span className="fs-6">
+                                                                        <div className="pe-4 col-12 text-end">
+                                                                            <p className="fs-4 fw-bold">₹ {totalMemberCommission}</p>
+                                                                        </div>
+                                                                    </span>
                                                                 </div>
                                                             </div>
 

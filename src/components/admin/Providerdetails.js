@@ -375,8 +375,16 @@ function Providerdetails() {
                     // console.log(data,"dsd");
                     nevigate('/admin_showproviders')
                 })
-                .catch((error) => {
-                    console.error(error);
+                .catch(function (error) {
+                    if (error.response) {
+                        alert(error.response.data.message);
+                    }
+                    else if (error.request) {
+                        alert('Network error. Please try again')
+                    }
+                    else {
+                        alert('An error occurred. Please try again')
+                    }
                 });
         } catch (error) {
             console.error(error);

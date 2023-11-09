@@ -201,8 +201,16 @@ const Addservice = () => {
                 // setBcategoryid('')
             })
             .catch(function (error) {
-                console.log(error);
-            })
+                if (error.response) {
+                    alert(error.response.data.message);
+                }
+                else if (error.request) {
+                    alert('Network error. Please try again')
+                }
+                else {
+                    alert('An error occurred. Please try again')
+                }
+            });
 
     };
     // ================================================================================================================================================

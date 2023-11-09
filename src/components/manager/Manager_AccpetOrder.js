@@ -95,8 +95,6 @@ const Manager_Order = () => {
                                             <th>Order Id</th>
                                             <th>Customer Name</th>
                                             <th>Customer Number</th>
-                                            <th>Provider Name</th>
-                                            <th>Provider Numbar</th>
                                             <th>Category</th>
                                             <th>Sub Category</th>
                                             <th>Product and Service</th>
@@ -123,16 +121,7 @@ const Manager_Order = () => {
                                                             {item.otherNumber}
                                                         </h6>
                                                     </td>
-                                                    <td>
-                                                        <h6 className="">
-                                                            {item.providerid[0].name}
-                                                        </h6>
-                                                    </td>
-                                                    <td>
-                                                        <h6 className="">
-                                                            {item.providerid[0].number}
-                                                        </h6>
-                                                    </td>
+                                                    
                                                     <td>
                                                         <h6 className="">
                                                             {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}

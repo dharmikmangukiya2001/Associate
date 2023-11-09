@@ -64,10 +64,17 @@ const Managerdetails = () => {
             // console.log(response.data, "dfdf");
             nevigate('/admin_allmanager')
         })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
+        .catch(function (error) {
+            if (error.response) {
+                alert(error.response.data.message);
+            }
+            else if (error.request) {
+                alert('Network error. Please try again')
+            }
+            else {
+                alert('An error occurred. Please try again')
+            }
+        });
     }
 
 
@@ -109,8 +116,16 @@ const Managerdetails = () => {
                     // console.log(tempservice,"dsd");
                     window.location.reload();
                 })
-                .catch((error) => {
-                    console.error(error);
+                .catch(function (error) {
+                    if (error.response) {
+                        alert(error.response.data.message);
+                    }
+                    else if (error.request) {
+                        alert('Network error. Please try again')
+                    }
+                    else {
+                        alert('An error occurred. Please try again')
+                    }
                 });
         } catch (error) {
             console.error(error);

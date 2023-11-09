@@ -95,7 +95,17 @@ const Addmember = () => {
                     } else {
                         console.log("Error datas");
                     }
-                })
+                }).catch(function (error) {
+                    if (error.response) {
+                        alert(error.response.data.message);
+                    }
+                    else if (error.request) {
+                        alert('Network error. Please try again')
+                    }
+                    else {
+                        alert('An error occurred. Please try again')
+                    }
+                });
         } catch (error) {
             console.error("An error occurred:", error);
         }

@@ -200,7 +200,7 @@ const Manager_Order = () => {
                                                                     />
                                                                 </span>
                                                                 <strong>
-                                                                    {item.name}
+                                                                    {item.name} - {item.Bname}
                                                                 </strong>
 
                                                             </p>

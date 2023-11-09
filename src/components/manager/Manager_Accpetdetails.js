@@ -205,6 +205,30 @@ const Orderdetails = () => {
                                                         </div>
                                                         <div className="ms-3 d-flex col-12">
                                                             <div className="col-2">
+                                                                <p><strong>Provider Name :</strong></p>
+                                                            </div>
+                                                            <div className="col-10">
+                                                                <p>
+                                                                    <span className="fs-6">
+                                                                    {item.providerid[0].name}
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="ms-3 d-flex col-12">
+                                                            <div className="col-2">
+                                                                <p><strong>Provider Number :</strong></p>
+                                                            </div>
+                                                            <div className="col-10">
+                                                                <p>
+                                                                    <span className="fs-6">
+                                                                    {item.providerid[0].number}
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="ms-3 d-flex col-12">
+                                                            <div className="col-2">
                                                                 <p><strong>Order Date :</strong></p>
                                                             </div>
                                                             <div className="col-10">
