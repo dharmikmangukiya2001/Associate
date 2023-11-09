@@ -4,8 +4,33 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Header from "../admin/Header";
 import { useParams } from "react-router-dom";
+import Loader from "../admin/Loader";
 
 const DashboardMamberOrderShow = () => {
+
+
+    // loader
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+      // Simulate an API call
+      fetchData().then((result) => {
+        setData(result);
+        setIsLoading(false);
+      });
+    }, []);
+  
+    const fetchData = async () => {
+      // Simulate an API call or any asynchronous operation
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Data from API");
+        }, 1000);
+      });
+    };
+
 
     const token = localStorage.getItem("token");
 
@@ -26,7 +51,8 @@ const DashboardMamberOrderShow = () => {
 
     return (
         <>
-
+ {
+            isLoading ? (<><Loader /></>) : (<>
         <Header/>
             <div>
                 <main id="main" className='main'>
@@ -151,6 +177,7 @@ const DashboardMamberOrderShow = () => {
                     </div>
                 </footer>{/* End Footer */}
             </div >
+        </>)}
         </>
         
     )

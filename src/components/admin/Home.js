@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
 
-    // // loader
+    // loader
     const [isLoading, setIsLoading] = useState(true);
 
     const [data, setData] = useState(null);
@@ -264,7 +264,6 @@ const Home = () => {
                                                             {orders &&
                                                                 <h6>{orders.length}</h6>
                                                             }
-                                                            {/* <span className="text-success small pt-1 fw-bold">12%</span> <span className="text-muted small pt-2 ps-1">increase</span> */}
                                                         </div>
                                                     </div>
                                                 </div>

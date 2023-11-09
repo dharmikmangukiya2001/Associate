@@ -134,10 +134,10 @@ const Header = () => {
                         <li className="nav-item dropdown">
                             <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                                 <i className="bi bi-chat-left-text" />
-                                <span className="badge bg-success badge-number">3</span>
+                                {/* <span className="badge bg-success badge-number">3</span> */}
                             </a>{/* End Messages Icon */}
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                                <li className="dropdown-header">
+                                {/* <li className="dropdown-header">
                                     You have 3 new messages
                                     <a href="#"><span className="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                                 </li>
@@ -185,7 +185,7 @@ const Header = () => {
                                 </li>
                                 <li className="dropdown-footer">
                                     <a href="#">Show all messages</a>
-                                </li>
+                                </li> */}
                             </ul>{/* End Messages Dropdown Items */}
                         </li>{/* End Messages Nav */}
                         <li className="nav-item dropdown pe-3">
@@ -347,13 +347,13 @@ const Header = () => {
                         </ul>
                     </li>{/* End Icons Nav */}                    
                                      
-                    <li className="nav-heading">Pages</li>
+                    {/* <li className="nav-heading">Pages</li>
                     <li className="nav-item">
                         <a className="nav-link collapsed" href="users-profile.html">
                             <i className="bi bi-person" />
                             <span>Profile</span>
                         </a>
-                    </li>{/* End Profile Page Nav */}
+                    </li>End Profile Page Nav */}
                     
                 </ul>
             </aside>

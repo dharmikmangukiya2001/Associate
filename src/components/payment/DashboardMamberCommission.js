@@ -3,8 +3,33 @@ import Header from "../admin/Header";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import Loader from "../admin/Loader";
 
 const DashboardMamberCommission = () => {
+
+    // loader
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+      // Simulate an API call
+      fetchData().then((result) => {
+        setData(result);
+        setIsLoading(false);
+      });
+    }, []);
+  
+    const fetchData = async () => {
+      // Simulate an API call or any asynchronous operation
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Data from API");
+        }, 1000);
+      });
+    };
+
+
 
     const [commissionTotals, setCommissionTotals] = useState('')
     const token = localStorage.getItem("token");
@@ -21,6 +46,8 @@ const DashboardMamberCommission = () => {
     }, [])
     return (
         <>
+         {
+            isLoading ? (<><Loader /></>) : (<>
             <Header />
 
             <main id="main" className='main'>
@@ -71,6 +98,7 @@ const DashboardMamberCommission = () => {
                     Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
                 </div>
             </footer>{/* End Footer */}
+        </>)}
         </>
     )
 }

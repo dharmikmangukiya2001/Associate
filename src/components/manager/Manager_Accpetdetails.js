@@ -1,50 +1,22 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
 import axios from "axios";
-import moment from 'moment';
-import Header from "../admin/Header";
-import Loader from "../admin/Loader";
+import ManagerHeader from "./ManagerHeader";
 
-const DashboardShowOrder = () => {
+const Orderdetails = () => {
 
+   
 
-    // // loader
-    const [isLoading, setIsLoading] = useState(true);
-
-    const [data, setData] = useState(null);
-
-    useEffect(() => {
-      // Simulate an API call
-      fetchData().then((result) => {
-        setData(result);
-        setIsLoading(false);
-      });
-    }, []);
-  
-    const fetchData = async () => {
-      // Simulate an API call or any asynchronous operation
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve("Data from API");
-        }, 1000);
-      });
-    };
-
-
-
-
-    const token = localStorage.getItem("token");
-
+    
     //  Show Member data
     const [order, setOrder] = useState([])
     const id = useParams()
     const orderid = id.id
+    const managertoken = localStorage.getItem("managertoken");
      useEffect(() => {
-         axios.get(`${process.env.REACT_APP_URL}/admin/order_detail/${orderid}`,{headers: {'token': token}}).then(function (response) {
+         axios.get(`${process.env.REACT_APP_URL}/manager/orderdetail/${orderid}`, { headers: { 'managertoken': managertoken } }).then(function (response) {
              // handle success
-            //  console.log(response.data, "dsdsdsd");
+             console.log(response.data, "dsdsdsd");
              setOrder([response.data.order]);
             //  setTempservice(response.data.user);
  
@@ -53,18 +25,15 @@ const DashboardShowOrder = () => {
                  // handle error
                  console.log(error);
              })
-     }, [orderid]);
+     }, [orderid])
 
-     const originalDate = '2023-11-07T09:09:58.492Z';
-
-     const formattedDate = moment(originalDate).format('MMMM Do YYYY, h:mm:ss a');
 
 
     return(
         <>
-         {
-            isLoading ? (<><Loader /></>) : (<>
-        <Header/>
+        
+
+        <ManagerHeader/>
         <main id="main" className="main">
                 <div className="pagetitle">
                     <h1 className="text-start m-0">Orders Details</h1>
@@ -362,8 +331,6 @@ const DashboardShowOrder = () => {
 
             </main>
         </>
-            )}
-            </>
     )
 }
-export default DashboardShowOrder;
+export default Orderdetails;

@@ -59,6 +59,8 @@ import Manager_Reset_Password from './components/manager/Manager_Reset_Password'
 import Manager_dashboard from './components/manager/Manager_dashboard'
 import Manager_Order from './components/manager/Manager_Order'
 import Manager_Orderdetails from './components/manager/Manager_Orderdetails'
+import Manager_AccpetOrder from './components/manager/Manager_AccpetOrder'
+import Manager_Accpetdetails from './components/manager/Manager_Accpetdetails'
 // Manager Panel Page End
 
 
@@ -72,14 +74,6 @@ import Showorder from './components/user/Showorder';
 import PayMent from './components/user/PayMent';
 import CompletedOrder from './components/user/CompletedOrder';
 // Member Panel Page End
-
-
-
-
-
-
-
-
 
 
 
@@ -244,9 +238,7 @@ function App() {
         <Route path='/admin_doneorder' element={isLoggedInAdmin ? <DashboardDoneOrder onLogout={adminhandleLogout} /> : <Navigate to="/admin_doneorder" />} />
         <Route path='/admin_membercommission' element={isLoggedInAdmin ? <DashboardMamberCommission onLogout={adminhandleLogout} /> : <Navigate to="/admin_membercommission" />} />
         <Route path='/admin_memberordershow/:id' element={isLoggedInAdmin ? <DashboardMamberOrderShow onLogout={adminhandleLogout} /> : <DashboardMamberOrderShow onLogout={adminhandleLogout} />} />
-
         {/* ADMIN SITE END */}
-
 
 
 
@@ -269,6 +261,8 @@ function App() {
         <Route path="/manager_dashboard" element={isLoggedInManager ? <Manager_dashboard onLogin={ManagerhandleLogout} /> : <Navigate to="/manager_dashboard" />} />
         <Route path="/manager_allorder" element={isLoggedInManager ? <Manager_Order onLogin={ManagerhandleLogout} /> : <Navigate to="/manager_allorder" />} />
         <Route path="/manager_orderdetails/:id" element={isLoggedInManager ? <Manager_Orderdetails onLogout={ManagerhandleLogout} /> : <Manager_Orderdetails onLogout={ManagerhandleLogout} />} />
+        <Route path="/manager_acceptorder" element={isLoggedInManager ? <Manager_AccpetOrder onLogin={ManagerhandleLogout} /> : <Navigate to="/manager_acceptorder" />} />
+        <Route path="/manager_acceptdetails/:id" element={isLoggedInManager ? <Manager_Accpetdetails onLogout={ManagerhandleLogout} /> : <Manager_Accpetdetails onLogout={ManagerhandleLogout} />} />
         {/* G MANAGER SITE END */}
 
 

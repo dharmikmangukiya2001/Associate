@@ -280,8 +280,8 @@ const ManagerHeader = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="a-none">
-                                    {/* <i className="bi bi-server fs-5" /><span>Show Services</span> */}
+                                <a href="/manager_acceptorder" class="a-none">
+                                    <i className="bi bi-server fs-5" /><span>Accept Order</span>
                                 </a>
                             </li>
                         </ul>

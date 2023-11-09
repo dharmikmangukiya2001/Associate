@@ -4,27 +4,84 @@ import { useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Header from "../admin/Header";
+import Loader from "../admin/Loader";
 
 const DashboardOrder = () => {
+
+
+    // // loader
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+      // Simulate an API call
+      fetchData().then((result) => {
+        setData(result);
+        setIsLoading(false);
+      });
+    }, []);
+  
+    const fetchData = async () => {
+      // Simulate an API call or any asynchronous operation
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Data from API");
+        }, 1000);
+      });
+    };
+
+
+    
 
     const token = localStorage.getItem("token");
 
     const [orders, setOrders] = useState('');
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_URL}/admin/done_order`,{headers: {'token': token}}).then(function (response) {
+        axios.get(`${process.env.REACT_APP_URL}/admin/accepted_order`, { headers: { 'token': token } }).then(function (response) {
             // handle success
-            // console.log(response.data);
-            setOrders(response.data.orders);
+            console.log(response.data);
+            setOrders(response.data.order);
         })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             })
     }, [])
-    return(
+
+
+    const XLSX = require('xlsx');
+    const exportToExcel = () => {
+        const headers = ['Member ID', 'Member Name', 'Member Number', 'D.O.B.', 'Category', 'Sub Category', 'Product and Service', 'Reference Name', 'Reference Number', 'Description'];
+        // Fetch data from the API and store it in the 'data' variable
+        const dataAsArray = orders.map((item) => [
+            item.userid.ids,
+            item.userid.name,
+            item.userid.number,
+            item.userid.DOB,
+            item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory,
+            item.productid.bsubcategoryid[0].bussinesssubcategory,
+            item.productid.product,
+            item.otherName,
+            item.otherNumber,
+            item.description,
+        ]);
+
+        const excelData = [headers, ...dataAsArray];
+        const ws = XLSX.utils.json_to_sheet(excelData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        XLSX.writeFile(wb, 'exported_data.xlsx');
+    }
+
+    return (
         <>
-        <Header/>
-        <div>
+
+{
+            isLoading ? (<><Loader /></>) : (<>
+            <Header />
+            <div>
                 <main id="main" className='main'>
                     <div className='pagetitle'>
                         <h1 className='text-start m-0'>Your Order</h1>
@@ -46,14 +103,10 @@ const DashboardOrder = () => {
                                         </div>
                                         <div className="card recent-sales overflow-auto">
                                             <div className="card-body">
-                                                <div className="d-flex">
-                                                    <div className="col-7">
-                                                        {/* <h5 className="card-title">Your Order</h5> */}
-                                                    </div>
-                                                    <div className="col-2 ms-5 me-3">
-                                                    </div>
-                                                    <div className="col-2">
-                                                    </div>
+                                                <div className="d-flex ms-4">
+                                                    <div className="ms-5 mb-2">
+                                                        <button className="btn btn-success" onClick={exportToExcel}>Export to Excel</button>
+                                                    </div>                                                    
                                                 </div>
 
                                                 <table className="rwd-table">
@@ -153,6 +206,7 @@ const DashboardOrder = () => {
                     </div>
                 </footer>{/* End Footer */}
             </div >
+        </>)}
         </>
     )
 }
