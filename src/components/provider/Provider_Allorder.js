@@ -94,81 +94,86 @@ const Provider_Allorder = () => {
                                                     </div>
                                                 </div>
 
-                                                <table className="rwd-table">
-                                                    <tbody>
+                                                <div className="table-responsive mt-2">
+                                                    <table className="table">
+                                                        <thead className="table-primary">
 
-                                                        <tr>
-                                                            <th>No.</th>
-                                                            <th>Customer Name</th>
-                                                            <th>Customer Number</th>
-                                                            <th>Customer Email</th>
-                                                            <th>Category</th>
-                                                            <th>Sub Category</th>
-                                                            <th>Product and Service</th>
-                                                            <th>Description</th>
-                                                            <th>Accept</th>
-                                                            <th>Cancel</th>
-                                                        </tr>
+                                                            <tr>
+                                                                <th>Order Id</th>
+                                                                <th>Customer Name</th>
+                                                                <th>Customer Number</th>
+                                                                <th>Customer Email</th>
+                                                                <th>Category</th>
+                                                                <th>Sub Category</th>
+                                                                <th>Product and Service</th>
+                                                                <th>Description</th>
+                                                                <th>Accept</th>
+                                                                <th>Cancel</th>
+                                                            </tr>
 
-                                                        <>
-                                                            {providerorder &&
-                                                                providerorder.map((item, i) => (
-                                                                    <tr key={i}>
+                                                        </thead>
+                                                        <tbody className="table-light">
+
+                                                            <>
+                                                                {providerorder &&
+                                                                    providerorder.map((item, i) => (
+                                                                        <tr key={i}>
 
 
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {i + 1}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.otherName}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.otherNumber}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.otherEmail}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.productid.bsubcategoryid[0].bussinesssubcategory}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.productid.product}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.description}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td data-th="Net Amount">
-                                                                            <button type="button" onClick={() => handleAccept(item._id)} className="btn btn-danger btn-sm">Accept</button>
-                                                                        </td>
-                                                                        <td data-th="Net Amount">
-                                                                            <button type="button" onClick={() => handleCancel(item._id)} className="btn btn-danger btn-sm">Cancel</button>
-                                                                        </td>
-                                                                    </tr>
+                                                                            <td>
+                                                                                <h6 className="">
+                                                                                    {item.no}
+                                                                                </h6>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h6 className="">
+                                                                                    {item.otherName}
+                                                                                </h6>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h6 className="">
+                                                                                    {item.otherNumber}
+                                                                                </h6>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h6 className="">
+                                                                                    {item.otherEmail}
+                                                                                </h6>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h6 className="">
+                                                                                    {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
+                                                                                </h6>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h6 className="">
+                                                                                    {item.productid.bsubcategoryid[0].bussinesssubcategory}
+                                                                                </h6>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h6 className="">
+                                                                                    {item.productid.product}
+                                                                                </h6>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h6 className="">
+                                                                                    {item.description}
+                                                                                </h6>
+                                                                            </td>
+                                                                            <td data-th="Net Amount">
+                                                                                <button type="button" onClick={() => handleAccept(item._id)} className="btn btn-danger btn-sm">Accept</button>
+                                                                            </td>
+                                                                            <td data-th="Net Amount">
+                                                                                <button type="button" onClick={() => handleCancel(item._id)} className="btn btn-danger btn-sm">Cancel</button>
+                                                                            </td>
+                                                                        </tr>
 
-                                                                ))}
-                                                        </>
+                                                                    ))}
+                                                            </>
 
-                                                    </tbody>
-                                                </table>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
 
                                             </div>
                                         </div>

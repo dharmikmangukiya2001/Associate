@@ -14,20 +14,20 @@ const DashboardDoneOrder = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-      // Simulate an API call
-      fetchData().then((result) => {
-        setData(result);
-        setIsLoading(false);
-      });
+        // Simulate an API call
+        fetchData().then((result) => {
+            setData(result);
+            setIsLoading(false);
+        });
     }, []);
-  
+
     const fetchData = async () => {
-      // Simulate an API call or any asynchronous operation
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve("Data from API");
-        }, 1000);
-      });
+        // Simulate an API call or any asynchronous operation
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve("Data from API");
+            }, 1000);
+        });
     };
 
 
@@ -37,7 +37,7 @@ const DashboardDoneOrder = () => {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL}/admin/done_order`, { headers: { 'token': token } }).then(function (response) {
             // handle success
-            // console.log(response.data);
+            console.log(response.data);
             setOrders(response.data.orders);
         })
             .catch(function (error) {
@@ -72,140 +72,142 @@ const DashboardDoneOrder = () => {
 
     return (
         <>
-         {
-            isLoading ? (<><Loader /></>) : (<>
-            <Header />
-            <main id="main" className='main'>
-                <div className='pagetitle'>
-                    <h1 className='text-start m-0'>Done Order</h1>
-                    <nav>
-                        <ol className='breadcrumb'>
-                            <li className='breadcrumb-item'>Home</li>
-                            <li className='breadcrumb-item activ'>Done Order</li>
-                        </ol>
-                    </nav>
-                </div>
+            {
+                isLoading ? (<><Loader /></>) : (<>
+                    <Header />
+                    <main id="main" className='main'>
+                        <div className='pagetitle'>
+                            <h1 className='text-start m-0'>Done Order</h1>
+                            <nav>
+                                <ol className='breadcrumb'>
+                                    <li className='breadcrumb-item'>Home</li>
+                                    <li className='breadcrumb-item activ'>Done Order</li>
+                                </ol>
+                            </nav>
+                        </div>
 
-                <section className="section dashboard">
-                    <div className="row">
-                        <div className="col-lg-12">
+                        <section className="section dashboard">
                             <div className="row">
-                                <div className="col-12">
-                                    <div class="collapse col-12" id="collapseExample">
+                                <div className="col-lg-12">
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <div class="collapse col-12" id="collapseExample">
 
-                                    </div>
-                                    <div className="card recent-sales overflow-auto">
-                                        <div className="card-body">
-                                            <div className="d-flex ms-4 mb-3">
-                                                <div className="col-2 ms-5">
-                                                    <button className="btn btn-success" onClick={exportToExcel}>Export to Excel</button>
-                                                </div>
-                                                <div className="col-2 ms-5 me-3">
-                                                </div>
-                                                <div className="col-2">
-                                                </div>
                                             </div>
+                                            <div className="card recent-sales overflow-auto">
+                                                <div className="card-body">
+                                                    <div className="d-flex mb-3">
+                                                        <div className="">
+                                                            <button className="btn btn-success" onClick={exportToExcel}>Export Excel</button>
+                                                        </div>
+                                                        <div className="col-2 ms-5 me-3">
+                                                        </div>
+                                                        <div className="col-2">
+                                                        </div>
+                                                    </div>
 
-                                            <table className="rwd-table">
-                                                <tbody>
+                                                    <div className="table-responsive mt-2">
+                                                        <table className="table">
+                                                            <thead className="table-primary">
 
-                                                    <tr>
-                                                        <th>Order Id</th>
-                                                        <th>Order Date</th>
-                                                        <th>Mamber Name</th>
-                                                        <th>Provider Name</th>
-                                                        <th>Order Service</th>
-                                                        <th>Order Deal Amount</th>
-                                                        <th>Mamber Commission</th>
-                                                        <th>Company Commission</th>
-
-                                                    </tr>
-
-                                                    <>
-                                                        {orders &&
-                                                            orders.map((item, i) => (
-                                                                <tr key={i}>
-
-
-                                                                    <td>
-                                                                        <h6 className="">
-                                                                            {item.no}
-                                                                        </h6>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        <h6 className="">
-                                                                            {item.updatedAt.slice(0, 10)}
-
-                                                                        </h6>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        <h6 className="">
-                                                                            {item.userid.name}
-
-                                                                        </h6>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        <h6 className="">
-                                                                            {item.providerid[0].name}
-
-                                                                        </h6>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        <h6 className="">
-                                                                            {item.productid.bsubcategoryid[0].bussinesssubcategory}
-                                                                        </h6>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        <h6 className="">
-                                                                            {item.dealamount}
-
-                                                                        </h6>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        <h6 className="">
-                                                                            {item.memberCommission}
-
-                                                                        </h6>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        <h6 className="">
-                                                                            {item.companyCommission}
-
-                                                                        </h6>
-                                                                    </td>
+                                                                <tr>
+                                                                    <th>Order Id</th>
+                                                                    <th>Order Date</th>
+                                                                    <th>Mamber Name</th>
+                                                                    <th>Provider Name</th>
+                                                                    <th>Order Service</th>
+                                                                    <th>Order Deal Amount</th>
+                                                                    <th>Mamber Commission</th>
+                                                                    <th>Company Commission</th>
 
                                                                 </tr>
+                                                            </thead>
+                                                            <tbody className="table-light">
+                                                                <>
+                                                                    {orders &&
+                                                                        orders.map((item, i) => (
+                                                                            <tr key={i}>
 
-                                                            ))}
-                                                    </>
 
-                                                </tbody>
-                                            </table>
+                                                                                <td>
+                                                                                    <h6 className="">
+                                                                                        {item.orderid.no}
+                                                                                    </h6>
+                                                                                </td>
 
+                                                                                <td>
+                                                                                    <h6 className="">
+                                                                                        {item.updatedAt.slice(0, 10)}
+
+                                                                                    </h6>
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    <h6 className="">
+                                                                                        {item.orderid.userid.name}
+
+                                                                                    </h6>
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    <h6 className="">
+                                                                                        {item.orderid.providerid}
+
+                                                                                    </h6>
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    <h6 className="">
+                                                                                        {item.orderid.productid.bsubcategoryid[0].bussinesssubcategory}
+                                                                                    </h6>
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    <h6 className="">
+                                                                                        {item.dealamount}
+
+                                                                                    </h6>
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    <h6 className="">
+                                                                                        {item.memberCommission}
+
+                                                                                    </h6>
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    <h6 className="">
+                                                                                        {item.companyCommission}
+
+                                                                                    </h6>
+                                                                                </td>
+
+                                                                            </tr>
+
+                                                                        ))}
+                                                                </>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                        </section>
+                    </main>
+                    <footer id="footer" className="footer">
+                        <div className="copyright">
+                            © Copyright <strong><span>Morsy Infotech</span></strong>. All Rights Reserved
                         </div>
-                    </div>
-                </section>
-            </main>
-            <footer id="footer" className="footer">
-                <div className="copyright">
-                    © Copyright <strong><span>Morsy Infotech</span></strong>. All Rights Reserved
-                </div>
-                <div className="credits">
-                    Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
-                </div>
-            </footer>{/* End Footer */}
-        </>)}
+                        <div className="credits">
+                            Designed by <a href="https://skydigitalgrapgics.in/">Dharmik Mangukiya</a>
+                        </div>
+                    </footer>{/* End Footer */}
+                </>)}
         </>
     )
 }

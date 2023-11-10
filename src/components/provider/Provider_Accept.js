@@ -26,6 +26,8 @@ const Provider_Accept = () => {
 
 
     const { id } = useParams();
+
+
     //---------------------------------------------------------------------|   CALL   |------------------------------------------------------------------------------------------------//
     const handleCall = (id) => {
         // data get karavava mate
@@ -177,100 +179,102 @@ const Provider_Accept = () => {
                                                     </div>
                                                 </div>
 
-                                                <table className="rwd-table">
-                                                    <tbody>
+                                                <div className="table-responsive mt-2">
+                                                    <table className="table">
+                                                        <thead className="table-primary">
 
-                                                        <tr>
-                                                            <th>Orderid</th>
-                                                            <th>Customer Name</th>
-                                                            <th>Customer Number</th>
-                                                            <th>Call</th>
-                                                            <th>Meeting</th>
-                                                            <th>Deal</th>
-                                                            <th>Amount</th>
-                                                            <th>Work</th>
-                                                            <th>Payment</th>
-                                                        </tr>
+                                                            <tr>
+                                                                <th>Orderid</th>
+                                                                <th>Customer Name</th>
+                                                                <th>Customer Number</th>
+                                                                <th>Call</th>
+                                                                <th>Meeting</th>
+                                                                <th>Deal</th>
+                                                                <th>Amount</th>
+                                                                <th>Work</th>
+                                                                <th>Payment</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody className="table-light">
+                                                            <>
+                                                                {providerorder &&
+                                                                    providerorder.map((item, i) => (
+                                                                        <tr key={i}>
 
-                                                        <>
-                                                            {providerorder &&
-                                                                providerorder.map((item, i) => (
-                                                                    <tr key={i}>
 
+                                                                            <td>
+                                                                                <h6 className="">
+                                                                                    {item.no}
+                                                                                </h6>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h6 className="">
+                                                                                    {item.otherName}
+                                                                                </h6>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h6 className="">
+                                                                                    {item.otherNumber}
+                                                                                </h6>
+                                                                            </td>
+                                                                            <td data-th="">
+                                                                                {item.trackingorder[0].call === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                    <a href={`tel:${item.otherNumber}`}>
+                                                                                        <button type="button" onClick={() => handleCall(item._id)} className="btn btn-danger btn-sm">Call Done</button>
+                                                                                    </a>}
+                                                                            </td>
+                                                                            <td data-th="">
+                                                                                {item.trackingorder[0].meeting === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                    <button type="button" onClick={() => handleMeeting(item._id)} className="btn btn-danger btn-sm">Meeting Done</button>}
+                                                                            </td>
+                                                                            <td data-th="">
+                                                                                {item.trackingorder[0].deal === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                    <button type="button" onClick={() => handleDeal(item._id)} className="btn btn-danger btn-sm">Deal Done</button>}
+                                                                            </td>
+                                                                            <td data-th="">
+                                                                                {item.trackingorder[0].amount === true ? (
+                                                                                    <span>
+                                                                                        <i className="bi-check-lg fs-2 text-success"></i>
+                                                                                    </span>
+                                                                                ) : (
+                                                                                    <div className="input-group mb-3">
+                                                                                        <input
+                                                                                            type="number"
+                                                                                            className="form-control"
+                                                                                            value={dealamount[item._id] || dealamount || ''}
+                                                                                            onChange={(e) => setDealamount({ ...dealamount, [item._id]: e.target.value })}
+                                                                                            placeholder="Enter Your Deal Amount"
+                                                                                            aria-label="Recipient's username"
+                                                                                            aria-describedby="button-addon2"
+                                                                                        />
+                                                                                        <button
+                                                                                            className="btn btn-danger"
+                                                                                            onClick={() => handleAmount(item._id)}
+                                                                                            type="button"
+                                                                                            id="button-addon2"
+                                                                                        >
+                                                                                            Deal Amount
+                                                                                        </button>
+                                                                                    </div>
+                                                                                )}
 
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.no}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.otherName}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h6 className="">
-                                                                                {item.otherNumber}
-                                                                            </h6>
-                                                                        </td>
-                                                                        <td data-th="">
-                                                                            {item.call === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
-                                                                                <a href={`tel:${item.otherNumber}`}>
-                                                                                    <button type="button" onClick={() => handleCall(item._id)} className="btn btn-danger btn-sm">Call Done</button>
-                                                                                </a>}
-                                                                        </td>
-                                                                        <td data-th="">
-                                                                            {item.meeting === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
-                                                                                <button type="button" onClick={() => handleMeeting(item._id)} className="btn btn-danger btn-sm">Meeting Done</button>}
-                                                                        </td>
-                                                                        <td data-th="">
-                                                                            {item.deal === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
-                                                                                <button type="button" onClick={() => handleDeal(item._id)} className="btn btn-danger btn-sm">Deal Done</button>}
-                                                                        </td>
-                                                                        <td data-th="">
-                                                                            {item.amount === true ? (
-                                                                                <span>
-                                                                                    <i className="bi-check-lg fs-2 text-success"></i>
-                                                                                </span>
-                                                                            ) : (
-                                                                                <div className="input-group mb-3">
-                                                                                    <input
-                                                                                        type="number"
-                                                                                        className="form-control"
-                                                                                        value={dealamount[item._id]|| dealamount || ''}
-                                                                                        onChange={(e) => setDealamount({ ...dealamount, [item._id]: e.target.value })}
-                                                                                        placeholder="Enter Your Deal Amount"
-                                                                                        aria-label="Recipient's username"
-                                                                                        aria-describedby="button-addon2"
-                                                                                    />
-                                                                                    <button
-                                                                                        className="btn btn-danger"
-                                                                                        onClick={() => handleAmount(item._id)}
-                                                                                        type="button"
-                                                                                        id="button-addon2"
-                                                                                    >
-                                                                                        Deal Amount
-                                                                                    </button>
-                                                                                </div>
-                                                                            )}
+                                                                            </td>
+                                                                            <td data-th="">
+                                                                                {item.trackingorder[0].work === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                    <button type="button" onClick={() => handleWork(item._id)} className="btn btn-danger btn-sm">Work Done</button>}
+                                                                            </td>
+                                                                            <td data-th="">
+                                                                                {item.trackingorder[0].payment === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
+                                                                                    <button type="button" onClick={() => handlePayMent(item._id)} className="btn btn-danger btn-sm">PayMent Done</button>}
+                                                                            </td>
+                                                                        </tr>
 
-                                                                        </td>
-                                                                        <td data-th="">
-                                                                            {item.work === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
-                                                                                <button type="button" onClick={() => handleWork(item._id)} className="btn btn-danger btn-sm">Work Done</button>}
-                                                                        </td>
-                                                                        <td data-th="">
-                                                                            {item.payment === true ? <span><i class="bi-check-lg fs-2 text-success"></i></span> :
-                                                                                <button type="button" onClick={() => handlePayMent(item._id)} className="btn btn-danger btn-sm">PayMent Done</button>}
-                                                                        </td>
-                                                                    </tr>
+                                                                    ))}
+                                                            </>
 
-                                                                ))}
-                                                        </>
-
-                                                    </tbody>
-                                                </table>
-
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

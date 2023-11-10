@@ -284,6 +284,16 @@ const ManagerHeader = () => {
                                     <i className="bi bi-server fs-5" /><span>Accept Order</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="/manager_doneorder" class="a-none">
+                                    <i className="bi bi-server fs-5" /><span>Done Order</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/manager_cancelorder" class="a-none">
+                                    <i className="bi bi-server fs-5" /><span>Cancel Order</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>{/* End Forms Nav */}
                     {/* <li className="nav-item">

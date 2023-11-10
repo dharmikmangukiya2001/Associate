@@ -124,18 +124,17 @@ const Allmanager = () => {
                                                             </div>
                                                             {/* <button className="btn btn-info" style={{ width: 'fit-content' }} onClick={handleSearch}>Search</button> */}
                                                         </div>
-                                                        <div className="d-flex">
-                                                            <div className="col-10">
+                                                        <div className="">
+                                                            <div className="">
                                                                 <h5 className="card-title">Show All Manager</h5>
                                                             </div>
-                                                            <div className="col-2">
-                                                                <button className="btn btn-success" onClick={exportToExcel}>Export to Excel</button>
+                                                            <div className="">
+                                                                <button className="btn btn-success" style={{width:'fit-content'}} onClick={exportToExcel}>Export Excel</button>
                                                             </div>
                                                         </div>
-                                                        <table className="rwd-table">
-
-
-                                                            <tbody>
+                                                        <div className="table-responsive mt-2">
+                                                            <table className="table">
+                                                                <thead className="table-primary">
 
                                                                 <tr>
                                                                     <th>No</th>
@@ -144,7 +143,8 @@ const Allmanager = () => {
                                                                     <th>Manager Email ID</th>
                                                                     <th>Show</th>
                                                                 </tr>
-
+                                                                </thead>
+                                                                <tbody className="table-light">
                                                                 <>
                                                                     {
                                                                         filteredManagers.map((item, i) => (
@@ -185,7 +185,7 @@ const Allmanager = () => {
 
                                                             </tbody>
                                                         </table>
-
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>

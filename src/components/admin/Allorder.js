@@ -234,13 +234,14 @@ const Allorder = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="card recent-sales overflow-auto">
+                                                <div className="card">
                                                     <div className="card-body">
+                                                        {/* <!-- Search Input --> */}
                                                         <div className="ms-3 me-3">
                                                             <div className="input-group mb-3">
                                                                 <input
                                                                     type="text"
-                                                                    class="form-control"
+                                                                    className="form-control"
                                                                     aria-label="Recipient's username"
                                                                     aria-describedby="basic-addon2"
                                                                     placeholder="Search Term"
@@ -249,124 +250,124 @@ const Allorder = () => {
                                                                 />
                                                             </div>
                                                         </div>
+
+                                                        {/* <!-- Table Actions --> */}
                                                         <div className="d-flex">
                                                             <div className="col-7">
                                                                 <h5 className="card-title">Show All Member</h5>
                                                             </div>
-                                                            <div className="col-2 ms-5 me-3">
-                                                                <button className="btn btn-success" onClick={exportToExcel}>Export to Excel</button>
-                                                            </div>
-                                                            <div className="col-2">
-                                                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                                                    Send to Manager
-                                                                </button>
+                                                            <div className="mt-3">
+                                                                <button className="btn btn-success me-2" style={{ width: 'fit-content' }} onClick={exportToExcel}>Export Excel</button>
                                                             </div>
                                                         </div>
+                                                        <div>
+                                                            <button className="btn btn-primary" style={{ width: 'fit-' }} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                                Send to Manager
+                                                            </button>
+                                                        </div>
 
-                                                        <table className="rwd-table">
-                                                            <tbody>
 
-                                                                <tr>
-                                                                    <th>Select</th>
-                                                                    <th>Order ID</th>
-                                                                    <th>Member ID</th>
-                                                                    <th>Member Name</th>
-                                                                    <th>Member Number</th>
-                                                                    <th>Category</th>
-                                                                    <th>Sub Category</th>
-                                                                    <th>Product and Service</th>
-                                                                    {/* <th>Description</th> */}
-                                                                    {/* <th>Customer Name</th> */}
-                                                                    {/* <th>Customer Number</th> */}
-                                                                    {/* <th>Send</th> */}
-                                                                    <th>Show</th>
-                                                                </tr>
+                                                        <div className="table-responsive mt-2">
+                                                            <table className="table">
+                                                                <thead className="table-primary">
+                                                                    <tr>
+                                                                        <th>Select</th>
+                                                                        <th>Order ID</th>
+                                                                        <th>Member ID</th>
+                                                                        <th>Member Name</th>
+                                                                        <th>Member Number</th>
+                                                                        <th>Category</th>
+                                                                        <th>Sub Category</th>
+                                                                        <th>Product and Service</th>
+                                                                        <th>Show</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody className="table-light">
+                                                                    <>
+                                                                        {
+                                                                            filteredData.map((item, i) => (
+                                                                                <tr key={i}>
 
-                                                                <>
-                                                                    {
-                                                                        filteredData.map((item, i) => (
-                                                                            <tr key={i}>
-
-                                                                                <td>
-                                                                                    <div class="form-check">
-                                                                                        <input
-                                                                                            className="form-check-input"
-                                                                                            type="checkbox"
-                                                                                            value={item._id}
-                                                                                            id="flexCheckDefault"
-                                                                                            onChange={() => handleCheckboxChange(item._id)}
-                                                                                            checked={selectedOrderIds.includes(item._id)}
-                                                                                        />
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <h6 className="">
-                                                                                        {item.no}
-                                                                                    </h6>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <h6 className="">
-                                                                                        {item.userid.ids}
-                                                                                    </h6>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <h6 className="">
-                                                                                        {item.userid.name}
-                                                                                    </h6>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <h6 className="">
-                                                                                        {item.userid.number}
-                                                                                    </h6>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <h6 className="">
-                                                                                        {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
-                                                                                    </h6>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <h6 className="">
-                                                                                        {item.productid.bsubcategoryid[0].bussinesssubcategory}
-                                                                                    </h6>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <h6 className="">
-                                                                                        {item.productid.product}
-                                                                                    </h6>
-                                                                                </td>
-                                                                                {/* <td>
+                                                                                    <td>
+                                                                                        <div class="form-check">
+                                                                                            <input
+                                                                                                className="form-check-input"
+                                                                                                type="checkbox"
+                                                                                                value={item._id}
+                                                                                                id="flexCheckDefault"
+                                                                                                onChange={() => handleCheckboxChange(item._id)}
+                                                                                                checked={selectedOrderIds.includes(item._id)}
+                                                                                            />
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <h6 className="">
+                                                                                            {item.no}
+                                                                                        </h6>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <h6 className="">
+                                                                                            {item.userid.ids}
+                                                                                        </h6>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <h6 className="">
+                                                                                            {item.userid.name}
+                                                                                        </h6>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <h6 className="">
+                                                                                            {item.userid.number}
+                                                                                        </h6>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <h6 className="">
+                                                                                            {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
+                                                                                        </h6>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <h6 className="">
+                                                                                            {item.productid.bsubcategoryid[0].bussinesssubcategory}
+                                                                                        </h6>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <h6 className="">
+                                                                                            {item.productid.product}
+                                                                                        </h6>
+                                                                                    </td>
+                                                                                    {/* <td>
                                                                             <h6 className="">
                                                                                 {item.description}
                                                                             </h6>
                                                                         </td> */}
-                                                                                {/* <td>
+                                                                                    {/* <td>
                                                                             <h6 className="">
                                                                                 {item.otherName}
                                                                             </h6>
                                                                         </td> */}
-                                                                                {/* <td>
+                                                                                    {/* <td>
                                                                             <h6 className="">
                                                                                 {item.otherNumber}
                                                                             </h6>
                                                                         </td> */}
-                                                                                {/* <td data-th="Net Amount">
+                                                                                    {/* <td data-th="Net Amount">
                                                                             <Link to={`/admin_providerdetails/${}`}>
                                                                             <button type="button" className="btn btn-success btn-sm">Send Manager</button>
                                                                             </Link>
                                                                         </td>                                                 */}
-                                                                                <td data-th="Net Amount">
-                                                                                    <Link to={`/admin_orderdetails/${item._id}`}>
-                                                                                        <button type="button" className="btn btn-primary btn-sm">Show</button>
-                                                                                    </Link>
-                                                                                </td>
-                                                                            </tr>
+                                                                                    <td data-th="Net Amount">
+                                                                                        <Link to={`/admin_orderdetails/${item._id}`}>
+                                                                                            <button type="button" style={{ width: 'fit-content' }} className="btn btn-primary btn-sm"> Show</button>
+                                                                                        </Link>
+                                                                                    </td>
+                                                                                </tr>
 
-                                                                        ))}
-                                                                </>
+                                                                            ))}
+                                                                    </>
 
-
-                                                            </tbody>
-                                                        </table>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
 
                                                     </div>
                                                 </div>

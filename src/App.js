@@ -47,6 +47,7 @@ import Provider_Profile from './components/provider/Provider_Profile';
 import Provider_Allorder from './components/provider/Provider_Allorder';
 import Provider_Accept from './components/provider/Provider_Accept';
 import Provider_Completed from './components/provider/Provider_Completed';
+import Provider_Cancel from './components/provider/Provider_Cancel';
 // Provider Panel Page End
 
 
@@ -61,6 +62,8 @@ import Manager_Order from './components/manager/Manager_Order'
 import Manager_Orderdetails from './components/manager/Manager_Orderdetails'
 import Manager_AccpetOrder from './components/manager/Manager_AccpetOrder'
 import Manager_Accpetdetails from './components/manager/Manager_Accpetdetails'
+import Manager_DoneOrder from './components/manager/Manager_DoneOrder'
+import Manager_CancelOrder from './components/manager/Manager_CancelOrder'
 // Manager Panel Page End
 
 
@@ -246,9 +249,10 @@ function App() {
         <Route path="/provider" element={!isLoggedInProvider ? <Provider_Login onLogin={ProviderhandleLogin} /> : <Navigate to="/provider_dashboard" />} />
         <Route path="/provider_dashboard" element={isLoggedInProvider ? <Provider_Dashboard onLogin={ProviderhandleLogout} /> : <Navigate to="/provider_dashboard" />} />
         <Route path="/provider_profile" element={isLoggedInProvider ? <Provider_Profile onLogin={ProviderhandleLogout} /> : <Navigate to="/provider_profile" />} />
-        <Route path='/provider_allorder' element={isLoggedInProvider ? < Provider_Allorder onLogout={ProviderhandleLogout} /> : < Provider_Allorder onLogout={ProviderhandleLogout} />} />
-        <Route path='/provider_acceptorder' element={isLoggedInProvider ? < Provider_Accept onLogout={ProviderhandleLogout} /> : < Provider_Accept onLogout={ProviderhandleLogout} />} />
-        <Route path='/provider_completedorder' element={isLoggedInProvider ? < Provider_Completed onLogout={ProviderhandleLogout} /> : < Provider_Completed onLogout={ProviderhandleLogout} />} />
+        <Route path='/provider_allorder' element={isLoggedInProvider ? < Provider_Allorder onLogout={ProviderhandleLogout} /> : <Navigate to="/provider_allorder" />} />
+        <Route path='/provider_acceptorder' element={isLoggedInProvider ? < Provider_Accept onLogout={ProviderhandleLogout} /> : <Navigate to="/provider_acceptorder" />} />
+        <Route path='/provider_completedorder' element={isLoggedInProvider ? < Provider_Completed onLogout={ProviderhandleLogout} /> : <Navigate to="/provider_completedorder" />} />
+        <Route path='/provider_cancelorder' element={isLoggedInProvider ? < Provider_Cancel onLogout={ProviderhandleLogout} /> : <Navigate to="/provider_cancelorder" />} />
         {/* PROVIDER SITE END */}
 
 
@@ -263,6 +267,8 @@ function App() {
         <Route path="/manager_orderdetails/:id" element={isLoggedInManager ? <Manager_Orderdetails onLogout={ManagerhandleLogout} /> : <Manager_Orderdetails onLogout={ManagerhandleLogout} />} />
         <Route path="/manager_acceptorder" element={isLoggedInManager ? <Manager_AccpetOrder onLogin={ManagerhandleLogout} /> : <Navigate to="/manager_acceptorder" />} />
         <Route path="/manager_acceptdetails/:id" element={isLoggedInManager ? <Manager_Accpetdetails onLogout={ManagerhandleLogout} /> : <Manager_Accpetdetails onLogout={ManagerhandleLogout} />} />
+        <Route path="/manager_doneorder" element={isLoggedInManager ? <Manager_DoneOrder onLogin={ManagerhandleLogout} /> : <Navigate to="/manager_doneorder" />} />
+        <Route path="/manager_cancelorder" element={isLoggedInManager ? <Manager_CancelOrder onLogin={ManagerhandleLogout} /> : <Navigate to="/manager_cancelorder" />} />
         {/* G MANAGER SITE END */}
 
 

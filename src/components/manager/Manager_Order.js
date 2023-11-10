@@ -13,7 +13,7 @@ const Manager_Order = () => {
         axios.get(`${process.env.REACT_APP_URL}/manager/showorders`, { headers: { 'managertoken': managertoken } }).then(function (response) {
             // handle success
             setAdminorder(response.data.adminorder);
-            // console.log(adminorder, "Order:::");
+            // console.log(response.data, "Order:::");
 
         })
             .catch(function (error) {
@@ -30,16 +30,16 @@ const Manager_Order = () => {
         e.preventDefault();
         setSeletedOption(true)
         // useEffect(() => {
-            axios.post(`${process.env.REACT_APP_URL}/manager/allprovider`, selectedOrderIds, { headers: { 'managertoken': managertoken } })
-                .then(function (response) {
-                    // handle success
-                    // console.log(response.data,'SDSDS');
-                    setProvider(response.data.providers);
-                })
-                .catch(function (error) {
-                    // handle error
-                    console.log(error);
-                })
+        axios.post(`${process.env.REACT_APP_URL}/manager/allprovider`, selectedOrderIds, { headers: { 'managertoken': managertoken } })
+            .then(function (response) {
+                // handle success
+                // console.log(response.data,'SDSDS');
+                setProvider(response.data.providers);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
         // }, [])
     }
 
@@ -182,141 +182,151 @@ const Manager_Order = () => {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="row">
-                                    {
-                                        seletedOption ? (
-                                            <>
-                                                <div class="card card-body">
-                                                    {providers && providers.map((item, i) => (
-                                                        <div key={i}>
-                                                            <p>
-                                                                <span>
-                                                                    <input
-                                                                        className="form-check-input me-3"
-                                                                        type="checkbox"
-                                                                        value={item._id}
-                                                                        id="flexCheckMDefault"
-                                                                        onChange={() => handleProviderCheckboxChange(item._id)}
-                                                                        checked={selectedProviderIds.includes(item._id)}
-                                                                    />
-                                                                </span>
-                                                                <strong>
-                                                                    {item.name} - {item.Bname}
-                                                                </strong>
+                                    <div className="col-12">
+                                        <div class="collapse col-12" id="collapseExample">
+                                            <div class="card card-body">
+                                                {
+                                                    seletedOption ? (
+                                                        <>
+                                                            <div class="card card-body">
+                                                                {providers && providers.map((item, i) => (
+                                                                    <div key={i}>
+                                                                        <p>
+                                                                            <span>
+                                                                                <input
+                                                                                    className="form-check-input me-3"
+                                                                                    type="checkbox"
+                                                                                    value={item._id}
+                                                                                    id="flexCheckMDefault"
+                                                                                    onChange={() => handleProviderCheckboxChange(item._id)}
+                                                                                    checked={selectedProviderIds.includes(item._id)}
+                                                                                />
+                                                                            </span>
+                                                                            <strong>
+                                                                                {item.name} - {item.Bname}
+                                                                            </strong>
 
-                                                            </p>
+                                                                        </p>
 
-                                                        </div>
-                                                    ))}
-                                                    <button onClick={handleSubmit} className="btn btn-dark" style={{ width: 'fit-content' }}>Submit</button>
-                                                    <div>
+                                                                    </div>
+                                                                ))}
+                                                                <button onClick={handleSubmit} className="btn btn-dark" style={{ width: 'fit-content' }}>Submit</button>
+                                                                <div>
 
+                                                                </div>
+                                                            </div>
+
+                                                        </>
+                                                    ) : (<></>)
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div className=" card-body">
+
+                                                <div className="ms-5 me-3">
+                                                    <div className="input-group mb-3">
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            aria-label="Recipient's username"
+                                                            aria-describedby="basic-addon2"
+                                                            placeholder="Search Term"
+                                                            value={searchInput}
+                                                            onChange={handleSearchInputChange}
+                                                        />
                                                     </div>
                                                 </div>
-
-                                            </>
-                                        ) : (<></>)
-                                    }
-                                    <div class="card card-body">
-                                        <div className="col-12 d-flex">
-
-                                            <div className="col-7 ms-5 me-3">
-                                                <div className="input-group mb-3">
-                                                    <input
-                                                        type="text"
-                                                        class="form-control"
-                                                        aria-label="Recipient's username"
-                                                        aria-describedby="basic-addon2"
-                                                        placeholder="Search Term"
-                                                        value={searchInput}
-                                                        onChange={handleSearchInputChange}
-                                                    />
+                                                <div className="d-flex">
+                                                <div className="me-3">
+                                                    <button className="btn btn-success" style={{width:'fit-content'}} onClick={exportToExcel}>Export to Excel</button>
                                                 </div>
-                                            </div>
-                                            <div className="col-2  me-3">
-                                                <button className="btn btn-success" onClick={exportToExcel}>Export to Excel</button>
-                                            </div>
-                                            <div className="col-2">
-                                                <button className="btn btn-primary" onClick={hendleProvider} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                                    Send to Provider
-                                                </button>
+                                                <div className="">
+                                                    <button className="btn btn-primary" style={{width:'fit-content'}} onClick={hendleProvider} type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                        Send to Provider
+                                                    </button>
+                                                </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    </div>
+                                </div>
+                                <div className="table-responsive mt-2">
+                                    <table className="table">
+                                        <thead className="table-primary">
+                                            <tr>
+                                                <th>Select</th>
+                                                <th>Order Numbar</th>
+                                                <th>Member ID</th>
+                                                <th>Member Name</th>
+                                                <th>Member Number</th>
+                                                <th>Category</th>
+                                                <th>Sub Category</th>
+                                                <th>Product and Service</th>
+                                                <th>Show</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="table-light">
+                                            {filteredData.map((item, i) => (
+                                                <tr key={i}>
+                                                    <td>
+                                                        <div className="form-check">
+                                                            <input
+                                                                className="form-check-input"
+                                                                type="checkbox"
+                                                                value={item._id}
+                                                                onChange={() => handleCheckboxChange(item._id)}
+                                                                checked={selectedOrderIds.includes(item._id)}
+                                                            />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h6 className="">
+                                                            {item.no}
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 className="">
+                                                            {item.userid.ids}
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 className="">
+                                                            {item.userid.name}
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 className="">
+                                                            {item.userid.number}
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 className="">
+                                                            {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 className="">
+                                                            {item.productid.bsubcategoryid[0].bussinesssubcategory}
+                                                        </h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6 className="">
+                                                            {item.productid.product}
+                                                        </h6>
+                                                    </td>
+                                                    <td data-th="Net Amount">
+                                                        <Link to={`/manager_orderdetails/${item._id}`}>
+                                                            <button type="button" className="btn btn-primary btn-sm">Show</button>
+                                                        </Link>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="card card-body">
-                                <table className="rwd-table">
-                                    <tbody>
-                                        <tr>
-                                            <th>Select</th>
-                                            <th>Order Numbar</th>
-                                            <th>Member ID</th>
-                                            <th>Member Name</th>
-                                            <th>Member Number</th>
-                                            <th>Category</th>
-                                            <th>Sub Category</th>
-                                            <th>Product and Service</th>
-                                            <th>Show</th>
-                                        </tr>
-                                        {filteredData.map((item, i) => (
-                                            <tr key={i}>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input
-                                                            className="form-check-input"
-                                                            type="checkbox"
-                                                            value={item._id}
-                                                            onChange={() => handleCheckboxChange(item._id)}
-                                                            checked={selectedOrderIds.includes(item._id)}
-                                                        />
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h6 className="">
-                                                        {item.no}
-                                                    </h6>
-                                                </td>
-                                                <td>
-                                                    <h6 className="">
-                                                        {item.userid.ids}
-                                                    </h6>
-                                                </td>
-                                                <td>
-                                                    <h6 className="">
-                                                        {item.userid.name}
-                                                    </h6>
-                                                </td>
-                                                <td>
-                                                    <h6 className="">
-                                                        {item.userid.number}
-                                                    </h6>
-                                                </td>
-                                                <td>
-                                                    <h6 className="">
-                                                        {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
-                                                    </h6>
-                                                </td>
-                                                <td>
-                                                    <h6 className="">
-                                                        {item.productid.bsubcategoryid[0].bussinesssubcategory}
-                                                    </h6>
-                                                </td>
-                                                <td>
-                                                    <h6 className="">
-                                                        {item.productid.product}
-                                                    </h6>
-                                                </td>
-                                                <td data-th="Net Amount">
-                                                    <Link to={`/manager_orderdetails/${item._id}`}>
-                                                        <button type="button" className="btn btn-primary btn-sm">Show</button>
-                                                    </Link>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </section>
                 </main>
                 <footer id="footer" className="footer">

@@ -14,7 +14,7 @@ const Provider_Dashboard = () => {
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_URL}/provider/completed_order`, { headers: { 'providertoken': providertoken } }).then(function (response) {
       // handle success
-      // console.log(response.data);
+      console.log(response.data);
       setCompleted(response.data.completed);
       setTotalProviderCommission(response.data.totalProviderCommission);
       setTotalDealAmount(response.data.totalDealAmount);

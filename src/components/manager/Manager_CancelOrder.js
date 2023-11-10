@@ -3,9 +3,9 @@ import ManagerHeader from "./ManagerHeader";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 
-const Manager_Order = () => {
+const Manager_CancelOrder = () => {
 
     const managertoken = localStorage.getItem("managertoken");
     const [order, setOrder] = useState([])
@@ -170,4 +170,4 @@ const Manager_Order = () => {
         </>
     )
 }
-export default Manager_Order;
+export default Manager_CancelOrder;

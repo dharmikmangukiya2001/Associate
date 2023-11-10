@@ -290,6 +290,11 @@ const Provider_Header = () => {
                                     <i className="bi bi-bag-check-fill fs-5" /><span>Completed Order</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="/provider_cancelorder" class="a-none">
+                                    <i className="bi bi-bag-x fs-5" /><span>Cancel Order</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>{/* End Forms Nav */}
                     {/* <li className="nav-item">

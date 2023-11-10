@@ -142,18 +142,17 @@ const AllMember = () => {
                                                             </div>
                                                             {/* <button className="btn btn-info" style={{ width: 'fit-content' }} onClick={handleSearch}>Search</button> */}
                                                         </div>
-                                                        <div className="d-flex">
-                                                            <div className="col-10">
+                                                        <div className="">
+                                                            <div className="">
                                                                 <h5 className="card-title">Show All Member</h5>
                                                             </div>
-                                                            <div className="col-2">
-                                                                <button className="btn btn-success" onClick={exportToExcel}>Export to Excel</button>
+                                                            <div className="">
+                                                                <button className="btn btn-success" style={{width:'fit-content'}} onClick={exportToExcel}>Export to Excel</button>
                                                             </div>
                                                         </div>
-                                                        <table className="rwd-table">
-
-
-                                                            <tbody>
+                                                        <div className="table-responsive mt-2">
+                                                            <table className="table">
+                                                                <thead className="table-primary">
 
                                                                 <tr>
                                                                     <th>Member ID</th>
@@ -168,7 +167,8 @@ const AllMember = () => {
 
                                                                     <th>Show</th>
                                                                 </tr>
-
+                                                                </thead>
+                                                                <tbody className="table-light">
                                                                 <>
                                                                     {
                                                                         filteredUsers.map((item, i) => (
@@ -233,7 +233,7 @@ const AllMember = () => {
 
                                                             </tbody>
                                                         </table>
-
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>

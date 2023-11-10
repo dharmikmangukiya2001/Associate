@@ -130,18 +130,19 @@ const Showprovider = () => {
                                                                 </div>
                                                                 {/* <button className="btn btn-info" style={{ width: 'fit-content' }} onClick={handleSearch}>Search</button> */}
                                                             </div>
-                                                            <div className="d-flex">
-                                                            <div className="col-10">
+                                                            <div className="">
+                                                            <div className="">
                                                                 <h5 className="card-title">Show All Providers</h5>
                                                             </div>
-                                                            <div className="col-2">
-                                                                <button className="btn btn-success" onClick={exportToExcel}>
-                                                                    Export to Excel
+                                                            <div className="">
+                                                                <button className="btn btn-success" style={{width:'fit-content'}} onClick={exportToExcel}>
+                                                                    Export Excel
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                            <table className="rwd-table">
-                                                                <tbody>
+                                                        <div className="table-responsive mt-2">
+                                                            <table className="table">
+                                                                <thead className="table-primary">
                                                                     <tr>
                                                                         <th>No.</th>
                                                                         <th>Provider Name</th>
@@ -151,6 +152,8 @@ const Showprovider = () => {
                                                                         <th>Provider Email</th>
                                                                         <th>Show Details</th>
                                                                     </tr>
+                                                                    </thead>
+                                                                <tbody className="table-light">
                                                                     {filteredProviders.map((item, i) => (
                                                                         <tr key={item._id}>
                                                                             <td>
@@ -182,6 +185,7 @@ const Showprovider = () => {
                                                                     ))}
                                                                 </tbody>
                                                             </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
