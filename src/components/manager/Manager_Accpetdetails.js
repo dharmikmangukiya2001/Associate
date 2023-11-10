@@ -5,36 +5,36 @@ import ManagerHeader from "./ManagerHeader";
 
 const Orderdetails = () => {
 
-   
 
-    
+
+
     //  Show Member data
     const [order, setOrder] = useState([])
     const id = useParams()
     const orderid = id.id
     const managertoken = localStorage.getItem("managertoken");
-     useEffect(() => {
-         axios.get(`${process.env.REACT_APP_URL}/manager/orderdetail/${orderid}`, { headers: { 'managertoken': managertoken } }).then(function (response) {
-             // handle success
-             console.log(response.data, "dsdsdsd");
-             setOrder([response.data.order]);
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_URL}/manager/orderdetail/${orderid}`, { headers: { 'managertoken': managertoken } }).then(function (response) {
+            // handle success
+            // console.log(response.data, "dsdsdsd");
+            setOrder([response.data.order]);
             //  setTempservice(response.data.user);
- 
-         })
-             .catch(function (error) {
-                 // handle error
-                 console.log(error);
-             })
-     }, [orderid])
+
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }, [orderid])
 
 
 
-    return(
+    return (
         <>
-        
 
-        <ManagerHeader/>
-        <main id="main" className="main">
+
+            <ManagerHeader />
+            <main id="main" className="main">
                 <div className="pagetitle">
                     <h1 className="text-start m-0">Orders Details</h1>
                     <nav>
@@ -54,7 +54,7 @@ const Orderdetails = () => {
                                     <div className="card recent-sales overflow-auto">
                                         <div className="card-body">
                                             <h5 className="card-title">Order Details :</h5>
-                                            
+
 
                                             {order.map((item, i) => (
                                                 <div className='prodetails'>
@@ -66,7 +66,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.userid.ids}
+                                                                        {item.userid.ids}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -78,7 +78,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.userid.name}
+                                                                        {item.userid.name}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -90,7 +90,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.userid.number}
+                                                                        {item.userid.number}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -102,7 +102,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
+                                                                        {item.productid.bsubcategoryid[0].bcategoryid.bussinesscategory}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -114,7 +114,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.productid.bsubcategoryid[0].bussinesssubcategory}
+                                                                        {item.productid.bsubcategoryid[0].bussinesssubcategory}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -126,7 +126,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.productid.product}
+                                                                        {item.productid.product}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -138,7 +138,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.description}
+                                                                        {item.description}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -150,7 +150,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.otherName}
+                                                                        {item.otherName}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -162,7 +162,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.otherNumber}
+                                                                        {item.otherNumber}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -174,7 +174,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.otherEmail}
+                                                                        {item.otherEmail}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -186,7 +186,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.no}
+                                                                        {item.no}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -198,7 +198,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.budget}
+                                                                        {item.budget}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -210,10 +210,13 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.providerid[0].name}
+                                                                        {item.providerid.map((provider, index) => (
+                                                                            <p key={index}>{provider.name}</p>
+                                                                        ))}
                                                                     </span>
                                                                 </p>
                                                             </div>
+
                                                         </div>
                                                         <div className="ms-3 d-flex col-12">
                                                             <div className="col-2">
@@ -222,7 +225,9 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.providerid[0].number}
+                                                                        {item.providerid.map((provider, index) => (
+                                                                            <p >{provider.number}</p>
+                                                                        ))}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -234,9 +239,9 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                     {new Date(item.updatedAt).toLocaleString()}
-                                                                    {/* {item.updatedAt} */}
-                                                                    {/* {item.updatedAt.slice(0, 10)} */}
+                                                                        {new Date(item.updatedAt).toLocaleString()}
+                                                                        {/* {item.updatedAt} */}
+                                                                        {/* {item.updatedAt.slice(0, 10)} */}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -248,10 +253,15 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.status === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Order Accept Panding</span>}
+                                                                        {item.trackingorder[0].status === true ? (
+                                                                            <span><i className="bi bi-check-lg fs-4 text-success"></i></span>
+                                                                        ) : (
+                                                                            <span className="text-danger fw-bold">Order Accept Pending</span>
+                                                                        )}
                                                                     </span>
                                                                 </p>
                                                             </div>
+
                                                         </div>
                                                         <div className="ms-3 d-flex col-12">
                                                             <div className="col-2">
@@ -260,7 +270,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.call === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Call Panding</span>}
+                                                                        {item.trackingorder[0].call === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Call Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -272,7 +282,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.meeting === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Meeting Panding</span>}
+                                                                        {item.trackingorder[0].meeting === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Meeting Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -284,7 +294,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.deal === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Order Deal Panding</span>}
+                                                                        {item.trackingorder[0].deal === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Order Deal Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -294,9 +304,9 @@ const Orderdetails = () => {
                                                                 <p><strong>Amount:</strong></p>
                                                             </div>
                                                             <div className="col-10">
-                                                                <p>                                                                    
+                                                                <p>
                                                                     <span className="fs-5 text-success fw-bold">
-                                                                    {item.dealamount}
+                                                                        {item.trackingorder[0].dealamount}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -306,9 +316,9 @@ const Orderdetails = () => {
                                                                 <p><strong>Deal Amount:</strong></p>
                                                             </div>
                                                             <div className="col-10">
-                                                                <p>                                                                    
+                                                                <p>
                                                                     <span className="fs-6">
-                                                                    {item.amount === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Deal Amount Panding</span>}
+                                                                        {item.trackingorder[0].amount === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Deal Amount Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -320,7 +330,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.work === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Order Work Panding</span>}
+                                                                        {item.trackingorder[0].work === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Order Work Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -332,7 +342,7 @@ const Orderdetails = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.payment === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">PayMent Panding</span>}
+                                                                        {item.trackingorder[0].payment === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">PayMent Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -350,7 +360,7 @@ const Orderdetails = () => {
 
                 <section>
 
-                    
+
                 </section>
 
             </main>

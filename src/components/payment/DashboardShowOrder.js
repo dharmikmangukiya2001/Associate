@@ -255,7 +255,7 @@ const DashboardShowOrder = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.status === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Order Accept Panding</span>}
+                                                                    {item.trackingorder[0].status === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Order Accept Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -267,7 +267,7 @@ const DashboardShowOrder = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.call === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Call Panding</span>}
+                                                                    {item.trackingorder[0].call === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Call Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -279,7 +279,7 @@ const DashboardShowOrder = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.meeting === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Meeting Panding</span>}
+                                                                    {item.trackingorder[0].meeting === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Meeting Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -291,7 +291,7 @@ const DashboardShowOrder = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.deal === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Order Deal Panding</span>}
+                                                                    {item.trackingorder[0].deal === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Order Deal Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -303,7 +303,7 @@ const DashboardShowOrder = () => {
                                                             <div className="col-10">
                                                                 <p>                                                                    
                                                                     <span className="fs-5 text-success fw-bold">
-                                                                    {item.dealamount}
+                                                                    {item.trackingorder[0].dealamount}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -315,7 +315,7 @@ const DashboardShowOrder = () => {
                                                             <div className="col-10">
                                                                 <p>                                                                    
                                                                     <span className="fs-6">
-                                                                    {item.amount === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Deal Amount Panding</span>}
+                                                                    {item.trackingorder[0].amount === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Deal Amount Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -327,7 +327,7 @@ const DashboardShowOrder = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.work === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Order Work Panding</span>}
+                                                                    {item.trackingorder[0].work === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">Order Work Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>
@@ -339,7 +339,7 @@ const DashboardShowOrder = () => {
                                                             <div className="col-10">
                                                                 <p>
                                                                     <span className="fs-6">
-                                                                    {item.payment === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">PayMent Panding</span>}
+                                                                    {item.trackingorder[0].payment === true ? <span><i class="bi-check-lg fs-4 text-success"></i></span> : <span className="text-danger fw-bold">PayMent Panding</span>}
                                                                     </span>
                                                                 </p>
                                                             </div>

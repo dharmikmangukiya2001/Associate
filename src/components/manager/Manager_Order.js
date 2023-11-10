@@ -224,7 +224,7 @@ const Manager_Order = () => {
                                         <div class="card">
                                             <div className=" card-body">
 
-                                                <div className="ms-5 me-3">
+                                                <div className="me-3">
                                                     <div className="input-group mb-3">
                                                         <input
                                                             type="text"

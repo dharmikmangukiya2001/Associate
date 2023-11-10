@@ -12,7 +12,7 @@ const Manager_DoneOrder = () => {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL}/manager/done_order`, { headers: { 'managertoken': managertoken } }).then(function (response) {
             // handle success
-            // console.log(response.data, "Order:::");
+            console.log(response.data, "Order:::");
             setOrders(response.data.orders);
 
         })
